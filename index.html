@@ -592,47 +592,80 @@
             console.log('保存语言偏好: ' + language);
         }
     }
-    
-    // 根据当前URL路径动态加载脚本
+      // 确保页面加载时DOM元素首先被正确初始化
     document.addEventListener('DOMContentLoaded', function() {
-        var script = document.createElement('script');
+        // 确保containerbox元素存在并可见
+        var containerBox = document.getElementById('containerbox');
+        if (containerBox) {
+            containerBox.style.display = 'block';
+        } else {
+            console.error('找不到关键DOM元素: containerbox');
+        }
         
-        // 获取当前路径
+        // 获取当前路径信息
         var path = window.location.pathname;
-        console.log('当前路径:', path);
+        var isNotePage = path.includes('/priv/');
+        console.log('当前路径:', path, '是否为笔记页面:', isNotePage);
         
-        // 直接使用绝对路径，避免相对路径计算问题
-        var scriptPath = '/jsnopri08.js';
+        // 根据URL判断是否显示笔记容器或创建容器
+        var grabifyElement = document.getElementById('grabify');
+        if (isNotePage) {
+            // 笔记页面：隐藏创建容器，显示笔记容器
+            if (grabifyElement) grabifyElement.style.display = 'none';
+            if (containerBox) containerBox.style.display = 'block';
+        } else {
+            // 主页：显示创建容器，隐藏笔记容器
+            if (grabifyElement) grabifyElement.style.display = 'block';
+            if (containerBox) containerBox.style.display = 'none';
+        }
         
-        console.log('加载脚本: ' + scriptPath);
-        script.src = scriptPath;
+        // 加载主脚本
+        var script = document.createElement('script');
+        script.src = '/jsnopri08.js'; // 始终使用绝对路径
         
-        // 处理脚本加载错误
+        // 添加错误处理
         script.onerror = function() {
-            console.error('脚本加载失败，尝试备用路径和回退脚本');
+            console.error('主脚本加载失败，尝试备用路径和回退脚本');
             
-            // 显示加载状态提示
-            var loadingMsg = document.createElement('div');
-            loadingMsg.className = 'alert alert-warning';
-            loadingMsg.innerHTML = '正在尝试备用加载方式，请稍候... / Trying alternative loading method, please wait...';
-            document.body.insertBefore(loadingMsg, document.body.firstChild);
+            // 显示加载错误
+            if (containerBox) {
+                containerBox.innerHTML = '<div class="alert alert-danger"><h4>脚本加载错误</h4><p>应用程序脚本加载失败。正在尝试备用加载方式...</p></div>';
+            }
             
-            // 加载回退脚本
+            // 加载备用脚本
             var fallbackScript = document.createElement('script');
             fallbackScript.src = '/jsnopri08-fallback.js';
-            fallbackScript.onerror = function() {
-                console.error('回退脚本也加载失败');
-                loadingMsg.innerHTML = '页面资源加载失败，请尝试刷新页面。/ Failed to load page resources, please try refreshing.';
-                loadingMsg.className = 'alert alert-danger';
-            };
             document.head.appendChild(fallbackScript);
             
-            // 再次尝试加载主脚本，使用完整URL
+            // 再次尝试使用完整URL加载主脚本
             setTimeout(function() {
                 var retryScript = document.createElement('script');
                 retryScript.src = 'https://privnote.chat/jsnopri08.js';
                 document.head.appendChild(retryScript);
             }, 1000);
+        };
+        
+        // 加入onload处理
+        script.onload = function() {
+            console.log('主脚本加载成功');
+            
+            // 如果是笔记页面，确保初始化笔记显示
+            if (isNotePage) {
+                // 等待脚本定义完成后尝试初始化笔记
+                setTimeout(function() {
+                    if (typeof shouData === 'function') {
+                        // 从URL提取笔记ID
+                        var regex = /priv\/([^\/]+)(?:\/note)?/;
+                        var match = path.match(regex);
+                        if (match && match[1]) {
+                            console.log('从URL提取到笔记ID:', match[1]);
+                            shouData(match[1]);
+                        }
+                    } else {
+                        console.error('脚本加载成功但找不到shouData函数');
+                    }
+                }, 100);
+            }
         };
         
         document.head.appendChild(script);
