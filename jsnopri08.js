@@ -73,7 +73,28 @@ function convertTime(seconds) {
 
 document.addEventListener('DOMContentLoaded', function() {
   try {
+    // Get saved language preference or detect from browser
+    currentLanguage = localStorage.getItem('selectedLanguage');
+    
+    // If no saved preference, try to detect
+    if (!currentLanguage) {
+      var maigua = maitime();
+      if (maigua == 7) {
+        currentLanguage = 'zh';
+      } else {
+        // Fall back to browser language detection
+        currentLanguage = detectBrowserLanguage();
+      }
+      // Save detected language
+      localStorage.setItem('selectedLanguage', currentLanguage);
+    }
+    
+    console.log('Initial language set to:', currentLanguage);
     applyLanguage(currentLanguage);
+    
+    // Update language dropdown display
+    document.getElementById('currentLanguage').textContent = 
+      currentLanguage === 'en' ? 'English' : '中文';
   } catch (e) {
     console.error('Error applying language:', e);
     applyLanguage('en');
@@ -745,13 +766,15 @@ function maitime(){
 }
 
 // Function to apply language strings to UI elements
-// Function to apply language strings to UI elements
 function applyLanguage(language) {
+  console.log('Applying language:', language);
+  
   if (!languageStrings[language]) {
     console.error('Language not supported:', language);
     return;
   }
   
+  // Set current language and save to localStorage
   currentLanguage = language;
   localStorage.setItem('selectedLanguage', language);
   
@@ -765,7 +788,7 @@ function applyLanguage(language) {
     }
   }
   
-  // Update UI with selected language strings
+  // Update UI with selected language strings - with forced redraw
   for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -779,11 +802,21 @@ function applyLanguage(language) {
         } else if (elementId === 'decrysrc') {
           element.src = textContent;
         } else {
+          // Force redraw by temporarily modifying the element
+          const oldDisplay = element.style.display;
+          element.style.display = 'none';
           element.textContent = textContent;
+          
+          // Use setTimeout to ensure the browser processes the display change
+          setTimeout(() => {
+            element.style.display = oldDisplay;
+          }, 0);
         }
       } catch (error) {
         console.error(`Error updating element ${elementId}:`, error);
       }
+    } else {
+      console.warn(`Element with ID '${elementId}' not found in the DOM`);
     }
   }
   
@@ -799,7 +832,32 @@ window.switchLanguage = function(language) {
       console.error('Unsupported language:', language);
       return;
     }
+    // Force immediate UI update
     applyLanguage(language);
+    
+    // Update dropdown display
+    const langElement = document.getElementById('currentLanguage');
+    if (langElement) {
+      langElement.textContent = language === 'en' ? 'English' : '中文';
+    }
+    
+    // Ensure all text elements are updated
+    for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        if (elementId === 'my-select') {
+          element.innerHTML = textContent;
+        } else if (elementId === 'encryptinfo' || elementId === 'demo2') {
+          element.innerHTML = textContent;
+        } else if (elementId === 'myTextarea' || elementId === 'HiddenTextarea') {
+          element.placeholder = textContent;
+        } else if (elementId === 'decrysrc') {
+          element.src = textContent;
+        } else {
+          element.textContent = textContent;
+        }
+      }
+    }
   } catch (error) {
     console.error('Error switching language:', error);
   }
