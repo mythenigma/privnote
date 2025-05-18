@@ -597,27 +597,34 @@
     document.addEventListener('DOMContentLoaded', function() {
         var script = document.createElement('script');
         
-        // 获取当前路径并计算正确的脚本路径
+        // 获取当前路径
         var path = window.location.pathname;
-        var scriptPath = '';
+        console.log('当前路径:', path);
         
-        // 检查是否在笔记URL中
-        if (path.includes('/priv/')) {
-            // 直接使用绝对路径，避免相对路径计算问题
-            scriptPath = '/jsnopri08.js';
-        } else {
-            // 首页或其他页面
-            scriptPath = '/jsnopri08.js';
-        }
+        // 直接使用绝对路径，避免相对路径计算问题
+        var scriptPath = '/jsnopri08.js';
         
         console.log('加载脚本: ' + scriptPath);
         script.src = scriptPath;
+        
+        // 处理脚本加载错误
         script.onerror = function() {
             console.error('脚本加载失败，尝试备用路径和回退脚本');
             
-            // 尝试完整URL
+            // 显示加载状态提示
+            var loadingMsg = document.createElement('div');
+            loadingMsg.className = 'alert alert-warning';
+            loadingMsg.innerHTML = '正在尝试备用加载方式，请稍候... / Trying alternative loading method, please wait...';
+            document.body.insertBefore(loadingMsg, document.body.firstChild);
+            
+            // 加载回退脚本
             var fallbackScript = document.createElement('script');
             fallbackScript.src = '/jsnopri08-fallback.js';
+            fallbackScript.onerror = function() {
+                console.error('回退脚本也加载失败');
+                loadingMsg.innerHTML = '页面资源加载失败，请尝试刷新页面。/ Failed to load page resources, please try refreshing.';
+                loadingMsg.className = 'alert alert-danger';
+            };
             document.head.appendChild(fallbackScript);
             
             // 再次尝试加载主脚本，使用完整URL
@@ -627,6 +634,7 @@
                 document.head.appendChild(retryScript);
             }, 1000);
         };
+        
         document.head.appendChild(script);
     });
 </script>

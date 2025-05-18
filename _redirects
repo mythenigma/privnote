@@ -1,16 +1,17 @@
 # Cloudflare Pages _redirects file for SPA routing
 
-# 重要：优先级从上到下，特定的路由应该放在通用路由之前
-# Important: Priority is top to bottom, specific routes should be before generic ones
+# 这个文件用于配置Cloudflare Pages的URL处理规则
+# 我们使用 "200" 状态码来指示服务器返回指定文件的内容，但保持浏览器地址栏中的原始URL不变
+# 这对于单页应用（SPA）非常重要，这样前端路由器才能正确工作
 
-# 将 /priv/xxx/note 路径重定向到 index.html，保持 URL 不变，状态码 200
-# Redirect /priv/xxx/note paths to index.html, preserving the URL, status code 200
-/priv/*/note    /index.html   200
+# 笔记详情页面 - 保持原始URL
+/priv/*/note    /index.html   200!
 
-# 将 /priv/xxx 路径重定向到 index.html，保持 URL 不变，状态码 200
-# Redirect /priv/xxx paths to index.html, preserving the URL, status code 200
-/priv/*         /index.html   200
+# 笔记页面 - 保持原始URL
+/priv/*         /index.html   200!
 
-# 将所有其他路径重定向到 index.html，保持 URL 不变，状态码 200
-# Redirect all other paths to index.html, preserving the URL, status code 200
-/*              /index.html   200
+# 所有其他路径 - 保持原始URL
+/*              /index.html   200!
+
+# 注意：200! 表示严格保持URL，而不是重定向
+# 这确保了浏览器地址栏中的URL保持不变
