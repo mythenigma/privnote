@@ -578,21 +578,32 @@
                 </div>
             </div>
         </div>
-    </div>    <script>    // Make switchLanguage globally accessible
+    </div>    <script>
+    // Define a temporary switchLanguage function that will be replaced by jsnopri08.js
+    // but handles the request gracefully until the script is loaded
     window.switchLanguage = function(language) {
-        // Will be implemented in jsnopri08.js
+        console.log('Temporary switchLanguage called with:', language);
+        // Store the language preference without page reload
+        localStorage.setItem('selectedLanguage', language);
+        
+        // If main script is loaded, defer to its implementation
         if (typeof applyLanguage === 'function') {
+            console.log('Deferring to main applyLanguage function');
             applyLanguage(language);
         } else {
-            // If applyLanguage is not yet loaded, we're in the read screen
-            // Set language in localStorage and reload the page
-            localStorage.setItem('selectedLanguage', language);
-            window.location.reload();
+            console.log('Main script not yet loaded, language preference saved');
+            // Set a flag to apply language once script loads
+            window.pendingLanguageSwitch = language;
         }
     }
 
     // Dynamically load the JS file based on current path depth
     (function() {
+        // If script is already loaded, don't load again
+        if (window.jsScriptLoaded) {
+            return;
+        }
+        
         // Get current path and calculate proper relative path to root
         var pathSegments = window.location.pathname.split('/').filter(Boolean);
         var jsPath = '';
@@ -605,20 +616,30 @@
             // We're at root or unknown path, use direct path
             jsPath = 'jsnopri08.js';
         }
-        
-        // Create and append script tag
+          // Create and append script tag with safeguards against multiple loads
         var script = document.createElement('script');
         script.src = jsPath;
         script.onload = function() {
-            console.log('JS loaded successfully');
-            // Apply language from localStorage
+            console.log('JS loaded successfully from: ' + jsPath);
+            window.jsScriptLoaded = true;
+            
+            // Apply language from localStorage without reload
             var savedLang = localStorage.getItem('selectedLanguage') || 'en';
             if (typeof applyLanguage === 'function') {
-                applyLanguage(savedLang);
+                setTimeout(function() {
+                    console.log('Applying saved language after script load:', savedLang);
+                    applyLanguage(savedLang);
+                    
+                    // Apply any pending language switch that happened before script loaded
+                    if (window.pendingLanguageSwitch) {
+                        console.log('Applying pending language switch:', window.pendingLanguageSwitch);
+                        applyLanguage(window.pendingLanguageSwitch);
+                        window.pendingLanguageSwitch = null;
+                    }
+                }, 100); // Slight delay to ensure everything is ready
             }
         };
         document.head.appendChild(script);
-        console.log('Loading JS from: ' + jsPath);
     })();
 </script>
 </main>

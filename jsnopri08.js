@@ -71,6 +71,20 @@ function convertTime(seconds) {
 //console.log(convertTime2(343434));
 // Remove cookie-based note ID logic and rely solely on URL parsing
 
+// Extract note ID from URL and store it for reference
+function extractNoteIdFromUrl() {
+  const url = window.location.href;
+  const regex = /priv\/([^\/]+)(?:\/note)?/; // Improved regex to handle paths with or without /note
+  const match = url.match(regex);
+  if (match !== null) {
+    const noteId = match[1];
+    console.log("Found note ID in URL:", noteId);
+    window.noteId = noteId; // Store for reference
+    return noteId;
+  }
+  return null;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   try {
     // Get saved language preference or detect from browser
@@ -101,13 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Extract note ID from URL and show note if present
-  const url = window.location.href;
-  const regex = /priv\/([^\/]+)(?:\/note)?/; // Improved regex to handle paths with or without /note
-  const match = url.match(regex);
-  if (match !== null) {
-    const numberoffile = match[1];
-    console.log("Found note ID in URL:", numberoffile);
-    shouData(numberoffile);
+  const noteId = extractNoteIdFromUrl();
+  if (noteId) {
+    shouData(noteId);
   } else {
     // No note ID in URL, show grabify section
     document.getElementById('grabify').style.display = 'block';
@@ -781,11 +791,7 @@ function applyLanguage(language) {
   // Update the language button text
   const langElement = document.getElementById('currentLanguage');
   if (langElement) {
-    if (language === 'en') {
-      langElement.textContent = 'English';
-    } else if (language === 'zh') {
-      langElement.textContent = '中文';
-    }
+    langElement.textContent = language === 'en' ? 'English' : '中文';
   }
   
   // Update UI with selected language strings - with forced redraw
@@ -804,13 +810,15 @@ function applyLanguage(language) {
         } else {
           // Force redraw by temporarily modifying the element
           const oldDisplay = element.style.display;
-          element.style.display = 'none';
           element.textContent = textContent;
           
-          // Use setTimeout to ensure the browser processes the display change
-          setTimeout(() => {
+          // Force browser repaint for UI updates
+          element.offsetHeight; // This triggers a reflow/repaint
+          
+          // Restore original display if it was explicitly set
+          if (oldDisplay) {
             element.style.display = oldDisplay;
-          }, 0);
+          }
         }
       } catch (error) {
         console.error(`Error updating element ${elementId}:`, error);
@@ -821,40 +829,47 @@ function applyLanguage(language) {
   }
   
   console.log('Language applied:', language);
+  
+  // Dispatch a custom event that can be used by other parts of the application
+  document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language } }));
 }
 
 // Function to switch language manually - make it globally accessible
 window.applyLanguage = applyLanguage;
+// Safer implementation that won't cause refresh loops
 window.switchLanguage = function(language) {
   try {
-    console.log('Switching language to:', language);
+    console.log('Main switchLanguage called with:', language);
     if (!languageStrings[language]) {
       console.error('Unsupported language:', language);
       return;
     }
-    // Force immediate UI update
+    
+    // Update the localStorage preference without page reload
+    localStorage.setItem('selectedLanguage', language);
+    currentLanguage = language; // Update currentLanguage variable
+    
+    // Apply language changes to UI
     applyLanguage(language);
     
-    // Update dropdown display
-    const langElement = document.getElementById('currentLanguage');
-    if (langElement) {
-      langElement.textContent = language === 'en' ? 'English' : '中文';
-    }
-    
-    // Ensure all text elements are updated
-    for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
-      const element = document.getElementById(elementId);
-      if (element) {
-        if (elementId === 'my-select') {
-          element.innerHTML = textContent;
-        } else if (elementId === 'encryptinfo' || elementId === 'demo2') {
-          element.innerHTML = textContent;
-        } else if (elementId === 'myTextarea' || elementId === 'HiddenTextarea') {
-          element.placeholder = textContent;
-        } else if (elementId === 'decrysrc') {
-          element.src = textContent;
-        } else {
-          element.textContent = textContent;
+    // Special handling for read mode - if we're in shouData and containerbox content is dynamic
+    // We need to check if we're on a note page and rerender if needed
+    const url = window.location.href;
+    const regex = /priv\/([^\/]+)(?:\/note)?/;
+    const match = url.match(regex);
+    if (match !== null && match[1]) {
+      // We're on a note page, determine whether we need to update content
+      const containerBox = document.getElementById('containerbox');
+      const isReadMode = containerBox && !containerBox.querySelector('textarea');
+      
+      if (isReadMode) {
+        // Store the note ID for reference
+        window.noteId = match[1];
+        console.log('Updating read view with new language');
+        
+        // Reload the note content with the new language
+        if (typeof shouData === 'function') {
+          shouData(window.noteId);
         }
       }
     }
