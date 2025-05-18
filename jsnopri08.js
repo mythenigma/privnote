@@ -422,20 +422,57 @@ async function shouData(filename) {
 }
 
 function yanzheng(){
-
   pass2 = document.getElementById('mythenigma');
   var expires = new Date(Date.now() + 700000).toUTCString();
+  
   if(pass1 == pass2.value){
-   document.cookie = "myth=ok; expires=" + expires;
-// to textareavlue is file name
-   window.location.href = "https://privnote.chat/priv/"+textareaValue+"/note";
-  }else{
-    pass2.value ='';
-    confirmask ++;
+    document.cookie = "myth=ok; expires=" + expires;
+    // 清除正在显示的密码输入界面元素，防止重复显示
+    const containerBox = document.getElementById('containerbox');
+    if (containerBox) {
+      console.log('密码验证成功，清除密码输入界面...');
+      // 在调用tocontent()前显示加载状态
+      if(currentLanguage === 'zh'){
+        containerBox.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">正在加载内容，请稍候...</p></div>';
+      } else {
+        containerBox.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-3">Loading content, please wait...</p></div>';
+      }
+    }
+    
+    // 使用短延迟确保DOM已更新
+    setTimeout(function() {
+      console.log('调用tocontent()显示内容...');
+      tocontent(); // 直接显示内容
+    }, 300);
+  } else {
+    console.log('密码验证失败');
+    pass2.value = '';
+    confirmask++;
+    
+    // 显示错误信息
+    const errorMsg = document.createElement('div');
+    errorMsg.className = 'alert alert-danger mt-2';
+    errorMsg.textContent = currentLanguage === 'zh' ? 
+      '密码不正确，请重试。' : 
+      'Incorrect password, please try again.';
+    
+    // 查找密码输入框的父元素，并在下方添加错误信息
+    const passwordInput = document.getElementById('mythenigma');
+    if (passwordInput && passwordInput.parentNode) {
+      // 检查是否已有错误消息，如果有则移除
+      const existingError = passwordInput.parentNode.querySelector('.alert-danger');
+      if (existingError) {
+        existingError.remove();
+      }
+      passwordInput.parentNode.appendChild(errorMsg);
+      
+      // 聚焦密码输入框以便用户继续输入
+      passwordInput.focus();
+    }
+    
     if(confirmask > 20){
       document.cookie = "myCookie=bad; expires=" + expires;
     }
-    
   }
 }
 
@@ -573,33 +610,55 @@ function simulateTypingfromTXT(selectid,text, delay) {
   typeNextCharacter();
 }
 async function tocontent(){
-  if(expiretime>0){
-    expiretime = convertTime2(expiretime);
-  } else {
-    // Send request to delete note
-    const data = new FormData();
-    data.append('e', textareaValue);
-    data.append('mudi', 'y');
-    const response = await fetch("https://maipdf.com/baidu.php", {
-      method: "POST",
-      body: data
-    });
-    
-    try {
-      const result = await response.text().then(text => text.trim());
-      textareaValue = result;
-    } catch (error) {
-      return;
-    }
-    
-    if(currentLanguage === 'zh'){
-      expiretime = '本次阅读之后';
+  console.log('开始显示内容...');
+  try {
+    if(expiretime>0){
+      expiretime = convertTime2(expiretime);
     } else {
-      expiretime = 'this reading session';
+      // Send request to delete note
+      const data = new FormData();
+      data.append('e', textareaValue);
+      data.append('mudi', 'y');
+      
+      try {
+        console.log('正在获取笔记内容，ID:', textareaValue);
+        const response = await fetch("https://maipdf.com/baidu.php", {
+          method: "POST",
+          body: data
+        });
+        
+        const result = await response.text().then(text => text.trim());
+        console.log('获取到内容结果', result.length > 20 ? 
+          result.substring(0, 20) + '...' : 
+          '内容长度不足');
+        
+        // 如果有返回内容则使用，否则保留原有的textareaValue
+        if (result && result.length > 0) {
+          textareaValue = result;
+        } else {
+          console.warn('服务器返回内容为空，使用现有ID作为内容');
+        }
+      } catch (error) {
+        console.error('获取内容时出错:', error);
+        // 发生错误时继续使用现有的textareaValue
+      }
+      
+      if(currentLanguage === 'zh'){
+        expiretime = '本次阅读之后';
+      } else {
+        expiretime = 'this reading session';
+      }
     }
+  } catch (error) {
+    console.error('处理过期时间时出错:', error);
   }
 
   const buttcontent = document.getElementById('containerbox');
+  
+  if(!buttcontent) {
+    console.error('找不到containerbox元素');
+    return;
+  }
   
   if(currentLanguage === 'zh'){
     buttcontent.innerHTML = '<h3>便签内容</h3> <div class="alert alert-success">该便签将在以下时间销毁： '+expiretime+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(120,65%,75%,0.3);"></textarea>';
@@ -608,9 +667,28 @@ async function tocontent(){
   }
   
   const textarea = document.getElementById('resultarea');
-  textarea.value = textareaValue;
+  if(!textarea) {
+    console.error('找不到resultarea元素');
+    return;
+  }
   
-  setTimeout(jilu(), 2000);
+  // 检查是否存在有效的内容
+  if(textareaValue && textareaValue.trim().length > 0) {
+    textarea.value = textareaValue;
+    console.log('内容已加载到文本区域');
+  } else {
+    console.error('没有有效的内容可显示');
+    textarea.value = currentLanguage === 'zh' ? 
+      '无法读取内容，可能已失效。' : 
+      'Content cannot be read, it may have expired.';
+  }
+  
+  // 记录笔记已被阅读
+  try {
+    setTimeout(() => jilu(), 500);
+  } catch(e) {
+    console.error('记录笔记阅读时出错:', e);
+  }
 }
 async function jilu(){
   const md5 = globename;
@@ -746,22 +824,24 @@ function maitime(){
 
 // Function to apply language strings to UI elements
 function applyLanguage(language) {
+  console.log('应用语言:', language);
+  
   if (!languageStrings[language]) {
-    console.error('Language not supported:', language);
+    console.error('不支持的语言:', language);
     return;
   }
   
   currentLanguage = language;
   localStorage.setItem('selectedLanguage', language);
   
-  // Update the language button text
+  // 更新语言按钮文本
   if (language === 'en') {
     document.getElementById('currentLanguage').textContent = 'English';
   } else if (language === 'zh') {
     document.getElementById('currentLanguage').textContent = '中文';
   }
   
-  // Update UI with selected language strings
+  // 更新UI元素文本
   for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -778,9 +858,61 @@ function applyLanguage(language) {
           element.textContent = textContent;
         }
       } catch (error) {
-        console.error(`Error updating element ${elementId}:`, error);
+        console.error(`更新元素错误 ${elementId}:`, error);
       }
     }
+  }
+  
+  // 检查是否在笔记阅读页面，可能需要重新加载内容
+  checkAndRefreshNoteContent();
+}
+
+// 检查并刷新笔记内容（如果在笔记阅读页面）
+function checkAndRefreshNoteContent() {
+  try {
+    var path = window.location.pathname;
+    if (path.includes('/priv/')) {
+      var match = path.match(/\/priv\/([^\/]+)/);
+      if (match && match[1]) {
+        var noteId = match[1];
+        console.log('检测到笔记页面，ID:', noteId);
+        
+        // 存储笔记ID以供后续使用
+        window.noteId = noteId;
+        
+        // 检查是否在阅读模式或密码输入模式
+        var containerBox = document.getElementById('containerbox');
+        if (containerBox) {
+          // 检查是否已有密码输入框
+          const passwordInput = containerBox.querySelector('#mythenigma');
+          if (passwordInput) {
+            console.log('处于密码输入界面，重新加载界面...');
+            // 重新加载笔记内容，包括密码输入界面
+            shouData(noteId);
+          } 
+          // 检查是否已在内容显示界面
+          else if (containerBox.querySelector('#resultarea')) {
+            console.log('已在笔记内容界面，检查是否需要刷新...');
+            
+            // 如果密码验证已通过，直接显示内容
+            if (document.cookie.includes('myth=ok')) {
+              console.log('密码已验证，直接刷新内容...');
+              setTimeout(() => tocontent(), 100);
+            } else {
+              // 否则重新加载笔记内容
+              shouData(noteId);
+            }
+          }
+          // 其他情况（如确认页面）
+          else {
+            console.log('笔记阅读模式下切换语言，重新加载内容');
+            shouData(noteId);
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.error('检查笔记内容时出错:', e);
   }
 }
 

@@ -578,18 +578,51 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <script>
-    // Make switchLanguage globally accessible
+    </div>    <script>
+    // 使用简单的函数来处理语言切换
     window.switchLanguage = function(language) {
-        // Will be implemented in jsnopri08.js
+        // 保存语言偏好
+        localStorage.setItem('selectedLanguage', language);
+        
+        // 如果主脚本已加载，应用语言
         if (typeof applyLanguage === 'function') {
             applyLanguage(language);
+        } else {
+            // 如果未加载，只保存偏好并尝试刷新页面
+            console.log('保存语言偏好: ' + language);
         }
     }
+    
+    // 根据当前URL路径动态加载脚本
+    document.addEventListener('DOMContentLoaded', function() {
+        var script = document.createElement('script');
+        
+        // 获取当前路径并计算正确的脚本路径
+        var path = window.location.pathname;
+        var scriptPath = '';
+        
+        // 检查是否在笔记URL中
+        if (path.includes('/priv/')) {
+            var segments = path.split('/').filter(Boolean);
+            var depth = segments.length;
+            
+            if (depth === 1) { // /priv/
+                scriptPath = 'jsnopri08.js';
+            } else if (depth === 2) { // /priv/xxx
+                scriptPath = '../jsnopri08.js';
+            } else { // /priv/xxx/note 或更深
+                scriptPath = '../../jsnopri08.js';
+            }
+        } else {
+            // 首页或其他页面
+            scriptPath = 'jsnopri08.js';
+        }
+        
+        console.log('加载脚本: ' + scriptPath);
+        script.src = scriptPath;
+        document.head.appendChild(script);
+    });
 </script>
-<script src="../../../jsnopri08.js"></script>
 </main>
 </body>
 </html>

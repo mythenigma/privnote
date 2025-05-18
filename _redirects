@@ -1,3 +1,13 @@
 # Cloudflare Pages _redirects file for SPA routing
-/priv/*    /index.html   200
-/*         /index.html   200
+
+# 重要：顺序很关键，特定的路由应该放在通用路由之前
+# Important: Order matters, specific routes should be before generic ones
+
+# 将 /priv/xxx/note 和 /priv/xxx 路径都重定向到 index.html，保持 URL 不变，状态码 200
+# Redirect both /priv/xxx/note and /priv/xxx paths to index.html, preserving the URL, status code 200
+/priv/*/note    /index.html   200
+/priv/*         /index.html   200
+
+# 将所有其他路径重定向到 index.html，保持 URL 不变，状态码 200
+# Redirect all other paths to index.html, preserving the URL, status code 200
+/*              /index.html   200
