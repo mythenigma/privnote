@@ -73,28 +73,7 @@ function convertTime(seconds) {
 
 document.addEventListener('DOMContentLoaded', function() {
   try {
-    // Get saved language preference or detect from browser
-    currentLanguage = localStorage.getItem('selectedLanguage');
-    
-    // If no saved preference, try to detect
-    if (!currentLanguage) {
-      var maigua = maitime();
-      if (maigua == 7) {
-        currentLanguage = 'zh';
-      } else {
-        // Fall back to browser language detection
-        currentLanguage = detectBrowserLanguage();
-      }
-      // Save detected language
-      localStorage.setItem('selectedLanguage', currentLanguage);
-    }
-    
-    console.log('Initial language set to:', currentLanguage);
     applyLanguage(currentLanguage);
-    
-    // Update language dropdown display
-    document.getElementById('currentLanguage').textContent = 
-      currentLanguage === 'en' ? 'English' : '中文';
   } catch (e) {
     console.error('Error applying language:', e);
     applyLanguage('en');
@@ -483,12 +462,12 @@ async function sendData() {
     const myDiv = document.getElementById("resultlink");
     const encrydiv = document.getElementById("encryptinfo");
 
-  //  myDiv.style.display="block";    fadeIn(encrydiv);
+  //  myDiv.style.display="block";
+    fadeIn(encrydiv);
     setTimeout(() => {
             fadeIn(myDiv);
       }, 2000);
-    // Use the generateNoteUrl function to create a consistent URL format
-    document.getElementById("innerlink").textContent = generateNoteUrl(result);
+    document.getElementById("innerlink").textContent= 'https://privnote.chat/priv/'+result+'/note';
     
   } catch (error) {
 
@@ -767,28 +746,22 @@ function maitime(){
 
 // Function to apply language strings to UI elements
 function applyLanguage(language) {
-  console.log('Applying language:', language);
-  
   if (!languageStrings[language]) {
     console.error('Language not supported:', language);
     return;
   }
   
-  // Set current language and save to localStorage
   currentLanguage = language;
   localStorage.setItem('selectedLanguage', language);
   
   // Update the language button text
-  const langElement = document.getElementById('currentLanguage');
-  if (langElement) {
-    if (language === 'en') {
-      langElement.textContent = 'English';
-    } else if (language === 'zh') {
-      langElement.textContent = '中文';
-    }
+  if (language === 'en') {
+    document.getElementById('currentLanguage').textContent = 'English';
+  } else if (language === 'zh') {
+    document.getElementById('currentLanguage').textContent = '中文';
   }
   
-  // Update UI with selected language strings - with forced redraw
+  // Update UI with selected language strings
   for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -802,65 +775,19 @@ function applyLanguage(language) {
         } else if (elementId === 'decrysrc') {
           element.src = textContent;
         } else {
-          // Force redraw by temporarily modifying the element
-          const oldDisplay = element.style.display;
-          element.style.display = 'none';
           element.textContent = textContent;
-          
-          // Use setTimeout to ensure the browser processes the display change
-          setTimeout(() => {
-            element.style.display = oldDisplay;
-          }, 0);
         }
       } catch (error) {
         console.error(`Error updating element ${elementId}:`, error);
       }
-    } else {
-      console.warn(`Element with ID '${elementId}' not found in the DOM`);
     }
   }
-  
-  console.log('Language applied:', language);
 }
 
 // Function to switch language manually - make it globally accessible
 window.applyLanguage = applyLanguage;
 window.switchLanguage = function(language) {
-  try {
-    console.log('Switching language to:', language);
-    if (!languageStrings[language]) {
-      console.error('Unsupported language:', language);
-      return;
-    }
-    // Force immediate UI update
-    applyLanguage(language);
-    
-    // Update dropdown display
-    const langElement = document.getElementById('currentLanguage');
-    if (langElement) {
-      langElement.textContent = language === 'en' ? 'English' : '中文';
-    }
-    
-    // Ensure all text elements are updated
-    for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
-      const element = document.getElementById(elementId);
-      if (element) {
-        if (elementId === 'my-select') {
-          element.innerHTML = textContent;
-        } else if (elementId === 'encryptinfo' || elementId === 'demo2') {
-          element.innerHTML = textContent;
-        } else if (elementId === 'myTextarea' || elementId === 'HiddenTextarea') {
-          element.placeholder = textContent;
-        } else if (elementId === 'decrysrc') {
-          element.src = textContent;
-        } else {
-          element.textContent = textContent;
-        }
-      }
-    }
-  } catch (error) {
-    console.error('Error switching language:', error);
-  }
+  applyLanguage(language);
 };
 
 // Function to detect browser language
@@ -892,39 +819,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Make essential functions globally available
 window.create = create;
-window.decoding = decoding;
-window.yanzheng = yanzheng;
-window.tocontent = tocontent;
-
-// Function to generate the note URL
-function generateNoteUrl(noteId) {
-  // Get the current origin (e.g., https://privnote.chat)
-  const origin = window.location.origin;
-  
-  // Create the URL with the /priv/noteId path
-  return `${origin}/priv/${noteId}`;
-}
-
-// Function to display the generated note link properly
-function displayNoteLink(noteId) {
-  const noteUrl = generateNoteUrl(noteId);
-  const innerLink = document.getElementById('innerlink');
-  
-  if (innerLink) {
-    innerLink.textContent = noteUrl;
-    
-    // Display the result link container
-    const resultLinkContainer = document.getElementById('resultlink');
-    if (resultLinkContainer) {
-      resultLinkContainer.style.display = 'block';
-    }
-    
-    // Hide the grabify section if it's currently visible
-    const grabifySection = document.getElementById('grabify');
-    if (grabifySection) {
-      grabifySection.style.display = 'none';
-    }
-  }
-}
