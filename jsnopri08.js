@@ -371,15 +371,23 @@ async function shouData(filename) {
         }
         
         if(currentLanguage === 'zh'){
-          buttcontent.innerHTML = "<h3>阅读后销毁?</h3><p>您即将开始阅读便签 " + filename + "</p>" + 
-            '<div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">' + 
-            '<button type="button" class="btn btn-warning btn-lg px-4 me-sm-3" onclick="tocontent()">现在查看</button>' + 
-            '<button type="button" class="btn btn-outline-secondary btn-lg px-4">暂时不打开</button></div>';
+          buttcontent.innerHTML = `<div style="background:#fff;border-radius:20px;box-shadow:0 8px 32px rgba(44,62,80,0.08);padding:3rem 2rem 2.5rem 2rem;margin:2rem auto;max-width:900px;border-top:8px solid #f39c12;">
+            <h2 style="font-weight:700;font-size:2.5rem;color:#2c3e50;">阅读后销毁?</h2>
+            <p style="font-size:1.3rem;color:#555;">您即将开始阅读便签 <b>${filename}</b></p>
+            <div class="d-flex flex-wrap justify-content-center gap-4 mt-5">
+              <button type="button" class="btn btn-warning btn-lg px-5 py-3 fw-bold shadow" style="font-size:1.2rem;border-radius:40px;" onclick="tocontent()">现在查看</button>
+              <button type="button" class="btn btn-outline-secondary btn-lg px-5 py-3 fw-bold" style="font-size:1.2rem;border-radius:40px;">暂时不打开</button>
+            </div>
+          </div>`;
         } else {
-          buttcontent.innerHTML = "<h3>Read and destroy?</h3><p>You're about to read and destroy the note with id " + filename + "</p>" + 
-            '<div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">' + 
-            '<button type="button" class="btn btn-warning btn-lg px-4 me-sm-3" onclick="tocontent()">Yes, Show it now</button>' + 
-            '<button type="button" class="btn btn-outline-secondary btn-lg px-4">Not This time</button></div>';
+          buttcontent.innerHTML = `<div style="background:#fff;border-radius:20px;box-shadow:0 8px 32px rgba(44,62,80,0.08);padding:3rem 2rem 2.5rem 2rem;margin:2rem auto;max-width:900px;border-top:8px solid #f39c12;">
+            <h2 style="font-weight:700;font-size:2.5rem;color:#2c3e50;">Read and destroy?</h2>
+            <p style="font-size:1.3rem;color:#555;">You're about to read and destroy the note with id <b>${filename}</b></p>
+            <div class="d-flex flex-wrap justify-content-center gap-4 mt-5">
+              <button type="button" class="btn btn-warning btn-lg px-5 py-3 fw-bold shadow" style="font-size:1.2rem;border-radius:40px;" onclick="tocontent()">YES, SHOW IT NOW</button>
+              <button type="button" class="btn btn-outline-secondary btn-lg px-5 py-3 fw-bold" style="font-size:1.2rem;border-radius:40px;">NOT THIS TIME</button>
+            </div>
+          </div>`;
         }
       } else {
         textareaValue = filename;
@@ -809,3 +817,5 @@ document.addEventListener('DOMContentLoaded', function() {
     applyLanguage('en');
   }
 });
+
+window.create = create;
