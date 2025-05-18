@@ -578,18 +578,49 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <script>
-    // Make switchLanguage globally accessible
+    </div>    <script>    // Make switchLanguage globally accessible
     window.switchLanguage = function(language) {
         // Will be implemented in jsnopri08.js
         if (typeof applyLanguage === 'function') {
             applyLanguage(language);
+        } else {
+            // If applyLanguage is not yet loaded, we're in the read screen
+            // Set language in localStorage and reload the page
+            localStorage.setItem('selectedLanguage', language);
+            window.location.reload();
         }
     }
+
+    // Dynamically load the JS file based on current path depth
+    (function() {
+        // Get current path and calculate proper relative path to root
+        var pathSegments = window.location.pathname.split('/').filter(Boolean);
+        var jsPath = '';
+        
+        // If we're at /priv/xxx/note or similar deep path
+        if (pathSegments.length >= 2 && pathSegments[0] === 'priv') {
+            // Go back to root based on path depth
+            jsPath = '../'.repeat(pathSegments.length) + 'jsnopri08.js';
+        } else {
+            // We're at root or unknown path, use direct path
+            jsPath = 'jsnopri08.js';
+        }
+        
+        // Create and append script tag
+        var script = document.createElement('script');
+        script.src = jsPath;
+        script.onload = function() {
+            console.log('JS loaded successfully');
+            // Apply language from localStorage
+            var savedLang = localStorage.getItem('selectedLanguage') || 'en';
+            if (typeof applyLanguage === 'function') {
+                applyLanguage(savedLang);
+            }
+        };
+        document.head.appendChild(script);
+        console.log('Loading JS from: ' + jsPath);
+    })();
 </script>
-<script src="../../../jsnopri08.js"></script>
 </main>
 </body>
 </html>
