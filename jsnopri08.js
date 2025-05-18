@@ -454,12 +454,12 @@ function yanzheng(){
   // 设置cookie的过期时间
   var expires = new Date(Date.now() + 700000).toUTCString();
   
-  // 验证密码是否正确
-  if(pass1 == pass2.value){
+  // 验证密码是否正确  if(pass1 == pass2.value){
     console.log('密码验证成功');
     
     // 设置cookie，确保path=/以便在整个域名下可用
     document.cookie = "myth=ok; expires=" + expires + "; path=/; SameSite=Lax";
+    console.log('已设置cookie：', document.cookie);
     
     // 获取笔记容器元素
     const containerBox = document.getElementById('containerbox');
@@ -645,7 +645,7 @@ function simulateTypingfromTXT(selectid,text, delay) {
 }
 async function tocontent(){
   console.log('开始显示内容...');
-    // 确保密码验证的cookie正确设置
+  // 确保密码验证的cookie正确设置
   // 这对于密码保护的笔记非常重要
   const checkCookie = document.cookie.split(';').some(item => {
     const cookieStr = item.trim();
@@ -653,10 +653,14 @@ async function tocontent(){
     return cookieStr.startsWith('myth=ok') || cookieStr.startsWith('myth=12345');
   });
   
+  console.log('Cookie检查:', checkCookie ? '已找到有效cookie' : '未找到有效cookie');
+  console.log('当前所有cookies:', document.cookie);
+  
   if (pass1 !== 'mythenigma' && !checkCookie) {
     console.log('检测到密码保护的笔记但cookie未设置，重新设置');
     const expires = new Date(Date.now() + 700000).toUTCString();
     document.cookie = "myth=ok; expires=" + expires + "; path=/; SameSite=Lax";
+    console.log('已重新设置cookie，当前cookies:', document.cookie);
   }
   
   // 处理过期时间
@@ -667,12 +671,12 @@ async function tocontent(){
     const data = new FormData();
     data.append('e', textareaValue);
     data.append('mudi', 'y');
-    
-    console.log('获取笔记内容，ID:', textareaValue);
+      console.log('获取笔记内容，ID:', textareaValue);
     try {
       const response = await fetch("https://maipdf.com/baidu.php", {
         method: "POST",
-        body: data
+        body: data,
+        credentials: 'include' // 确保包含cookies
       });
       
       if (!response.ok) {
