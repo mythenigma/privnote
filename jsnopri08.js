@@ -71,20 +71,6 @@ function convertTime(seconds) {
 //console.log(convertTime2(343434));
 // Remove cookie-based note ID logic and rely solely on URL parsing
 
-// Extract note ID from URL and store it for reference
-function extractNoteIdFromUrl() {
-  const url = window.location.href;
-  const regex = /priv\/([^\/]+)(?:\/note)?/; // Improved regex to handle paths with or without /note
-  const match = url.match(regex);
-  if (match !== null) {
-    const noteId = match[1];
-    console.log("Found note ID in URL:", noteId);
-    window.noteId = noteId; // Store for reference
-    return noteId;
-  }
-  return null;
-}
-
 document.addEventListener('DOMContentLoaded', function() {
   try {
     // Get saved language preference or detect from browser
@@ -115,9 +101,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Extract note ID from URL and show note if present
-  const noteId = extractNoteIdFromUrl();
-  if (noteId) {
-    shouData(noteId);
+  const url = window.location.href;
+  const regex = /priv\/([^\/]+)(?:\/note)?/; // Improved regex to handle paths with or without /note
+  const match = url.match(regex);
+  if (match !== null) {
+    const numberoffile = match[1];
+    console.log("Found note ID in URL:", numberoffile);
+    shouData(numberoffile);
   } else {
     // No note ID in URL, show grabify section
     document.getElementById('grabify').style.display = 'block';
@@ -777,7 +767,7 @@ function maitime(){
 
 // Function to apply language strings to UI elements
 function applyLanguage(language) {
-  console.log('Main applyLanguage called with:', language);
+  console.log('Applying language:', language);
   
   if (!languageStrings[language]) {
     console.error('Language not supported:', language);
@@ -788,16 +778,17 @@ function applyLanguage(language) {
   currentLanguage = language;
   localStorage.setItem('selectedLanguage', language);
   
-  // Update the language dropdown display
+  // Update the language button text
   const langElement = document.getElementById('currentLanguage');
   if (langElement) {
-    langElement.textContent = language === 'en' ? 'English' : '中文';
+    if (language === 'en') {
+      langElement.textContent = 'English';
+    } else if (language === 'zh') {
+      langElement.textContent = '中文';
+    }
   }
   
-  // Track which elements were updated for debugging
-  const updatedElements = [];
-  
-  // Update UI with selected language strings
+  // Update UI with selected language strings - with forced redraw
   for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -811,9 +802,15 @@ function applyLanguage(language) {
         } else if (elementId === 'decrysrc') {
           element.src = textContent;
         } else {
-          // Directly update text content
+          // Force redraw by temporarily modifying the element
+          const oldDisplay = element.style.display;
+          element.style.display = 'none';
           element.textContent = textContent;
-          updatedElements.push(elementId);
+          
+          // Use setTimeout to ensure the browser processes the display change
+          setTimeout(() => {
+            element.style.display = oldDisplay;
+          }, 0);
         }
       } catch (error) {
         console.error(`Error updating element ${elementId}:`, error);
@@ -823,63 +820,46 @@ function applyLanguage(language) {
     }
   }
   
-  console.log('Language applied:', language, 'Updated elements:', updatedElements);
-  
-  // Handle special cases for note viewing
-  handleNoteViewLanguageChange(language);
+  console.log('Language applied:', language);
 }
 
 // Function to switch language manually - make it globally accessible
 window.applyLanguage = applyLanguage;
-// Function to check if we're in note view mode and handle language change
-function handleNoteViewLanguageChange(language) {
-  try {
-    // Check if we're on a note page by examining the URL
-    const url = window.location.href;
-    const regex = /priv\/([^\/]+)(?:\/note)?/;
-    const match = url.match(regex);
-    
-    if (match && match[1]) {
-      const noteId = match[1];
-      console.log('We are on a note page:', noteId);
-      
-      // Store noteId globally for reference
-      window.noteId = noteId;
-      
-      // Check if we're in read mode by looking for specific elements
-      const containerBox = document.getElementById('containerbox');
-      const isReadMode = containerBox && !containerBox.querySelector('textarea');
-      
-      if (isReadMode && typeof shouData === 'function') {
-        console.log('In read mode, refreshing note content with new language');
-        shouData(noteId);
-      }
-    }
-  } catch (error) {
-    console.error('Error in handleNoteViewLanguageChange:', error);
-  }
-}
-
-// Safer implementation that won't cause refresh loops
 window.switchLanguage = function(language) {
   try {
-    console.log('Main switchLanguage called with:', language);
-    
-    // Validate language
+    console.log('Switching language to:', language);
     if (!languageStrings[language]) {
       console.error('Unsupported language:', language);
       return;
     }
-    
-    // Update the localStorage preference without page reload
-    localStorage.setItem('selectedLanguage', language);
-    currentLanguage = language;
-    
-    // Apply language changes to UI
+    // Force immediate UI update
     applyLanguage(language);
     
+    // Update dropdown display
+    const langElement = document.getElementById('currentLanguage');
+    if (langElement) {
+      langElement.textContent = language === 'en' ? 'English' : '中文';
+    }
+    
+    // Ensure all text elements are updated
+    for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        if (elementId === 'my-select') {
+          element.innerHTML = textContent;
+        } else if (elementId === 'encryptinfo' || elementId === 'demo2') {
+          element.innerHTML = textContent;
+        } else if (elementId === 'myTextarea' || elementId === 'HiddenTextarea') {
+          element.placeholder = textContent;
+        } else if (elementId === 'decrysrc') {
+          element.src = textContent;
+        } else {
+          element.textContent = textContent;
+        }
+      }
+    }
   } catch (error) {
-    console.error('Error in switchLanguage:', error);
+    console.error('Error switching language:', error);
   }
 };
 
