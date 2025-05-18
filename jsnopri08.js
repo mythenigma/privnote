@@ -439,6 +439,16 @@ function yanzheng(){
       }
     }
     
+    // 确保URL保持在当前路径，而不是重定向
+    // 从URL中提取笔记ID
+    const url = window.location.href;
+    const regex = /priv\/([^\/]+)(?:\/note)?/;
+    const match = url.match(regex);
+    if (match !== null) {
+      // 存储笔记ID以供tocontent()使用
+      textareaValue = match[1];
+    }
+    
     // 使用短延迟确保DOM已更新
     setTimeout(function() {
       console.log('调用tocontent()显示内容...');
