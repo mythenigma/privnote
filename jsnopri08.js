@@ -777,7 +777,7 @@ function maitime(){
 
 // Function to apply language strings to UI elements
 function applyLanguage(language) {
-  console.log('Applying language:', language);
+  console.log('Main applyLanguage called with:', language);
   
   if (!languageStrings[language]) {
     console.error('Language not supported:', language);
@@ -788,13 +788,16 @@ function applyLanguage(language) {
   currentLanguage = language;
   localStorage.setItem('selectedLanguage', language);
   
-  // Update the language button text
+  // Update the language dropdown display
   const langElement = document.getElementById('currentLanguage');
   if (langElement) {
     langElement.textContent = language === 'en' ? 'English' : '中文';
   }
   
-  // Update UI with selected language strings - with forced redraw
+  // Track which elements were updated for debugging
+  const updatedElements = [];
+  
+  // Update UI with selected language strings
   for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -808,17 +811,9 @@ function applyLanguage(language) {
         } else if (elementId === 'decrysrc') {
           element.src = textContent;
         } else {
-          // Force redraw by temporarily modifying the element
-          const oldDisplay = element.style.display;
+          // Directly update text content
           element.textContent = textContent;
-          
-          // Force browser repaint for UI updates
-          element.offsetHeight; // This triggers a reflow/repaint
-          
-          // Restore original display if it was explicitly set
-          if (oldDisplay) {
-            element.style.display = oldDisplay;
-          }
+          updatedElements.push(elementId);
         }
       } catch (error) {
         console.error(`Error updating element ${elementId}:`, error);
@@ -828,18 +823,49 @@ function applyLanguage(language) {
     }
   }
   
-  console.log('Language applied:', language);
+  console.log('Language applied:', language, 'Updated elements:', updatedElements);
   
-  // Dispatch a custom event that can be used by other parts of the application
-  document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language } }));
+  // Handle special cases for note viewing
+  handleNoteViewLanguageChange(language);
 }
 
 // Function to switch language manually - make it globally accessible
 window.applyLanguage = applyLanguage;
+// Function to check if we're in note view mode and handle language change
+function handleNoteViewLanguageChange(language) {
+  try {
+    // Check if we're on a note page by examining the URL
+    const url = window.location.href;
+    const regex = /priv\/([^\/]+)(?:\/note)?/;
+    const match = url.match(regex);
+    
+    if (match && match[1]) {
+      const noteId = match[1];
+      console.log('We are on a note page:', noteId);
+      
+      // Store noteId globally for reference
+      window.noteId = noteId;
+      
+      // Check if we're in read mode by looking for specific elements
+      const containerBox = document.getElementById('containerbox');
+      const isReadMode = containerBox && !containerBox.querySelector('textarea');
+      
+      if (isReadMode && typeof shouData === 'function') {
+        console.log('In read mode, refreshing note content with new language');
+        shouData(noteId);
+      }
+    }
+  } catch (error) {
+    console.error('Error in handleNoteViewLanguageChange:', error);
+  }
+}
+
 // Safer implementation that won't cause refresh loops
 window.switchLanguage = function(language) {
   try {
     console.log('Main switchLanguage called with:', language);
+    
+    // Validate language
     if (!languageStrings[language]) {
       console.error('Unsupported language:', language);
       return;
@@ -847,34 +873,13 @@ window.switchLanguage = function(language) {
     
     // Update the localStorage preference without page reload
     localStorage.setItem('selectedLanguage', language);
-    currentLanguage = language; // Update currentLanguage variable
+    currentLanguage = language;
     
     // Apply language changes to UI
     applyLanguage(language);
     
-    // Special handling for read mode - if we're in shouData and containerbox content is dynamic
-    // We need to check if we're on a note page and rerender if needed
-    const url = window.location.href;
-    const regex = /priv\/([^\/]+)(?:\/note)?/;
-    const match = url.match(regex);
-    if (match !== null && match[1]) {
-      // We're on a note page, determine whether we need to update content
-      const containerBox = document.getElementById('containerbox');
-      const isReadMode = containerBox && !containerBox.querySelector('textarea');
-      
-      if (isReadMode) {
-        // Store the note ID for reference
-        window.noteId = match[1];
-        console.log('Updating read view with new language');
-        
-        // Reload the note content with the new language
-        if (typeof shouData === 'function') {
-          shouData(window.noteId);
-        }
-      }
-    }
   } catch (error) {
-    console.error('Error switching language:', error);
+    console.error('Error in switchLanguage:', error);
   }
 };
 

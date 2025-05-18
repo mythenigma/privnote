@@ -579,67 +579,162 @@
             </div>
         </div>
     </div>    <script>
-    // Define a temporary switchLanguage function that will be replaced by jsnopri08.js
-    // but handles the request gracefully until the script is loaded
-    window.switchLanguage = function(language) {
-        console.log('Temporary switchLanguage called with:', language);
-        // Store the language preference without page reload
-        localStorage.setItem('selectedLanguage', language);
-        
-        // If main script is loaded, defer to its implementation
-        if (typeof applyLanguage === 'function') {
-            console.log('Deferring to main applyLanguage function');
-            applyLanguage(language);
-        } else {
-            console.log('Main script not yet loaded, language preference saved');
-            // Set a flag to apply language once script loads
-            window.pendingLanguageSwitch = language;
-        }
-    }
-
-    // Dynamically load the JS file based on current path depth
+    // Initialize language system
     (function() {
-        // If script is already loaded, don't load again
+        // Define a temporary, robust switchLanguage function
+        window.switchLanguage = function(language) {
+            console.log('Language switch requested:', language);
+            
+            // Store preference in localStorage (persists between page loads)
+            if (language) {
+                localStorage.setItem('selectedLanguage', language);
+            }
+            
+            // If main script is loaded, use its implementation
+            if (typeof window.applyLanguage === 'function') {
+                try {
+                    console.log('Using main language system');
+                    window.applyLanguage(language);
+                } catch (e) {
+                    console.error('Error in applyLanguage:', e);
+                }
+            } else {
+                console.log('Main script not loaded, flagging for later');
+                // This flag will be checked when script loads
+                window.pendingLanguageSwitch = language;
+            }
+        };
+        
+        // Simple language fallback system for critical UI elements
+        // This will ensure basic language functionality even if script fails to load
+        window.updateBasicUILanguage = function(lang) {
+            try {
+                var basicElements = {
+                    'en': {
+                        'currentLanguage': 'English',
+                        'trans1': 'Secure your words, vanish your trace',
+                        'trans2': 'Encrypts your notes with links, zero-width characters, or binary, ensuring secure sharing and auto-destruction',
+                        'topbanner': 'New Notes'
+                    },
+                    'zh': {
+                        'currentLanguage': '中文',
+                        'trans1': '隐信云 – 加密你的话语，消失你的痕迹',
+                        'trans2': '创建一个便签',
+                        'topbanner': '新建便签'
+                    }
+                };
+                
+                if (basicElements[lang]) {
+                    for (var id in basicElements[lang]) {
+                        var element = document.getElementById(id);
+                        if (element) {
+                            element.textContent = basicElements[lang][id];
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Basic UI update error:', e);
+            }
+        };
+    })();
+
+    // Script loading system - completely rewritten for reliability
+    (function() {
+        // Only load once
         if (window.jsScriptLoaded) {
             return;
         }
-        
-        // Get current path and calculate proper relative path to root
-        var pathSegments = window.location.pathname.split('/').filter(Boolean);
-        var jsPath = '';
-        
-        // If we're at /priv/xxx/note or similar deep path
-        if (pathSegments.length >= 2 && pathSegments[0] === 'priv') {
-            // Go back to root based on path depth
-            jsPath = '../'.repeat(pathSegments.length) + 'jsnopri08.js';
-        } else {
-            // We're at root or unknown path, use direct path
-            jsPath = 'jsnopri08.js';
+          // Get current path and build correct script path
+        function getJsPath() {
+            // Get the absolute path from window.location
+            var absolutePath = window.location.pathname;
+            console.log('Current path:', absolutePath);
+            
+            // Check for root or direct access
+            if (absolutePath === '/' || absolutePath === '/index.html' || absolutePath === '') {
+                return 'jsnopri08.js';
+            }
+            
+            // Special handling for note URLs
+            var pathSegments = absolutePath.split('/').filter(Boolean);
+            if (pathSegments.length >= 1 && pathSegments[0] === 'priv') {
+                // Calculate proper relative path to root based on depth
+                var depth = pathSegments.length;
+                var relativePath = '';
+                for (var i = 0; i < depth; i++) {
+                    relativePath += '../';
+                }
+                return relativePath + 'jsnopri08.js';
+            }
+            
+            // Fallback for other cases
+            return '/jsnopri08.js';
         }
-          // Create and append script tag with safeguards against multiple loads
+        
+        // Get the correct path
+        var jsPath = getJsPath();
+        console.log('Resolved JS path:', jsPath);
+        
+        // Create the script element
         var script = document.createElement('script');
+        script.type = 'text/javascript';
         script.src = jsPath;
+        
+        // Handle script loading success
         script.onload = function() {
-            console.log('JS loaded successfully from: ' + jsPath);
+            console.log('Script loaded successfully from:', jsPath);
             window.jsScriptLoaded = true;
             
-            // Apply language from localStorage without reload
+            // Apply saved language preference
             var savedLang = localStorage.getItem('selectedLanguage') || 'en';
-            if (typeof applyLanguage === 'function') {
+            console.log('Stored language preference:', savedLang);
+            
+            // Apply basic UI updates immediately in case full system has issues
+            window.updateBasicUILanguage(savedLang);
+            
+            // Apply with the main language system
+            if (typeof window.applyLanguage === 'function') {
+                // Wait a moment for everything to initialize
                 setTimeout(function() {
-                    console.log('Applying saved language after script load:', savedLang);
-                    applyLanguage(savedLang);
-                    
-                    // Apply any pending language switch that happened before script loaded
-                    if (window.pendingLanguageSwitch) {
-                        console.log('Applying pending language switch:', window.pendingLanguageSwitch);
-                        applyLanguage(window.pendingLanguageSwitch);
-                        window.pendingLanguageSwitch = null;
+                    try {
+                        // First apply saved language
+                        window.applyLanguage(savedLang);
+                        
+                        // Then apply any pending switch from before script loaded
+                        if (window.pendingLanguageSwitch) {
+                            console.log('Applying pending language switch:', window.pendingLanguageSwitch);
+                            window.applyLanguage(window.pendingLanguageSwitch);
+                            window.pendingLanguageSwitch = null;
+                        }
+                    } catch (e) {
+                        console.error('Error applying language after load:', e);
                     }
-                }, 100); // Slight delay to ensure everything is ready
+                }, 200);
+            } else {
+                console.error('applyLanguage function not found after script load');
             }
         };
+        
+        // Handle script loading error
+        script.onerror = function() {
+            console.error('Failed to load script from:', jsPath);
+            // Apply basic UI updates as fallback
+            var savedLang = localStorage.getItem('selectedLanguage') || 'en';
+            window.updateBasicUILanguage(savedLang);
+            
+            // Try alternative path as fallback
+            var fallbackPath = '/jsnopri08.js';
+            if (jsPath !== fallbackPath) {
+                console.log('Trying fallback path:', fallbackPath);
+                var fallbackScript = document.createElement('script');
+                fallbackScript.src = fallbackPath;
+                document.head.appendChild(fallbackScript);
+            }
+        };
+        
+        // Add the script to the page
         document.head.appendChild(script);
+    })();
     })();
 </script>
 </main>
