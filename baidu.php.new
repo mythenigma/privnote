@@ -1,4 +1,4 @@
- <?php 
+<?php 
 // Loop through all cookies and print their names and values
 
 
@@ -75,7 +75,9 @@ if(isset ($_GET['e'])){
 
     if($mythenigma != 'mythenigma'){
        	if (isset($_COOKIE['myth'])) {
-		  $cookie_value = $_COOKIE['myth'];		  if($cookie_value != 'ok' && $cookie_value != '12345'){
+		  $cookie_value = $_COOKIE['myth'];
+		  // 支持两种cookie值: 'ok'（客户端设置）和'12345'（服务器更新）
+		  if($cookie_value != 'ok' && $cookie_value != '12345'){
 		  	exit('18æ1æ'.$mythenigma);
 		  }else{
 		  	// 设置更长的过期时间，确保在整个会话期间有效
@@ -85,6 +87,7 @@ if(isset ($_GET['e'])){
 			
 		  }
 		}else{
+			// 没有设置cookie，返回错误代码和密码
 			exit('19æ1æ'.$mythenigma);
 		}
 
