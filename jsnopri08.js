@@ -81,10 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Extract note ID from URL and show note if present
   const url = window.location.href;
-  const regex = /priv\/(\d+)\/note/;
+  const regex = /priv\/([^\/]+)(?:\/note)?/; // Improved regex to handle paths with or without /note
   const match = url.match(regex);
   if (match !== null) {
     const numberoffile = match[1];
+    console.log("Found note ID in URL:", numberoffile);
     shouData(numberoffile);
   } else {
     // No note ID in URL, show grabify section
@@ -461,12 +462,12 @@ async function sendData() {
     const myDiv = document.getElementById("resultlink");
     const encrydiv = document.getElementById("encryptinfo");
 
-  //  myDiv.style.display="block";
-    fadeIn(encrydiv);
+  //  myDiv.style.display="block";    fadeIn(encrydiv);
     setTimeout(() => {
             fadeIn(myDiv);
       }, 2000);
-    document.getElementById("innerlink").textContent= 'https://privnote.chat/priv/'+result+'/note';
+    // Use the generateNoteUrl function to create a consistent URL format
+    document.getElementById("innerlink").textContent = generateNoteUrl(result);
     
   } catch (error) {
 
@@ -744,6 +745,7 @@ function maitime(){
 }
 
 // Function to apply language strings to UI elements
+// Function to apply language strings to UI elements
 function applyLanguage(language) {
   if (!languageStrings[language]) {
     console.error('Language not supported:', language);
@@ -754,10 +756,13 @@ function applyLanguage(language) {
   localStorage.setItem('selectedLanguage', language);
   
   // Update the language button text
-  if (language === 'en') {
-    document.getElementById('currentLanguage').textContent = 'English';
-  } else if (language === 'zh') {
-    document.getElementById('currentLanguage').textContent = '中文';
+  const langElement = document.getElementById('currentLanguage');
+  if (langElement) {
+    if (language === 'en') {
+      langElement.textContent = 'English';
+    } else if (language === 'zh') {
+      langElement.textContent = '中文';
+    }
   }
   
   // Update UI with selected language strings
@@ -781,12 +786,23 @@ function applyLanguage(language) {
       }
     }
   }
+  
+  console.log('Language applied:', language);
 }
 
 // Function to switch language manually - make it globally accessible
 window.applyLanguage = applyLanguage;
 window.switchLanguage = function(language) {
-  applyLanguage(language);
+  try {
+    console.log('Switching language to:', language);
+    if (!languageStrings[language]) {
+      console.error('Unsupported language:', language);
+      return;
+    }
+    applyLanguage(language);
+  } catch (error) {
+    console.error('Error switching language:', error);
+  }
 };
 
 // Function to detect browser language
@@ -818,4 +834,39 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// Make essential functions globally available
 window.create = create;
+window.decoding = decoding;
+window.yanzheng = yanzheng;
+window.tocontent = tocontent;
+
+// Function to generate the note URL
+function generateNoteUrl(noteId) {
+  // Get the current origin (e.g., https://privnote.chat)
+  const origin = window.location.origin;
+  
+  // Create the URL with the /priv/noteId path
+  return `${origin}/priv/${noteId}`;
+}
+
+// Function to display the generated note link properly
+function displayNoteLink(noteId) {
+  const noteUrl = generateNoteUrl(noteId);
+  const innerLink = document.getElementById('innerlink');
+  
+  if (innerLink) {
+    innerLink.textContent = noteUrl;
+    
+    // Display the result link container
+    const resultLinkContainer = document.getElementById('resultlink');
+    if (resultLinkContainer) {
+      resultLinkContainer.style.display = 'block';
+    }
+    
+    // Hide the grabify section if it's currently visible
+    const grabifySection = document.getElementById('grabify');
+    if (grabifySection) {
+      grabifySection.style.display = 'none';
+    }
+  }
+}
