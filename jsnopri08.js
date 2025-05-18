@@ -340,7 +340,7 @@ async function shouData(filename) {
   
   const data = new FormData();
   data.append('e', filename);
-  const response = await fetch("baidu.php", {
+  const response = await fetch("https://maipdf.com/baidu.php", {
     method: "POST",
     body: data
   });
@@ -440,7 +440,7 @@ async function sendData() {
   data.append('pass1', pass1);
   data.append('emailnoti', emailnoti);
   data.append('refename', refename );
-  const response = await fetch("privcheck.php", {
+  const response = await fetch("https://maipdf.com/privcheck.php", {
     method: "POST",
     body: data
   });
@@ -571,7 +571,7 @@ async function tocontent(){
     const data = new FormData();
     data.append('e', textareaValue);
     data.append('mudi', 'y');
-    const response = await fetch("baidu.php", {
+    const response = await fetch("https://maipdf.com/baidu.php", {
       method: "POST",
       body: data
     });
