@@ -1,7 +1,7 @@
 # Cloudflare Pages 重定向规则
 # 只允许 /note/:id 这种格式，全部交给 view.html 渲染
 
-/note/:id    /view.html    200
+/note/:id    /view.html    200!
 
 # SPA catch-all
 /*    /index.html   200
