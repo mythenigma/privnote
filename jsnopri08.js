@@ -289,6 +289,11 @@ function create() {
 
   const select = document.getElementById("my-select");
   expiretime = select.selectedIndex;
+  // 显示当前选择的销毁策略
+  const expireShow = document.getElementById('expireShow');
+  if (expireShow) {
+    expireShow.textContent = expireDesc[expiretime] || expireDesc[0];
+  }
   const mySwitch = document.getElementById("mySwitch");
   confirmask = mySwitch.checked;
   pass1 = document.getElementById('pass1').value;
@@ -561,44 +566,40 @@ function simulateTypingfromTXT(selectid,text, delay) {
  typeNextCharacter();
 }
 async function tocontent(){
- if(expiretime>0){
-   expiretime = convertTime2(expiretime);
- } else {
-   // Send request to delete note
-   const data = new FormData();
-   data.append('e', textareaValue);
-   data.append('mudi', 'y');
-   const response = await fetch("https://maipdf.com/baidu.php", {
-     method: "POST",
-     body: data
-   });
-   
-   try {
-     const result = await response.text().then(text => text.trim());
-     textareaValue = result;
-   } catch (error) {
-     return;
-   }
-   
-   if(currentLanguage === 'zh'){
-     expiretime = '本次阅读之后';
-   } else {
-     expiretime = 'this reading session';
-   }
- }
-
- const buttcontent = document.getElementById('containerbox');
- 
- if(currentLanguage === 'zh'){
-   buttcontent.innerHTML = '<h3>便签内容</h3> <div class="alert alert-success">该便签将在以下时间销毁： '+expiretime+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(120,65%,75%,0.3);"></textarea>';
- } else {
-   buttcontent.innerHTML = '<h3>Note Content</h3> <div class="alert alert-success">This note will be self-destructed after '+expiretime+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(19,65%,75%,0.3);"></textarea>';
- }
- 
- const textarea = document.getElementById('resultarea');
- textarea.value = textareaValue;
- 
- setTimeout(jilu(), 2000);
+  let expireDisplay = expireDesc[expiretime] || expireDesc[0];
+  if(expiretime>0){
+    // 不是阅后即焚
+    // 不再用 convertTime2(expiretime)
+  } else {
+    // Send request to delete note
+    const data = new FormData();
+    data.append('e', textareaValue);
+    data.append('mudi', 'y');
+    const response = await fetch("https://maipdf.com/baidu.php", {
+      method: "POST",
+      body: data
+    });
+    try {
+      const result = await response.text().then(text => text.trim());
+      textareaValue = result;
+    } catch (error) {
+      return;
+    }
+    if(currentLanguage === 'zh'){
+      expireDisplay = '本次阅读之后';
+    } else {
+      expireDisplay = 'this reading session';
+    }
+  }
+  const buttcontent = document.getElementById('containerbox');
+  if(currentLanguage === 'zh'){
+    buttcontent.innerHTML = '<h3>便签内容</h3> <div class="alert alert-success">该便签将在以下时间销毁： '+expireDisplay+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(120,65%,75%,0.3);"></textarea>';
+  } else {
+    buttcontent.innerHTML = '<h3>Note Content</h3> <div class="alert alert-success">This note will be self-destructed: '+expireDisplay+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(19,65%,75%,0.3);"></textarea>';
+  }
+  const textarea = document.getElementById('resultarea');
+  textarea.value = textareaValue;
+  setTimeout(jilu(), 2000);
 }
 async function jilu(){
  const md5 = globename;
@@ -795,3 +796,12 @@ window.addEventListener('DOMContentLoaded', function() {
   if (btnBinDec) btnBinDec.onclick = decryptBinary;
   if (btnCopyDec) btnCopyDec.onclick = copyDecryptResult;
 });
+
+// 展示用的映射表
+const expireDesc = [
+  "after reading it",
+  "1 hour from now",
+  "24 hour from now",
+  "7 days from now",
+  "24 days from now"
+];

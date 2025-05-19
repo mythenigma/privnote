@@ -118,13 +118,14 @@
         <div class="row mb-4">
           <h6 class="mb-3" id="trantou">Link URL self-destructs</h6>
           <div class="col-md-6 mb-3 mb-md-0">
-            <select id="my-select" class="form-select">
+            <select id="my-select" class="form-select" onchange="if(document.getElementById('expireShow')){const desc=[&quot;after reading it&quot;,&quot;1 hour from now&quot;,&quot;24 hour from now&quot;,&quot;7 days from now&quot;,&quot;24 days from now&quot;];document.getElementById('expireShow').textContent=desc[this.selectedIndex]||desc[0];}">
               <option>after reading it</option>
               <option>1 hour from now</option>
               <option>24 hour from now</option>
               <option>7 days from now</option>
               <option>24 days from now</option>
             </select>
+            <div id="expireShow" style="margin-top:6px;color:#fff;font-size:1em;"></div>
           </div>
           <div class="col-md-6">
             <div class="form-check">
