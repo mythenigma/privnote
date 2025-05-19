@@ -109,30 +109,26 @@ if(isset ($_GET['e'])){
 
        $originalTime = time() - $originalTime - $timegap;
     if($mythenigma != 'mythenigma'){
-       	if (isset($_COOKIE['myth'])) {
-		  $cookie_value = $_COOKIE['myth'];
-		  error_log("处理密码保护笔记，cookie值: " . $cookie_value);
-		  // 支持两种cookie值: 'ok'（客户端设置）和'12345'（服务器更新）
-		  if($cookie_value != 'ok' && $cookie_value != '12345'){
-		    error_log("Cookie值无效: " . $cookie_value);
-		  	exit('18æ1æ'.$mythenigma);
-		  }else{
-		  	// 设置更长的过期时间，确保在整个会话期间有效
-		  	error_log("Cookie验证成功，设置新cookie");
-		  	setcookie('myth', '12345', time() + 3600, '/', '', false, true);
-			
-				$firstLine = implode('æ', $mythline);
-			
-		  }
-		}else{
-			// 没有设置cookie，返回错误代码和密码
-			error_log("未找到myth cookie");
-			exit('19æ1æ'.$mythenigma);
-		}
-
-       	
-  }
-	 
+        // 优先用POST参数传递的密码，其次才用cookie
+        $client_password = '';
+        if (isset($_POST['myth'])) {
+            $client_password = $_POST['myth'];
+            error_log("处理密码保护笔记，POST密码: " . $client_password);
+        } elseif (isset($_COOKIE['myth'])) {
+            $client_password = $_COOKIE['myth'];
+            error_log("处理密码保护笔记，cookie值: " . $client_password);
+        }
+        // 支持两种密码: 'ok'（客户端设置）和'12345'（服务器更新）
+        if($client_password != 'ok' && $client_password != '12345' && $client_password != $mythenigma){
+            error_log("密码无效: " . $client_password);
+            exit('18æ1æ'.$mythenigma);
+        }else{
+            // 密码验证成功
+            error_log("密码验证成功");
+            // 不再强制设置cookie
+            $firstLine = implode('æ', $mythline);
+        }
+    }
 	 
 	 
 	if ($firstline[0]== '0'){
