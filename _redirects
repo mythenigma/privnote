@@ -1,19 +1,7 @@
-
-
 # Cloudflare Pages 重定向规则
-# 将 /priv/* 路径都交给前端路由处理，而不是返回 404
+# 只允许 /priv/:id 这种格式，全部交给 view.html 渲染
 
-# 基本规则：带有 /note 后缀的 URL 保持原样（用于直接访问）
-/priv/:id/note    /index.html    200！
+/priv/:id    /view.html    200！
 
-# 不带 /note 后缀的 URL 保持原样（用于分享链接）
-/priv/:id         /view.html    200！
-
-# 对已删除笔记的特殊处理
-/priv/:id/destroyed    /index.html    200
-
-# 带有密码参数的 URL
-/priv/:id/password/:pwd    /index.html    200
-
-# 捕获所有其他路由，返回首页
-/*    /index.html    200
+# 其他全部回首页
+/*    /index.html    200！

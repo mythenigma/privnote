@@ -76,16 +76,17 @@ async function showNote(noteId, password = '') {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  // 获取查询参数中的笔记ID
+  // 先查 ?note=xxx
   const urlParams = new URLSearchParams(window.location.search);
-  const noteId = urlParams.get('note');
-  
-  // 检查查询参数是否包含笔记ID
+  let noteId = urlParams.get('note');
+  // 如果没有 ?note=xxx，再查 /priv/xxx
+  if (!noteId) {
+    const match = window.location.pathname.match(/^\/priv\/(\d+)$/);
+    if (match) noteId = match[1];
+  }
   if (noteId) {
-    // 直接使用查询参数中的笔记ID
     showNote(noteId);
   } else {
-    // 没有找到笔记ID，显示过期消息
     renderExpired();
   }
 });
