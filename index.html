@@ -307,6 +307,17 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <script src="jsnopri08.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('tranmake');
+  if (btn) {
+    btn.addEventListener('click', function() {
+      alert('Encrypt Note 按钮已被点击！请在这里实现你的加密/生成逻辑。');
+      // TODO: 在这里实现加密/生成 note 的实际功能
+    });
+  }
+});
+</script>
 
 </body>
 </html>
