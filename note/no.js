@@ -692,9 +692,11 @@ function encryptZeroWidth() {
     document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '请输入隐藏内容' : 'Please enter hidden content';
     return;
   }
-  // Zero-width: only hidden content is encoded, then appended to cover text
   const encoded = textToZeroWidthWithDoubleEncryption(hidden, key);
-  document.getElementById('encryptResult').value = cover + encoded;
+  console.log('[DEBUG] Zero-width encoded string (should be invisible chars):', encoded, 'length:', encoded.length);
+  const result = cover + encoded;
+  console.log('[DEBUG] Final zero-width encryption result:', result, 'length:', result.length);
+  document.getElementById('encryptResult').value = result;
 }
 
 function encryptBinary() {
