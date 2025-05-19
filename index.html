@@ -60,173 +60,172 @@
 </div>
 </header>
 <main class="flex-grow-1">
+<div class="container main-container">
+  <!-- Tab navigation -->
+  <ul class="nav nav-tabs justify-content-center mb-4" id="mainTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="tab-link" data-bs-toggle="tab" data-bs-target="#tab-link-pane" type="button" role="tab" aria-controls="tab-link-pane" aria-selected="true">
+        <span id="tabLinkText">Generate Link</span>
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tab-encrypt" data-bs-toggle="tab" data-bs-target="#tab-encrypt-pane" type="button" role="tab" aria-controls="tab-encrypt-pane" aria-selected="false">
+        <span id="tabEncryptText">Character Encryption</span>
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tab-decrypt" data-bs-toggle="tab" data-bs-target="#tab-decrypt-pane" type="button" role="tab" aria-controls="tab-decrypt-pane" aria-selected="false">
+        <span id="tabDecryptText">Decrypt</span>
+      </button>
+    </li>
+  </ul>
+  <!-- Tab content -->
+  <div class="tab-content" id="mainTabContent">
+    <div class="tab-pane fade show active" id="tab-link-pane" role="tabpanel" aria-labelledby="tab-link">
+      <!-- 原有生成自毁链接表单内容 -->
+      <div class="container main-container" id="containerbox">
+        <h5 class="mb-3 text-center" id="trans2">Encrypts your notes with links, zero-width characters, or binary, ensuring secure sharing and auto-destruction</h5>
 
-<!-- Tab navigation -->
-<ul class="nav nav-tabs justify-content-center mb-4" id="mainTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="tab-link" data-bs-toggle="tab" data-bs-target="#tab-link-pane" type="button" role="tab" aria-controls="tab-link-pane" aria-selected="true">
-      <span id="tabLinkText">Generate Link</span>
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="tab-encrypt" data-bs-toggle="tab" data-bs-target="#tab-encrypt-pane" type="button" role="tab" aria-controls="tab-encrypt-pane" aria-selected="false">
-      <span id="tabEncryptText">Character Encryption</span>
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="tab-decrypt" data-bs-toggle="tab" data-bs-target="#tab-decrypt-pane" type="button" role="tab" aria-controls="tab-decrypt-pane" aria-selected="false">
-      <span id="tabDecryptText">Decrypt</span>
-    </button>
-  </li>
-</ul>
-
-<!-- Tab content -->
-<div class="tab-content" id="mainTabContent">
-  <div class="tab-pane fade show active" id="tab-link-pane" role="tabpanel" aria-labelledby="tab-link">
-    <!-- 原有生成自毁链接表单内容 -->
-    <div class="container main-container" id="containerbox">
-      <h5 class="mb-3 text-center" id="trans2">Encrypts your notes with links, zero-width characters, or binary, ensuring secure sharing and auto-destruction</h5>
-
-<div id="demo2" class="collapse info-box">
-<p class="mb-0">Privnote is a versatile encryption tool for secure notes. You can:</p>
-<ul class="mt-2 mb-0">
-<li><strong>Encrypted Link Sharing:</strong> <span class="text-muted">Generate a secure link for your note, which auto-destructs after a set time.</span></li>
-<li><strong>Zero-Width Character Encryption:</strong> <span class="text-muted">Hide your note in plain text using zero-width characters, making it invisible to the naked eye.</span></li>
-<li><strong>Binary Encryption:</strong> <span class="text-muted">Convert your note into binary (0s and 1s) for extra security.</span></li>
-</ul>
-</div>
-<div class="form-group" id="formpart">
-<label for="myTextarea" class="section-title" data-bs-toggle="collapse" data-bs-target="#demo2">
-<i class="fas fa-user-lock"></i> <span id="topbanner">New Notes</span>
-</label>
-<textarea class="form-control mb-3" rows="8" id="myTextarea" placeholder="Write Your Note Here..."></textarea>
-</div>
-<div class="alert alert-success" id="encryptinfo" style="display: none">
-<small>The note has been successfully encrypted with two methods: the upper box contains zero-width character encryption, storing the information within the text, while the lower box shows the encryption as binary (0s and 1s). Both can be copied and used for decryption.</small>
-</div>
-
-</div>
-<div class="card" id="resultlink" style="display: none">
-<div class="card-body">
-<h6 class="card-title">PrivNote has been made</h6>
-<ul class="list-group list-group-flush mb-3">
-<li class="list-group-item list-group-item-success" id="innerlink"></li>
-<li id="tranli" class="list-group-item list-group-item-warning">The message will be automatically destroyed according to your settings.</li>
-</ul>
-<button type="button" class="btn btn-outline-secondary" id="copybutton" onclick="copylink()">
-<i class="fas fa-copy me-2"></i>Copy Link
-</button>
-</div>
-</div>
-
-<div id="demo" class="collapse">
-<div class="row mb-4">
-<h6 class="mb-3" id="trantou">Link URL self-destructs</h6>
-<div class="col-md-6 mb-3 mb-md-0">
-<select id="my-select" class="form-select">
-<option>after reading it</option>
-<option>1 hour from now</option>
-<option>24 hour from now</option>
-<option>7 days from now</option>
-<option>24 days from now</option>
-</select>
-</div>
-<div class="col-md-6">
-<div class="form-check">
-<input class="form-check-input" type="checkbox" id="mySwitch" value="yes" checked>
-<label class="form-check-label" for="mySwitch">
-Asking for confirmation before showing and destroying the note.
-</label>
-</div>
-</div>
-</div>
-
-<div class="row mb-4">
-<h5 class="mb-3"><small>Enter an optional password to encrypt the note</small></h5>
-<div class="col-md-6 mb-3 mb-md-0">
-<input type="password" class="form-control" id="pass1" placeholder="Enter Password" autocomplete="off">
-</div>
-<div class="col-md-6">
-<input type="password" class="form-control" id="pass2" placeholder="Confirm Password">
-</div>
-</div>
-
-<div class="row">
-<h5 class="mb-3">Read notification<br><small>E-mail to notify when note is read</small></h5>
-<div class="col-md-6 mb-3 mb-md-0">
-<input type="text" class="form-control" placeholder="Enter Email" id="emailnoti">
-</div>
-<div class="col-md-6">
-<input type="text" class="form-control" placeholder="Retype Email" id="refename">
-</div>
-</div>
-</div>
-
-<div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4" id="buttontwo">
-<button id="tranmake" type="button" class="btn btn-primary" onclick="create()">
-<i class="fas fa-lock me-2"></i>Encrypt Note
-</button>
-<button id="tranoption" type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#demo">
-<i class="fas fa-cog me-2"></i>Optional Setting
-</button>
-<button id="decodemessage" type="button" class="btn btn-outline-warning" onclick="decoding()">
-<i class="fas fa-unlock me-2"></i>Decrypt Notes
-</button>
-</div>
-</div>
-  </div>
-  <div class="tab-pane fade" id="tab-encrypt-pane" role="tabpanel" aria-labelledby="tab-encrypt">
-    <!-- 字符加密工具内容 -->
-    <div class="container main-container">
-      <h5 class="mb-3 text-center" id="encryptTabTitle">字符加密工具</h5>
-      <div class="mb-3">
-        <label for="coverText" class="form-label">表面内容（可选）</label>
-        <textarea class="form-control" id="coverText" rows="2" placeholder="输入表面内容，可留空"></textarea>
+        <div id="demo2" class="collapse info-box">
+          <p class="mb-0">Privnote is a versatile encryption tool for secure notes. You can:</p>
+          <ul class="mt-2 mb-0">
+            <li><strong>Encrypted Link Sharing:</strong> <span class="text-muted">Generate a secure link for your note, which auto-destructs after a set time.</span></li>
+            <li><strong>Zero-Width Character Encryption:</strong> <span class="text-muted">Hide your note in plain text using zero-width characters, making it invisible to the naked eye.</span></li>
+            <li><strong>Binary Encryption:</strong> <span class="text-muted">Convert your note into binary (0s and 1s) for extra security.</span></li>
+          </ul>
+        </div>
+        <div class="form-group" id="formpart">
+          <label for="myTextarea" class="section-title" data-bs-toggle="collapse" data-bs-target="#demo2">
+            <i class="fas fa-user-lock"></i> <span id="topbanner">New Notes</span>
+          </label>
+          <textarea class="form-control mb-3" rows="8" id="myTextarea" placeholder="Write Your Note Here..."></textarea>
+        </div>
+        <div class="alert alert-success" id="encryptinfo" style="display: none">
+          <small>The note has been successfully encrypted with two methods: the upper box contains zero-width character encryption, storing the information within the text, while the lower box shows the encryption as binary (0s and 1s). Both can be copied and used for decryption.</small>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="hiddenText" class="form-label">隐藏内容（必填，将被加密）</label>
-        <textarea class="form-control" id="hiddenText" rows="3" placeholder="输入需要加密的隐藏内容"></textarea>
+      <div class="card" id="resultlink" style="display: none">
+        <div class="card-body">
+          <h6 class="card-title">PrivNote has been made</h6>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item list-group-item-success" id="innerlink"></li>
+            <li id="tranli" class="list-group-item list-group-item-warning">The message will be automatically destroyed according to your settings.</li>
+          </ul>
+          <button type="button" class="btn btn-outline-secondary" id="copybutton" onclick="copylink()">
+            <i class="fas fa-copy me-2"></i>Copy Link
+          </button>
+        </div>
       </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-        <button class="btn btn-primary me-2" id="btnZeroWidthEncrypt">零宽字符加密</button>
-        <button class="btn btn-outline-primary me-2" id="btnBinaryEncrypt">二进制加密</button>
+
+      <div id="demo" class="collapse">
+        <div class="row mb-4">
+          <h6 class="mb-3" id="trantou">Link URL self-destructs</h6>
+          <div class="col-md-6 mb-3 mb-md-0">
+            <select id="my-select" class="form-select">
+              <option>after reading it</option>
+              <option>1 hour from now</option>
+              <option>24 hour from now</option>
+              <option>7 days from now</option>
+              <option>24 days from now</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="mySwitch" value="yes" checked>
+              <label class="form-check-label" for="mySwitch">
+                Asking for confirmation before showing and destroying the note.
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <h5 class="mb-3"><small>Enter an optional password to encrypt the note</small></h5>
+          <div class="col-md-6 mb-3 mb-md-0">
+            <input type="password" class="form-control" id="pass1" placeholder="Enter Password" autocomplete="off">
+          </div>
+          <div class="col-md-6">
+            <input type="password" class="form-control" id="pass2" placeholder="Confirm Password">
+          </div>
+        </div>
+
+        <div class="row">
+          <h5 class="mb-3">Read notification<br><small>E-mail to notify when note is read</small></h5>
+          <div class="col-md-6 mb-3 mb-md-0">
+            <input type="text" class="form-control" placeholder="Enter Email" id="emailnoti">
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Retype Email" id="refename">
+          </div>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="encryptResult" class="form-label">合成结果</label>
-        <textarea class="form-control" id="encryptResult" rows="3" placeholder="加密结果将在此显示" readonly></textarea>
-        <button class="btn btn-outline-success mt-2" id="btnCopyEncryptResult"><i class="fas fa-copy me-2"></i>复制结果</button>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4" id="buttontwo">
+        <button id="tranmake" type="button" class="btn btn-primary" onclick="create()">
+          <i class="fas fa-lock me-2"></i>Encrypt Note
+        </button>
+        <button id="tranoption" type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#demo">
+          <i class="fas fa-cog me-2"></i>Optional Setting
+        </button>
+        <button id="decodemessage" type="button" class="btn btn-outline-warning" onclick="decoding()">
+          <i class="fas fa-unlock me-2"></i>Decrypt Notes
+        </button>
       </div>
-      <div class="alert alert-info mt-3" style="font-size:0.95em">
-        <strong>说明：</strong>零宽字符加密会将隐藏内容隐写进表面内容，二进制加密则将隐藏内容转为0/1字符串。复制结果后可用于粘贴、分享或解密。
+    </div>
+    <div class="tab-pane fade" id="tab-encrypt-pane" role="tabpanel" aria-labelledby="tab-encrypt">
+      <!-- 字符加密工具内容 -->
+      <div class="container main-container">
+        <h5 class="mb-3 text-center" id="encryptTabTitle">字符加密工具</h5>
+        <div class="mb-3">
+          <label for="coverText" class="form-label">表面内容（可选）</label>
+          <textarea class="form-control" id="coverText" rows="2" placeholder="输入表面内容，可留空"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="hiddenText" class="form-label">隐藏内容（必填，将被加密）</label>
+          <textarea class="form-control" id="hiddenText" rows="3" placeholder="输入需要加密的隐藏内容"></textarea>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+          <button class="btn btn-primary me-2" id="btnZeroWidthEncrypt">零宽字符加密</button>
+          <button class="btn btn-outline-primary me-2" id="btnBinaryEncrypt">二进制加密</button>
+        </div>
+        <div class="mb-3">
+          <label for="encryptResult" class="form-label">合成结果</label>
+          <textarea class="form-control" id="encryptResult" rows="3" placeholder="加密结果将在此显示" readonly></textarea>
+          <button class="btn btn-outline-success mt-2" id="btnCopyEncryptResult"><i class="fas fa-copy me-2"></i>复制结果</button>
+        </div>
+        <div class="alert alert-info mt-3" style="font-size:0.95em">
+          <strong>说明：</strong>零宽字符加密会将隐藏内容隐写进表面内容，二进制加密则将隐藏内容转为0/1字符串。复制结果后可用于粘贴、分享或解密。
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tab-decrypt-pane" role="tabpanel" aria-labelledby="tab-decrypt">
+      <div class="container main-container">
+        <h5 class="mb-3 text-center" id="decryptTabTitle">解密工具</h5>
+        <div class="mb-3">
+          <label for="decryptInput" class="form-label" id="decryptInputLabel">加密内容（零宽字符或二进制）</label>
+          <textarea class="form-control" id="decryptInput" rows="3" placeholder="粘贴需要解密的内容"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="decryptKey" class="form-label" id="decryptKeyLabel">密码（可选，默认 mythenigma）</label>
+          <input type="text" class="form-control" id="decryptKey" placeholder="输入密码，留空则用默认">
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+          <button class="btn btn-warning me-2" id="btnZeroWidthDecrypt">零宽字符解密</button>
+          <button class="btn btn-outline-warning me-2" id="btnBinaryDecrypt">二进制解密</button>
+        </div>
+        <div class="mb-3">
+          <label for="decryptResult" class="form-label" id="decryptResultLabel">解密结果</label>
+          <textarea class="form-control" id="decryptResult" rows="3" placeholder="解密结果将在此显示" readonly></textarea>
+          <button class="btn btn-outline-success mt-2" id="btnCopyDecryptResult"><i class="fas fa-copy me-2"></i>复制结果</button>
+        </div>
+        <div class="alert alert-info mt-3" style="font-size:0.95em">
+          <strong>说明：</strong>支持零宽字符和二进制两种加密内容的解密，密码留空则使用默认值。
+        </div>
       </div>
     </div>
   </div>
-  <div class="tab-pane fade" id="tab-decrypt-pane" role="tabpanel" aria-labelledby="tab-decrypt">
-    <div class="container main-container">
-      <h5 class="mb-3 text-center" id="decryptTabTitle">解密工具</h5>
-      <div class="mb-3">
-        <label for="decryptInput" class="form-label" id="decryptInputLabel">加密内容（零宽字符或二进制）</label>
-        <textarea class="form-control" id="decryptInput" rows="3" placeholder="粘贴需要解密的内容"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="decryptKey" class="form-label" id="decryptKeyLabel">密码（可选，默认 mythenigma）</label>
-        <input type="text" class="form-control" id="decryptKey" placeholder="输入密码，留空则用默认">
-      </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-        <button class="btn btn-warning me-2" id="btnZeroWidthDecrypt">零宽字符解密</button>
-        <button class="btn btn-outline-warning me-2" id="btnBinaryDecrypt">二进制解密</button>
-      </div>
-      <div class="mb-3">
-        <label for="decryptResult" class="form-label" id="decryptResultLabel">解密结果</label>
-        <textarea class="form-control" id="decryptResult" rows="3" placeholder="解密结果将在此显示" readonly></textarea>
-        <button class="btn btn-outline-success mt-2" id="btnCopyDecryptResult"><i class="fas fa-copy me-2"></i>复制结果</button>
-      </div>
-      <div class="alert alert-info mt-3" style="font-size:0.95em">
-        <strong>说明：</strong>支持零宽字符和二进制两种加密内容的解密，密码留空则使用默认值。
-      </div>
-    </div>
-  </div>
 </div>
+</main>
 
 <section class="py-4 text-center container after-section" id="grabify" style="display: none">
 <div class="row">
@@ -284,6 +283,5 @@ applyLanguage(language);
 }
 </script>
 <script src="../../../jsnopri08.js"></script>
-</main>
 </body>
 </html>

@@ -400,6 +400,35 @@ border-top: none;
   }
 }
 
+/* Tab content layout */
+.tab-content {
+  min-height: 520px;
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 2rem;
+}
+.tab-pane {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  display: none;
+}
+.tab-pane.active, .tab-pane.show {
+  display: block;
+}
+@media (max-width: 600px) {
+  .tab-content {
+    min-height: 0;
+    padding-top: 0.2rem;
+    padding-bottom: 1rem;
+  }
+  .tab-pane {
+    max-width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
 .logo-text {
