@@ -88,7 +88,7 @@ window.addEventListener('DOMContentLoaded', function() {
     noteContainer.innerHTML = '<div class="note-expired">无效的URL格式，必须是 /note/数字</div>';
     return;
   }
-  // 调试信息：显示 noteId
+  // 调试信息：显示 noteId   sadf 
   noteContainer.innerHTML = `<div style="color:#1976d2;font-weight:bold;">[调试] 当前 noteId: ${noteId}</div>`;
   showNoteDebug(noteId);
 });
