@@ -37,6 +37,21 @@
 }
 </script>
 
+<!-- 备用重定向脚本 - 尽早执行以确保正确重定向 -->
+<script>
+(function() {
+  // 检查URL是否是/priv/数字格式
+  var url = window.location.pathname;
+  var match = url.match(/^\/priv\/(\d+)$/);
+  if (match) {
+    // 找到匹配的数字ID
+    var noteId = match[1];
+    // 立即重定向到view.html
+    window.location.href = '/view.html?note=' + noteId;
+  }
+})();
+</script>
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">

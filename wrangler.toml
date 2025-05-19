@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "name": "privnote",
+  "routes": [
+    {
+      "pattern": "/priv/:id",
+      "script": "redirect-handler",
+      "zone_id": "auto"
+    }
+  ],
+  "workers_dev": true
+}
