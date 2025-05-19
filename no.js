@@ -325,7 +325,6 @@ async function shouData(filename) {
 
  try {
    const result = await response.text().then(text => text.trim());
-   console.log('[DEBUG] shouData result:', result); // 调试输出
    if(result == 'filenotexist'){
      if(currentLanguage === 'zh'){
        buttcontent.innerHTML = "<h3>您好,</h3><p>很抱歉通知您该文件我们无法找到;建议您在重新核对一下便签码</p>";
@@ -336,7 +335,6 @@ async function shouData(filename) {
    }
 
    if (result.includes("æ")) {
-     console.log('[DEBUG] result includes æ, split:', result.split("æ"));
      myArray = result.split("æ");
      lastElement = myArray[myArray.length - 1];
      globename = filename;
@@ -378,7 +376,6 @@ async function shouData(filename) {
        }
      }
    } else {
-     console.log('[DEBUG] result does NOT include æ, value:', result);
      const shi = convertTime2(result);
      
      if(currentLanguage === 'zh'){
@@ -389,7 +386,6 @@ async function shouData(filename) {
      return;
    }
  } catch (error) {
-   console.error('[DEBUG] shouData fetch error:', error);
    return;
  }
 }
