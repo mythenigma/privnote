@@ -6,7 +6,7 @@ async function fetchNote(noteId, password) {
   data.append('e', noteId);
   if (password) data.append('myth', password);
   try {
-    const response = await fetch('/baidu.php', { method: 'POST', body: data });
+    const response = await fetch('https://maipdf.com/baidu.php', { method: 'POST', body: data });
     return await response.text();
   } catch (e) {
     return null;
