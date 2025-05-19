@@ -752,9 +752,6 @@ const languageStrings = {
  }
 };
 
-// Get user language preference from localStorage or set default
-let currentLanguage = localStorage.getItem('selectedLanguage') || 'en';
-
 // Function to detect location based timing
 function maitime(){
   let d = new Date();
@@ -851,12 +848,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function encryptZeroWidth() {
   const cover = document.getElementById('coverText').value || '';
   const hidden = document.getElementById('hiddenText').value || '';
+  const key = document.getElementById('encryptKey').value || 'mythenigma';
   if (!hidden) {
     document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '请输入隐藏内容' : 'Please enter hidden content';
     return;
   }
-  // 用主站同款加密算法
-  const key = 'mythenigma';
   const encoded = textToZeroWidthWithDoubleEncryption(hidden, key);
   document.getElementById('encryptResult').value = cover + encoded;
 }
@@ -864,11 +860,11 @@ function encryptZeroWidth() {
 function encryptBinary() {
   const cover = document.getElementById('coverText').value || '';
   const hidden = document.getElementById('hiddenText').value || '';
+  const key = document.getElementById('encryptKey').value || 'mythenigma';
   if (!hidden) {
     document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '请输入隐藏内容' : 'Please enter hidden content';
     return;
   }
-  const key = 'mythenigma';
   const encoded = textToBinaryEncryption(hidden, key);
   document.getElementById('encryptResult').value = cover + encoded;
 }
@@ -960,4 +956,72 @@ window.addEventListener('DOMContentLoaded', function() {
   if (btnZeroDec) btnZeroDec.onclick = decryptZeroWidth;
   if (btnBinDec) btnBinDec.onclick = decryptBinary;
   if (btnCopyDec) btnCopyDec.onclick = copyDecryptResult;
+});
+
+// 多语言Tab和内容文本映射
+const languageTabStrings = {
+  en: {
+    tabLinkText: 'Generate Link',
+    tabEncryptText: 'Character Encryption',
+    tabDecryptText: 'Decrypt',
+    decryptTabTitle: 'Decrypt Tool',
+    decryptInputLabel: 'Encrypted Content (Zero-Width or Binary)',
+    decryptKeyLabel: 'Password (optional)',
+    btnZeroWidthDecrypt: 'Zero-Width Decrypt',
+    btnBinaryDecrypt: 'Binary Decrypt',
+    decryptResultLabel: 'Decryption Result',
+    btnCopyDecryptResult: 'Copy Result',
+    decryptResultPlaceholder: 'Decryption result will appear here',
+    decryptInputPlaceholder: 'Paste content to decrypt',
+    decryptKeyPlaceholder: 'Enter password (if any)',
+    decryptInfo: 'Supports decryption of both zero-width and binary encrypted content. Leave password blank if not set.'
+  },
+  zh: {
+    tabLinkText: '生成链接',
+    tabEncryptText: '字符加密',
+    tabDecryptText: '解密',
+    decryptTabTitle: '解密工具',
+    decryptInputLabel: '加密内容（零宽字符或二进制）',
+    decryptKeyLabel: '密码（可选）',
+    btnZeroWidthDecrypt: '零宽字符解密',
+    btnBinaryDecrypt: '二进制解密',
+    decryptResultLabel: '解密结果',
+    btnCopyDecryptResult: '复制结果',
+    decryptResultPlaceholder: '解密结果将在此显示',
+    decryptInputPlaceholder: '粘贴需要解密的内容',
+    decryptKeyPlaceholder: '输入密码（如有）',
+    decryptInfo: '支持零宽字符和二进制两种加密内容的解密，密码留空即可。'
+  }
+};
+
+function applyTabLanguage(lang) {
+  const tabStrings = languageTabStrings[lang] || languageTabStrings['en'];
+  // Tab标题
+  document.getElementById('tabLinkText').textContent = tabStrings.tabLinkText;
+  document.getElementById('tabEncryptText').textContent = tabStrings.tabEncryptText;
+  document.getElementById('tabDecryptText').textContent = tabStrings.tabDecryptText;
+  // Decrypt Tab内容
+  document.getElementById('decryptTabTitle').textContent = tabStrings.decryptTabTitle;
+  document.getElementById('decryptInputLabel').textContent = tabStrings.decryptInputLabel;
+  document.getElementById('decryptKeyLabel').textContent = tabStrings.decryptKeyLabel;
+  document.getElementById('btnZeroWidthDecrypt').textContent = tabStrings.btnZeroWidthDecrypt;
+  document.getElementById('btnBinaryDecrypt').textContent = tabStrings.btnBinaryDecrypt;
+  document.getElementById('decryptResultLabel').textContent = tabStrings.decryptResultLabel;
+  document.getElementById('btnCopyDecryptResult').innerHTML = '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyDecryptResult;
+  document.getElementById('decryptResult').placeholder = tabStrings.decryptResultPlaceholder;
+  document.getElementById('decryptInput').placeholder = tabStrings.decryptInputPlaceholder;
+  document.getElementById('decryptKey').placeholder = tabStrings.decryptKeyPlaceholder;
+  document.querySelector('#tab-decrypt-pane .alert-info').innerHTML = '<strong>' + (lang === 'zh' ? '说明：' : 'Info:') + '</strong>' + tabStrings.decryptInfo;
+}
+
+// 在 applyLanguage 里调用 applyTabLanguage
+const _oldApplyLanguage = window.applyLanguage;
+window.applyLanguage = function(language) {
+  _oldApplyLanguage(language);
+  applyTabLanguage(language);
+};
+
+// 页面加载时也初始化一次
+window.addEventListener('DOMContentLoaded', function() {
+  applyTabLanguage(currentLanguage);
 });
