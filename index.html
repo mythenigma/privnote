@@ -37,31 +37,7 @@
 }
 </script>
 
-<!-- 强化版重定向脚本 - 将所有/priv/路径重定向到view.html -->
-<script>
-(function() {
-  // 获取当前URL路径
-  var path = window.location.pathname;
-  
-  // 检查是否是以/priv/开头的URL
-  if (path.indexOf('/priv/') === 0) {
-    // 尝试匹配数字ID
-    var matches = path.match(/\/priv\/([0-9]+)(?:\/|$)/);
-    
-    if (matches && matches[1]) {
-      // 找到数字ID，立即重定向到view.html
-      var noteId = matches[1];
-      console.log('检测到笔记ID: ' + noteId + '，重定向到view.html');
-      window.location.replace('/view.html?note=' + noteId);
-    } else {
-      // 没有找到有效ID但是/priv/路径，重定向到view.html
-      console.log('检测到/priv/路径但无有效ID，重定向到view.html');
-      window.location.replace('/view.html');
-    }
-  }
-})();
-</script>
-</script>
+<!-- 已删除自动重定向 /priv/xxx 到 view.html 的脚本，避免 SPA 路由冲突 -->
 
 </head>
 
@@ -184,7 +160,7 @@
       </div>
 
       <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4" id="buttontwo">
-        <button id="tranmake" type="button" class="btn btn-primary" onclick="create()">
+        <button id="tranmake" type="button" class="btn btn-primary">
           <i class="fas fa-lock me-2"></i>Encrypt Note
         </button>
         <button id="tranoption" type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#demo">
