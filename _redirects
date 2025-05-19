@@ -1,7 +1,6 @@
 
 
 # 其他/priv/路径也重定向到首页
-/priv/*           /view.html          301
 
 # 所有其他页面保持正常
 /*                /view.html          200

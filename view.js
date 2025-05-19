@@ -88,5 +88,4 @@ window.addEventListener('DOMContentLoaded', function() {
     // 没有找到笔记ID，显示过期消息
     renderExpired();
   }
-  }
 });
