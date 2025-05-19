@@ -10,8 +10,8 @@
 # 笔记页面 - 保持原始URL
 /priv/*         /index.html   200!
 
-# 支持/priv/数字 直接跳转到/read/index.html?note=数字，去掉/note后缀
-/priv/(\d+)$    /read/index.html?note=$1  200
+# 支持/priv/数字 直接跳转到根目录 view.html?note=数字，去掉/note后缀
+/priv/(\d+)$    /view.html?note=$1  200
 
 # 所有其他路径 - 保持原始URL
 /*              /index.html   200!
