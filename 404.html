@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>页面未找到 - 404 Not Found</title>
-    <style>
+  <meta charset="UTF-8">
+  <title>Note Not Found - Privnote</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/view.css" rel="stylesheet">
+  <style>
         body { font-family: Arial, sans-serif; text-align: center; margin-top: 10%; color: #444; }
-        h1 { font-size: 2.5em; color: #d32f2f; }
-        p { font-size: 1.2em; }
-        a { color: #1976d2; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        .note-expired { font-size: 1.5em; color: #d32f2f; }
+        .spinner { font-size: 1.2em; }
     </style>
 </head>
 <body>
-    <h1>404 - 页面未找到</h1>
-    <p>您访问的页面不存在或已被删除。</p>
-    <p><a href="/">返回首页</a></p>
+  <div class="note-container" id="noteContainer">
+    <div class="note-expired">Sorry, this note does not exist or has already been destroyed.</div>
+    <div class="spinner" id="loadingSpinner" style="display:none;">Loading...</div>
+  </div>
+  <script src="/view.js"></script>
 </body>
 </html>
