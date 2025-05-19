@@ -1,20 +1,20 @@
 # Cloudflare Pages _redirects file
 
-# 使用SPA模式保持原始URL
-# 所有/priv/开头的路径都保持原URL，只是显示view.html的内容
-/priv/1*          /view.html    200!
-/priv/2*          /view.html    200!
-/priv/3*          /view.html    200!
-/priv/4*          /view.html    200!
-/priv/5*          /view.html    200!
-/priv/6*          /view.html    200!
-/priv/7*          /view.html    200!
-/priv/8*          /view.html    200!
-/priv/9*          /view.html    200!
-/priv/0*          /view.html    200!
+# 不使用SPA模式，直接进行明确的URL重定向
+# 将所有/priv/开头的数字路径进行完整301重定向
+/priv/1*          /view.html?note=1*          301
+/priv/2*          /view.html?note=2*          301
+/priv/3*          /view.html?note=3*          301
+/priv/4*          /view.html?note=4*          301
+/priv/5*          /view.html?note=5*          301
+/priv/6*          /view.html?note=6*          301
+/priv/7*          /view.html?note=7*          301
+/priv/8*          /view.html?note=8*          301
+/priv/9*          /view.html?note=9*          301
+/priv/0*          /view.html?note=0*          301
 
-# 其他/priv/路径也保持URL不变
-/priv/*           /view.html    200!
+# 其他/priv/路径也重定向到首页
+/priv/*           /index.html          301
 
 # 所有其他页面保持正常
-/*                /index.html   200
+/*                /index.html          200
