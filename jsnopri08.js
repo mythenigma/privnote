@@ -166,17 +166,6 @@ function binaryToTextDecryption(binaryText, key) {
    return text;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // 使用统一的 16 位二进制进行 XOR 加密，并转换为零宽字符
 function textToZeroWidthWithDoubleEncryption(text, key) {
    // 将密钥字符串转为字符的 charCode 数组
@@ -220,10 +209,6 @@ function zeroWidthToTextWithDoubleDecryption(zeroWidthText, key) {
    return text;
 }
 
-
-
-
-
 // 先使用 XOR 加密，再进行零宽字符编码
 function textToZeroWidthWithDoubleEncryptionNostring(text, key) {
    // 第一步：XOR 加密
@@ -252,102 +237,63 @@ function zeroWidthToTextWithDoubleDecryptionNostring(zeroWidthText, key) {
    return text;
 }
 
-function decoding(){
- const textarea = document.getElementById('myTextarea'); // Get the textarea element by its ID
- textareaValue = textarea.value; 
- 
- 
- pass1 = document.getElementById('pass1').value;
- pass2 = document.getElementById('pass2').value;
- if (pass1 === "" && pass2 === "") {
-   pass1 = 'mythenigma';
- }
- const isBinary = /^[01]+$/.test(textareaValue);
- let decodedSecretMessage;
-
-if (isBinary) {
-  decodedSecretMessage = binaryToTextDecryption(textareaValue,pass1);
-console.log(decodedSecretMessage);
-} else {
- const encodedSecretPart = textareaValue.slice(0, textareaValue.length);  // 提取加密部分
- decodedSecretMessage = zeroWidthToTextWithDoubleDecryption(encodedSecretPart, pass1);  // 解密加密部分
-}
-
-
-
-
- //console.log(decodedSecretMessage);
- simulateTyping("HiddenTextarea",decodedSecretMessage, 100);
+function decoding() {
+  const textarea = document.getElementById('myTextarea');
+  textareaValue = textarea.value;
+  pass1 = document.getElementById('pass1').value;
+  pass2 = document.getElementById('pass2').value;
+  if (pass1 === "" && pass2 === "") {
+    pass1 = 'mythenigma';
+  }
+  const isBinary = /^[01]+$/.test(textareaValue);
+  let decodedSecretMessage;
+  if (isBinary) {
+    decodedSecretMessage = binaryToTextDecryption(textareaValue, pass1);
+  } else {
+    decodedSecretMessage = zeroWidthToTextWithDoubleDecryption(textareaValue, pass1);
+  }
+  // 直接弹窗显示或输出到控制台
+  alert(decodedSecretMessage);
 }
 
 function create() {
+  const textarea = document.getElementById('myTextarea');
+  textareaValue = textarea.value;
 
-  const textarea = document.getElementById('myTextarea'); // Get the textarea element by its ID
-  textareaValue = textarea.value; 
-
-  const hiddentext = document.getElementById('HiddenTextarea'); // Get the textarea element by its ID
-  hiddentextValue = hiddentext.value; hiddentextValue += ' \n ';
-
-
- let totallength = textareaValue.length + hiddentextValue.length ;
-
- if(totallength > 30000){
-   alert('Too long.....');
-   return ;
- }
-
-
-if (textareaValue === ""){
- alert('Write something on note');
- return ;
-}
-
-
+  let totallength = textareaValue.length;
+  if (totallength > 30000) {
+    alert('Too long.....');
+    return;
+  }
+  if (textareaValue === "") {
+    alert('Write something on note');
+    return;
+  }
 
   const select = document.getElementById("my-select");
   expiretime = select.selectedIndex;
-  //console.log("Selected option index: " + expiretime );
   const mySwitch = document.getElementById("mySwitch");
   confirmask = mySwitch.checked;
-  //console.log("Checkbox is checked with value: " + confirmask);
   pass1 = document.getElementById('pass1').value;
   pass2 = document.getElementById('pass2').value;
-  //console.log(pass1);
-
- if (pass1 === "" && pass2 === "") {
-   pass1 = 'mythenigma';
- } else if (pass1 === pass2) {
-   pass1 = pass2;
- } else {
-   alert('Password Not Matching or Clear the Password');
-   return;
- }
-
- emailnoti =  document.getElementById('emailnoti').value;
- refename  =  document.getElementById('refename').value;
-
- if(emailnoti ===""){
+  if (pass1 === "" && pass2 === "") {
+    pass1 = 'mythenigma';
+  } else if (pass1 === pass2) {
+    pass1 = pass2;
+  } else {
+    alert('Password Not Matching or Clear the Password');
+    return;
+  }
+  emailnoti = document.getElementById('emailnoti').value;
+  refename = document.getElementById('refename').value;
+  if (emailnoti === "") {
     emailnoti = 'nothingin';
- }
-
- if(refename===""){
-   refename = 'nothingin';
- }
- 
-const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1); 
-const encodedSecretMessage01= textToBinaryEncryption(hiddentextValue, pass1); 
-combineallvalue =  encodedSecretMessage + textareaValue;
-textareaValue   =  combineallvalue;
-textarea.value  =  combineallvalue;
-hiddentext.value=   encodedSecretMessage01;
-//document.getElementById('topbanner').innerHTML="Notes have been combined&ready";
-
-simulateTypinghtml('topbanner','Notes have been combined&ready',100);
-let hiddenbox = document.getElementById('HiddenTextarea');
-//fadeOut(hiddenbox);
-sendData();
-
-//console.log('hope no');
+  }
+  if (refename === "") {
+    refename = 'nothingin';
+  }
+  // 只发送 textareaValue，不再拼接隐藏内容
+  sendData();
 }
 
 async function shouData(filename) {
@@ -1028,18 +974,18 @@ function applyTabLanguage(lang) {
   document.getElementById('tabDecryptText').textContent = tabStrings.tabDecryptText;
   // Character Encryption Tab内容
   document.getElementById('encryptTabTitle').textContent = tabStrings.encryptTabTitle;
-  document.querySelector('label[for="coverText"]').textContent = tabStrings.coverTextLabel;
+  document.getElementById('coverTextLabel').textContent = tabStrings.coverTextLabel;
   document.getElementById('coverText').placeholder = tabStrings.coverTextPlaceholder;
-  document.querySelector('label[for="hiddenText"]').textContent = tabStrings.hiddenTextLabel;
+  document.getElementById('hiddenTextLabel').textContent = tabStrings.hiddenTextLabel;
   document.getElementById('hiddenText').placeholder = tabStrings.hiddenTextPlaceholder;
   document.getElementById('encryptKeyLabel').textContent = tabStrings.encryptKeyLabel;
   document.getElementById('encryptKey').placeholder = tabStrings.encryptKeyPlaceholder;
   document.getElementById('btnZeroWidthEncrypt').textContent = tabStrings.btnZeroWidthEncrypt;
   document.getElementById('btnBinaryEncrypt').textContent = tabStrings.btnBinaryEncrypt;
-  document.querySelector('label[for="encryptResult"]').textContent = tabStrings.encryptResultLabel;
+  document.getElementById('encryptResultLabel').textContent = tabStrings.encryptResultLabel;
   document.getElementById('encryptResult').placeholder = tabStrings.encryptResultPlaceholder;
   document.getElementById('btnCopyEncryptResult').innerHTML = '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyEncryptResult;
-  document.querySelector('#tab-encrypt-pane .alert-info').innerHTML = tabStrings.encryptInfo;
+  document.getElementById('encryptInfo').innerHTML = tabStrings.encryptInfo;
   // Decrypt Tab内容
   document.getElementById('decryptTabTitle').textContent = tabStrings.decryptTabTitle;
   document.getElementById('decryptInputLabel').textContent = tabStrings.decryptInputLabel;
@@ -1051,7 +997,7 @@ function applyTabLanguage(lang) {
   document.getElementById('decryptResultLabel').textContent = tabStrings.decryptResultLabel;
   document.getElementById('decryptResult').placeholder = tabStrings.decryptResultPlaceholder;
   document.getElementById('btnCopyDecryptResult').innerHTML = '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyDecryptResult;
-  document.querySelector('#tab-decrypt-pane .alert-info').innerHTML = tabStrings.decryptInfo;
+  document.getElementById('decryptInfo').innerHTML = tabStrings.decryptInfo;
 }
 
 // 在 applyLanguage 里调用 applyTabLanguage
