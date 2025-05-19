@@ -85,11 +85,11 @@ window.addEventListener('DOMContentLoaded', function() {
   let noteId = match ? match[1] : null;
   const noteContainer = document.getElementById('noteContainer');
   if (!noteId) {
-    noteContainer.innerHTML = '<div class="note-expired">无效的URL格式，必须是 /note/数字</div>';
+    noteContainer.innerHTML = '<div class="note-expired">Invalid URL format. Must be /note/number</div>';
     return;
   }
-  // 调试信息：显示 noteId   sadf 
-  noteContainer.innerHTML = `<div style="color:#1976d2;font-weight:bold;">[调试] 当前 noteId: ${noteId}</div>`;
+  // Debug info: show noteId
+  noteContainer.innerHTML = `<div style="color:#1976d2;font-weight:bold;">[Debug] Current noteId: ${noteId}</div>`;
   showNoteDebug(noteId);
 });
 
@@ -98,8 +98,8 @@ async function showNoteDebug(noteId, password = '') {
   renderLoading();
   const result = await fetchNote(noteId, password);
   const noteContainer = document.getElementById('noteContainer');
-  let debugHtml = `<div style="color:#1976d2;font-weight:bold;">[调试] noteId: ${noteId}</div>`;
-  debugHtml += `<div style="color:#333;">[调试] fetch 返回原文：<pre style='background:#f5f5f5;border:1px solid #eee;padding:8px;'>${result ? result.replace(/</g,'&lt;') : '(无返回)'}</pre></div>`;
+  let debugHtml = `<div style="color:#1976d2;font-weight:bold;">[Debug] noteId: ${noteId}</div>`;
+  debugHtml += `<div style="color:#333;">[Debug] fetch result:<pre style='background:#f5f5f5;border:1px solid #eee;padding:8px;'>${result ? result.replace(/</g,'&lt;') : '(no response)'}</pre></div>`;
   if (!result || result === 'filenotexist') {
     debugHtml += '<div class="note-expired">This note has expired or does not exist.</div>';
     noteContainer.innerHTML = debugHtml;
@@ -108,13 +108,13 @@ async function showNoteDebug(noteId, password = '') {
   if (result.includes('æ')) {
     // Format: ...æ...æpasswordæ...
     const arr = result.split('æ');
-    debugHtml += `<div style='color:#333;'>[调试] 服务器分解字段：<pre style='background:#f5f5f5;border:1px solid #eee;padding:8px;'>${JSON.stringify(arr, null, 2)}</pre></div>`;
-    debugHtml += `<div style='color:#b71c1c;'>[调试] 密码字段(第3项): ${arr[2] ? arr[2] : '(无)'}</div>`;
-    // 密码保护
+    debugHtml += `<div style='color:#333;'>[Debug] server split fields:<pre style='background:#f5f5f5;border:1px solid #eee;padding:8px;'>${JSON.stringify(arr, null, 2)}</pre></div>`;
+    debugHtml += `<div style='color:#b71c1c;'>[Debug] password field (3rd): ${arr[2] ? arr[2] : '(none)'}</div>`;
+    // Password protection
     if (arr[2] && arr[2] !== 'mythenigma') {
-      debugHtml += `<div style='color:#b71c1c;'>[调试] 需要密码，当前输入: ${password ? password : '(未输入)'}</div>`;
+      debugHtml += `<div style='color:#b71c1c;'>[Debug] Password required, current input: ${password ? password : '(none)'}</div>`;
       if (password && arr[2] !== password) {
-        debugHtml += `<div style='color:#b71c1c;'>[调试] 密码错误</div>`;
+        debugHtml += `<div style='color:#b71c1c;'>[Debug] Wrong password</div>`;
         debugHtml += `<div class="note-title">Password Required</div>
         <div class="note-password">
           <input type="password" id="notePassword" placeholder="Enter password">
