@@ -104,20 +104,35 @@ var lastElement = '';
 var globename='';
 var combineallvalue='';
 function copylink(){
-    const exampleLi = document.getElementById('innerlink'); // select the <li> element with id "example"
-    const exampleText = exampleLi.textContent; // get the text content of the <li> element
-    navigator.clipboard.writeText(exampleText) // copy the text to the clipboard
- .then(() => {
-
-var button = document.getElementById("copybutton");
-button.classList.add('rotate');
-button.textContent = "Link Copied";
-
- })
- .catch((err) => {
-   console.error('Error copying text: ', err);
- });
-
+    const exampleLi = document.getElementById('innerlink');
+    const exampleText = exampleLi.textContent;
+    const button = document.getElementById("copybutton");
+    const originalHTML = button.innerHTML;
+    const originalClass = button.className;
+    navigator.clipboard.writeText(exampleText)
+    .then(() => {
+        // 成功：按钮变绿、图标变对勾、文字变“已复制”
+        button.classList.remove('btn-outline-secondary');
+        button.classList.add('btn-success');
+        button.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '已复制' : 'Copied!');
+        button.disabled = true;
+        setTimeout(() => {
+            button.className = originalClass;
+            button.innerHTML = originalHTML;
+            button.disabled = false;
+        }, 1800);
+    })
+    .catch((err) => {
+        // 失败：按钮变红、图标变叉、文字变“复制失败”
+        button.classList.remove('btn-outline-secondary');
+        button.classList.add('btn-danger');
+        button.innerHTML = '<i class="fas fa-times me-2"></i>' + (currentLanguage === 'zh' ? '复制失败' : 'Copy Failed');
+        setTimeout(() => {
+            button.className = originalClass;
+            button.innerHTML = originalHTML;
+        }, 1800);
+        console.error('Error copying text: ', err);
+    });
 }
 
 
@@ -830,4 +845,119 @@ document.addEventListener('DOMContentLoaded', function() {
    // If there's an error, fall back to English
    applyLanguage('en');
  }
+});
+
+// 字符加密Tab功能
+function encryptZeroWidth() {
+  const cover = document.getElementById('coverText').value || '';
+  const hidden = document.getElementById('hiddenText').value || '';
+  if (!hidden) {
+    document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '请输入隐藏内容' : 'Please enter hidden content';
+    return;
+  }
+  // 用主站同款加密算法
+  const key = 'mythenigma';
+  const encoded = textToZeroWidthWithDoubleEncryption(hidden, key);
+  document.getElementById('encryptResult').value = cover + encoded;
+}
+
+function encryptBinary() {
+  const cover = document.getElementById('coverText').value || '';
+  const hidden = document.getElementById('hiddenText').value || '';
+  if (!hidden) {
+    document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '请输入隐藏内容' : 'Please enter hidden content';
+    return;
+  }
+  const key = 'mythenigma';
+  const encoded = textToBinaryEncryption(hidden, key);
+  document.getElementById('encryptResult').value = cover + encoded;
+}
+
+function copyEncryptResult() {
+  const result = document.getElementById('encryptResult').value;
+  if (!result) return;
+  navigator.clipboard.writeText(result).then(() => {
+    const btn = document.getElementById('btnCopyEncryptResult');
+    const old = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '已复制' : 'Copied!');
+    btn.classList.remove('btn-outline-success');
+    btn.classList.add('btn-success');
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = old;
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-outline-success');
+      btn.disabled = false;
+    }, 1500);
+  });
+}
+
+// 事件绑定
+window.addEventListener('DOMContentLoaded', function() {
+  const btnZero = document.getElementById('btnZeroWidthEncrypt');
+  const btnBin = document.getElementById('btnBinaryEncrypt');
+  const btnCopy = document.getElementById('btnCopyEncryptResult');
+  if (btnZero) btnZero.onclick = encryptZeroWidth;
+  if (btnBin) btnBin.onclick = encryptBinary;
+  if (btnCopy) btnCopy.onclick = copyEncryptResult;
+});
+
+// 解密Tab功能
+function decryptZeroWidth() {
+  const input = document.getElementById('decryptInput').value || '';
+  const key = document.getElementById('decryptKey').value || 'mythenigma';
+  if (!input) {
+    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '请输入加密内容' : 'Please enter encrypted content';
+    return;
+  }
+  try {
+    const decoded = zeroWidthToTextWithDoubleDecryption(input, key);
+    document.getElementById('decryptResult').value = decoded;
+  } catch (e) {
+    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '解密失败，请检查内容和密码' : 'Decrypt failed, check content and password';
+  }
+}
+
+function decryptBinary() {
+  const input = document.getElementById('decryptInput').value || '';
+  const key = document.getElementById('decryptKey').value || 'mythenigma';
+  if (!input) {
+    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '请输入加密内容' : 'Please enter encrypted content';
+    return;
+  }
+  try {
+    const decoded = binaryToTextDecryption(input, key);
+    document.getElementById('decryptResult').value = decoded;
+  } catch (e) {
+    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '解密失败，请检查内容和密码' : 'Decrypt failed, check content and password';
+  }
+}
+
+function copyDecryptResult() {
+  const result = document.getElementById('decryptResult').value;
+  if (!result) return;
+  navigator.clipboard.writeText(result).then(() => {
+    const btn = document.getElementById('btnCopyDecryptResult');
+    const old = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '已复制' : 'Copied!');
+    btn.classList.remove('btn-outline-success');
+    btn.classList.add('btn-success');
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = old;
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-outline-success');
+      btn.disabled = false;
+    }, 1500);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  // ...existing code...
+  const btnZeroDec = document.getElementById('btnZeroWidthDecrypt');
+  const btnBinDec = document.getElementById('btnBinaryDecrypt');
+  const btnCopyDec = document.getElementById('btnCopyDecryptResult');
+  if (btnZeroDec) btnZeroDec.onclick = decryptZeroWidth;
+  if (btnBinDec) btnBinDec.onclick = decryptBinary;
+  if (btnCopyDec) btnCopyDec.onclick = copyDecryptResult;
 });
