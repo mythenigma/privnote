@@ -2,13 +2,13 @@
 
 ## Problem Description
 
-The URL pattern `https://privnote.chat/priv/{number}` was not redirecting properly to the `view.html` page. Instead, it was being captured by the general rule for `/priv/*` paths and serving the `index.html` page.
+The URL pattern `https://privnote.chat/note/{number}` was not redirecting properly to the `view.html` page. Instead, it was being captured by the general rule for `/note/*` paths and serving the `index.html` page.
 
 ## Root Causes
 
-1. **Conflicting redirect rules order**: In the `_redirects` file, the general rule for `/priv/*` appeared before the specific rule for `/priv/(\d+)$`, causing all requests to match the general rule first.
+1. **Conflicting redirect rules order**: In the `_redirects` file, the general rule for `/note/*` appeared before the specific rule for `/note/(\d+)$`, causing all requests to match the general rule first.
 
-2. **Wrong JavaScript URL pattern matching**: The JavaScript code in `jsnopri08.js` only looked for the pattern `/priv/{number}/note` but not for the simpler `/priv/{number}` pattern.
+2. **Wrong JavaScript URL pattern matching**: The JavaScript code in `jsnopri08.js` only looked for the pattern `/note/{number}/note` but not for the simpler `/note/{number}` pattern.
 
 ## Solution
 
@@ -17,14 +17,14 @@ The URL pattern `https://privnote.chat/priv/{number}` was not redirecting proper
 Changed the rule order to ensure specific patterns are matched before general patterns:
 
 ```plaintext
-# Support /priv/number direct redirect to view.html
-/priv/(\d+)$    /view.html?note=$1  302
+# Support /note/number direct redirect to view.html
+/note/(\d+)$    /view.html?note=$1  302
 
 # Note detail pages - keep original URL
-/priv/*/note    /index.html   200!
+/note/*/note    /index.html   200!
 
 # Note pages - keep original URL  
-/priv/*         /index.html   200!
+/note/*         /index.html   200!
 ```
 
 ### 2. Changed redirect status from 200 to 302
@@ -39,9 +39,9 @@ Added support for the simpler URL pattern without the `/note` suffix:
 document.addEventListener('DOMContentLoaded', function() {
  // Extract note ID from URL and show note if present
  const url = window.location.href;
- // Check for both formats: /priv/number/note and /priv/number
- const regexWithNote = /priv\/(\d+)\/note/;
- const regexWithoutNote = /priv\/(\d+)$/;
+ // Check for both formats: /note/number/note and /note/number
+ const regexWithNote = /note\/(\d+)\/note/;
+ const regexWithoutNote = /note\/(\d+)$/;
  
  const matchWithNote = url.match(regexWithNote);
  const matchWithoutNote = url.match(regexWithoutNote);
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
    const numberoffile = matchWithNote[1];
    shouData(numberoffile);
  } else if (matchWithoutNote !== null) {
-   // If we match /priv/number, redirect to view.html
+   // If we match /note/number, redirect to view.html
    const numberoffile = matchWithoutNote[1];
    window.location.href = `/view.html?note=${numberoffile}`;
  } else {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 To test that the fix works:
 
-1. Access the URL `https://privnote.chat/priv/2148508737`
+1. Access the URL `https://privnote.chat/note/2148508737`
 2. The page should now redirect to `https://privnote.chat/view.html?note=2148508737`
 3. The note viewer should load and display the note content (if the note exists)
 

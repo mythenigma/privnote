@@ -8,8 +8,8 @@
         // 强制重定向脚本
         (function() {
             var path = window.location.pathname;
-            // 检查是否是/priv/数字格式的URL
-            var matches = path.match(/^\/priv\/([0-9]+)$/);
+            // 检查是否是/note/数字格式的URL
+            var matches = path.match(/^\/note\/([0-9]+)$/);
             if (matches && matches[1]) {
                 var noteId = matches[1];
                 // 立即重定向到view.html

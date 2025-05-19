@@ -80,12 +80,12 @@ async function showNote(noteId, password = '') {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  // 只支持 /priv/xxx 路径
-  const match = window.location.pathname.match(/^\/priv\/(\d+)$/);
+  // 只支持 /note/xxx 路径
+  const match = window.location.pathname.match(/^\/note\/(\d+)$/);
   let noteId = match ? match[1] : null;
   const noteContainer = document.getElementById('noteContainer');
   if (!noteId) {
-    noteContainer.innerHTML = '<div class="note-expired">无效的URL格式，必须是 /priv/数字</div>';
+    noteContainer.innerHTML = '<div class="note-expired">无效的URL格式，必须是 /note/数字</div>';
     return;
   }
   // 调试信息：显示 noteId

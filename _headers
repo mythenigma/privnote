@@ -35,14 +35,3 @@
   for = "/*.js"
     [headers.values]
     Content-Type = "application/javascript; charset=UTF-8"
-
-# Redirects for compatibility with old structure
-[[redirects]]
-  from = "/priv/:id/note"
-  to = "/index.html"
-  status = 200
-  
-[[redirects]]
-  from = "/priv/:id"
-  to = "/view.html?note=:id"
-  status = 302

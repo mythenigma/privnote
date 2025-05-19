@@ -74,15 +74,15 @@ function convertTime(seconds) {
 document.addEventListener('DOMContentLoaded', function() {
  // Extract note ID from URL and show note if present
  const url = window.location.href;
- // 只处理 /priv/数字/note 这种 legacy fallback，移除 /priv/数字 自动重定向逻辑
- const regexWithNote = /priv\/(\d+)\/note/;
+ // 只处理 /note/数字/note 这种 legacy fallback，移除 /priv/数字 自动重定向逻辑
+ const regexWithNote = /note\/(\d+)\/note/;
  const matchWithNote = url.match(regexWithNote);
  
  if (matchWithNote !== null) {
    const numberoffile = matchWithNote[1];
    shouData(numberoffile);
  } else {
-   // 不做任何重定向，交由 view.js 处理 /priv/数字
+   // 不做任何重定向，交由 view.js 处理 /note/数字
    // 如果没有 note ID，显示 grabify 区域
    if (document.getElementById('grabify')) {
      document.getElementById('grabify').style.display = 'block';
@@ -446,7 +446,7 @@ async function sendData() {
    setTimeout(() => {
            fadeIn(myDiv);
      }, 2000);
-   document.getElementById("innerlink").textContent= 'https://privnote.chat/priv/'+result;
+   document.getElementById("innerlink").textContent= 'https://privnote.chat/note/'+result;
    
  } catch (error) {
 

@@ -2,31 +2,31 @@
 
 ## 问题简述
 
-在Cloudflare Pages上，使用常规的`_redirects`文件规则无法正确将`/priv/{数字}`格式的URL重定向到`/view.html?note={数字}`。
+在Cloudflare Pages上，使用常规的`_redirects`文件规则无法正确将`/note/{数字}`格式的URL重定向到`/view.html?note={数字}`。
 
 ## 新的解决方案
 
 我们采用了"两阶段重定向"策略，这个策略在Cloudflare Pages上更可靠：
 
-1. 第一阶段：使用`_redirects`文件将所有`/priv/{数字}`格式的URL导向特殊的中间页面`priv_redirect.html`
+1. 第一阶段：使用`_redirects`文件将所有`/note/{数字}`格式的URL导向特殊的中间页面`note_redirect.html`
 2. 第二阶段：中间页面使用JavaScript立即解析URL并重定向到正确的`/view.html?note={数字}`页面
 
 ### 具体实现
 
 1. **创建了特殊的重定向页面**：
-   - `priv_redirect.html` - 专门用于处理`/priv/{数字}`格式URL的重定向
+   - `note_redirect.html` - 专门用于处理`/note/{数字}`格式URL的重定向
    - `404.html` - 处理任何不匹配预期格式的URL
 
 2. **使用数字前缀明确匹配**：
    在`_redirects`文件中，我们针对数字0-9开头的URL设置了明确的规则：
    ```
-   /priv/1*          /priv_redirect.html    200
-   /priv/2*          /priv_redirect.html    200
+   /note/1*          /note_redirect.html    200
+   /note/2*          /note_redirect.html    200
    ...等
    ```
 
 3. **使用JavaScript执行实际重定向**：
-   在`priv_redirect.html`页面中，JavaScript会：
+   在`note_redirect.html`页面中，JavaScript会：
    - 解析URL路径
    - 提取笔记ID
    - 立即重定向到`/view.html?note={ID}`
@@ -49,14 +49,14 @@
 
 1. 请确保上传所有这些新文件到您的Cloudflare Pages项目：
    - `_redirects`（更新后的版本）
-   - `priv_redirect.html`（新文件）
+   - `note_redirect.html`（新文件）
    - `404.html`（新文件）
 
 2. 部署后清除Cloudflare缓存
 
 3. 测试以下URL格式是否都能正确重定向：
-   - `https://privnote.chat/priv/2148508737`
-   - `https://privnote.chat/priv/1234567890`
+   - `https://privnote.chat/note/2148508737`
+   - `https://privnote.chat/note/1234567890`
 
 ## 临时解决方案
 
