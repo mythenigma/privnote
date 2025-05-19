@@ -302,6 +302,11 @@ function switchLanguage(lang) {
 }
 window.addEventListener('DOMContentLoaded', function() {
   switchLanguage(currentLanguage);
+  // Debug输出当前URL信息
+  console.log('[DEBUG] location.href:', window.location.href);
+  console.log('[DEBUG] location.pathname:', window.location.pathname);
+  console.log('[DEBUG] location.search:', window.location.search);
+  console.log('[DEBUG] location.hash:', window.location.hash);
   // 绑定Encrypt Note按钮事件，恢复调用 create()
   var encryptBtn = document.getElementById('tranmake');
   if (encryptBtn) {
