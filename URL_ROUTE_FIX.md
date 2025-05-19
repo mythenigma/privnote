@@ -1,103 +1,76 @@
-# URL路由和笔记显示问题修复指南
+# URL Routing Fix for Privnote.chat
 
-## 问题描述
+## Problem Description
 
-在应用程序中存在以下几个关键问题：
+The URL pattern `https://privnote.chat/priv/{number}` was not redirecting properly to the `view.html` page. Instead, it was being captured by the general rule for `/priv/*` paths and serving the `index.html` page.
 
-1. **URL路由问题**：在访问格式为 `/priv/xxx/note` 的笔记URL时，页面会重定向回首页而不是显示笔记内容。
+## Root Causes
 
-2. **密码保护笔记问题**：密码保护的笔记在输入正确密码后不显示内容，而是停留在密码输入界面。
+1. **Conflicting redirect rules order**: In the `_redirects` file, the general rule for `/priv/*` appeared before the specific rule for `/priv/(\d+)$`, causing all requests to match the general rule first.
 
-3. **DOM元素加载问题**：在某些情况下，关键DOM元素（如`containerbox`）无法被找到或不可见，导致笔记内容无法显示。
+2. **Wrong JavaScript URL pattern matching**: The JavaScript code in `jsnopri08.js` only looked for the pattern `/priv/{number}/note` but not for the simpler `/priv/{number}` pattern.
 
-## 根本原因分析
+## Solution
 
-经过调查，发现以下几个根本原因：
+### 1. Reordered the redirect rules in `_redirects`
 
-1. **脚本加载顺序问题**：主脚本可能在DOM完全准备好之前就开始执行，或者脚本加载失败。
+Changed the rule order to ensure specific patterns are matched before general patterns:
 
-2. **URL解析问题**：不同URL格式的解析不一致，导致无法正确提取笔记ID。
+```plaintext
+# Support /priv/number direct redirect to view.html
+/priv/(\d+)$    /view.html?note=$1  302
 
-3. **DOM可见性问题**：元素默认显示/隐藏状态设置不当，导致关键容器在需要时未显示。
+# Note detail pages - keep original URL
+/priv/*/note    /index.html   200!
 
-4. **异步操作处理**：密码验证后异步加载内容的逻辑存在问题，不能保证正确顺序执行。
-
-## 解决方案
-
-### 1. 改进脚本加载策略
-
-- 确保脚本始终使用绝对路径（`/jsnopri08.js`）而不是相对路径
-- 添加脚本加载成功和失败的处理逻辑
-- 检查并确保关键DOM元素在脚本执行前已正确初始化
-
-```javascript
-// 修改前
-if (path.includes('/priv/')) {
-    scriptPath = '/jsnopri08.js';
-} else {
-    scriptPath = '/jsnopri08.js';
-}
-
-// 修改后
-script.src = '/jsnopri08.js'; // 始终使用绝对路径
-script.onload = function() {
-    console.log('主脚本加载成功');
-    // 脚本加载成功后初始化页面
-};
+# Note pages - keep original URL  
+/priv/*         /index.html   200!
 ```
 
-### 2. 改进URL解析逻辑
+### 2. Changed redirect status from 200 to 302
 
-- 使用更健壮的正则表达式来处理不同格式的URL
-- 在关键函数中添加额外的URL解析验证
+Changed the status code from `200` (which serves the content at the same URL) to `302` (which does an actual redirect) to ensure browser navigates to the view.html page.
 
-```javascript
-// 修改前
-const regex = /priv\/([^\/]+)/;
+### 3. Updated JavaScript URL parsing in `jsnopri08.js`
 
-// 修改后
-const regex = /priv\/([^\/]+)(?:\/note)?/; // 同时支持带和不带/note的URL
-```
-
-### 3. 确保DOM元素可见性
-
-- 在脚本初始化时明确设置关键容器的可见性
-- 基于URL路径决定显示创建笔记界面还是阅读笔记界面
+Added support for the simpler URL pattern without the `/note` suffix:
 
 ```javascript
-// 添加显式的DOM可见性控制
-var containerBox = document.getElementById('containerbox');
-if (containerBox) {
-    containerBox.style.display = 'block';
-}
+document.addEventListener('DOMContentLoaded', function() {
+ // Extract note ID from URL and show note if present
+ const url = window.location.href;
+ // Check for both formats: /priv/number/note and /priv/number
+ const regexWithNote = /priv\/(\d+)\/note/;
+ const regexWithoutNote = /priv\/(\d+)$/;
+ 
+ const matchWithNote = url.match(regexWithNote);
+ const matchWithoutNote = url.match(regexWithoutNote);
+ 
+ if (matchWithNote !== null) {
+   const numberoffile = matchWithNote[1];
+   shouData(numberoffile);
+ } else if (matchWithoutNote !== null) {
+   // If we match /priv/number, redirect to view.html
+   const numberoffile = matchWithoutNote[1];
+   window.location.href = `/view.html?note=${numberoffile}`;
+ } else {
+   // No note ID in URL, show grabify section
+   document.getElementById('grabify').style.display = 'block';
+ }
+});
 ```
 
-### 4. 改进密码验证流程
+## Testing
 
-- 在密码验证成功后确保正确提取笔记ID
-- 添加更多的错误处理和UI反馈
-- 确保异步操作的正确顺序执行
+To test that the fix works:
 
-```javascript
-// 添加更健壮的笔记ID提取
-const url = window.location.href;
-const regex = /priv\/([^\/]+)(?:\/note)?/;
-const match = url.match(regex);
-if (match !== null && match[1]) {
-    textareaValue = match[1];
-    // 使用短延迟确保DOM已更新
-    setTimeout(function() { 
-        tocontent(); // 显示内容
-    }, 300);
-}
-```
+1. Access the URL `https://privnote.chat/priv/2148508737`
+2. The page should now redirect to `https://privnote.chat/view.html?note=2148508737`
+3. The note viewer should load and display the note content (if the note exists)
 
-## 测试方法
+## Implementation Date
 
-1. **URL格式测试**：
-   - 使用 `/priv/xxx` 格式访问笔记
-   - 使用 `/priv/xxx/note` 格式访问同一笔记
-   - 确认两种格式都能正确显示内容
+May 19, 2025
 
 2. **密码保护笔记测试**：
    - 创建有密码保护的笔记

@@ -4,14 +4,14 @@
 # 我们使用 "200" 状态码来指示服务器返回指定文件的内容，但保持浏览器地址栏中的原始URL不变
 # 这对于单页应用（SPA）非常重要，这样前端路由器才能正确工作
 
+# 支持/priv/数字 直接跳转到根目录 view.html?note=数字，去掉/note后缀
+/priv/(\d+)$    /view.html?note=$1  302
+
 # 笔记详情页面 - 保持原始URL
 /priv/*/note    /index.html   200!
 
 # 笔记页面 - 保持原始URL
 /priv/*         /index.html   200!
-
-# 支持/priv/数字 直接跳转到根目录 view.html?note=数字，去掉/note后缀
-/priv/(\d+)$    /view.html?note=$1  200
 
 # 所有其他路径 - 保持原始URL
 /*              /index.html   200!

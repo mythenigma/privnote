@@ -74,11 +74,20 @@ function convertTime(seconds) {
 document.addEventListener('DOMContentLoaded', function() {
  // Extract note ID from URL and show note if present
  const url = window.location.href;
- const regex = /priv\/(\d+)\/note/;
- const match = url.match(regex);
- if (match !== null) {
-   const numberoffile = match[1];
+ // Check for both formats: /priv/number/note and /priv/number
+ const regexWithNote = /priv\/(\d+)\/note/;
+ const regexWithoutNote = /priv\/(\d+)$/;
+ 
+ const matchWithNote = url.match(regexWithNote);
+ const matchWithoutNote = url.match(regexWithoutNote);
+ 
+ if (matchWithNote !== null) {
+   const numberoffile = matchWithNote[1];
    shouData(numberoffile);
+ } else if (matchWithoutNote !== null) {
+   // If we match /priv/number, redirect to view.html
+   const numberoffile = matchWithoutNote[1];
+   window.location.href = `/view.html?note=${numberoffile}`;
  } else {
    // No note ID in URL, show grabify section
    document.getElementById('grabify').style.display = 'block';
