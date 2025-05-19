@@ -59,8 +59,8 @@ async function showNote(noteId, password = '') {
   if (result.includes('æ')) {
     // Format: ...æ...æpasswordæ...
     const arr = result.split('æ');
+    // 密码保护
     if (arr[2] && arr[2] !== 'mythenigma') {
-      // Password required
       if (password && arr[2] !== password) {
         renderPassword(noteId, 'Wrong password, try again.');
       } else {
@@ -80,17 +80,80 @@ async function showNote(noteId, password = '') {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  // 先查 ?note=xxx
-  const urlParams = new URLSearchParams(window.location.search);
-  let noteId = urlParams.get('note');
-  // 如果没有 ?note=xxx，再查 /priv/xxx
+  // 只支持 /priv/xxx 路径
+  const match = window.location.pathname.match(/^\/priv\/(\d+)$/);
+  let noteId = match ? match[1] : null;
+  const noteContainer = document.getElementById('noteContainer');
   if (!noteId) {
-    const match = window.location.pathname.match(/^\/priv\/(\d+)$/);
-    if (match) noteId = match[1];
+    noteContainer.innerHTML = '<div class="note-expired">无效的URL格式，必须是 /priv/数字</div>';
+    return;
   }
-  if (noteId) {
-    showNote(noteId);
-  } else {
-    renderExpired();
-  }
+  // 调试信息：显示 noteId
+  noteContainer.innerHTML = `<div style="color:#1976d2;font-weight:bold;">[调试] 当前 noteId: ${noteId}</div>`;
+  showNoteDebug(noteId);
 });
+
+// 调试版 showNote，显示所有细节
+async function showNoteDebug(noteId, password = '') {
+  renderLoading();
+  const result = await fetchNote(noteId, password);
+  const noteContainer = document.getElementById('noteContainer');
+  let debugHtml = `<div style="color:#1976d2;font-weight:bold;">[调试] noteId: ${noteId}</div>`;
+  debugHtml += `<div style="color:#333;">[调试] fetch 返回原文：<pre style='background:#f5f5f5;border:1px solid #eee;padding:8px;'>${result ? result.replace(/</g,'&lt;') : '(无返回)'}</pre></div>`;
+  if (!result || result === 'filenotexist') {
+    debugHtml += '<div class="note-expired">This note has expired or does not exist.</div>';
+    noteContainer.innerHTML = debugHtml;
+    return;
+  }
+  if (result.includes('æ')) {
+    // Format: ...æ...æpasswordæ...
+    const arr = result.split('æ');
+    debugHtml += `<div style='color:#333;'>[调试] 服务器分解字段：<pre style='background:#f5f5f5;border:1px solid #eee;padding:8px;'>${JSON.stringify(arr, null, 2)}</pre></div>`;
+    debugHtml += `<div style='color:#b71c1c;'>[调试] 密码字段(第3项): ${arr[2] ? arr[2] : '(无)'}</div>`;
+    // 密码保护
+    if (arr[2] && arr[2] !== 'mythenigma') {
+      debugHtml += `<div style='color:#b71c1c;'>[调试] 需要密码，当前输入: ${password ? password : '(未输入)'}</div>`;
+      if (password && arr[2] !== password) {
+        debugHtml += `<div style='color:#b71c1c;'>[调试] 密码错误</div>`;
+        debugHtml += `<div class="note-title">Password Required</div>
+        <div class="note-password">
+          <input type="password" id="notePassword" placeholder="Enter password">
+          <button id="viewBtn">View</button>
+          <div style="color:#b71c1c;margin-top:0.5rem;">Wrong password, try again.</div>
+        </div>`;
+        noteContainer.innerHTML = debugHtml;
+        document.getElementById('viewBtn').onclick = async function() {
+          const pwd = document.getElementById('notePassword').value;
+          renderLoading();
+          await showNoteDebug(noteId, pwd);
+        };
+        return;
+      } else {
+        debugHtml += `<div class='note-title'>Password Required</div>
+        <div class='note-password'>
+          <input type='password' id='notePassword' placeholder='Enter password'>
+          <button id='viewBtn'>View</button>
+          <div style='color:#b71c1c;margin-top:0.5rem;'></div>
+        </div>`;
+        noteContainer.innerHTML = debugHtml;
+        document.getElementById('viewBtn').onclick = async function() {
+          const pwd = document.getElementById('notePassword').value;
+          renderLoading();
+          await showNoteDebug(noteId, pwd);
+        };
+        return;
+      }
+    }
+    // Note exists, show content
+    const noteContent = arr[arr.length - 1];
+    let expireMsg = '';
+    if (arr[0] === '0') expireMsg = 'This note will self-destruct after reading.';
+    debugHtml += `<div class="note-title">Note Content</div>
+    <div class="note-content">${noteContent}</div>
+    ${expireMsg ? `<div class="note-expired">${expireMsg}</div>` : ''}`;
+    noteContainer.innerHTML = debugHtml;
+  } else {
+    debugHtml += '<div class="note-expired">This note has expired or does not exist.</div>';
+    noteContainer.innerHTML = debugHtml;
+  }
+}
