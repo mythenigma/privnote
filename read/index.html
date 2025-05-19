@@ -588,6 +588,21 @@
             applyLanguage(language);
         }
     }
+
+    // 自动根据URL参数展示note内容
+    window.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const noteId = urlParams.get('note');
+      if (noteId) {
+        // 这里假设你有一个showNote函数，或者直接调用后端API
+        if (typeof shouData === 'function') {
+          shouData(noteId);
+        } else {
+          // 简单fallback: 显示noteId
+          document.getElementById('containerbox').innerHTML = '<h3>Note ID: ' + noteId + '</h3>';
+        }
+      }
+    });
 </script>
 <script src="jsnopri08.js"></script>
 </main>

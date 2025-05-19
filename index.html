@@ -100,16 +100,13 @@
           </label>
           <textarea class="form-control mb-3" rows="8" id="myTextarea" placeholder="Write Your Note Here..."></textarea>
         </div>
-        <div class="alert alert-success" id="encryptinfo" style="display: none">
-          <small>The note has been successfully encrypted with two methods: the upper box contains zero-width character encryption, storing the information within the text, while the lower box shows the encryption as binary (0s and 1s). Both can be copied and used for decryption.</small>
-        </div>
       </div>
       <div class="card" id="resultlink" style="display: none">
         <div class="card-body">
           <h6 class="card-title">PrivNote has been made</h6>
           <ul class="list-group list-group-flush mb-3">
             <li class="list-group-item list-group-item-success" id="innerlink"></li>
-            <li id="tranli" class="list-group-item list-group-item-warning">The message will be automatically destroyed according to your settings.</li>
+            <li id="tranli" class="list-group-item list-group-item-warning">This note will be automatically destroyed after it is read, according to your settings.</li>
           </ul>
           <button type="button" class="btn btn-outline-secondary" id="copybutton" onclick="copylink()">
             <i class="fas fa-copy me-2"></i>Copy Link

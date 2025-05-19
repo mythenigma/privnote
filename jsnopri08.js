@@ -441,7 +441,7 @@ async function sendData() {
    setTimeout(() => {
            fadeIn(myDiv);
      }, 2000);
-   document.getElementById("innerlink").textContent= 'https://privnote.chat/priv/'+result+'/note';
+   document.getElementById("innerlink").textContent= 'https://privnote.chat/priv/'+result;
    
  } catch (error) {
 
