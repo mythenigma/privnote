@@ -2,27 +2,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>重定向到笔记...</title>
-    <meta http-equiv="refresh" content="0;url=/index.html">
-    <script>
-        // 强制重定向脚本
-        (function() {
-            var path = window.location.pathname;
-            // 检查是否是/note/数字格式的URL
-            var matches = path.match(/^\/note\/([0-9]+)$/);
-            if (matches && matches[1]) {
-                var noteId = matches[1];
-                // 立即重定向到view.html
-                window.location.replace('/view.html?note=' + noteId);
-            } else {
-                // 如果不是预期格式，则重定向到首页
-                window.location.replace('/index.html');
-            }
-        })();
-    </script>
+    <title>页面未找到 - 404 Not Found</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 10%; color: #444; }
+        h1 { font-size: 2.5em; color: #d32f2f; }
+        p { font-size: 1.2em; }
+        a { color: #1976d2; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-    <h1>正在重定向到您的笔记...</h1>
-    <p>如果您没有被自动重定向，<a href="/">请点击这里</a>。</p>
+    <h1>404 - 页面未找到</h1>
+    <p>您访问的页面不存在或已被删除。</p>
+    <p><a href="/">返回首页</a></p>
 </body>
 </html>
