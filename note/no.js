@@ -693,9 +693,9 @@ function encryptZeroWidth() {
     return;
   }
   const encoded = textToZeroWidthWithDoubleEncryption(hidden, key);
-  console.log('[DEBUG] Zero-width encoded string (should be invisible chars):', encoded, 'length:', encoded.length);
+  // 打印零宽编码的Unicode码点，便于和老网站对比
+  console.log('[DEBUG] Zero-width encoded code points:', Array.from(encoded).map(c => c.charCodeAt(0)));
   const result = cover + encoded;
-  console.log('[DEBUG] Final zero-width encryption result:', result, 'length:', result.length);
   document.getElementById('encryptResult').value = result;
 }
 

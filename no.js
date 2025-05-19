@@ -693,7 +693,10 @@ function encryptZeroWidth() {
     return;
   }
   const encoded = textToZeroWidthWithDoubleEncryption(hidden, key);
-  document.getElementById('encryptResult').value = cover + encoded;
+  // 打印零宽编码的Unicode码点，便于和老网站对比
+  console.log('[DEBUG] Zero-width encoded code points:', Array.from(encoded).map(c => c.charCodeAt(0)));
+  const result = cover + encoded;
+  document.getElementById('encryptResult').value = result;
 }
 
 function encryptBinary() {
