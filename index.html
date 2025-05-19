@@ -175,51 +175,55 @@
     <div class="tab-pane fade" id="tab-encrypt-pane" role="tabpanel" aria-labelledby="tab-encrypt">
       <!-- 字符加密工具内容 -->
       <div class="container main-container">
-        <h5 class="mb-3 text-center" id="encryptTabTitle">字符加密工具</h5>
+        <h5 class="mb-3 text-center" id="encryptTabTitle">Character Encryption Tool</h5>
         <div class="mb-3">
-          <label for="coverText" class="form-label">表面内容（可选）</label>
-          <textarea class="form-control" id="coverText" rows="2" placeholder="输入表面内容，可留空"></textarea>
+          <label for="coverText" class="form-label" id="coverTextLabel">Cover Text (optional)</label>
+          <textarea class="form-control" id="coverText" rows="2" placeholder="Enter cover text, optional"></textarea>
         </div>
         <div class="mb-3">
-          <label for="hiddenText" class="form-label">隐藏内容（必填，将被加密）</label>
-          <textarea class="form-control" id="hiddenText" rows="3" placeholder="输入需要加密的隐藏内容"></textarea>
+          <label for="hiddenText" class="form-label" id="hiddenTextLabel">Hidden Content (required, will be encrypted)</label>
+          <textarea class="form-control" id="hiddenText" rows="3" placeholder="Enter hidden content to encrypt"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="encryptKey" class="form-label" id="encryptKeyLabel">Password (optional)</label>
+          <input type="text" class="form-control" id="encryptKey" placeholder="Enter password (if any)">
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-          <button class="btn btn-primary me-2" id="btnZeroWidthEncrypt">零宽字符加密</button>
-          <button class="btn btn-outline-primary me-2" id="btnBinaryEncrypt">二进制加密</button>
+          <button class="btn btn-primary me-2" id="btnZeroWidthEncrypt">Zero-Width Encrypt</button>
+          <button class="btn btn-outline-primary me-2" id="btnBinaryEncrypt">Binary Encrypt</button>
         </div>
         <div class="mb-3">
-          <label for="encryptResult" class="form-label">合成结果</label>
-          <textarea class="form-control" id="encryptResult" rows="3" placeholder="加密结果将在此显示" readonly></textarea>
-          <button class="btn btn-outline-success mt-2" id="btnCopyEncryptResult"><i class="fas fa-copy me-2"></i>复制结果</button>
+          <label for="encryptResult" class="form-label" id="encryptResultLabel">Combined Result</label>
+          <textarea class="form-control" id="encryptResult" rows="3" placeholder="Encrypted result will appear here" readonly></textarea>
+          <button class="btn btn-outline-success mt-2" id="btnCopyEncryptResult"><i class="fas fa-copy me-2"></i>Copy Result</button>
         </div>
-        <div class="alert alert-info mt-3" style="font-size:0.95em">
-          <strong>说明：</strong>零宽字符加密会将隐藏内容隐写进表面内容，二进制加密则将隐藏内容转为0/1字符串。复制结果后可用于粘贴、分享或解密。
+        <div class="alert alert-info mt-3" id="encryptInfo" style="font-size:0.95em">
+          <strong>Info:</strong> Zero-width encryption hides the hidden content in the cover text. Binary encryption converts the hidden content to 0/1. You can set a custom password.
         </div>
       </div>
     </div>
     <div class="tab-pane fade" id="tab-decrypt-pane" role="tabpanel" aria-labelledby="tab-decrypt">
       <div class="container main-container">
-        <h5 class="mb-3 text-center" id="decryptTabTitle">解密工具</h5>
+        <h5 class="mb-3 text-center" id="decryptTabTitle">Decrypt Tool</h5>
         <div class="mb-3">
-          <label for="decryptInput" class="form-label" id="decryptInputLabel">加密内容（零宽字符或二进制）</label>
-          <textarea class="form-control" id="decryptInput" rows="3" placeholder="粘贴需要解密的内容"></textarea>
+          <label for="decryptInput" class="form-label" id="decryptInputLabel">Encrypted Content (Zero-Width or Binary)</label>
+          <textarea class="form-control" id="decryptInput" rows="3" placeholder="Paste content to decrypt"></textarea>
         </div>
         <div class="mb-3">
-          <label for="decryptKey" class="form-label" id="decryptKeyLabel">密码（可选，默认 mythenigma）</label>
-          <input type="text" class="form-control" id="decryptKey" placeholder="输入密码，留空则用默认">
+          <label for="decryptKey" class="form-label" id="decryptKeyLabel">Password (optional)</label>
+          <input type="text" class="form-control" id="decryptKey" placeholder="Enter password (if any)">
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-          <button class="btn btn-warning me-2" id="btnZeroWidthDecrypt">零宽字符解密</button>
-          <button class="btn btn-outline-warning me-2" id="btnBinaryDecrypt">二进制解密</button>
+          <button class="btn btn-warning me-2" id="btnZeroWidthDecrypt">Zero-Width Decrypt</button>
+          <button class="btn btn-outline-warning me-2" id="btnBinaryDecrypt">Binary Decrypt</button>
         </div>
         <div class="mb-3">
-          <label for="decryptResult" class="form-label" id="decryptResultLabel">解密结果</label>
-          <textarea class="form-control" id="decryptResult" rows="3" placeholder="解密结果将在此显示" readonly></textarea>
-          <button class="btn btn-outline-success mt-2" id="btnCopyDecryptResult"><i class="fas fa-copy me-2"></i>复制结果</button>
+          <label for="decryptResult" class="form-label" id="decryptResultLabel">Decryption Result</label>
+          <textarea class="form-control" id="decryptResult" rows="3" placeholder="Decryption result will appear here" readonly></textarea>
+          <button class="btn btn-outline-success mt-2" id="btnCopyDecryptResult"><i class="fas fa-copy me-2"></i>Copy Result</button>
         </div>
-        <div class="alert alert-info mt-3" style="font-size:0.95em">
-          <strong>说明：</strong>支持零宽字符和二进制两种加密内容的解密，密码留空则使用默认值。
+        <div class="alert alert-info mt-3" id="decryptInfo" style="font-size:0.95em">
+          <strong>Info:</strong> Supports decryption of both zero-width and binary encrypted content. Leave password blank if not set.
         </div>
       </div>
     </div>
@@ -283,5 +287,6 @@ applyLanguage(language);
 }
 </script>
 <script src="../../../jsnopri08.js"></script>
+<script src="translate.js"></script>
 </body>
 </html>

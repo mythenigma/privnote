@@ -652,52 +652,6 @@ function fadeIn(element, duration = 1000) { // 默认持续时间为1000毫秒
            }, interval);
    }
 
-// Store UI text content for different languages
-const languageStrings = {
- 'en': {
-   'encryptinfo': 'The note has been successfully encrypted with two methods: the upper box contains zero-width character encryption, storing the information within the text, while the lower box shows the encryption as binary (0s and 1s). Both can be copied and used for decryption.',
-   'trans1': 'Secure your words, vanish your trace',
-   'trans2': 'Encrypts your notes with links, zero-width characters, or binary, ensuring secure sharing and auto-destruction',
-   'demo2': 'Privnote is a versatile encryption tool for secure notes. You can:<br>1. Encrypted Link Sharing: <small>Generate a secure link for your note, which auto-destructs after a set time.</small><br>2. Zero-Width Character Encryption: <small>Hide your note in plain text using zero-width characters, making it invisible to the naked eye.</small><br>3. Binary Encryption: <small>Convert your note into binary (0s and 1s) for extra security.</small>',
-   'tranmake': 'Encrypt Note',
-   'tranoption': 'Optional Setting',
-   'myTextarea': 'Write Your Note Here...',
-   'HiddenTextarea': 'Write Hidden Messages Here...',
-   'tranafter': 'You can track the results of when the note link was opened, on which device it was opened, and by what IP was opened.',
-   'trana': 'Check Open Log',
-   'tranb': 'How to decode?',
-   'tranli': 'The message will be automatically destroyed according to your settings.',
-   'decodemessage': 'Decrypt Notes',
-   'copybutton': 'Copy Link',
-   'trantou': 'Link URL self-destructs',
-   'my-select': '<option>after reading it</option><option>1 hour from now</option><option>24 hour from now</option><option>7 days from now</option><option>24 days from now</option>',
-   'topbanner': 'New Notes',
-   'currentLanguage': 'English',
-   'decrysrc': 'read/pic/enDecode1.png'
- },
- 'zh': {
-   'encryptinfo': '\u4FBF\u7B7E\u5DF2\u6210\u529F\u52A0\u5BC6\uFF0C\u751F\u6210\u4E86\u4E24\u79CD\u52A0\u5BC6\u65B9\u5F0F\uFF1A\u4E0A\u6846\u5185\u5BB9\u4E3A\u96F6\u5BBD\u5B57\u7B26\u52A0\u5BC6\uFF0C\u4FE1\u606F\u5B58\u50A8\u5728\u6587\u5B57\u4E2D\uFF1B\u4E0B\u6846\u5185\u5BB9\u4E3A\u52A0\u5BC6\u540E\u76840\u548C1\u6570\u5B57\u3002\u4E24\u4E2A\u6846\u4E2D\u7684\u5185\u5BB9\u90FD\u53EF\u4EE5\u590D\u5236\u5E76\u7528\u4E8E\u89E3\u5BC6',
-   'trans1': '\u9690\u4FE1\u4E91 \u2013 \u52A0\u5BC6\u4F60\u7684\u8BDD\u8BED\uFF0C\u6D88\u5931\u4F60\u7684\u75D5\u8FF9',
-   'trans2': '\u521B\u5EFA\u4E00\u4E2A\u4FBF\u7B7E',
-   'demo2': '\u9690\u4FE1\u4E91\u662F\u4E00\u6B3E\u591A\u529F\u80FD\u7684\u52A0\u5BC6\u4FBF\u7B7E\u5DE5\u5177\u3002\u60A8\u53EF\u4EE5\u901A\u8FC7\u4EE5\u4E0B\u65B9\u5F0F\u4FDD\u62A4\u60A8\u7684\u4FBF\u7B7E\u5185\u5BB9\uFF1A\u52A0\u5BC6\u94FE\u63A5\u5206\u4EAB,\u96F6\u5BBD\u5B57\u7B26\u52A0\u5BC6,\u4E8C\u8FDB\u5236\u52A0\u5BC6.',
-   'tranmake': '\u52A0\u5BC6\u4FBF\u7B7E',
-   'tranoption': '\u66F4\u591A\u8BBE\u7F6E',
-   'myTextarea': '\u8BF7\u5728\u6B64\u8F93\u5165\u4FBF\u7B7E\u5185\u5BB9',
-   'HiddenTextarea': '\u5728\u6B64\u8F93\u5165\u6216\u73B0\u5B9E\u9690\u85CF\u5185\u5BB9',
-   'tranafter': '\u9690\u4FE1\u4E91\u94FE\u63A5\u53D1\u9001\u51FA\u53BB\u4E4B\u540E\uFF1F\u53EF\u4EE5\u901A\u8FC7\u4E00\u4E0B\u94FE\u63A5\u67E5\u770B\u4E00\u4E0B\u9605\u8BFB\u8BB0\u5F55\uFF0C\u67E5\u770B\u6253\u5F00\u8005\u7684IP;\u8FD8\u53EF\u4EE5\u5C06\u9605\u8BFB\u94FE\u63A5\u751F\u6210\u4E8C\u7EF4\u7801\u53D1\u7ED9\u4ED6\u4EBA',
-   'trana': '\u67E5\u770B\u6253\u5F00\u8BB0\u5F55',
-   'tranb': '\u5982\u4F55\u8FDB\u884C\u89E3\u5BC6?',
-   'tranli': '\u4FBF\u7B7E\u4F1A\u6839\u636E\u60A8\u7684\u8BBE\u7F6E\u8FDB\u884C\u81EA\u6BC1',
-   'decodemessage': '\u89E3\u5BC6\u4FE1\u606F',
-   'copybutton': '\u590D\u5236\u94FE\u63A5',
-   'trantou': '\u4FBF\u7B7E\u94FE\u63A5\u6709\u6548\u671F',
-   'my-select': '<option>\u9605\u540E\u5373\u7130</option><option>1\u5C0F\u65F6\u540E</option><option>24 \u5C0F\u65F6\u540E</option><option>7 \u5929\u540E</option><option>24 \u5929\u540E</option>',
-   'topbanner': '\u65B0\u5EFA\u4FBF\u7B7E',
-   'currentLanguage': '\u4E2D\u6587',
-   'decrysrc': 'read/pic/CNdecode1.png'
- }
-};
-
 // Function to detect location based timing
 function maitime(){
   let d = new Date();
@@ -714,81 +668,6 @@ function maitime(){
    }
    return 7;
 }
-
-// Function to apply language strings to UI elements
-function applyLanguage(language) {
- if (!languageStrings[language]) {
-   console.error('Language not supported:', language);
-   return;
- }
- 
- currentLanguage = language;
- localStorage.setItem('selectedLanguage', language);
- 
- // Update the language button text
- if (language === 'en') {
-   document.getElementById('currentLanguage').textContent = 'English';
- } else if (language === 'zh') {
-   document.getElementById('currentLanguage').textContent = '中文';
- }
- 
- // Update UI with selected language strings
- for (const [elementId, textContent] of Object.entries(languageStrings[language])) {
-   const element = document.getElementById(elementId);
-   if (element) {
-     try {
-       if (elementId === 'my-select') {
-         element.innerHTML = textContent;
-       } else if (elementId === 'encryptinfo' || elementId === 'demo2') {
-         element.innerHTML = textContent;
-       } else if (elementId === 'myTextarea' || elementId === 'HiddenTextarea') {
-         element.placeholder = textContent;
-       } else if (elementId === 'decrysrc') {
-         element.src = textContent;
-       } else {
-         element.textContent = textContent;
-       }
-     } catch (error) {
-       console.error(`Error updating element ${elementId}:`, error);
-     }
-   }
- }
-}
-
-// Function to switch language manually - make it globally accessible
-window.applyLanguage = applyLanguage;
-window.switchLanguage = function(language) {
- applyLanguage(language);
-};
-
-// Function to detect browser language
-function detectBrowserLanguage() {
- const language = navigator.language || navigator.userLanguage || 'en'; // Default to English
- return language.toLowerCase().startsWith('zh') ? 'zh' : 'en';
-}
-
-// Auto-detect language on page load if user hasn't set a preference
-if (!localStorage.getItem('selectedLanguage')) {
- // Try primary detection method first
- var maigua = maitime();
- if (maigua == 7) {
-   currentLanguage = 'zh';
- } else {
-   // Fall back to browser language detection
-   currentLanguage = detectBrowserLanguage();
- }
-}
-
-// Apply the language when page loads
-document.addEventListener('DOMContentLoaded', function() {
- try {
-   applyLanguage(currentLanguage);
- } catch (e) {
-   console.error('Error applying language:', e);
-   // If there's an error, fall back to English
-   applyLanguage('en');
- }
-});
 
 // 字符加密Tab功能
 function encryptZeroWidth() {
