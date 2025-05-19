@@ -4,10 +4,10 @@
 # 将 /priv/* 路径都交给前端路由处理，而不是返回 404
 
 # 基本规则：带有 /note 后缀的 URL 保持原样（用于直接访问）
-/priv/:id/note    /index.html    200
+/priv/:id/note    /index.html    200！
 
 # 不带 /note 后缀的 URL 保持原样（用于分享链接）
-/priv/:id         /view.html    200
+/priv/:id         /view.html    200！
 
 # 对已删除笔记的特殊处理
 /priv/:id/destroyed    /index.html    200
