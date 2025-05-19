@@ -72,32 +72,41 @@ function convertTime(seconds) {
 // Remove cookie-based note ID logic and rely solely on URL parsing
 
 document.addEventListener('DOMContentLoaded', function() {
- // Extract note ID from URL and show note if present
- const url = window.location.href;
- // 只处理 /note/数字/note 这种 legacy fallback，移除 /priv/数字 自动重定向逻辑
- const regexWithNote = /note\/(\d+)\/note/;
- const matchWithNote = url.match(regexWithNote);
- 
- if (matchWithNote !== null) {
-   const numberoffile = matchWithNote[1];
-   shouData(numberoffile);
- } else {
-   // 不做任何重定向，交由 view.js 处理 /note/数字
-   // 如果没有 note ID，显示 grabify 区域
-   if (document.getElementById('grabify')) {
-     document.getElementById('grabify').style.display = 'block';
-   }
- }
-
- // Debug: 输出当前URL和jsnopri08.js已加载
- if (!window._jsnopri08_debug) {
-   window._jsnopri08_debug = true;
-   const debugDiv = document.createElement('div');
-   debugDiv.style = 'position:fixed;bottom:0;left:0;z-index:9999;background:#fff3cd;color:#856404;padding:8px 16px;border:1px solid #ffeeba;font-size:14px;';
-   debugDiv.innerHTML = 'jsnopri08.js loaded. URL: ' + url;
-   document.body.appendChild(debugDiv);
-   setTimeout(()=>debugDiv.remove(), 6000);
- }
+  // Extract note ID from URL and show note if present
+  const url = window.location.href;
+  // 支持 /note/数字 伪静态路由
+  const regexNote = /\/note\/(\d+)/;
+  const matchNote = url.match(regexNote);
+  if (matchNote !== null) {
+    const numberoffile = matchNote[1];
+    shouData(numberoffile);
+    // 隐藏首页内容，仅展示笔记
+    if (document.getElementById('mainHome')) {
+      document.getElementById('mainHome').style.display = 'none';
+    }
+    return;
+  }
+  // 只处理 /note/数字/note 这种 legacy fallback，移除 /priv/数字 自动重定向逻辑
+  const regexWithNote = /note\/(\d+)\/note/;
+  const matchWithNote = url.match(regexWithNote);
+  if (matchWithNote !== null) {
+    const numberoffile = matchWithNote[1];
+    shouData(numberoffile);
+    return;
+  }
+  // 如果没有 note ID，显示 grabify 区域
+  if (document.getElementById('grabify')) {
+    document.getElementById('grabify').style.display = 'block';
+  }
+  // Debug: 输出当前URL和jsnopri08.js已加载
+  if (!window._jsnopri08_debug) {
+    window._jsnopri08_debug = true;
+    const debugDiv = document.createElement('div');
+    debugDiv.style = 'position:fixed;bottom:0;left:0;z-index:9999;background:#fff3cd;color:#856404;padding:8px 16px;border:1px solid #ffeeba;font-size:14px;';
+    debugDiv.innerHTML = 'jsnopri08.js loaded. URL: ' + url;
+    document.body.appendChild(debugDiv);
+    setTimeout(()=>debugDiv.remove(), 6000);
+  }
 });
 
 var textareaValue='';
