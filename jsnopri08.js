@@ -566,7 +566,6 @@ function simulateTypingfromTXT(selectid,text, delay) {
  typeNextCharacter();
 }
 async function tocontent(){
-  // expiretime 取自 myArray[0]，需用映射表转换为描述
   const expireDesc = [
     "after reading it",
     "1 hour from now",
@@ -575,23 +574,41 @@ async function tocontent(){
     "24 days from now"
   ];
   let expireDisplay = expireDesc[0];
-  // 动态剩余时间提示
+  let countdownInterval = null;
+  const buttcontent = document.getElementById('containerbox');
+
+  // 动态倒计时逻辑
   if (typeof myArray !== 'undefined' && myArray[0] !== undefined) {
     const idx = parseInt(myArray[0], 10);
     if(idx === 0) {
       expireDisplay = expireDesc[0];
     } else if(myArray[4] && !isNaN(parseInt(myArray[4],10))) {
-      // myArray[4] 为剩余秒数
-      expireDisplay = 'in ' + convertTime2(parseInt(myArray[4],10));
+      let remain = parseInt(myArray[4],10);
+      function updateCountdown() {
+        if (remain <= 0) {
+          expireDisplay = currentLanguage === 'zh' ? '已销毁' : 'Destroyed';
+          clearInterval(countdownInterval);
+        } else {
+          expireDisplay = (currentLanguage === 'zh' ? '剩余 ' : 'in ') + convertTime2(remain);
+          remain--;
+        }
+        const expireDiv = document.getElementById('expireCountdown');
+        if (expireDiv) expireDiv.textContent = expireDisplay;
+      }
+      // 首次渲染
+      expireDisplay = (currentLanguage === 'zh' ? '剩余 ' : 'in ') + convertTime2(remain);
+      setTimeout(() => {
+        countdownInterval = setInterval(updateCountdown, 1000);
+      }, 1000);
     } else {
       expireDisplay = expireDesc[idx] || expireDesc[0];
     }
   }
-  const buttcontent = document.getElementById('containerbox');
+
   if(currentLanguage === 'zh'){
-    buttcontent.innerHTML = '<h3>便签内容</h3> <div class="alert alert-success">该便签将在以下时间销毁： '+expireDisplay+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(120,65%,75%,0.3);"></textarea>';
+    buttcontent.innerHTML = '<h3>便签内容</h3> <div class="alert alert-success"><span id="expireCountdown">'+expireDisplay+'</span></div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(120,65%,75%,0.3);"></textarea>';
   } else {
-    buttcontent.innerHTML = '<h3>Note Content</h3> <div class="alert alert-success">This note will be self-destructed: '+expireDisplay+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(19,65%,75%,0.3);"></textarea>';
+    buttcontent.innerHTML = '<h3>Note Content</h3> <div class="alert alert-success"><span id="expireCountdown">'+expireDisplay+'</span></div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(19,65%,75%,0.3);"></textarea>';
   }
   const textarea = document.getElementById('resultarea');
   textarea.value = textareaValue;
