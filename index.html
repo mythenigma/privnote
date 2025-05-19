@@ -277,16 +277,37 @@ You can track the results of when the note link was opened, on which device it w
 </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Make switchLanguage globally accessible
-window.switchLanguage = function(language) {
-// Will be implemented in jsnopri08.js
-if (typeof applyLanguage === 'function') {
-applyLanguage(language);
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="translate.js"></script>
+<script>
+// 默认语言
+var currentLanguage = 'en';
+
+function switchLanguage(lang) {
+  currentLanguage = lang;
+  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'English');
+  if (window.applyTabLanguage) {
+    window.applyTabLanguage(lang);
+  }
+  document.getElementById('trans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
+  // 额外：同步更新Generate Link页面的所有label、按钮、placeholder
+  document.getElementById('trans2').textContent = (lang === 'zh' ? '通过链接、零宽字符或二进制加密您的便签，确保安全分享与自动销毁' : 'Encrypts your notes with links, zero-width characters, or binary, ensuring secure sharing and auto-destruction');
+  document.getElementById('topbanner').textContent = (lang === 'zh' ? '新建便签' : 'New Notes');
+  document.getElementById('myTextarea').placeholder = (lang === 'zh' ? '在此输入便签内容...' : 'Write Your Note Here...');
+  document.getElementById('tranmake').innerHTML = '<i class="fas fa-lock me-2"></i>' + (lang === 'zh' ? '加密便签' : 'Encrypt Note');
+  document.getElementById('tranoption').innerHTML = '<i class="fas fa-cog me-2"></i>' + (lang === 'zh' ? '更多设置' : 'Optional Setting');
+  document.getElementById('decodemessage').innerHTML = '<i class="fas fa-unlock me-2"></i>' + (lang === 'zh' ? '解密便签' : 'Decrypt Notes');
+  document.getElementById('tranli').textContent = (lang === 'zh' ? '消息将根据您的设置自动销毁。' : 'The message will be automatically destroyed according to your settings.');
+  document.getElementById('trantou').textContent = (lang === 'zh' ? '链接URL自毁' : 'Link URL self-destructs');
+  document.getElementById('tranafter').textContent = (lang === 'zh' ? '您可以追踪便签链接被打开的时间、设备和IP。' : 'You can track the results of when the note link was opened, on which device it was opened, and by what IP was opened.');
+  document.getElementById('trana').innerHTML = '<i class="fas fa-chart-line me-2"></i>' + (lang === 'zh' ? '查看打开日志' : 'Check Open Log');
+  document.getElementById('tranb').innerHTML = '<i class="fas fa-question-circle me-2"></i>' + (lang === 'zh' ? '如何解密？' : 'How to decode?');
 }
-}
+window.addEventListener('DOMContentLoaded', function() {
+  switchLanguage(currentLanguage);
+});
 </script>
 <script src="../../../jsnopri08.js"></script>
-<script src="translate.js"></script>
+
 </body>
 </html>
