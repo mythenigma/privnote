@@ -72,13 +72,6 @@ function convertTime(seconds) {
 // Remove cookie-based note ID logic and rely solely on URL parsing
 
 document.addEventListener('DOMContentLoaded', function() {
- try {
-   applyLanguage(currentLanguage);
- } catch (e) {
-   console.error('Error applying language:', e);
-   applyLanguage('en');
- }
-
  // Extract note ID from URL and show note if present
  const url = window.location.href;
  const regex = /priv\/(\d+)\/note/;
@@ -434,10 +427,7 @@ async function sendData() {
    fadeOut(containerbox); fadeOut(buttontwo);
    
    const myDiv = document.getElementById("resultlink");
-   const encrydiv = document.getElementById("encryptinfo");
-
- //  myDiv.style.display="block";
-   fadeIn(encrydiv);
+   // 只保留展示链接卡片
    setTimeout(() => {
            fadeIn(myDiv);
      }, 2000);
@@ -774,7 +764,6 @@ function copyDecryptResult() {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  // ...existing code...
   const btnZeroDec = document.getElementById('btnZeroWidthDecrypt');
   const btnBinDec = document.getElementById('btnBinaryDecrypt');
   const btnCopyDec = document.getElementById('btnCopyDecryptResult');
