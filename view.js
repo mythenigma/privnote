@@ -76,24 +76,28 @@ async function showNote(noteId, password = '') {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
+  // 首先尝试从URL路径中获取笔记ID
+  const path = window.location.pathname;
+  const pathMatches = path.match(/\/priv\/([0-9]+)(?:\/|$)/);
+  
+  // 然后检查查询参数中是否有笔记ID
   const urlParams = new URLSearchParams(window.location.search);
-  const noteId = urlParams.get('note');
-  if (noteId) {
-    // 尝试查看笔记
-    showNote(noteId);
-  } else {
-    // 检查URL路径是否包含笔记ID (从/priv/数字格式中提取)
-    const path = window.location.pathname;
-    const matches = path.match(/\/priv\/([0-9]+)(?:\/|$)/);
-    
-    if (matches && matches[1]) {
-      // 从URL路径中提取到笔记ID
-      const pathNoteId = matches[1];
-      // 重定向到正确的格式
-      window.location.href = '/view.html?note=' + pathNoteId;
-    } else {
-      // 没有找到任何笔记ID
-      renderExpired();
-    }
+  const queryNoteId = urlParams.get('note');
+  
+  // 优先使用URL路径中的ID
+  if (pathMatches && pathMatches[1]) {
+    // 从URL路径中提取到笔记ID
+    const pathNoteId = pathMatches[1];
+    showNote(pathNoteId);
+  } 
+  // 其次使用查询参数中的ID
+  else if (queryNoteId) {
+    // 使用查询参数中的笔记ID
+    showNote(queryNoteId);
+  } 
+  // 没有找到任何ID
+  else {
+    // 没有找到任何笔记ID
+    renderExpired();
   }
 });

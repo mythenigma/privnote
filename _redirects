@@ -1,19 +1,20 @@
 # Cloudflare Pages _redirects file
 
-# 将所有/priv/开头的路径重定向到view.html，保留完整的笔记ID
-/priv/1* /view.html?note=1:splat 301
-/priv/2* /view.html?note=2:splat 301
-/priv/3* /view.html?note=3:splat 301
-/priv/4* /view.html?note=4:splat 301
-/priv/5* /view.html?note=5:splat 301
-/priv/6* /view.html?note=6:splat 301
-/priv/7* /view.html?note=7:splat 301
-/priv/8* /view.html?note=8:splat 301
-/priv/9* /view.html?note=9:splat 301
-/priv/0* /view.html?note=0:splat 301
+# 使用SPA模式保持原始URL
+# 所有/priv/开头的路径都保持原URL，只是显示view.html的内容
+/priv/1*          /view.html    200!
+/priv/2*          /view.html    200!
+/priv/3*          /view.html    200!
+/priv/4*          /view.html    200!
+/priv/5*          /view.html    200!
+/priv/6*          /view.html    200!
+/priv/7*          /view.html    200!
+/priv/8*          /view.html    200!
+/priv/9*          /view.html    200!
+/priv/0*          /view.html    200!
 
-# 确保任何其他/priv/路径也会重定向到view.html
-/priv/* /view.html 301
+# 其他/priv/路径也保持URL不变
+/priv/*           /view.html    200!
 
 # 所有其他页面保持正常
-/* /index.html 200
+/*                /index.html   200
