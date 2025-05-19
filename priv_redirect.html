@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PrivNote重定向</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            background: #4285f4;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        #noteId {
+            font-weight: bold;
+            color: #4285f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>笔记重定向</h1>
+        <p>我们正在处理您的笔记请求，笔记ID: <span id="noteId">--</span></p>
+        <p>系统将自动重定向到查看页面</p>
+        <a href="/" class="button" id="redirectButton">手动前往查看</a>
+    </div>
+
+    <script>
+        // 立即执行的笔记重定向函数
+        (function() {
+            // 提取URL路径并尝试匹配笔记ID
+            var path = window.location.pathname;
+            var matches = path.match(/\/priv\/([0-9]+)(?:\/|$)/);
+            
+            if (matches && matches[1]) {
+                var noteId = matches[1];
+                // 在页面上显示笔记ID
+                document.getElementById('noteId').textContent = noteId;
+                
+                // 更新手动重定向按钮
+                var button = document.getElementById('redirectButton');
+                button.href = '/view.html?note=' + noteId;
+                
+                // 执行自动重定向
+                setTimeout(function() {
+                    window.location.href = '/view.html?note=' + noteId;
+                }, 500); // 短暂延迟以允许用户看到页面
+            } else {
+                document.getElementById('noteId').textContent = "无效ID";
+                // 如果没有有效的笔记ID，则重定向到首页
+                setTimeout(function() {
+                    window.location.href = '/';
+                }, 1500);
+            }
+        })();
+    </script>
+</body>
+</html>

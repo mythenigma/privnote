@@ -1,22 +1,22 @@
-# Cloudflare Pages _redirects file for SPA routing
+# Cloudflare Pages _redirects file
 
-# 这个文件用于配置Cloudflare Pages的URL处理规则
-# 我们使用 "200" 状态码来指示服务器返回指定文件的内容，但保持浏览器地址栏中的原始URL不变
-# 这对于单页应用（SPA）非常重要，这样前端路由器才能正确工作
+# 把所有/priv/开头的路径全部重定向到view.html，而不是index.html
+# 这是一个简单直接的解决方案，确保用户至少能看到笔记查看页面
 
-# 针对特定格式的URL设置精确的重定向规则
-# 仅匹配/priv/数字格式，重定向到view.html
-/priv/:id/   /view.html?note=:id   302
-/priv/:id    /view.html?note=:id   302
+# 将所有/priv/开头的路径重定向到view.html，保留任何数字作为笔记ID
+/priv/1* /view.html?note=:splat 302
+/priv/2* /view.html?note=:splat 302
+/priv/3* /view.html?note=:splat 302
+/priv/4* /view.html?note=:splat 302
+/priv/5* /view.html?note=:splat 302
+/priv/6* /view.html?note=:splat 302
+/priv/7* /view.html?note=:splat 302
+/priv/8* /view.html?note=:splat 302
+/priv/9* /view.html?note=:splat 302
+/priv/0* /view.html?note=:splat 302
 
-# 保留/priv/数字/note格式的URL以向后兼容
-/priv/*/note    /index.html   200!
+# 确保任何其他/priv/路径也会重定向到view.html（这可能会导致无效的笔记ID，但至少用户会到达正确的页面）
+/priv/* /view.html 302
 
-# 其他所有/priv/开头的路径都保持原URL，返回index.html
-/priv/*         /index.html   200!
-
-# 所有其他路径 - 保持原始URL，加载index.html
-/*              /index.html   200!
-
-# 注意：200! 表示严格保持URL，而不是重定向
-# 这确保了浏览器地址栏中的URL保持不变
+# 所有其他页面保持正常
+/* /index.html 200

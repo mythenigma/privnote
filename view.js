@@ -79,8 +79,21 @@ window.addEventListener('DOMContentLoaded', function() {
   const urlParams = new URLSearchParams(window.location.search);
   const noteId = urlParams.get('note');
   if (noteId) {
+    // 尝试查看笔记
     showNote(noteId);
   } else {
-    renderExpired();
+    // 检查URL路径是否包含笔记ID (从/priv/数字格式中提取)
+    const path = window.location.pathname;
+    const matches = path.match(/\/priv\/([0-9]+)(?:\/|$)/);
+    
+    if (matches && matches[1]) {
+      // 从URL路径中提取到笔记ID
+      const pathNoteId = matches[1];
+      // 重定向到正确的格式
+      window.location.href = '/view.html?note=' + pathNoteId;
+    } else {
+      // 没有找到任何笔记ID
+      renderExpired();
+    }
   }
 });

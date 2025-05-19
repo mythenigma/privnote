@@ -37,19 +37,30 @@
 }
 </script>
 
-<!-- 备用重定向脚本 - 尽早执行以确保正确重定向 -->
+<!-- 强化版重定向脚本 - 将所有/priv/路径重定向到view.html -->
 <script>
 (function() {
-  // 检查URL是否是/priv/数字格式
-  var url = window.location.pathname;
-  var match = url.match(/^\/priv\/(\d+)$/);
-  if (match) {
-    // 找到匹配的数字ID
-    var noteId = match[1];
-    // 立即重定向到view.html
-    window.location.href = '/view.html?note=' + noteId;
+  // 获取当前URL路径
+  var path = window.location.pathname;
+  
+  // 检查是否是以/priv/开头的URL
+  if (path.indexOf('/priv/') === 0) {
+    // 尝试匹配数字ID
+    var matches = path.match(/\/priv\/([0-9]+)(?:\/|$)/);
+    
+    if (matches && matches[1]) {
+      // 找到数字ID，立即重定向到view.html
+      var noteId = matches[1];
+      console.log('检测到笔记ID: ' + noteId + '，重定向到view.html');
+      window.location.replace('/view.html?note=' + noteId);
+    } else {
+      // 没有找到有效ID但是/priv/路径，重定向到view.html
+      console.log('检测到/priv/路径但无有效ID，重定向到view.html');
+      window.location.replace('/view.html');
+    }
   }
 })();
+</script>
 </script>
 
 </head>
