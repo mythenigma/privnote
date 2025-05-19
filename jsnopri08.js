@@ -574,37 +574,18 @@ async function tocontent(){
     "24 days from now"
   ];
   let expireDisplay = expireDesc[0];
-  let countdownInterval = null;
-  const buttcontent = document.getElementById('containerbox');
-
-  // 动态倒计时逻辑
+  let remain = null;
   if (typeof myArray !== 'undefined' && myArray[0] !== undefined) {
     const idx = parseInt(myArray[0], 10);
-    if(idx === 0) {
-      expireDisplay = expireDesc[0];
-    } else if(myArray[4] && !isNaN(parseInt(myArray[4],10))) {
-      let remain = parseInt(myArray[4],10);
-      function updateCountdown() {
-        if (remain <= 0) {
-          expireDisplay = currentLanguage === 'zh' ? '已销毁' : 'Destroyed';
-          clearInterval(countdownInterval);
-        } else {
-          expireDisplay = (currentLanguage === 'zh' ? '剩余 ' : 'in ') + convertTime2(remain);
-          remain--;
-        }
-        const expireDiv = document.getElementById('expireCountdown');
-        if (expireDiv) expireDiv.textContent = expireDisplay;
-      }
-      // 首次渲染
+    // 优先用 myArray[4] 作为剩余秒数倒计时
+    if(myArray[4] && !isNaN(parseInt(myArray[4],10))) {
+      remain = parseInt(myArray[4],10);
       expireDisplay = (currentLanguage === 'zh' ? '剩余 ' : 'in ') + convertTime2(remain);
-      setTimeout(() => {
-        countdownInterval = setInterval(updateCountdown, 1000);
-      }, 1000);
     } else {
       expireDisplay = expireDesc[idx] || expireDesc[0];
     }
   }
-
+  const buttcontent = document.getElementById('containerbox');
   if(currentLanguage === 'zh'){
     buttcontent.innerHTML = '<h3>便签内容</h3> <div class="alert alert-success"><span id="expireCountdown">'+expireDisplay+'</span></div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(120,65%,75%,0.3);"></textarea>';
   } else {
@@ -612,6 +593,20 @@ async function tocontent(){
   }
   const textarea = document.getElementById('resultarea');
   textarea.value = textareaValue;
+  // 启动倒计时定时器
+  if(remain!==null && remain>0){
+    let countdown = remain;
+    const expireDiv = document.getElementById('expireCountdown');
+    const timer = setInterval(()=>{
+      countdown--;
+      if(countdown<=0){
+        expireDiv.textContent = currentLanguage === 'zh' ? '已销毁' : 'Destroyed';
+        clearInterval(timer);
+      }else{
+        expireDiv.textContent = (currentLanguage === 'zh' ? '剩余 ' : 'in ') + convertTime2(countdown);
+      }
+    },1000);
+  }
   setTimeout(jilu(), 2000);
 }
 async function jilu(){
