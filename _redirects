@@ -1,22 +1,19 @@
 # Cloudflare Pages _redirects file
 
-# 把所有/priv/开头的路径全部重定向到view.html，而不是index.html
-# 这是一个简单直接的解决方案，确保用户至少能看到笔记查看页面
+# 将所有/priv/开头的路径重定向到view.html，保留完整的笔记ID
+/priv/1* /view.html?note=1:splat 301
+/priv/2* /view.html?note=2:splat 301
+/priv/3* /view.html?note=3:splat 301
+/priv/4* /view.html?note=4:splat 301
+/priv/5* /view.html?note=5:splat 301
+/priv/6* /view.html?note=6:splat 301
+/priv/7* /view.html?note=7:splat 301
+/priv/8* /view.html?note=8:splat 301
+/priv/9* /view.html?note=9:splat 301
+/priv/0* /view.html?note=0:splat 301
 
-# 将所有/priv/开头的路径重定向到view.html，保留任何数字作为笔记ID
-/priv/1* /view.html?note=:splat 302
-/priv/2* /view.html?note=:splat 302
-/priv/3* /view.html?note=:splat 302
-/priv/4* /view.html?note=:splat 302
-/priv/5* /view.html?note=:splat 302
-/priv/6* /view.html?note=:splat 302
-/priv/7* /view.html?note=:splat 302
-/priv/8* /view.html?note=:splat 302
-/priv/9* /view.html?note=:splat 302
-/priv/0* /view.html?note=:splat 302
-
-# 确保任何其他/priv/路径也会重定向到view.html（这可能会导致无效的笔记ID，但至少用户会到达正确的页面）
-/priv/* /view.html 302
+# 确保任何其他/priv/路径也会重定向到view.html
+/priv/* /view.html 301
 
 # 所有其他页面保持正常
 /* /index.html 200
