@@ -6,13 +6,13 @@ function maitime(){
 
       return 0;
    }else{
-    let  filterstrings = ['鍙�','棣�','鏂�','sin','hong','sg','tw','hk','鑷�'];
+    let  filterstrings = ['台','香','新','sin','hong','sg','tw','hk','臺'];
     let  regex = new RegExp( filterstrings.join( "|" ), "i");  
      if(regex.test(d)){
        return 0;
      }
    }
-   //alert('MaiPDF妫€娴嬪埌鎮ㄥ湪涓浗,鏈〉闈㈢敓鎴愮殑閾炬帴鍦ㄤ腑鍥藉湴鍖烘墦寮€闈炲父鎱�,浜插彲浠ュ幓鎴戜滑鐨勪腑鏂囩珯鐐� maitube.com 涓婄敓鎴怭DF閾炬帴');
+   //alert('MaiPDF检测到您在中国,本页面生成的链接在中国地区打开非常慢,亲可以去我们的中文站点 maitube.com 上生成PDF链接');
    return 7;
 }
 
@@ -74,19 +74,19 @@ function convertTime(seconds) {
 document.addEventListener('DOMContentLoaded', function() {
   // Extract note ID from URL and show note if present
   const url = window.location.href;
-  // 鏀寔 /note/鏁板瓧 浼潤鎬佽矾鐢�
+  // 支持 /note/数字 伪静态路由
   const regexNote = /\/note\/(\d+)/;
   const matchNote = url.match(regexNote);
   if (matchNote !== null) {
     const numberoffile = matchNote[1];
     shouData(numberoffile);
-    // 闅愯棌棣栭〉鍐呭锛屼粎灞曠ず绗旇
+    // 隐藏首页内容，仅展示笔记
     if (document.getElementById('mainHome')) {
       document.getElementById('mainHome').style.display = 'none';
     }
     return;
   }
-  // 鍙鐞� /note/鏁板瓧/note 杩欑 legacy fallback锛岀Щ闄� /priv/鏁板瓧 鑷姩閲嶅畾鍚戦€昏緫
+  // 只处理 /note/数字/note 这种 legacy fallback，移除 /priv/数字 自动重定向逻辑
   const regexWithNote = /note\/(\d+)\/note/;
   const matchWithNote = url.match(regexWithNote);
   if (matchWithNote !== null) {
@@ -94,11 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
     shouData(numberoffile);
     return;
   }
-  // 濡傛灉娌℃湁 note ID锛屾樉绀� grabify 鍖哄煙
+  // 如果没有 note ID，显示 grabify 区域
   if (document.getElementById('grabify')) {
     document.getElementById('grabify').style.display = 'block';
   }
-  // Debug: 杈撳嚭褰撳墠URL鍜宩snopri08.js宸插姞杞�
+  // Debug: 输出当前URL和jsnopri08.js已加载
   if (!window._jsnopri08_debug) {
     window._jsnopri08_debug = true;
     const debugDiv = document.createElement('div');
@@ -128,10 +128,10 @@ function copylink(){
     const originalClass = button.className;
     navigator.clipboard.writeText(exampleText)
     .then(() => {
-        // 鎴愬姛锛氭寜閽彉缁裤€佸浘鏍囧彉瀵瑰嬀銆佹枃瀛楀彉鈥滃凡澶嶅埗鈥�
+        // 成功：按钮变绿、图标变对勾、文字变“已复制”
         button.classList.remove('btn-outline-secondary');
         button.classList.add('btn-success');
-        button.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '宸插鍒�' : 'Copied!');
+        button.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '已复制' : 'Copied!');
         button.disabled = true;
         setTimeout(() => {
             button.className = originalClass;
@@ -140,10 +140,10 @@ function copylink(){
         }, 1800);
     })
     .catch((err) => {
-        // 澶辫触锛氭寜閽彉绾€€佸浘鏍囧彉鍙夈€佹枃瀛楀彉鈥滃鍒跺け璐モ€�
+        // 失败：按钮变红、图标变叉、文字变“复制失败”
         button.classList.remove('btn-outline-secondary');
         button.classList.add('btn-danger');
-        button.innerHTML = '<i class="fas fa-times me-2"></i>' + (currentLanguage === 'zh' ? '澶嶅埗澶辫触' : 'Copy Failed');
+        button.innerHTML = '<i class="fas fa-times me-2"></i>' + (currentLanguage === 'zh' ? '复制失败' : 'Copy Failed');
         setTimeout(() => {
             button.className = originalClass;
             button.innerHTML = originalHTML;
@@ -153,29 +153,29 @@ function copylink(){
 }
 
 
-// 鍔犲瘑杩囩▼锛氫娇鐢╔OR瀵规枃鏈繘琛屽姞瀵嗭紝骞惰浆鎹负0鍜�1鐨勪簩杩涘埗
+// 加密过程：使用XOR对文本进行加密，并转换为0和1的二进制
 function textToBinaryEncryption(text, key) {
-   const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 杞崲瀵嗛挜涓哄瓧绗︾殑charCode鏁扮粍
+   const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 转换密钥为字符的charCode数组
 
-   // 绗竴姝ワ細瀵规瘡涓瓧绗﹁繘琛孹OR鍔犲瘑锛屽苟杞崲涓轰簩杩涘埗
+   // 第一步：对每个字符进行XOR加密，并转换为二进制
    const encryptedText = Array.from(text).map((char, index) => {
-       // 浣跨敤瀵嗛挜瀛楃鐨刢harCode涓庡綋鍓嶅瓧绗︾殑charCode杩涜寮傛垨杩愮畻
+       // 使用密钥字符的charCode与当前字符的charCode进行异或运算
        let charCode = char.charCodeAt(0) ^ keyCodes[index % keyCodes.length];
        
-       // 杞崲涓轰簩杩涘埗锛岃繑鍥炵殑鏄�0鍜�1鐨勫瓧绗︿覆锛堟瘡涓瓧绗︾殑16浣嶄簩杩涘埗琛ㄧず锛�
-       return charCode.toString(2).padStart(16, '0'); // 姣忎釜瀛楃鐨勪簩杩涘埗琛ㄧず涓�16浣�
+       // 转换为二进制，返回的是0和1的字符串（每个字符的16位二进制表示）
+       return charCode.toString(2).padStart(16, '0'); // 每个字符的二进制表示为16位
    }).join('');
 
    return encryptedText;
 }
 
-// 瑙ｅ瘑杩囩▼锛氫粠0鍜�1鐨勪簩杩涘埗鎭㈠鍘熷鏂囨湰
+// 解密过程：从0和1的二进制恢复原始文本
 function binaryToTextDecryption(binaryText, key) {
-   const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 杞崲瀵嗛挜涓哄瓧绗︾殑charCode鏁扮粍
+   const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 转换密钥为字符的charCode数组
 
-   // 鍒嗗壊浜岃繘鍒跺瓧绗︿覆涓烘瘡16浣嶄竴缁勶紙姣忎釜瀛楃鐨�16浣嶄簩杩涘埗琛ㄧず锛�
+   // 分割二进制字符串为每16位一组（每个字符的16位二进制表示）
    const text = binaryText.match(/.{16}/g).map((bin, index) => {
-       // 灏嗕簩杩涘埗瀛楃涓茶浆涓烘暣鏁帮紙瀛楃缂栫爜锛夛紝骞惰繘琛孹OR瑙ｅ瘑
+       // 将二进制字符串转为整数（字符编码），并进行XOR解密
        let charCode = parseInt(bin, 2) ^ keyCodes[index % keyCodes.length];
        return String.fromCharCode(charCode);
    }).join('');
@@ -183,69 +183,69 @@ function binaryToTextDecryption(binaryText, key) {
    return text;
 }
 
-// 浣跨敤缁熶竴鐨� 16 浣嶄簩杩涘埗杩涜 XOR 鍔犲瘑锛屽苟杞崲涓洪浂瀹藉瓧绗�
+// 使用统一的 16 位二进制进行 XOR 加密，并转换为零宽字符
 function textToZeroWidthWithDoubleEncryption(text, key) {
-   // 灏嗗瘑閽ュ瓧绗︿覆杞负瀛楃鐨� charCode 鏁扮粍
+   // 将密钥字符串转为字符的 charCode 数组
    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
 
-   // 绗竴姝ワ細XOR 鍔犲瘑
+   // 第一步：XOR 加密
    const xorEncryptedText = Array.from(text).map((char, index) => {
-       // 浣跨敤 keyCodes 涓殑瀛楃涓庡師濮嬪瓧绗︾殑 charCode 杩涜寮傛垨杩愮畻
+       // 使用 keyCodes 中的字符与原始字符的 charCode 进行异或运算
        let charCode = char.charCodeAt(0) ^ keyCodes[index % keyCodes.length];
        
-       // 灏嗗瓧绗︾紪鐮佸己鍒朵负 16 浣嶄簩杩涘埗瀛楃涓诧紝纭繚缁熶竴闀垮害
+       // 将字符编码强制为 16 位二进制字符串，确保统一长度
        return charCode.toString(2).padStart(16, '0');
    }).join('');
 
-   // 绗簩姝ワ細灏� XOR 鍔犲瘑鍚庣殑浜岃繘鍒惰浆鎹负闆跺瀛楃
+   // 第二步：将 XOR 加密后的二进制转换为零宽字符
    return xorEncryptedText.split('').map(bit => bit === '0' ? '\u200B' : '\u200C').join('');
 }
 
 
-// 瑙ｅ瘑娴佺▼锛氬厛瑙ｇ爜闆跺瀛楃锛屽啀浣跨敤 XOR 瑙ｅ瘑
+// 解密流程：先解码零宽字符，再使用 XOR 解密
 function zeroWidthToTextWithDoubleDecryption(zeroWidthText, key) {
-   // 灏嗗瘑閽ュ瓧绗︿覆杞负瀛楃鐨� charCode 鏁扮粍
+   // 将密钥字符串转为字符的 charCode 数组
    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
 
-   // 灏嗛浂瀹藉瓧绗﹁浆鎹负浜岃繘鍒跺瓧绗︿覆
+   // 将零宽字符转换为二进制字符串
    const binary = Array.from(zeroWidthText).map(char => {
        return char === '\u200B' ? '0' : '1';
    }).join('');
 
-   // 姣�16涓簩杩涘埗浣嶆仮澶嶄负涓€涓瓧绗�
+   // 每16个二进制位恢复为一个字符
    const text = binary.match(/.{16}/g).map((bin, index) => {
        let charCode = parseInt(bin, 2) ^ keyCodes[index % keyCodes.length];
        return String.fromCharCode(charCode);
    }).join('');
 
-   // 妫€鏌ュ苟鏇挎崲鏈€鍚庝竴涓瓧绗︽槸鍚︽槸闈炴硶瀛楃锛堝鍗婅瀛楃锛�
+   // 检查并替换最后一个字符是否是非法字符（如半角字符）
    if (text.charCodeAt(text.length - 1) < 32 || text.charCodeAt(text.length - 1) > 126) {
-       // 濡傛灉鏈€鍚庝竴涓瓧绗︽槸闈炴硶瀛楃锛堝鎹㈣绗︺€佸洖杞︾锛夛紝灏辨浛鎹负绌烘牸
+       // 如果最后一个字符是非法字符（如换行符、回车符），就替换为空格
        return text.slice(0, -1) + ' ';
    }
    return text;
 }
 
-// 鍏堜娇鐢� XOR 鍔犲瘑锛屽啀杩涜闆跺瀛楃缂栫爜
+// 先使用 XOR 加密，再进行零宽字符编码
 function textToZeroWidthWithDoubleEncryptionNostring(text, key) {
-   // 绗竴姝ワ細XOR 鍔犲瘑
+   // 第一步：XOR 加密
    const xorEncryptedText = Array.from(text).map(char => {
-       // 浣跨敤 charCodeAt 鑾峰彇 UTF-16 缂栫爜锛屽苟涓庡瘑閽ヨ繘琛屽紓鎴栨搷浣�
+       // 使用 charCodeAt 获取 UTF-16 编码，并与密钥进行异或操作
        let charCode = char.charCodeAt(0) ^ key;
-       return charCode.toString(2).padStart(16, '0');  // 淇敼涓� 16 浣嶄簩杩涘埗琛ㄧず锛屾敮鎸佹洿澶ц寖鍥寸殑瀛楃
+       return charCode.toString(2).padStart(16, '0');  // 修改为 16 位二进制表示，支持更大范围的字符
    }).join('');
 
-   // 绗簩姝ワ細灏� XOR 鍔犲瘑鍚庣殑浜岃繘鍒惰浆鎹负闆跺瀛楃
+   // 第二步：将 XOR 加密后的二进制转换为零宽字符
    return xorEncryptedText.split('').map(bit => bit === '0' ? '\u200B' : '\u200C').join('');
 }
 
-// 瑙ｅ瘑娴佺▼锛氬厛瑙ｇ爜闆跺瀛楃锛屽啀浣跨敤 XOR 瑙ｅ瘑
+// 解密流程：先解码零宽字符，再使用 XOR 解密
 function zeroWidthToTextWithDoubleDecryptionNostring(zeroWidthText, key) {
    const binary = Array.from(zeroWidthText).map(char => {
        return char === '\u200B' ? '0' : '1';
    }).join('');
 
-   // 姣�16涓簩杩涘埗浣嶆仮澶嶄负涓€涓瓧绗︼紙鏀寔澶氬瓧鑺傚瓧绗︼級
+   // 每16个二进制位恢复为一个字符（支持多字节字符）
    const text = binary.match(/.{16}/g).map(bin => {
        let charCode = parseInt(bin, 2) ^ key;
        return String.fromCharCode(charCode);
@@ -269,7 +269,7 @@ function decoding() {
   } else {
     decodedSecretMessage = zeroWidthToTextWithDoubleDecryption(textareaValue, pass1);
   }
-  // 鐩存帴寮圭獥鏄剧ず鎴栬緭鍑哄埌鎺у埗鍙�
+  // 直接弹窗显示或输出到控制台
   alert(decodedSecretMessage);
 }
 
@@ -309,7 +309,7 @@ function create() {
   if (refename === "") {
     refename = 'nothingin';
   }
-  // 鍙彂閫� textareaValue锛屼笉鍐嶆嫾鎺ラ殣钘忓唴瀹�
+  // 只发送 textareaValue，不再拼接隐藏内容
   sendData();
 }
 
@@ -325,17 +325,19 @@ async function shouData(filename) {
 
  try {
    const result = await response.text().then(text => text.trim());
+   console.log('[DEBUG] shouData result:', result); // 调试输出
    if(result == 'filenotexist'){
      if(currentLanguage === 'zh'){
-       buttcontent.innerHTML = "<h3>鎮ㄥソ,</h3><p>寰堟姳姝夐€氱煡鎮ㄨ鏂囦欢鎴戜滑鏃犳硶鎵惧埌;寤鸿鎮ㄥ湪閲嶆柊鏍稿涓€涓嬩究绛剧爜</p>";
+       buttcontent.innerHTML = "<h3>您好,</h3><p>很抱歉通知您该文件我们无法找到;建议您在重新核对一下便签码</p>";
      } else {
        buttcontent.innerHTML = "<h3>Dear client,</h3><p>we regret to inform you that the file number you are looking for does not exist. Please check the file number and try again.</p>";
      }
      return;
    }
 
-   if (result.includes("忙")) {
-     myArray = result.split("忙");
+   if (result.includes("æ")) {
+     console.log('[DEBUG] result includes æ, split:', result.split("æ"));
+     myArray = result.split("æ");
      lastElement = myArray[myArray.length - 1];
      globename = filename;
      
@@ -349,10 +351,10 @@ async function shouData(filename) {
        }
        
        if(currentLanguage === 'zh'){
-         buttcontent.innerHTML = "<h3>闃呰鍚庨攢姣�?</h3><p>鎮ㄥ嵆灏嗗紑濮嬮槄璇讳究绛� " + filename + "</p>" + 
+         buttcontent.innerHTML = "<h3>阅读后销毁?</h3><p>您即将开始阅读便签 " + filename + "</p>" + 
            '<div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">' + 
-           '<button type="button" class="btn btn-warning btn-lg px-4 me-sm-3" onclick="tocontent()">鐜板湪鏌ョ湅</button>' + 
-           '<button type="button" class="btn btn-outline-secondary btn-lg px-4">鏆傛椂涓嶆墦寮€</button></div>';
+           '<button type="button" class="btn btn-warning btn-lg px-4 me-sm-3" onclick="tocontent()">现在查看</button>' + 
+           '<button type="button" class="btn btn-outline-secondary btn-lg px-4">暂时不打开</button></div>';
        } else {
          buttcontent.innerHTML = "<h3>Read and destroy?</h3><p>You're about to read and destroy the note with id " + filename + "</p>" + 
            '<div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">' + 
@@ -364,10 +366,10 @@ async function shouData(filename) {
        pass1 = myArray[2];
        
        if(currentLanguage === 'zh'){
-         buttcontent.innerHTML = "<h3>杈撳叆瀵嗙爜杩涜闃呰</h3><p>鎮ㄥ嵆灏嗗紑濮嬮槄璇讳究绛� "+ filename + 
+         buttcontent.innerHTML = "<h3>输入密码进行阅读</h3><p>您即将开始阅读便签 "+ filename + 
            '   <div class="mb-3"><label for="pwd"></label>' + 
-           '<input type="password" class="form-control" id="mythenigma" placeholder="杈撳叆瀵嗙爜"></div> ' + 
-           '<button type="button" class="btn btn-primary btn-lg px-4 me-sm-3" onclick="yanzheng()">寮€濮嬮槄璇�</button></p>';
+           '<input type="password" class="form-control" id="mythenigma" placeholder="输入密码"></div> ' + 
+           '<button type="button" class="btn btn-primary btn-lg px-4 me-sm-3" onclick="yanzheng()">开始阅读</button></p>';
        } else {
          buttcontent.innerHTML = "<h3>Enter Password to read note</h3><p>You're about to read and destroy the note with id "+ filename + 
            '   <div class="mb-3"><label for="pwd"></label>' + 
@@ -376,16 +378,18 @@ async function shouData(filename) {
        }
      }
    } else {
+     console.log('[DEBUG] result does NOT include æ, value:', result);
      const shi = convertTime2(result);
      
      if(currentLanguage === 'zh'){
-       buttcontent.innerHTML = "<h3>鎮ㄥソ,</h3><p>鏈変汉宸茬粡闃呰杩囦簡 "+filename+" 璇ユ枃浠跺彲鑳藉凡缁忓け鏁堬紝骞跺湪 "+shi+" 涔嬪墠宸茬粡閿€姣�. 鎮ㄥ彲浠ヨ嚜宸卞皾璇曞垱寤轰竴涓嚜宸辩殑渚跨</p>";
+       buttcontent.innerHTML = "<h3>您好,</h3><p>有人已经阅读过了 "+filename+" 该文件可能已经失效，并在 "+shi+" 之前已经销毁. 您可以自己尝试创建一个自己的便签</p>";
      } else {
        buttcontent.innerHTML = "<h3>Dear client,</h3><p>someone has accessed the file with the FileName "+filename+" and it may be reaching its expiration date already. Please note that the file has been self-destructed at "+shi+" ago. If you are interested in this service, please create your own self-destructing notes.</p>";
      }
      return;
    }
  } catch (error) {
+   console.error('[DEBUG] shouData fetch error:', error);
    return;
  }
 }
@@ -398,13 +402,13 @@ function yanzheng(){
     passInput.focus();
     return;
   }
-  // textareaValue 鏄綋鍓� note 鐨� id
+  // textareaValue 是当前 note 的 id
   const noteId = textareaValue;
   const data = new URLSearchParams();
   data.append('e', noteId);
   data.append('myth', password);
 
-  // 璇锋眰杩滅 PHP 楠岃瘉瀵嗙爜
+  // 请求远端 PHP 验证密码
   fetch('https://maipdf.com/baidu.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -413,20 +417,20 @@ function yanzheng(){
   })
   .then(res => res.text())
   .then(res => {
-    if (res.startsWith('18忙1忙') || res.startsWith('19忙1忙')) {
+    if (res.startsWith('18æ1æ') || res.startsWith('19æ1æ')) {
       passInput.value = '';
-      passInput.placeholder = currentLanguage === 'zh' ? '瀵嗙爜閿欒锛岃閲嶈瘯' : 'Wrong password, try again';
+      passInput.placeholder = currentLanguage === 'zh' ? '密码错误，请重试' : 'Wrong password, try again';
       passInput.focus();
       return;
     }
-    // 瀵嗙爜姝ｇ‘锛岀洿鎺ュ睍绀哄唴瀹�
-    // 杩欓噷 textareaValue 鍙兘闇€瑕佹洿鏂颁负 noteId
+    // 密码正确，直接展示内容
+    // 这里 textareaValue 可能需要更新为 noteId
     textareaValue = noteId;
     tocontent();
   })
   .catch(() => {
     passInput.value = '';
-    passInput.placeholder = currentLanguage === 'zh' ? '缃戠粶閿欒' : 'Network error';
+    passInput.placeholder = currentLanguage === 'zh' ? '网络错误' : 'Network error';
     passInput.focus();
   });
 }
@@ -451,7 +455,7 @@ async function sendData() {
    fadeOut(containerbox); fadeOut(buttontwo);
    
    const myDiv = document.getElementById("resultlink");
-   // 鍙繚鐣欏睍绀洪摼鎺ュ崱鐗�
+   // 只保留展示链接卡片
    setTimeout(() => {
            fadeIn(myDiv);
      }, 2000);
@@ -498,28 +502,28 @@ function simulateTyping(selectid, text, delay) {
        if (index < text.length) {
            const character = text.charAt(index);
            if (character === '\n') {
-               // 濡傛灉鏄崲琛岀锛岀洿鎺ユ彃鍏ユ崲琛岀
+               // 如果是换行符，直接插入换行符
                textarea.value += '\n';
-               index++;  // 璺宠繃鎹㈣绗�
+               index++;  // 跳过换行符
            } else if (character === ' ') {
-               // 濡傛灉鏄┖鏍硷紝鐩存帴鎻掑叆涓€涓┖鏍�
+               // 如果是空格，直接插入一个空格
                textarea.value += ' ';
                index++;
            } else {
-               // 鍚﹀垯鎻掑叆瀛楃
+               // 否则插入字符
                textarea.value += character;
                index++;
            }
 
            // Move cursor to the end of the textarea
-           textarea.scrollTop = textarea.scrollHeight;  // 璁╂粴鍔ㄦ潯婊氬姩鍒板簳閮�
+           textarea.scrollTop = textarea.scrollHeight;  // 让滚动条滚动到底部
 
-           // 璋冪敤涓嬩竴涓瓧绗︾殑杈撳叆
+           // 调用下一个字符的输入
            setTimeout(typeNextCharacter, delay);
        }
    }
 
-   // 寮€濮嬫ā鎷熻緭鍏�
+   // 开始模拟输入
    typeNextCharacter();
 }
 
@@ -581,7 +585,7 @@ async function tocontent(){
    }
    
    if(currentLanguage === 'zh'){
-     expiretime = '鏈闃呰涔嬪悗';
+     expiretime = '本次阅读之后';
    } else {
      expiretime = 'this reading session';
    }
@@ -590,7 +594,7 @@ async function tocontent(){
  const buttcontent = document.getElementById('containerbox');
  
  if(currentLanguage === 'zh'){
-   buttcontent.innerHTML = '<h3>渚跨鍐呭</h3> <div class="alert alert-success">璇ヤ究绛惧皢鍦ㄤ互涓嬫椂闂撮攢姣侊細 '+expiretime+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(120,65%,75%,0.3);"></textarea>';
+   buttcontent.innerHTML = '<h3>便签内容</h3> <div class="alert alert-success">该便签将在以下时间销毁： '+expiretime+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(120,65%,75%,0.3);"></textarea>';
  } else {
    buttcontent.innerHTML = '<h3>Note Content</h3> <div class="alert alert-success">This note will be self-destructed after '+expiretime+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(19,65%,75%,0.3);"></textarea>';
  }
@@ -639,7 +643,7 @@ function fadeOut(element) {
      opacity = 0;
      element.style.opacity = opacity;
      clearInterval(fadeOutInterval);
-     element.style.display = 'none'; // 瀹屽叏闅愯棌鍏冪礌锛屼笉鍗犵敤绌洪棿
+     element.style.display = 'none'; // 完全隐藏元素，不占用空间
    } else {
      element.style.opacity = opacity;
    }
@@ -648,13 +652,13 @@ function fadeOut(element) {
  const fadeOutInterval = setInterval(decreaseOpacity, 50);
 }
 
-function fadeIn(element, duration = 1000) { // 榛樿鎸佺画鏃堕棿涓�1000姣
-           let opacity = 0; // 鍒濆閫忔槑搴�
+function fadeIn(element, duration = 1000) { // 默认持续时间为1000毫秒
+           let opacity = 0; // 初始透明度
            element.style.opacity = opacity;
-           element.style.display = 'block'; // 纭繚鍏冪礌鍙
+           element.style.display = 'block'; // 确保元素可见
 
-           const interval = 50; // 姣忔澧炲姞閫忔槑搴︾殑鏃堕棿闂撮殧锛堟绉掞級
-           const increment = interval / duration; // 姣忔澧炲姞鐨勯€忔槑搴�
+           const interval = 50; // 每次增加透明度的时间间隔（毫秒）
+           const increment = interval / duration; // 每次增加的透明度
 
            const fadeInInterval = setInterval(() => {
                opacity += increment;
@@ -674,7 +678,7 @@ function maitime(){
    if(d.indexOf("0800")<1){  
       return 0;
    }else{
-    let  filterstrings = ['鍙�','棣�','鏂�','sin','hong','sg','tw','hk','鑷�'];
+    let  filterstrings = ['台','香','新','sin','hong','sg','tw','hk','臺'];
     let  regex = new RegExp( filterstrings.join( "|" ), "i");  
      if(regex.test(d)){
        return 0;
@@ -683,13 +687,13 @@ function maitime(){
    return 7;
 }
 
-// 瀛楃鍔犲瘑Tab鍔熻兘
+// 字符加密Tab功能
 function encryptZeroWidth() {
   const cover = document.getElementById('coverText').value || '';
   const hidden = document.getElementById('hiddenText').value || '';
   const key = document.getElementById('encryptKey').value || 'mythenigma';
   if (!hidden) {
-    document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '璇疯緭鍏ラ殣钘忓唴瀹�' : 'Please enter hidden content';
+    document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '请输入隐藏内容' : 'Please enter hidden content';
     return;
   }
   const encoded = textToZeroWidthWithDoubleEncryption(hidden, key);
@@ -701,7 +705,7 @@ function encryptBinary() {
   const hidden = document.getElementById('hiddenText').value || '';
   const key = document.getElementById('encryptKey').value || 'mythenigma';
   if (!hidden) {
-    document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '璇疯緭鍏ラ殣钘忓唴瀹�' : 'Please enter hidden content';
+    document.getElementById('encryptResult').value = currentLanguage === 'zh' ? '请输入隐藏内容' : 'Please enter hidden content';
     return;
   }
   const encoded = textToBinaryEncryption(hidden, key);
@@ -714,7 +718,7 @@ function copyEncryptResult() {
   navigator.clipboard.writeText(result).then(() => {
     const btn = document.getElementById('btnCopyEncryptResult');
     const old = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '宸插鍒�' : 'Copied!');
+    btn.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '已复制' : 'Copied!');
     btn.classList.remove('btn-outline-success');
     btn.classList.add('btn-success');
     btn.disabled = true;
@@ -727,7 +731,7 @@ function copyEncryptResult() {
   });
 }
 
-// 浜嬩欢缁戝畾
+// 事件绑定
 window.addEventListener('DOMContentLoaded', function() {
   const btnZero = document.getElementById('btnZeroWidthEncrypt');
   const btnBin = document.getElementById('btnBinaryEncrypt');
@@ -737,19 +741,19 @@ window.addEventListener('DOMContentLoaded', function() {
   if (btnCopy) btnCopy.onclick = copyEncryptResult;
 });
 
-// 瑙ｅ瘑Tab鍔熻兘
+// 解密Tab功能
 function decryptZeroWidth() {
   const input = document.getElementById('decryptInput').value || '';
   const key = document.getElementById('decryptKey').value || 'mythenigma';
   if (!input) {
-    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '璇疯緭鍏ュ姞瀵嗗唴瀹�' : 'Please enter encrypted content';
+    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '请输入加密内容' : 'Please enter encrypted content';
     return;
   }
   try {
     const decoded = zeroWidthToTextWithDoubleDecryption(input, key);
     document.getElementById('decryptResult').value = decoded;
   } catch (e) {
-    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '瑙ｅ瘑澶辫触锛岃妫€鏌ュ唴瀹瑰拰瀵嗙爜' : 'Decrypt failed, check content and password';
+    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '解密失败，请检查内容和密码' : 'Decrypt failed, check content and password';
   }
 }
 
@@ -757,14 +761,14 @@ function decryptBinary() {
   const input = document.getElementById('decryptInput').value || '';
   const key = document.getElementById('decryptKey').value || 'mythenigma';
   if (!input) {
-    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '璇疯緭鍏ュ姞瀵嗗唴瀹�' : 'Please enter encrypted content';
+    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '请输入加密内容' : 'Please enter encrypted content';
     return;
   }
   try {
     const decoded = binaryToTextDecryption(input, key);
     document.getElementById('decryptResult').value = decoded;
   } catch (e) {
-    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '瑙ｅ瘑澶辫触锛岃妫€鏌ュ唴瀹瑰拰瀵嗙爜' : 'Decrypt failed, check content and password';
+    document.getElementById('decryptResult').value = currentLanguage === 'zh' ? '解密失败，请检查内容和密码' : 'Decrypt failed, check content and password';
   }
 }
 
@@ -774,7 +778,7 @@ function copyDecryptResult() {
   navigator.clipboard.writeText(result).then(() => {
     const btn = document.getElementById('btnCopyDecryptResult');
     const old = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '宸插鍒�' : 'Copied!');
+    btn.innerHTML = '<i class="fas fa-check me-2"></i>' + (currentLanguage === 'zh' ? '已复制' : 'Copied!');
     btn.classList.remove('btn-outline-success');
     btn.classList.add('btn-success');
     btn.disabled = true;
