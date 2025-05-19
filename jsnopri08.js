@@ -566,29 +566,25 @@ function simulateTypingfromTXT(selectid,text, delay) {
  typeNextCharacter();
 }
 async function tocontent(){
-  let expireDisplay = expireDesc[expiretime] || expireDesc[0];
-  if(expiretime>0){
-    // 不是阅后即焚
-    // 不再用 convertTime2(expiretime)
-  } else {
-    // Send request to delete note
-    const data = new FormData();
-    data.append('e', textareaValue);
-    data.append('mudi', 'y');
-    const response = await fetch("https://maipdf.com/baidu.php", {
-      method: "POST",
-      body: data
-    });
-    try {
-      const result = await response.text().then(text => text.trim());
-      textareaValue = result;
-    } catch (error) {
-      return;
-    }
-    if(currentLanguage === 'zh'){
-      expireDisplay = '本次阅读之后';
+  // expiretime 取自 myArray[0]，需用映射表转换为描述
+  const expireDesc = [
+    "after reading it",
+    "1 hour from now",
+    "24 hour from now",
+    "7 days from now",
+    "24 days from now"
+  ];
+  let expireDisplay = expireDesc[0];
+  // 动态剩余时间提示
+  if (typeof myArray !== 'undefined' && myArray[0] !== undefined) {
+    const idx = parseInt(myArray[0], 10);
+    if(idx === 0) {
+      expireDisplay = expireDesc[0];
+    } else if(myArray[4] && !isNaN(parseInt(myArray[4],10))) {
+      // myArray[4] 为剩余秒数
+      expireDisplay = 'in ' + convertTime2(parseInt(myArray[4],10));
     } else {
-      expireDisplay = 'this reading session';
+      expireDisplay = expireDesc[idx] || expireDesc[0];
     }
   }
   const buttcontent = document.getElementById('containerbox');
