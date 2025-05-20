@@ -419,9 +419,17 @@ function yanzheng(){
       passInput.focus();
       return;
     }
-    // 密码正确，直接展示内容
-    // 这里 textareaValue 可能需要更新为 noteId
-    textareaValue = noteId;
+    // 密码正确，解析返回内容，更新expiretime和textareaValue
+    if (res.includes('æ')) {
+      myArray = res.split('æ');
+      lastElement = myArray[myArray.length - 1];
+      globename = noteId;
+      // expiretime 取自返回的第7个字段（index 6），textareaValue取最后一段
+      expiretime = myArray[6];
+      textareaValue = lastElement;
+    } else {
+      textareaValue = res;
+    }
     tocontent();
   })
   .catch(() => {
