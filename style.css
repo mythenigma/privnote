@@ -237,26 +237,47 @@ box-shadow: var(--box-shadow);
 #demo h6, #demo h5 {
 color: white;
 margin-bottom: 1rem;
+text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+font-weight: 600;
 }
 
 #demo .form-select, #demo .form-control {
 border-radius: 5px;
-border: 1px solid rgba(255, 255, 255, 0.1);
-background-color: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.3);
+background-color: rgba(255, 255, 255, 0.15);
+color: white;
+font-weight: 500;
+}
+
+#demo .form-select option {
+background-color: var(--primary-color);
 color: white;
 }
 
 #demo .form-select:focus, #demo .form-control:focus {
-background-color: rgba(255, 255, 255, 0.1);
-border-color: rgba(255, 255, 255, 0.3);
+background-color: rgba(255, 255, 255, 0.25);
+border-color: rgba(255, 255, 255, 0.5);
+box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.15);
 }
 
 #demo small {
-color: rgba(255, 255, 255, 0.7);
+color: rgba(255, 255, 255, 0.85);
+font-weight: 500;
 }
 
 #demo .form-check-label {
-color: rgba(255, 255, 255, 0.8);
+color: rgba(255, 255, 255, 0.9);
+font-weight: 500;
+}
+
+#expireShow {
+margin-top: 6px;
+color: rgba(255, 255, 255, 0.9) !important;
+font-size: 1em;
+font-weight: 500;
+background-color: rgba(255, 255, 255, 0.1);
+padding: 5px 10px;
+border-radius: 4px;
 }
 
 /* After section */

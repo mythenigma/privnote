@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Privnote - Decrypt Tool</title>
+<meta name="keywords" content="decrypt zero-width characters, decrypt binary encryption, secure messaging, decryption tool, ephemeral messages,隐信云">
+<meta name="description" content="Privnote.chat allows you to decrypt messages encrypted with zero-width characters and binary formats, ensuring secure and private messaging.">
+<meta property="og:image" content="privnote.png">
+<meta property="og:url" content="https://privnote.chat/decrypt.html">
+<link rel="canonical" href="https://privnote.chat/decrypt.html">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap & Font Awesome -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Organization",
+"name": "Privnote",
+"url": "https://privnote.chat",
+"logo": "https://privnote.chat/read/pic/noti.png",
+"contactPoint": {
+"@type": "ContactPoint",
+"email": "joe@pdfhost.online",
+"contactType": "Customer Service",
+"areaServed": "US",
+"availableLanguage": "English"
+}
+}
+</script>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<header class="site-header">
+<div class="container-fluid d-flex justify-content-between align-items-center">
+<a class="text-decoration-none" href="https://privnote.chat">
+<h1 class="logo-text">Priv<i class="fas fa-unlock-alt"></i>ote.chat</h1>
+</a>
+<div class="d-flex align-items-center">
+<div class="dropdown me-3">
+<button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-globe me-1"></i><span id="currentLanguage">English</span>
+</button>
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
+</ul>
+</div>
+<div id="trans1" class="tagline">Secure your words, vanish your trace</div>
+</div>
+</div>
+</header>
+
+<!-- Navigation Links -->
+<div class="container">
+  <ul class="nav nav-tabs justify-content-center mb-4" id="mainNav">
+    <li class="nav-item">
+      <a class="nav-link" href="index.html">
+        <span id="navLinkText">Generate Link</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="encryption.html">
+        <span id="navEncryptText">Character Encryption</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="decrypt.html">
+        <span id="navDecryptText">Decrypt</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<main class="flex-grow-1">
+<div class="container main-container">
+    <h5 class="mb-3 text-center" id="decryptTabTitle">Decrypt Tool</h5>
+    <div class="mb-3">
+      <label for="decryptInput" class="form-label" id="decryptInputLabel">Encrypted Content (Zero-Width or Binary)</label>
+      <textarea class="form-control" id="decryptInput" rows="3" placeholder="Paste content to decrypt"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="decryptKey" class="form-label" id="decryptKeyLabel">Password (optional)</label>
+      <input type="password" class="form-control" id="decryptKey" placeholder="Enter password (if any)">
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+      <button class="btn btn-warning me-2" id="btnZeroWidthDecrypt" onclick="decryptZeroWidth()">Zero-Width Decrypt</button>
+      <button class="btn btn-outline-warning me-2" id="btnBinaryDecrypt" onclick="decryptBinary()">Binary Decrypt</button>
+    </div>
+    <div class="mb-3">
+      <label for="decryptResult" class="form-label" id="decryptResultLabel">Decryption Result</label>
+      <textarea class="form-control" id="decryptResult" rows="3" placeholder="Decryption result will appear here" readonly></textarea>
+      <button class="btn btn-outline-success mt-2" id="btnCopyDecryptResult" onclick="copyDecryptResult()"><i class="fas fa-copy me-2"></i>Copy Result</button>
+    </div>
+    <div class="alert alert-info mt-3" id="decryptInfo" style="font-size:0.95em">
+      <strong>Info:</strong> <span id="decryptInfoText">Supports decryption of both zero-width and binary encrypted content. Leave password blank if not set.</span>
+    </div>
+</div>
+</main>
+
+<footer class="mt-auto">
+<div class="container">
+<p class="text-center mb-0">
+<a href="read/selfdestructANDencoding.php" class="nav-link">
+&copy;2025 MaiPDF.com<br><span class="__cf_email__" data-cfemail="b7ddd8d2f7c7d3d1dfd8c4c399d8d9dbded9d2">[email&#160;protected]</span>
+</a>
+</p>
+</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="translate.js"></script>
+<script>
+// 默认语言
+var currentLanguage = 'en';
+
+function switchLanguage(lang) {
+  currentLanguage = lang;
+  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'English');
+  document.getElementById('trans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
+  
+  // Navigation links
+  document.getElementById('navLinkText').textContent = (lang === 'zh' ? '生成链接' : 'Generate Link');
+  document.getElementById('navEncryptText').textContent = (lang === 'zh' ? '字符加密' : 'Character Encryption');
+  document.getElementById('navDecryptText').textContent = (lang === 'zh' ? '解密工具' : 'Decrypt');
+  
+  // Decrypt tool
+  document.getElementById('decryptTabTitle').textContent = (lang === 'zh' ? '解密工具' : 'Decrypt Tool');
+  document.getElementById('decryptInputLabel').textContent = (lang === 'zh' ? '加密内容（零宽字符或二进制）' : 'Encrypted Content (Zero-Width or Binary)');
+  document.getElementById('decryptKeyLabel').textContent = (lang === 'zh' ? '密码（可选）' : 'Password (optional)');
+  document.getElementById('btnZeroWidthDecrypt').textContent = (lang === 'zh' ? '零宽字符解密' : 'Zero-Width Decrypt');
+  document.getElementById('btnBinaryDecrypt').textContent = (lang === 'zh' ? '二进制解密' : 'Binary Decrypt');
+  document.getElementById('decryptResultLabel').textContent = (lang === 'zh' ? '解密结果' : 'Decryption Result');
+  document.getElementById('btnCopyDecryptResult').innerHTML = '<i class="fas fa-copy me-2"></i>' + (lang === 'zh' ? '复制结果' : 'Copy Result');
+  document.getElementById('decryptInfoText').textContent = (lang === 'zh' ? '支持解密零宽字符和二进制加密内容。如果未设置密码，请留空。' : 
+    'Supports decryption of both zero-width and binary encrypted content. Leave password blank if not set.');
+    
+  // 更新placeholder
+  document.getElementById('decryptInput').placeholder = (lang === 'zh' ? '粘贴要解密的内容' : 'Paste content to decrypt');
+  document.getElementById('decryptKey').placeholder = (lang === 'zh' ? '输入密码（如果有）' : 'Enter password (if any)');
+  document.getElementById('decryptResult').placeholder = (lang === 'zh' ? '解密结果将在此显示' : 'Decryption result will appear here');
+}
+
+// 从 original.html 移植过来的解密函数
+
+// 解密过程：从0和1的二进制恢复原始文本
+function binaryToTextDecryption(binaryText, key) {
+    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 转换密钥为字符的charCode数组
+
+    // 分割二进制字符串为每16位一组（每个字符的16位二进制表示）
+    const text = binaryText.match(/.{16}/g).map((bin, index) => {
+        // 将二进制字符串转为整数（字符编码），并进行XOR解密
+        let charCode = parseInt(bin, 2) ^ keyCodes[index % keyCodes.length];
+        return String.fromCharCode(charCode);
+    }).join('');
+
+    return text;
+}
+
+// 解密流程：先解码零宽字符，再使用 XOR 解密
+function zeroWidthToTextWithDoubleDecryption(zeroWidthText, key) {
+    // 将密钥字符串转为字符的 charCode 数组
+    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
+
+    // 将零宽字符转换为二进制字符串
+    const binary = Array.from(zeroWidthText).map(char => {
+        return char === '\u200B' ? '0' : '1';
+    }).join('');
+
+    // 每16个二进制位恢复为一个字符
+    const text = binary.match(/.{16}/g).map((bin, index) => {
+        let charCode = parseInt(bin, 2) ^ keyCodes[index % keyCodes.length];
+        return String.fromCharCode(charCode);
+    }).join('');
+
+    // 检查并替换最后一个字符是否是非法字符（如半角字符）
+    if (text.charCodeAt(text.length - 1) < 32 || text.charCodeAt(text.length - 1) > 126) {
+        // 如果最后一个字符是非法字符（如换行符、回车符），就替换为空格
+        return text.slice(0, -1) + ' ';
+    }
+    return text;
+}
+
+// 添加零宽字符解密功能
+function decryptZeroWidth() {
+    const encryptedContent = document.getElementById('decryptInput').value;
+    let password = document.getElementById('decryptKey').value;
+    
+    if (encryptedContent === "") {
+        alert(currentLanguage === 'zh' ? '请输入要解密的内容！' : 'Please enter content to decrypt!');
+        return;
+    }
+    
+    if (password === "") {
+        password = 'mythenigma'; // 默认密码
+    }
+    
+    try {
+        // 尝试找到并提取零宽字符
+        const zeroWidthChars = encryptedContent.match(/[\u200B\u200C]+/);
+        if (!zeroWidthChars) {
+            alert(currentLanguage === 'zh' ? '未找到零宽字符加密内容！' : 'No zero-width characters found in the content!');
+            return;
+        }
+        
+        const decryptedText = zeroWidthToTextWithDoubleDecryption(zeroWidthChars[0], password);
+        document.getElementById('decryptResult').value = decryptedText;
+    } catch (error) {
+        console.error('解密出错: ', error);
+        alert(currentLanguage === 'zh' ? '解密失败，请检查内容和密码是否正确。' : 'Decryption failed, please check if the content and password are correct.');
+    }
+}
+
+// 添加二进制解密功能
+function decryptBinary() {
+    const encryptedContent = document.getElementById('decryptInput').value;
+    let password = document.getElementById('decryptKey').value;
+    
+    if (encryptedContent === "") {
+        alert(currentLanguage === 'zh' ? '请输入要解密的内容！' : 'Please enter content to decrypt!');
+        return;
+    }
+    
+    // 检查是否是二进制内容（只包含0和1）
+    const isBinary = /^[01]+$/.test(encryptedContent);
+    if (!isBinary) {
+        alert(currentLanguage === 'zh' ? '输入内容不是有效的二进制格式（0和1）！' : 'Input is not valid binary format (0s and 1s)!');
+        return;
+    }
+    
+    if (password === "") {
+        password = 'mythenigma'; // 默认密码
+    }
+    
+    try {
+        const decryptedText = binaryToTextDecryption(encryptedContent, password);
+        document.getElementById('decryptResult').value = decryptedText;
+    } catch (error) {
+        console.error('解密出错: ', error);
+        alert(currentLanguage === 'zh' ? '解密失败，请检查内容和密码是否正确。' : 'Decryption failed, please check if the content and password are correct.');
+    }
+}
+
+// 复制解密结果
+function copyDecryptResult() {
+    const decryptResult = document.getElementById('decryptResult');
+    const resultText = decryptResult.value;
+    
+    if (!resultText) {
+        alert(currentLanguage === 'zh' ? '没有可复制的内容！' : 'No content to copy!');
+        return;
+    }
+    
+    navigator.clipboard.writeText(resultText)
+        .then(() => {
+            const copyBtn = document.getElementById('btnCopyDecryptResult');
+            const originalText = copyBtn.innerHTML;
+            
+            copyBtn.classList.add('btn-success');
+            copyBtn.classList.remove('btn-outline-success');
+            copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>' + 
+                (currentLanguage === 'zh' ? '已复制！' : 'Copied!');
+            
+            setTimeout(() => {
+                copyBtn.classList.remove('btn-success');
+                copyBtn.classList.add('btn-outline-success');
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('无法复制文本: ', err);
+            alert(currentLanguage === 'zh' ? '复制失败，请手动复制。' : 'Copy failed, please copy manually.');
+        });
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  switchLanguage(currentLanguage);
+});
+</script>
+<script src="no.js"></script>
+
+</body>
+</html>
