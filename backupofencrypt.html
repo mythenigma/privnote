@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Privnote - Encrypts your notes with links, zero-width characters, or binary</title>
+	<meta name="keywords" content="self-destructive notes, send notes with self-destruct, zero-width character encryption, binary encryption, secure messaging, encrypted notes, ephemeral messages,隐信云">
+    <meta name="description" content="Privnote.chat allows you to send self-destructive notes. Once read, the notes are automatically deleted. It also supports encryption using zero-width characters and binary, ensuring secure and private messaging.">
+    <meta property="og:image" content="privnote.png">
+    <meta property="og:url" content="https://privnote.chat">
+    <link rel="canonical" href="https://privnote.chat">
+    <meta property="og:type" content="website">
+    <link rel="shortcut icon" href="lock.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" type="text/css">   
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Privnote",
+    "url": "https://privnote.chat",
+    "logo": "https://privnote.chat/read/pic/noti.png",
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "joe@pdfhost.online",
+        "contactType": "Customer Service",
+        "areaServed": "US",
+        "availableLanguage": "English"
+    }
+}
+</script>
+
+</head>
+
+<body>
+     <nav class="navbar bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="https://privnote.chat" style="color: white">
+            <h1>Priv<i class="fas fa-1x fa-unlock-alt text-warning"></i>ote.chat</h1>
+          </a>
+          <small id="trans1">Secure your words,vanish your trace</small>
+        </div>
+      </nav>
+
+     <div class="container my-2" id="containerbox"> 
+        <h6 class="mb-2" id="trans2">Encrypts your notes with links, zero-width characters, or binary, ensuring secure sharing and auto-destruction</h6>
+
+		    <div id="demo2" class="collapse container-fluid bg-dark text-white" >
+		      Privnote is a versatile encryption tool for secure notes. You can:<br>
+
+				1. Encrypted Link Sharing: <small>Generate a secure link for your note, which auto-destructs after a set time.</small><br>
+				2. Zero-Width Character Encryption: <small>Hide your note in plain text using zero-width characters, making it invisible to the naked eye.</small><br>
+				3. Binary Encryption: <small>Convert your note into binary (0s and 1s) for extra security.</small>
+		    </div>	
+		<div class="form-group" style="font-size:1.5em;" id="formpart">
+            <label for="comment" data-bs-toggle="collapse" data-bs-target="#demo2"><i class='fas fa-user-lock'></i> <div id="topbanner">New Notes </div></label>
+            <textarea class="form-control" rows="8" id="myTextarea" placeholder="Write Your Note Here..." style="background-color:hsla(19,65%,75%,0.3);"></textarea>
+  <div class="alert alert-success"  id= "encryptinfo" style="display: none"><small>
+    The note has been successfully encrypted with two methods: the upper box contains zero-width character encryption, storing the information within the text, while the lower box shows the encryption as binary (0s and 1s). Both can be copied and used for decryption.</small>
+  </div>
+
+
+			<textarea class="form-control" rows="7" id="HiddenTextarea" placeholder="Write Hidden Messages Here..." style="background-color:hsla(17,69%,77%,0.3);"></textarea>
+        </div>
+	 <div class="card bg-light text-dark" id="resultlink" style="display: none">
+	   <div class="card-body">
+			<h6>PrivNote has been made</h6>
+	   <style>
+			h6{
+			  text-shadow: 5px 5px 5px #FF0000;
+			}
+		</style>
+		   <ul class="list-group">
+			  <li class="list-group-item list-group-item-success" id="innerlink"></li>
+			  <li id="tranli" class="list-group-item list-group-item-warning">The message will be automatically destroyed accoding to your settings.</li>
+			</ul>
+			<button  type="button" class="btn btn-outline-secondary btn-lg px-4" id="copybutton" onclick="copylink()">Copy Link</button>
+		  </div>
+	 </div>
+
+
+        <!-- 密码输入区域，直接放在主表单下方 -->
+        <div class="row mt-4">
+          <h5><small>Enter password to encrypt the note (required, enter twice to confirm)</small></h5>
+          <div class="col">
+            <input type="password" class="form-control" id="pass1" placeholder="Enter Password"  autocomplete="off" required>
+          </div>
+          <div class="col">
+            <input type="password" class="form-control" id="pass2" placeholder="Confirm Password" required>
+          </div>
+        </div>
+
+        <div class="d-grid  d-sm-flex justify-content-sm-center mt-1" id="buttontwo">
+            <button id="tranmake" type="button" class="btn btn-primary btn-lg px-4 me-sm-3" onclick="create()">Encrypt Note</button>
+        </div>
+     </div>
+
+  <style>
+    .container-fluid,#demo{
+        color:white;
+        background-color:hsl(0, 60%, 50%);
+    }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .form-group {
+            font-size: 1.5em;
+        }
+
+        /* Zebra stripe background for textareas */
+        .form-group textarea:nth-child(odd) {
+            background-color: hsla(19, 65%, 75%, 0.3);  /* Light color for odd elements */
+        }
+
+        .form-group textarea:nth-child(even) {
+            background-color: hsla(17, 69%, 77%, 0.3);  /* Darker color for even elements */
+        }
+
+        /* Border styling for the textareas */
+.form-group textarea {
+    border: 2px solid transparent;
+    border-image: linear-gradient(to right, #ff7e5f, #feb47b);
+    border-image-slice: 1;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+        /* Optional: Add a hover effect for better user interaction */
+        .form-group textarea:hover {
+            border-color: #007bff;
+        }
+  </style>
+  
+
+
+
+
+
+
+<footer class="py-5 my-6">
+  
+
+  <p class="text-center text-muted"><a href="read/selfdestructANDencoding.php" class="nav-link px-2 text-muted">&copy;2025 MaiPDF.com<br>joe@pdfhost.online</a></p>
+</footer>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">How to decode messages</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- 模态框内容 -->
+      <div class="modal-body">
+        <img id = "decrysrc" src="read/pic/enDecode1.png" class="img-fluid" alt="changecode" data-bs-toggle="modal" data-bs-target="#myModal">
+      </div>
+
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div> 
+
+</body>
+
+<style>
+.rotate2 {
+  -webkit-animation: spin 1s linear infinite;
+  -moz-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+.rotate {
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-iteration-count: 2;
+}
+@-moz-keyframes spin {
+  100% { -moz-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes spin {
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+
+<script >
+
+// 删除 convertTime2 和 convertTime 函数及所有相关调用
+
+//console.log(convertTime2(343434));
+const url = window.location.href;
+const regex = /prive\/(\d+)\/note/;
+const match = url.match(regex);
+
+//console.log(match); // logs "2146489127"
+
+
+
+
+let myCookieValue = document.cookie
+  .split('; ')
+  .find(cookie => cookie.startsWith('cookiefilenumber='))
+  ?.split('=')[1];
+if (myCookieValue) {
+  ///console.log(myCookieValue);
+
+   const numberoffile = myCookieValue;
+   const buttcontent = document.getElementById('containerbox');
+   buttcontent.innerHTML = '<h3><div class="spinner-grow text-muted"></div><div class="spinner-grow text-primary"></div><div class="spinner-grow text-success"></div><div class="spinner-grow text-info"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-danger"></div><div class="spinner-grow text-secondary"></div><div class="spinner-grow text-dark"></div><div class="spinner-grow text-light"></div></h3>';
+
+  document.cookie = "cookiefilenumber=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+
+} else {
+  //console.log("Cookie not found.");
+  // document.getElementById('grabify').style.display='block';
+}
+
+
+
+
+if(match !== null){
+  const numberoffile = match[1];
+  
+
+}
+
+var textareaValue='';
+var expiretime = 0;
+var confirmask = 1;
+var pass1=''; var pass2='';
+var containerbox = document.getElementById('demo');
+var buttontwo = document.getElementById('buttontwo');
+var myArray = '';
+var lastElement = '';
+var globename='';
+var combineallvalue='';
+function copylink(){
+     const exampleLi = document.getElementById('innerlink'); // select the <li> element with id "example"
+     const exampleText = exampleLi.textContent; // get the text content of the <li> element
+     navigator.clipboard.writeText(exampleText) // copy the text to the clipboard
+  .then(() => {
+
+var button = document.getElementById("copybutton");
+button.classList.add('rotate');
+button.textContent = "Link Copied";
+
+  })
+  .catch((err) => {
+    console.error('Error copying text: ', err);
+  });
+
+}
+
+
+// 加密过程：使用XOR对文本进行加密，并转换为0和1的二进制
+function textToBinaryEncryption(text, key) {
+    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 转换密钥为字符的charCode数组
+
+    // 第一步：对每个字符进行XOR加密，并转换为二进制
+    const encryptedText = Array.from(text).map((char, index) => {
+        // 使用密钥字符的charCode与当前字符的charCode进行异或运算
+        let charCode = char.charCodeAt(0) ^ keyCodes[index % keyCodes.length];
+        
+        // 转换为二进制，返回的是0和1的字符串（每个字符的16位二进制表示）
+        return charCode.toString(2).padStart(16, '0'); // 每个字符的二进制表示为16位
+    }).join('');
+
+    return encryptedText;
+}
+
+// 解密过程：从0和1的二进制恢复原始文本
+function binaryToTextDecryption(binaryText, key) {
+    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 转换密钥为字符的charCode数组
+
+    // 分割二进制字符串为每16位一组（每个字符的16位二进制表示）
+    const text = binaryText.match(/.{16}/g).map((bin, index) => {
+        // 将二进制字符串转为整数（字符编码），并进行XOR解密
+        let charCode = parseInt(bin, 2) ^ keyCodes[index % keyCodes.length];
+        return String.fromCharCode(charCode);
+    }).join('');
+
+    return text;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// 使用统一的 16 位二进制进行 XOR 加密，并转换为零宽字符
+function textToZeroWidthWithDoubleEncryption(text, key) {
+    // 将密钥字符串转为字符的 charCode 数组
+    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
+
+    // 第一步：XOR 加密
+    const xorEncryptedText = Array.from(text).map((char, index) => {
+        // 使用 keyCodes 中的字符与原始字符的 charCode 进行异或运算
+        let charCode = char.charCodeAt(0) ^ keyCodes[index % keyCodes.length];
+        
+        // 将字符编码强制为 16 位二进制字符串，确保统一长度
+        return charCode.toString(2).padStart(16, '0');
+    }).join('');
+
+    // 第二步：将 XOR 加密后的二进制转换为零宽字符
+    return xorEncryptedText.split('').map(bit => bit === '0' ? '\u200B' : '\u200C').join('');
+}
+
+
+// 解密流程：先解码零宽字符，再使用 XOR 解密
+function zeroWidthToTextWithDoubleDecryption(zeroWidthText, key) {
+    // 将密钥字符串转为字符的 charCode 数组
+    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
+
+    // 将零宽字符转换为二进制字符串
+    const binary = Array.from(zeroWidthText).map(char => {
+        return char === '\u200B' ? '0' : '1';
+    }).join('');
+
+    // 每16个二进制位恢复为一个字符
+    const text = binary.match(/.{16}/g).map((bin, index) => {
+        let charCode = parseInt(bin, 2) ^ keyCodes[index % keyCodes.length];
+        return String.fromCharCode(charCode);
+    }).join('');
+
+    // 检查并替换最后一个字符是否是非法字符（如半角字符）
+    if (text.charCodeAt(text.length - 1) < 32 || text.charCodeAt(text.length - 1) > 126) {
+        // 如果最后一个字符是非法字符（如换行符、回车符），就替换为空格
+        return text.slice(0, -1) + ' ';
+    }
+    return text;
+}
+
+
+
+
+
+// 先使用 XOR 加密，再进行零宽字符编码
+function textToZeroWidthWithDoubleEncryptionNostring(text, key) {
+    // 第一步：XOR 加密
+    const xorEncryptedText = Array.from(text).map(char => {
+        // 使用 charCodeAt 获取 UTF-16 编码，并与密钥进行异或操作
+        let charCode = char.charCodeAt(0) ^ key;
+        return charCode.toString(2).padStart(16, '0');  // 修改为 16 位二进制表示，支持更大范围的字符
+    }).join('');
+
+    // 第二步：将 XOR 加密后的二进制转换为零宽字符
+    return xorEncryptedText.split('').map(bit => bit === '0' ? '\u200B' : '\u200C').join('');
+}
+
+// 解密流程：先解码零宽字符，再使用 XOR 解密
+function zeroWidthToTextWithDoubleDecryptionNostring(zeroWidthText, key) {
+    const binary = Array.from(zeroWidthText).map(char => {
+        return char === '\u200B' ? '0' : '1';
+    }).join('');
+
+    // 每16个二进制位恢复为一个字符（支持多字节字符）
+    const text = binary.match(/.{16}/g).map(bin => {
+        let charCode = parseInt(bin, 2) ^ key;
+        return String.fromCharCode(charCode);
+    }).join('');
+
+    return text;
+}
+
+function decoding(){
+  const textarea = document.getElementById('myTextarea'); // Get the textarea element by its ID
+  textareaValue = textarea.value; 
+  
+  
+  pass1 = document.getElementById('pass1').value;
+  pass2 = document.getElementById('pass2').value;
+  if (pass1 === "" && pass2 === "") {
+    pass1 = 'mythenigma';
+  }
+  const isBinary = /^[01]+$/.test(textareaValue);
+  let decodedSecretMessage;
+
+if (isBinary) {
+   decodedSecretMessage = binaryToTextDecryption(textareaValue,pass1);
+ console.log(decodedSecretMessage);
+} else {
+  const encodedSecretPart = textareaValue.slice(0, textareaValue.length);  // 提取加密部分
+  decodedSecretMessage = zeroWidthToTextWithDoubleDecryption(encodedSecretPart, pass1);  // 解密加密部分
+}
+
+
+
+
+  //console.log(decodedSecretMessage);
+  simulateTyping("HiddenTextarea",decodedSecretMessage, 100);
+}
+
+function create() {
+
+   const textarea = document.getElementById('myTextarea'); // Get the textarea element by its ID
+   textareaValue = textarea.value; 
+
+   const hiddentext = document.getElementById('HiddenTextarea'); // Get the textarea element by its ID
+   hiddentextValue = hiddentext.value; hiddentextValue += ' \n ';
+
+
+  let totallength = textareaValue.length + hiddentextValue.length ;
+
+  if(totallength > 30000){
+    alert('Too long.....');
+    return ;
+  }
+
+
+if (textareaValue === ""){
+  alert('Write something on note');
+  return ;
+}
+
+   pass1 = document.getElementById('pass1').value;
+   pass2 = document.getElementById('pass2').value;
+   //console.log(pass1);
+
+  if (pass1 === "" && pass2 === "") {
+    pass1 = 'mythenigma';
+  } else if (pass1 === pass2) {
+    pass1 = pass2;
+  } else {
+    alert('Password Not Matching or Clear the Password');
+    return;
+  }
+
+
+ const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1); 
+ const encodedSecretMessage01= textToBinaryEncryption(hiddentextValue, pass1); 
+ combineallvalue =  encodedSecretMessage + textareaValue;
+ textareaValue   =  combineallvalue;
+ textarea.value  =  combineallvalue;
+ hiddentext.value=   encodedSecretMessage01;
+ //document.getElementById('topbanner').innerHTML="Notes have been combined&ready";
+
+ let hiddenbox = document.getElementById('HiddenTextarea');
+ //fadeOut(hiddenbox);
+
+
+//console.log('hope no');
+}
+
+async function tocontent(){
+  if(expiretime>0){
+    expiretime = convertTime2(expiretime);
+  }else{
+    // 在这进行回传删除！
+    // textareaValue 是文件名
+     // console.log(textareaValue);
+      const data = new FormData();
+      data.append('e', textareaValue);
+      data.append('mudi', 'y');
+      const response = await fetch("baidu.php", {
+      method: "POST",
+      body: data
+      });
+      try {
+       const result = await response.text().then(text => text.trim());
+       textareaValue = result ;
+	   // simulateTyping(inputText, typingDelay);
+	   //console.log(result);
+	   
+        } catch (error) {
+      return ;
+      }
+	  expiretime = 'this reading session';
+  }
+ const buttcontent = document.getElementById('containerbox');
+ 
+ buttcontent.innerHTML = '<h3>Note Content</h3> <div class="alert alert-success">This note will be self-destructed after '+expiretime+' </div><textarea id="resultarea" class="form-control" rows="12"  style="background-color:hsla(19,65%,75%,0.3);">'+'</textarea>';
+ 
+ 
+   const textarea = document.getElementById('resultarea'); // Get the textarea element by its ID
+   textarea.value= textareaValue; 
+// textareaValue = textareaValue.slice(1, textareaValue.length);
+ 
+// simulateTyping("resultarea",textareaValue, 100);
+ setTimeout(jilu(), 2000);
+
+
+}
+async function jilu(){
+  const md5 = globename;
+  const d = new Date();
+  const check = 1;
+  let eAlert='';let doctitle='';
+  //console.log(myArray[3]);
+  if(myArray[3]=='nothingin'){
+    eAlert = ''; 
+  }else{
+    eAlert = myArray[3]; 
+  }
+   if(myArray[4]=='nothingin'){
+     doctitle = globename; 
+  }else{
+     doctitle = myArray[4]; 
+  }
+  
+  const data = new FormData();
+  data.append('md5', md5);
+  data.append('shijian', d);
+  //data.append('pic', check);
+  data.append('yj', eAlert);
+  data.append('dtitle', doctitle);
+  //data.append('tok', ip);
+    const response = await fetch("https://maipdf.com/log.php?&pic="+check, {
+     method: "POST",
+     body: data
+    });
+}
+
+function fadeOut(element) {
+  let opacity = 1;
+
+  function decreaseOpacity() {
+    opacity -= 0.05;
+    if (opacity <= 0) {
+      opacity = 0;
+      element.style.opacity = opacity;
+      clearInterval(fadeOutInterval);
+      element.style.display = 'none'; // 完全隐藏元素，不占用空间
+    } else {
+      element.style.opacity = opacity;
+    }
+  }
+
+  const fadeOutInterval = setInterval(decreaseOpacity, 50);
+}
+
+function fadeIn(element, duration = 1000) { // 默认持续时间为1000毫秒
+            let opacity = 0; // 初始透明度
+            element.style.opacity = opacity;
+            element.style.display = 'block'; // 确保元素可见
+
+            const interval = 50; // 每次增加透明度的时间间隔（毫秒）
+            const increment = interval / duration; // 每次增加的透明度
+
+            const fadeInInterval = setInterval(() => {
+                opacity += increment;
+                if (opacity >= 1) {
+                    opacity = 1;
+                    clearInterval(fadeInInterval);
+                }
+                element.style.opacity = opacity;
+            }, interval);
+    }
+</script>
