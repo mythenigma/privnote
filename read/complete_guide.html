@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privnote.chat - Complete User Guide</title>
+  <meta name="description" content="A comprehensive guide to using Privnote.chat for secure, encrypted, and self-destructing messages. Learn how to send private notes with zero-width character encryption.">
+  <meta name="keywords" content="privnote guide, how to use privnote, zero-width character encryption, self-destructing notes, secure messaging tutorial, 隐信云教程">
+  
+  <!-- Bootstrap & Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    .guide-section {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+    }
+    .guide-section:last-child {
+      border-bottom: none;
+    }
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      color: #3498db;
+      font-size: 1.5rem;
+    }
+    .step-number {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: #3498db;
+      color: white;
+      margin-right: 10px;
+    }
+    .step {
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    .step-content {
+      flex: 1;
+    }
+    .screenshot {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin: 1.5rem 0;
+      max-width: 100%;
+    }
+    .code-block {
+      font-family: 'Roboto Mono', monospace;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    .navigation-header {
+      background-color: #3498db;
+      color: white;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+    }
+    .tip-box {
+      background-color: #e8f4fd;
+      border-left: 4px solid #3498db;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .warning-box {
+      background-color: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .feature-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .language-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    @media (max-width: 768px) {
+      .step {
+        flex-direction: column;
+      }
+      .step-number {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Language Toggle -->
+  <div class="language-toggle">
+    <button class="btn btn-sm btn-outline-primary" id="langToggle">
+      <i class="fas fa-globe me-1"></i> <span id="langText">中文</span>
+    </button>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="navigation-header">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="m-0"><i class="fas fa-unlock-alt me-2"></i> Privnote.chat</h1>
+        <a href="https://privnote.chat" class="btn btn-light">
+          <i class="fas fa-home me-1"></i> Back to Homepage
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <!-- Introduction -->
+        <section class="guide-section">
+          <h2 class="text-center mb-4" data-en="Complete Guide to Privnote.chat" data-zh="Privnote.chat 完整使用指南">Complete Guide to Privnote.chat</h2>
+          
+          <p class="lead text-center mb-4" data-en="Secure your messages with self-destructing notes and zero-width character encryption" data-zh="通过自毁消息和零宽字符加密保障您的信息安全">
+            Secure your messages with self-destructing notes and zero-width character encryption
+          </p>
+          
+          <div class="text-center mb-4">
+            <img src="pic/2025head.png" alt="Privnote.chat interface" class="img-fluid screenshot" style="max-width: 650px;">
+          </div>
+          
+          <p data-en="Privnote.chat is a secure messaging platform that provides multiple levels of security for your sensitive information. This comprehensive guide will walk you through all the features and show you how to use them effectively." data-zh="Privnote.chat 是一个为您的敏感信息提供多层安全保障的安全消息平台。本指南将全面介绍所有功能，并教您如何有效使用它们。">
+            Privnote.chat is a secure messaging platform that provides multiple levels of security for your sensitive information. This comprehensive guide will walk you through all the features and show you how to use them effectively.
+          </p>
+          
+          <div class="alert alert-info" data-en="This guide covers all features of Privnote.chat including self-destructing notes and zero-width character encryption." data-zh="本指南涵盖 Privnote.chat 的所有功能，包括自毁笔记和零宽字符加密。">
+            This guide covers all features of Privnote.chat including self-destructing notes and zero-width character encryption.
+          </div>
+        </section>
+        
+        <!-- Table of Contents -->
+        <section class="guide-section">
+          <h3 data-en="Table of Contents" data-zh="目录">Table of Contents</h3>
+          <div class="card">
+            <div class="card-body">
+              <ol class="mb-0">
+                <li><a href="#feature-overview">Feature Overview</a></li>
+                <li><a href="#self-destructing-notes">Self-Destructing Notes</a></li>
+                <li><a href="#character-encryption">Character Encryption</a></li>
+                <li><a href="#decryption">Decryption Process</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#faq">Frequently Asked Questions</a></li>
+              </ol>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Feature Overview -->
+        <section id="feature-overview" class="guide-section">
+          <h3 data-en="Feature Overview" data-zh="功能概述">Feature Overview</h3>
+          
+          <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <h4 data-en="Self-Destructing Notes" data-zh="自毁消息">Self-Destructing Notes</h4>
+                <p data-en="Create messages that automatically delete themselves after being read, ensuring your private information doesn't linger." data-zh="创建阅读后自动删除的消息，确保您的私人信息不会长期存在。">
+                  Create messages that automatically delete themselves after being read, ensuring your private information doesn't linger.
+                </p>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-eye-slash"></i>
+                </div>
+                <h4 data-en="Zero-Width Character Encryption" data-zh="零宽字符加密">Zero-Width Character Encryption</h4>
+                <p data-en="Hide messages within normal text using invisible zero-width characters, providing a stealth layer of security." data-zh="使用不可见的零宽字符在普通文本中隐藏消息，提供隐蔽的安全层。">
+                  Hide messages within normal text using invisible zero-width characters, providing a stealth layer of security.
+                </p>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <h4 data-en="Password Protection" data-zh="密码保护">Password Protection</h4>
+                <p data-en="Add a password to your notes for an additional layer of security, ensuring only intended recipients can access the content." data-zh="为您的笔记添加密码以提供额外的安全层，确保只有预期的收件人才能访问内容。">
+                  Add a password to your notes for an additional layer of security, ensuring only intended recipients can access the content.
+                </p>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-code"></i>
+                </div>
+                <h4 data-en="Binary Encryption" data-zh="二进制加密">Binary Encryption</h4>
+                <p data-en="Convert your message to binary format (0s and 1s) as an alternative encryption method." data-zh="将您的消息转换为二进制格式（0和1）作为替代加密方法。">
+                  Convert your message to binary format (0s and 1s) as an alternative encryption method.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Self-Destructing Notes -->
+        <section id="self-destructing-notes" class="guide-section">
+          <h3 data-en="Creating Self-Destructing Notes" data-zh="创建自毁消息">Creating Self-Destructing Notes</h3>
+          
+          <p data-en="Self-destructing notes are perfect for sharing sensitive information that you don't want to be permanently stored. Here's how to create one:" data-zh="自毁消息非常适合分享您不希望永久存储的敏感信息。以下是创建方法：">
+            Self-destructing notes are perfect for sharing sensitive information that you don't want to be permanently stored. Here's how to create one:
+          </p>
+          
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h5 data-en="Navigate to Privnote.chat" data-zh="访问 Privnote.chat">Navigate to Privnote.chat</h5>
+              <p data-en="Open your web browser and go to <a href='https://privnote.chat'>https://privnote.chat</a>. You'll see the main note creation interface." data-zh="打开您的网络浏览器并访问 <a href='https://privnote.chat'>https://privnote.chat</a>。您将看到主要的笔记创建界面。">
+                Open your web browser and go to <a href="https://privnote.chat">https://privnote.chat</a>. You'll see the main note creation interface.
+              </p>
+              <img src="pic/2025head.png" alt="Privnote.chat homepage" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h5 data-en="Write Your Message" data-zh="编写您的消息">Write Your Message</h5>
+              <p data-en="Type your message in the text area. This will be the content of your self-destructing note." data-zh="在文本区域中输入您的消息。这将成为您的自毁笔记的内容。">
+                Type your message in the text area. This will be the content of your self-destructing note.
+              </p>
+              <img src="pic/en2025writing.png" alt="Writing a message" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h5 data-en="Set Security Options" data-zh="设置安全选项">Set Security Options</h5>
+              <p data-en="You can optionally set a password and choose when the note should self-destruct (after reading, after a specific time, etc.)." data-zh="您可以选择设置密码，并选择笔记何时自毁（阅读后、特定时间后等）。">
+                You can optionally set a password and choose when the note should self-destruct (after reading, after a specific time, etc.).
+              </p>
+              <img src="pic/2025passwordhead.png" alt="Setting security options" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h5 data-en="Create the Note" data-zh="创建笔记">Create the Note</h5>
+              <p data-en="Click on the 'Create Note' button to generate your self-destructing note." data-zh="点击"创建笔记"按钮生成您的自毁笔记。">
+                Click on the "Create Note" button to generate your self-destructing note.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h5 data-en="Share the Link" data-zh="分享链接">Share the Link</h5>
+              <p data-en="A unique link will be generated. Copy this link and share it with your recipient through any communication channel (email, messaging app, etc.)." data-zh="系统将生成唯一链接。复制此链接并通过任何通信渠道（电子邮件、消息应用等）与收件人共享。">
+                A unique link will be generated. Copy this link and share it with your recipient through any communication channel (email, messaging app, etc.).
+              </p>
+              <img src="pic/2025link.png" alt="Copying the link" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="tip-box">
+            <h5><i class="fas fa-lightbulb me-2"></i> <span data-en="Tip" data-zh="提示">Tip</span></h5>
+            <p data-en="For maximum security, don't send the password in the same channel as the note link. Use a different communication method to share the password." data-zh="为了最大限度地提高安全性，请不要在与笔记链接相同的渠道中发送密码。使用不同的通信方式共享密码。">
+              For maximum security, don't send the password in the same channel as the note link. Use a different communication method to share the password.
+            </p>
+          </div>
+        </section>
+        
+        <!-- Character Encryption -->
+        <section id="character-encryption" class="guide-section">
+          <h3 data-en="Using Character Encryption" data-zh="使用字符加密">Using Character Encryption</h3>
+          
+          <p data-en="Privnote.chat offers a unique zero-width character encryption that allows you to hide secret messages within normal-looking text. Here's how to use it:" data-zh="Privnote.chat 提供独特的零宽字符加密，允许您在看起来正常的文本中隐藏秘密消息。以下是使用方法：">
+            Privnote.chat offers a unique zero-width character encryption that allows you to hide secret messages within normal-looking text. Here's how to use it:
+          </p>
+          
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h5 data-en="Go to the Character Encryption Tab" data-zh="前往字符加密选项卡">Go to the Character Encryption Tab</h5>
+              <p data-en="From the Privnote.chat homepage, click on the 'Character Encryption' tab in the navigation menu." data-zh="从 Privnote.chat 首页，点击导航菜单中的"字符加密"选项卡。">
+                From the Privnote.chat homepage, click on the "Character Encryption" tab in the navigation menu.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h5 data-en="Enter Public and Secret Messages" data-zh="输入公开和秘密消息">Enter Public and Secret Messages</h5>
+              <p data-en="Type your public message in the 'Public Message' field. This is what will be visible to anyone looking at the message. Then enter your secret message in the 'Secret Message' field. This is what will be hidden using zero-width characters." data-zh="在"公开消息"字段中输入您的公开消息。这是任何查看消息的人都可以看到的内容。然后在"秘密消息"字段中输入您的秘密消息。这是将使用零宽字符隐藏的内容。">
+                Type your public message in the "Public Message" field. This is what will be visible to anyone looking at the message. Then enter your secret message in the "Secret Message" field. This is what will be hidden using zero-width characters.
+              </p>
+              <img src="pic/2025doccopy.png" alt="Entering public and secret messages" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h5 data-en="Set a Password (Optional)" data-zh="设置密码（可选）">Set a Password (Optional)</h5>
+              <p data-en="For added security, you can set a password that will be required to decrypt the hidden message." data-zh="为了增加安全性，您可以设置一个密码，该密码将用于解密隐藏的消息。">
+                For added security, you can set a password that will be required to decrypt the hidden message.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h5 data-en="Encrypt the Note" data-zh="加密笔记">Encrypt the Note</h5>
+              <p data-en="Click on the 'Encrypt Note' button to generate your encrypted message." data-zh="点击"加密笔记"按钮生成您的加密消息。">
+                Click on the "Encrypt Note" button to generate your encrypted message.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h5 data-en="Copy and Share" data-zh="复制并分享">Copy and Share</h5>
+              <p data-en="Two encrypted versions will be generated: one using zero-width characters and another in binary format. You can copy either one and share it with your recipient." data-zh="系统将生成两个加密版本：一个使用零宽字符，另一个以二进制格式。您可以复制其中任何一个并与收件人共享。">
+                Two encrypted versions will be generated: one using zero-width characters and another in binary format. You can copy either one and share it with your recipient.
+              </p>
+              <img src="pic/encodedin.png" alt="Copying encrypted message" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="warning-box">
+            <h5><i class="fas fa-exclamation-triangle me-2"></i> <span data-en="Important" data-zh="重要提示">Important</span></h5>
+            <p data-en="The zero-width character encryption is visually undetectable. The message will look like normal text, but it contains hidden information that can only be revealed through the decryption process." data-zh="零宽字符加密在视觉上是无法检测的。消息看起来像普通文本，但它包含只能通过解密过程显示的隐藏信息。">
+              The zero-width character encryption is visually undetectable. The message will look like normal text, but it contains hidden information that can only be revealed through the decryption process.
+            </p>
+          </div>
+        </section>
+        
+        <!-- Decryption -->
+        <section id="decryption" class="guide-section">
+          <h3 data-en="Decryption Process" data-zh="解密过程">Decryption Process</h3>
+          
+          <p data-en="Here's how to decrypt messages that have been encrypted using Privnote.chat:" data-zh="以下是如何解密使用 Privnote.chat 加密的消息：">
+            Here's how to decrypt messages that have been encrypted using Privnote.chat:
+          </p>
+          
+          <h4 data-en="Reading a Self-Destructing Note" data-zh="阅读自毁笔记">Reading a Self-Destructing Note</h4>
+          
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h5 data-en="Open the Link" data-zh="打开链接">Open the Link</h5>
+              <p data-en="Click on the link you received. This will take you to the Privnote.chat page where the note is stored." data-zh="点击您收到的链接。这将带您前往存储笔记的 Privnote.chat 页面。">
+                Click on the link you received. This will take you to the Privnote.chat page where the note is stored.
+              </p>
+              <img src="pic/2025readnoti.png" alt="Opening a note link" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h5 data-en="Enter Password (If Required)" data-zh="输入密码（如果需要）">Enter Password (If Required)</h5>
+              <p data-en="If the note is password-protected, you'll be prompted to enter the password." data-zh="如果笔记受密码保护，系统将提示您输入密码。">
+                If the note is password-protected, you'll be prompted to enter the password.
+              </p>
+              <img src="pic/2025passwordtoread.png" alt="Entering password" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h5 data-en="Read the Note" data-zh="阅读笔记">Read the Note</h5>
+              <p data-en="After entering the correct password (if required), you'll be able to see the content of the note. Remember, this note will self-destruct after you've read it, so make sure to save any important information." data-zh="输入正确的密码（如果需要）后，您将能够看到笔记的内容。请记住，此笔记将在您阅读后自毁，因此请确保保存任何重要信息。">
+                After entering the correct password (if required), you'll be able to see the content of the note. Remember, this note will self-destruct after you've read it, so make sure to save any important information.
+              </p>
+            </div>
+          </div>
+          
+          <h4 data-en="Decrypting Character-Encrypted Messages" data-zh="解密字符加密消息">Decrypting Character-Encrypted Messages</h4>
+          
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h5 data-en="Go to the Decrypt Tab" data-zh="前往解密选项卡">Go to the Decrypt Tab</h5>
+              <p data-en="From the Privnote.chat homepage, click on the 'Decrypt' tab in the navigation menu." data-zh="从 Privnote.chat 首页，点击导航菜单中的"解密"选项卡。">
+                From the Privnote.chat homepage, click on the "Decrypt" tab in the navigation menu.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h5 data-en="Paste the Encrypted Content" data-zh="粘贴加密内容">Paste the Encrypted Content</h5>
+              <p data-en="Paste the encrypted message you received (either the zero-width character version or the binary version) into the appropriate field." data-zh="将您收到的加密消息（零宽字符版本或二进制版本）粘贴到相应的字段中。">
+                Paste the encrypted message you received (either the zero-width character version or the binary version) into the appropriate field.
+              </p>
+              <img src="pic/2025decode.png" alt="Pasting encrypted content" class="screenshot">
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h5 data-en="Enter the Password" data-zh="输入密码">Enter the Password</h5>
+              <p data-en="If the encrypted message was protected with a password, enter it in the password field." data-zh="如果加密消息受密码保护，请在密码字段中输入密码。">
+                If the encrypted message was protected with a password, enter it in the password field.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h5 data-en="Decrypt the Message" data-zh="解密消息">Decrypt the Message</h5>
+              <p data-en="Click on either 'Zero-Width Decrypt' or 'Binary Decrypt' depending on which type of encrypted message you received." data-zh="根据您收到的加密消息类型，点击"零宽解密"或"二进制解密"。">
+                Click on either "Zero-Width Decrypt" or "Binary Decrypt" depending on which type of encrypted message you received.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h5 data-en="View the Decrypted Message" data-zh="查看解密消息">View the Decrypted Message</h5>
+              <p data-en="The decrypted message will appear in the result field. You can then copy it for your reference." data-zh="解密后的消息将显示在结果字段中。然后您可以复制它以供参考。">
+                The decrypted message will appear in the result field. You can then copy it for your reference.
+              </p>
+              <img src="pic/en2025Enligshdecode.png" alt="Viewing decrypted message" class="screenshot">
+            </div>
+          </div>
+        </section>
+        
+        <!-- Use Cases -->
+        <section id="use-cases" class="guide-section">
+          <h3 data-en="Use Cases" data-zh="使用场景">Use Cases</h3>
+          
+          <p data-en="Privnote.chat is versatile and can be used in various scenarios. Here are some common use cases:" data-zh="Privnote.chat 功能多样，可用于各种场景。以下是一些常见用例：">
+            Privnote.chat is versatile and can be used in various scenarios. Here are some common use cases:
+          </p>
+          
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title" data-en="Sharing Sensitive Information" data-zh="分享敏感信息">Sharing Sensitive Information</h5>
+                  <p class="card-text" data-en="When you need to share confidential data like passwords, account details, or private information that shouldn't be stored permanently." data-zh="当您需要共享不应永久存储的机密数据，如密码、账户详细信息或私人信息时。">
+                    When you need to share confidential data like passwords, account details, or private information that shouldn't be stored permanently.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title" data-en="Business Communications" data-zh="商务通信">Business Communications</h5>
+                  <p class="card-text" data-en="For sharing temporary information with colleagues, such as meeting details, access codes, or short-term instructions." data-zh="用于与同事共享临时信息，如会议详情、访问代码或短期指示。">
+                    For sharing temporary information with colleagues, such as meeting details, access codes, or short-term instructions.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title" data-en="Steganography" data-zh="隐写术">Steganography</h5>
+                  <p class="card-text" data-en="Using the zero-width character encryption to hide messages within innocent-looking text, providing an additional layer of security through obscurity." data-zh="使用零宽字符加密在看似无害的文本中隐藏消息，通过模糊性提供额外的安全层。">
+                    Using the zero-width character encryption to hide messages within innocent-looking text, providing an additional layer of security through obscurity.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title" data-en="Personal Communication" data-zh="个人通信">Personal Communication</h5>
+                  <p class="card-text" data-en="For sharing personal messages that you don't want to be permanently recorded in chat histories or email threads." data-zh="用于共享您不希望在聊天历史记录或电子邮件线程中永久记录的个人消息。">
+                    For sharing personal messages that you don't want to be permanently recorded in chat histories or email threads.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- FAQ -->
+        <section id="faq" class="guide-section">
+          <h3 data-en="Frequently Asked Questions" data-zh="常见问题">Frequently Asked Questions</h3>
+          
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-en="How secure is Privnote.chat?" data-zh="Privnote.chat 有多安全？">
+                  How secure is Privnote.chat?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" data-en="Privnote.chat uses industry-standard encryption methods to protect your data. The zero-width character encryption and binary encryption provide strong security, especially when combined with password protection. Additionally, self-destructing notes are automatically deleted after being read, leaving no trace of the sensitive information." data-zh="Privnote.chat 使用行业标准加密方法保护您的数据。零宽字符加密和二进制加密提供强大的安全性，特别是当与密码保护结合使用时。此外，自毁笔记在被阅读后会自动删除，不留下敏感信息的痕迹。">
+                  Privnote.chat uses industry-standard encryption methods to protect your data. The zero-width character encryption and binary encryption provide strong security, especially when combined with password protection. Additionally, self-destructing notes are automatically deleted after being read, leaving no trace of the sensitive information.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-en="What happens if the recipient never opens the self-destructing note?" data-zh="如果收件人从不打开自毁笔记会发生什么？">
+                  What happens if the recipient never opens the self-destructing note?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" data-en="If a self-destructing note is never opened, it will remain on the server for a limited time (usually 30 days) before being automatically deleted. This ensures that messages don't remain on the server indefinitely if they're never accessed." data-zh="如果自毁笔记从未被打开，它将在服务器上保留有限时间（通常为30天）后自动删除。这确保了如果消息从未被访问，它们不会无限期地保留在服务器上。">
+                  If a self-destructing note is never opened, it will remain on the server for a limited time (usually 30 days) before being automatically deleted. This ensures that messages don't remain on the server indefinitely if they're never accessed.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" data-en="Can I recover a note after it has self-destructed?" data-zh="我可以在笔记自毁后恢复它吗？">
+                  Can I recover a note after it has self-destructed?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" data-en="No, once a note has self-destructed, it is permanently deleted from the server and cannot be recovered. This is a key security feature of the service, ensuring that sensitive information doesn't persist longer than necessary." data-zh="不可以，一旦笔记自毁，它就会从服务器上永久删除，无法恢复。这是该服务的一个关键安全功能，确保敏感信息不会比必要的时间更长久地存在。">
+                  No, once a note has self-destructed, it is permanently deleted from the server and cannot be recovered. This is a key security feature of the service, ensuring that sensitive information doesn't persist longer than necessary.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" data-en="How do zero-width characters work?" data-zh="零宽字符是如何工作的？">
+                  How do zero-width characters work?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" data-en="Zero-width characters are special Unicode characters that have no visible width when displayed. Privnote.chat uses these characters (specifically Zero Width Space U+200B and Zero Width Non-Joiner U+200C) to encode binary data (0s and 1s) that represent your encrypted message. These invisible characters are inserted into the visible text, creating a steganographic message that looks like normal text but contains hidden information." data-zh="零宽字符是显示时没有可见宽度的特殊Unicode字符。Privnote.chat使用这些字符（特别是零宽空格U+200B和零宽非连接符U+200C）来编码表示您加密消息的二进制数据（0和1）。这些不可见字符被插入到可见文本中，创建一个隐写消息，看起来像普通文本但包含隐藏信息。">
+                  Zero-width characters are special Unicode characters that have no visible width when displayed. Privnote.chat uses these characters (specifically Zero Width Space U+200B and Zero Width Non-Joiner U+200C) to encode binary data (0s and 1s) that represent your encrypted message. These invisible characters are inserted into the visible text, creating a steganographic message that looks like normal text but contains hidden information.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" data-en="Is there a size limit for notes?" data-zh="笔记有大小限制吗？">
+                  Is there a size limit for notes?
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" data-en="Yes, there is a size limit of 30,000 characters for notes created on Privnote.chat. This limit applies to the combined length of both the public and secret messages when using character encryption." data-zh="是的，在Privnote.chat上创建的笔记有30,000个字符的大小限制。使用字符加密时，此限制适用于公开和秘密消息的组合长度。">
+                  Yes, there is a size limit of 30,000 characters for notes created on Privnote.chat. This limit applies to the combined length of both the public and secret messages when using character encryption.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Conclusion -->
+        <section class="guide-section">
+          <h3 data-en="Conclusion" data-zh="结论">Conclusion</h3>
+          
+          <p data-en="Privnote.chat provides a powerful set of tools for secure communication. By combining self-destructing notes with zero-width character encryption and password protection, you can ensure that your sensitive information remains private and is shared only with intended recipients." data-zh="Privnote.chat 提供了一套强大的安全通信工具。通过将自毁笔记与零宽字符加密和密码保护相结合，您可以确保您的敏感信息保持私密，并且只与预期收件人共享。">
+            Privnote.chat provides a powerful set of tools for secure communication. By combining self-destructing notes with zero-width character encryption and password protection, you can ensure that your sensitive information remains private and is shared only with intended recipients.
+          </p>
+          
+          <p data-en="Whether you're sharing sensitive business information, personal messages, or any other content that requires privacy and security, Privnote.chat offers the features you need to communicate with confidence." data-zh="无论您是共享敏感的业务信息、个人消息还是任何其他需要隐私和安全的内容，Privnote.chat 都提供了您需要的功能，让您可以自信地进行通信。">
+            Whether you're sharing sensitive business information, personal messages, or any other content that requires privacy and security, Privnote.chat offers the features you need to communicate with confidence.
+          </p>
+          
+          <div class="text-center mt-4">
+            <a href="https://privnote.chat" class="btn btn-primary btn-lg">
+              <i class="fas fa-arrow-right me-2"></i> <span data-en="Start Using Privnote.chat" data-zh="开始使用 Privnote.chat">Start Using Privnote.chat</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 data-en="Privnote.chat" data-zh="Privnote.chat">Privnote.chat</h5>
+          <p data-en="Secure your words, vanish your trace" data-zh="安全传信，隐匿无踪">Secure your words, vanish your trace</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p data-en="&copy; 2025 MaiPDF.com" data-zh="&copy; 2025 隐信云">© 2025 MaiPDF.com</p>
+          <a href="https://privnote.chat" class="text-white me-3"><i class="fas fa-home"></i></a>
+          <a href="mailto:joe@pdfhost.online" class="text-white"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div
