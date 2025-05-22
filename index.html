@@ -402,67 +402,11 @@ body {
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="translate.js"></script>
 <script>
-// 默认语言
-var currentLanguage = 'en';
-
-function switchLanguage(lang) {
-  currentLanguage = lang;
-  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : (lang === 'es' ? 'Español' : 'English'));
-  document.getElementById('trans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 
-                                                (lang === 'es' ? 'Asegura tus palabras, desvanece tu rastro' : 
-                                                'Secure your words, vanish your trace'));
-  
-  // Navigation links
-  document.getElementById('navLinkText').textContent = (lang === 'zh' ? '生成链接' : 
-                                                     (lang === 'es' ? 'Generar Enlace' : 
-                                                     'Generate Link'));
-  document.getElementById('navEncryptText').textContent = (lang === 'zh' ? '字符加密' : 
-                                                        (lang === 'es' ? 'Cifrado de Caracteres' : 
-                                                        'Character Encryption'));
-  document.getElementById('navDecryptText').textContent = (lang === 'zh' ? '解密工具' : 
-                                                        (lang === 'es' ? 'Descifrar' : 
-                                                        'Decrypt'));
-  
-  // 更新主页内容
-  document.getElementById('trans2').textContent = (lang === 'zh' ? '通过链接、零宽字符或二进制加密您的便签，确保安全分享与自动销毁' : 
-                                                (lang === 'es' ? 'Cifra tus notas con enlaces, caracteres de ancho cero o binarios, garantizando compartir seguro y autodestrucción' : 
-                                                'Encrypts your notes with links, zero-width characters, or binary, ensuring secure sharing and auto-destruction'));
-  document.getElementById('topbanner').textContent = (lang === 'zh' ? '新建便签' : 
-                                                   (lang === 'es' ? 'Nuevas Notas' : 
-                                                   'New Notes'));
-  document.getElementById('myTextarea').placeholder = (lang === 'zh' ? '在此输入便签内容...' : 
-                                                    (lang === 'es' ? 'Escriba su nota aquí...' : 
-                                                    'Write Your Note Here...'));
-  document.getElementById('tranmake').innerHTML = '<i class="fas fa-lock me-2"></i>' + (lang === 'zh' ? '加密便签' : 
-                                                                                     (lang === 'es' ? 'Cifrar Nota' : 
-                                                                                     'Encrypt Note'));
-  document.getElementById('tranoption').innerHTML = '<i class="fas fa-cog me-2"></i>' + (lang === 'zh' ? '更多设置' : 
-                                                                                      (lang === 'es' ? 'Configuración Opcional' : 
-                                                                                      'Optional Setting'));
-  document.getElementById('decodemessage').innerHTML = '<i class="fas fa-unlock me-2"></i><a href="decrypt.html" class="text-decoration-none text-warning">' + (lang === 'zh' ? '解密便签' : 
-                                                                                                                                                            (lang === 'es' ? 'Descifrar Notas' : 
-                                                                                                                                                            'Decrypt Notes')) + '</a>';
-  document.getElementById('tranli').textContent = (lang === 'zh' ? '消息将根据您的设置自动销毁。' : 
-                                                (lang === 'es' ? 'El mensaje se destruirá automáticamente según su configuración.' : 
-                                                'The message will be automatically destroyed according to your settings.'));
-  document.getElementById('trantou').textContent = (lang === 'zh' ? '链接URL自毁' : 
-                                                 (lang === 'es' ? 'URL del enlace se autodestruye' : 
-                                                 'Link URL self-destructs'));
-  document.getElementById('tranafter').textContent = (lang === 'zh' ? '您可以追踪便签链接被打开的时间、设备和IP。' : 
-                                                   (lang === 'es' ? 'Puede rastrear cuándo, en qué dispositivo y con qué IP se abrió el enlace de la nota.' : 
-                                                   'You can track the results of when the note link was opened, on which device it was opened, and by what IP was opened.'));
-  document.getElementById('trana').innerHTML = '<i class="fas fa-chart-line me-2"></i>' + (lang === 'zh' ? '查看打开日志' : 
-                                                                                        (lang === 'es' ? 'Ver Registro de Apertura' : 
-                                                                                        'Check Open Log'));
-  document.getElementById('tranb').innerHTML = '<i class="fas fa-question-circle me-2"></i>' + (lang === 'zh' ? '如何解密？' : 
-                                                                                             (lang === 'es' ? '¿Cómo descifrar?' : 
-                                                                                             'How to decode?'));
-}
-
-
 window.addEventListener('DOMContentLoaded', function() {
+  // Initialize language using the centralized function
   switchLanguage(currentLanguage);
-  // 绑定Encrypt Note按钮事件，恢复调用 create()
+  
+  // Bind Encrypt Note button event
   var encryptBtn = document.getElementById('tranmake');
   if (encryptBtn) {
     encryptBtn.addEventListener('click', function() {
