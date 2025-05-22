@@ -395,61 +395,36 @@ const languageTabStrings = {
 
 function applyTabLanguage(lang) {
   const tabStrings = languageTabStrings[lang] || languageTabStrings['en'];
-  
-  // 添加安全的元素更新函数
-  function safeUpdateText(id, value) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.textContent = value;
-    }
-  }
-  
-  function safeUpdatePlaceholder(id, value) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.placeholder = value;
-    }
-  }
-  
-  function safeUpdateHTML(id, value) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.innerHTML = value;
-    }
-  }
-  
-  // 安全地更新Tab标题
-  safeUpdateText('tabLinkText', tabStrings.tabLinkText);
-  safeUpdateText('tabEncryptText', tabStrings.tabEncryptText);
-  safeUpdateText('tabDecryptText', tabStrings.tabDecryptText);
-  
-  // 安全地更新Character Encryption Tab内容
-  safeUpdateText('encryptTabTitle', tabStrings.encryptTabTitle);
-  safeUpdateText('coverTextLabel', tabStrings.coverTextLabel);
-  safeUpdatePlaceholder('coverText', tabStrings.coverTextPlaceholder);
-  safeUpdateText('hiddenTextLabel', tabStrings.hiddenTextLabel);
-  safeUpdatePlaceholder('hiddenText', tabStrings.hiddenTextPlaceholder);
-  safeUpdateText('encryptKeyLabel', tabStrings.encryptKeyLabel);
-  safeUpdatePlaceholder('encryptKey', tabStrings.encryptKeyPlaceholder);
-  safeUpdateText('btnZeroWidthEncrypt', tabStrings.btnZeroWidthEncrypt);
-  safeUpdateText('btnBinaryEncrypt', tabStrings.btnBinaryEncrypt);
-  safeUpdateText('encryptResultLabel', tabStrings.encryptResultLabel);
-  safeUpdatePlaceholder('encryptResult', tabStrings.encryptResultPlaceholder);
-  safeUpdateHTML('btnCopyEncryptResult', '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyEncryptResult);
-  safeUpdateHTML('encryptInfo', tabStrings.encryptInfo);
-  
-  // 安全地更新Decrypt Tab内容
-  safeUpdateText('decryptTabTitle', tabStrings.decryptTabTitle);
-  safeUpdateText('decryptInputLabel', tabStrings.decryptInputLabel);
-  safeUpdatePlaceholder('decryptInput', tabStrings.decryptInputPlaceholder);
-  safeUpdateText('decryptKeyLabel', tabStrings.decryptKeyLabel);
-  safeUpdatePlaceholder('decryptKey', tabStrings.decryptKeyPlaceholder);
-  safeUpdateText('btnZeroWidthDecrypt', tabStrings.btnZeroWidthDecrypt);
-  safeUpdateText('btnBinaryDecrypt', tabStrings.btnBinaryDecrypt);
-  safeUpdateText('decryptResultLabel', tabStrings.decryptResultLabel);
-  safeUpdatePlaceholder('decryptResult', tabStrings.decryptResultPlaceholder);
-  safeUpdateHTML('btnCopyDecryptResult', '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyDecryptResult);
-  safeUpdateHTML('decryptInfo', tabStrings.decryptInfo);
+  // Tab标题
+  document.getElementById('tabLinkText').textContent = tabStrings.tabLinkText;
+  document.getElementById('tabEncryptText').textContent = tabStrings.tabEncryptText;
+  document.getElementById('tabDecryptText').textContent = tabStrings.tabDecryptText;
+  // Character Encryption Tab内容
+  document.getElementById('encryptTabTitle').textContent = tabStrings.encryptTabTitle;
+  document.getElementById('coverTextLabel').textContent = tabStrings.coverTextLabel;
+  document.getElementById('coverText').placeholder = tabStrings.coverTextPlaceholder;
+  document.getElementById('hiddenTextLabel').textContent = tabStrings.hiddenTextLabel;
+  document.getElementById('hiddenText').placeholder = tabStrings.hiddenTextPlaceholder;
+  document.getElementById('encryptKeyLabel').textContent = tabStrings.encryptKeyLabel;
+  document.getElementById('encryptKey').placeholder = tabStrings.encryptKeyPlaceholder;
+  document.getElementById('btnZeroWidthEncrypt').textContent = tabStrings.btnZeroWidthEncrypt;
+  document.getElementById('btnBinaryEncrypt').textContent = tabStrings.btnBinaryEncrypt;
+  document.getElementById('encryptResultLabel').textContent = tabStrings.encryptResultLabel;
+  document.getElementById('encryptResult').placeholder = tabStrings.encryptResultPlaceholder;
+  document.getElementById('btnCopyEncryptResult').innerHTML = '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyEncryptResult;
+  document.getElementById('encryptInfo').innerHTML = tabStrings.encryptInfo;
+  // Decrypt Tab内容
+  document.getElementById('decryptTabTitle').textContent = tabStrings.decryptTabTitle;
+  document.getElementById('decryptInputLabel').textContent = tabStrings.decryptInputLabel;
+  document.getElementById('decryptInput').placeholder = tabStrings.decryptInputPlaceholder;
+  document.getElementById('decryptKeyLabel').textContent = tabStrings.decryptKeyLabel;
+  document.getElementById('decryptKey').placeholder = tabStrings.decryptKeyPlaceholder;
+  document.getElementById('btnZeroWidthDecrypt').textContent = tabStrings.btnZeroWidthDecrypt;
+  document.getElementById('btnBinaryDecrypt').textContent = tabStrings.btnBinaryDecrypt;
+  document.getElementById('decryptResultLabel').textContent = tabStrings.decryptResultLabel;
+  document.getElementById('decryptResult').placeholder = tabStrings.decryptResultPlaceholder;
+  document.getElementById('btnCopyDecryptResult').innerHTML = '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyDecryptResult;
+  document.getElementById('decryptInfo').innerHTML = tabStrings.decryptInfo;
 }
 
 window.applyTabLanguage = applyTabLanguage;
