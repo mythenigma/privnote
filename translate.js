@@ -59,6 +59,35 @@ const languageTabStrings = {
     decryptResultPlaceholder: '解密结果将在此显示',
     btnCopyDecryptResult: '复制结果',
     decryptInfo: '<strong>说明：</strong>支持零宽字符和二进制两种加密内容的解密，密码留空即可。'
+  },
+  es: {
+    tabLinkText: 'Generar Enlace',
+    tabEncryptText: 'Cifrado de Caracteres',
+    tabDecryptText: 'Descifrar',
+    encryptTabTitle: 'Herramienta de Cifrado de Caracteres',
+    coverTextLabel: 'Texto de Cobertura (opcional)',
+    coverTextPlaceholder: 'Ingrese texto de cobertura, opcional',
+    hiddenTextLabel: 'Contenido Oculto (requerido, será cifrado)',
+    hiddenTextPlaceholder: 'Ingrese contenido oculto para cifrar',
+    encryptKeyLabel: 'Contraseña (opcional)',
+    encryptKeyPlaceholder: 'Ingrese contraseña (si hay alguna)',
+    btnZeroWidthEncrypt: 'Cifrado de Ancho Cero',
+    btnBinaryEncrypt: 'Cifrado Binario',
+    encryptResultLabel: 'Resultado Combinado',
+    encryptResultPlaceholder: 'El resultado cifrado aparecerá aquí',
+    btnCopyEncryptResult: 'Copiar Resultado',
+    encryptInfo: '<strong>Info:</strong> El cifrado de ancho cero oculta el contenido en el texto de cobertura. El cifrado binario convierte el contenido oculto a 0/1. Puede establecer una contraseña personalizada.',
+    decryptTabTitle: 'Herramienta de Descifrado',
+    decryptInputLabel: 'Contenido Cifrado (Ancho Cero o Binario)',
+    decryptInputPlaceholder: 'Pegar contenido para descifrar',
+    decryptKeyLabel: 'Contraseña (opcional)',
+    decryptKeyPlaceholder: 'Ingrese contraseña (si hay alguna)',
+    btnZeroWidthDecrypt: 'Descifrar Ancho Cero',
+    btnBinaryDecrypt: 'Descifrar Binario',
+    decryptResultLabel: 'Resultado del Descifrado',
+    decryptResultPlaceholder: 'El resultado del descifrado aparecerá aquí',
+    btnCopyDecryptResult: 'Copiar Resultado',
+    decryptInfo: '<strong>Info:</strong> Admite descifrado de contenido cifrado tanto en ancho cero como binario. Deje la contraseña en blanco si no se estableció.'
   }
 };
 

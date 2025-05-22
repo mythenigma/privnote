@@ -3,14 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<title>Privnote - Character Encryption Tool</title>
+<title>Privnote - Character Encryption</title>
 <meta name="keywords" content="zero-width character encryption, binary encryption, secure messaging, encrypted notes, ephemeral messages,隐信云">
-<meta name="description" content="Privnote.chat allows you to send encrypted messages using zero-width characters and binary, ensuring secure and private messaging.">
+<meta name="description" content="Privnote.chat allows you to encrypt messages using zero-width characters and binary formats, ensuring secure and private messaging.">
 <meta property="og:image" content="privnote.png">
 <meta property="og:url" content="https://privnote.chat/encryption.html">
 <link rel="canonical" href="https://privnote.chat/encryption.html">
 <meta property="og:type" content="website">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!-- Bootstrap & Font Awesome -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -20,44 +20,203 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<script type="application/ld+json">
-{
-"@context": "https://schema.org",
-"@type": "Organization",
-"name": "Privnote",
-"url": "https://privnote.chat",
-"logo": "https://privnote.chat/read/pic/noti.png",
-"contactPoint": {
-"@type": "ContactPoint",
-"email": "joe@pdfhost.online",
-"contactType": "Customer Service",
-"areaServed": "US",
-"availableLanguage": "English"
+<style>
+/* Enhanced Mobile Header Styles */
+@media (max-width: 767px) {
+  .site-header {
+    padding: 10px 5px;
+    background-color: #343a40;
+  }
+  .logo-text {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  .logo-icon {
+    color: #FFC107;
+    font-size: 1.3rem;
+    margin-right: 3px;
+  }
+  .language-dropdown {
+    margin-right: 5px;
+  }
+  .language-dropdown .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .tagline {
+    display: none;
+  }
+  .mobile-tagline {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+    font-style: italic;
+  }
+  .header-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Improved mobile navigation */
+  #mainNav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+    max-width: 100%;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  #mainNav::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  #mainNav .nav-link {
+    padding: 0.4rem 0.6rem;
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+  
+  /* Improved form controls for mobile */
+  .main-container {
+    padding: 0 8px;
+  }
+  .form-label {
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+  textarea.form-control {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+  .btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Improved alert and card styling */
+  .alert {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  /* Fix dropdown on mobile */
+  .dropdown-menu {
+    position: absolute;
+    min-width: 7rem;
+  }
 }
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+  .site-header {
+    padding: 8px 4px;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  .logo-icon {
+    font-size: 1.2rem;
+  }
+  #mainNav .nav-link {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  h5.mb-3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem !important;
+  }
+  .form-label {
+    font-size: 0.8rem;
+  }
+  .row.mb-3 {
+    margin-bottom: 0.5rem !important;
+  }
+  textarea.form-control, input.form-control {
+    font-size: 0.85rem;
+    padding: 0.35rem;
+  }
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+  }
 }
-</script>
+
+@media (min-width: 768px) {
+  .mobile-tagline {
+    display: none;
+  }
+}
+
+/* Add button hover/active states for better mobile feedback */
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Ensure scrolling works properly on mobile */
+body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix modal display on mobile */
+.modal-dialog {
+  margin: 0.5rem;
+}
+@media (max-width: 576px) {
+  .modal-dialog {
+    max-width: 95%;
+    margin: 0.25rem auto;
+  }
+  .modal-body {
+    padding: 0.5rem;
+  }
+  .modal-footer, .modal-header {
+    padding: 0.5rem;
+  }
+}
+</style>
 
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 <header class="site-header">
-<div class="container-fluid d-flex justify-content-between align-items-center">
-<a class="text-decoration-none" href="https://privnote.chat">
-<h1 class="logo-text">Priv<i class="fas fa-unlock-alt"></i>ote.chat</h1>
-</a>
-<div class="d-flex align-items-center">
-<div class="dropdown me-3">
-<button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-<i class="fas fa-globe me-1"></i><span id="currentLanguage">English</span>
-</button>
-<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
-</ul>
-</div>
-<div id="trans1" class="tagline">Secure your words, vanish your trace</div>
-</div>
-</div>
+  <div class="container-fluid">
+    <div class="d-flex align-items-center header-row">
+      <div class="logo-container">
+        <a class="text-decoration-none d-flex align-items-center" href="https://privnote.chat">
+          <div class="logo-icon"><i class="fas fa-lock"></i></div>
+          <h1 class="logo-text m-0">Priv<span class="text-warning">note</span></h1>
+        </a>
+      </div>
+      <div class="d-flex align-items-center header-controls">
+        <div class="dropdown language-dropdown">
+          <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-globe me-1"></i><span id="currentLanguage">EN</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+            <li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
+            <li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
+          </ul>
+        </div>
+        <div id="trans1" class="tagline d-none d-md-block">Secure your words, vanish your trace</div>
+      </div>
+    </div>
+    <div class="mobile-tagline" id="mobileTrans1">Secure your words, vanish your trace</div>
+  </div>
 </header>
 
 <!-- Navigation Links -->
@@ -82,73 +241,72 @@
 </div>
 
 <main class="flex-grow-1">
-<div class="container main-container" id="containerbox">
-  <!-- Character Encryption Tool Content -->
-    <h5 class="mb-3 text-center" id="trans2">Character Encryption Tool</h5>
+<div class="container main-container">
+    <h5 class="mb-3 text-center" id="encryptTabTitle">Character Encryption Tool</h5>
 
-    <div id="demo2" class="collapse info-box">
-      <p class="mb-0" id="encryptIntro">Privnote is a versatile encryption tool for secure notes. You can:</p>
-      <ul class="mt-2 mb-0">
-        <li><strong>Zero-Width Character Encryption:</strong> <span class="text-muted" id="zeroWidthDesc">Hide your note in plain text using zero-width characters, making it invisible to the naked eye.</span></li>
-        <li><strong>Binary Encryption:</strong> <span class="text-muted" id="binaryDesc">Convert your note into binary (0s and 1s) for extra security.</span></li>
-      </ul>
+    <!-- First textarea - Input area -->
+    <div class="mb-3">
+      <label for="myTextarea" class="form-label"><i class="fas fa-edit me-1"></i>Public Message (Input)</label>
+      <textarea class="form-control" id="myTextarea" rows="5" placeholder="Write Your Note Here..." style="border-left: 4px solid #3498db;"></textarea>
     </div>
     
-    <div class="form-group" id="formpart">
-      <label for="coverText" class="section-title" data-bs-toggle="collapse" data-bs-target="#demo2">
-        <i class="fas fa-user-lock"></i> <span id="coverTextTitle">Cover Text</span>
-      </label>
-      <div class="input-group mb-3">
-        <textarea class="form-control mb-3" rows="4" id="coverText" placeholder="Enter cover text (visible text to hide your message in)"></textarea>
-        <button class="btn btn-outline-secondary" type="button" onclick="copyCoverText()"><i class="fas fa-copy me-2"></i>Copy</button>
+    <!-- Hidden textarea - will be moved to bottom after encryption -->
+    <div class="mb-3" id="hiddenTextContainer">
+      <label for="HiddenTextarea" class="form-label"><i class="fas fa-eye-slash me-1"></i>Secret Message (Input)</label>
+      <textarea class="form-control" id="HiddenTextarea" rows="5" placeholder="Write Hidden Messages Here..." style="border-left: 4px solid #9b59b6;"></textarea>
+    </div>
+
+    <!-- Password inputs -->
+    <div class="row mb-3">
+      <div class="col-md-6 mb-2 mb-md-0">
+        <label for="pass1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="pass1" placeholder="Enter Password" autocomplete="off" required>
       </div>
-      
-      <div class="alert alert-info" id="encryptinfo" style="display: none">
-        <small id="successMessage">
-          The note has been successfully encrypted with two methods: the upper box contains zero-width character encryption, storing the information within the text, while the lower box shows the encryption as binary (0s and 1s). Both can be copied and used for decryption.
-        </small>
+      <div class="col-md-6">
+        <label for="pass2" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="pass2" placeholder="Confirm Password" required>
       </div>
-      
-      <label for="hiddenText" class="section-title mt-3">
-        <i class="fas fa-eye-slash"></i> <span id="hiddenTextTitle">Hidden Content</span>
-      </label>
-      <textarea class="form-control mb-3" rows="5" id="hiddenText" placeholder="Enter hidden content to encrypt"></textarea>
     </div>
-    
-    <!-- Password Section -->
-    <div class="mb-4">
-      <label for="encryptKey" class="form-label" id="passwordLabel">Password (optional)</label>
-      <input type="password" class="form-control" id="encryptKey" placeholder="Enter password (if any)">
-    </div>
-    
-    <!-- Encryption Buttons -->
+
+    <!-- Encrypt button -->
     <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-4">
-      <button class="btn btn-primary me-2" id="btnZeroWidthEncrypt" onclick="encryptZeroWidth()">
-        <i class="fas fa-lock me-2"></i><span id="zeroWidthBtnText">Zero-Width Encrypt</span>
-      </button>
-      <button class="btn btn-outline-primary me-2" id="btnBinaryEncrypt" onclick="encryptBinary()">
-        <i class="fas fa-binary me-2"></i><span id="binaryBtnText">Binary Encrypt</span>
+      <button id="tranmake" type="button" class="btn btn-warning px-4 py-2" onclick="create()">
+        <i class="fas fa-lock me-2"></i>Encrypt Note
       </button>
     </div>
-    
-    <!-- Results Area -->
+
+    <!-- Result display area -->
+    <div class="alert alert-success" id="encryptinfo" style="display: none">
+      <strong>Success!</strong> <span>The note has been successfully encrypted with two methods: the upper box contains zero-width character encryption, storing the information within the text, while the lower box shows the encryption as binary (0s and 1s). Both can be copied and used for decryption.</span>
+    </div>
+
+    <!-- Cover text copy area - 使用红色主题 -->
     <div class="mb-3">
-      <label for="encryptResult" class="form-label" id="resultLabel">Encrypted Result</label>
-      <textarea class="form-control" id="encryptResult" rows="5" placeholder="Encrypted result will appear here" readonly></textarea>
-      <button class="btn btn-outline-success mt-2" id="btnCopyEncryptResult" onclick="copyEncryptedResult()">
-        <i class="fas fa-copy me-2"></i><span id="copyBtnText">Copy Result</span>
-      </button>
+      <label for="coverCopy" class="form-label"><i class="fas fa-key me-1"></i>Zero-Width Encrypted Result (Copy to Share)</label>
+      <textarea class="form-control mb-2" id="coverCopy" rows="5" placeholder="Encrypted content will appear here" readonly style="border-left: 4px solid #dc3545; background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9)) !important;"></textarea>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-danger" type="button" onclick="copyTextarea('coverCopy')">
+          <i class="fas fa-copy me-2"></i>Copy Zero-Width Result
+        </button>
+      </div>
+    </div>
+
+    <!-- Card for link generation -->
+    <div class="card" id="resultlink" style="display: none">
+      <div class="card-body">
+        <h6 class="card-title">PrivNote has been made</h6>
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item list-group-item-success" id="innerlink"></li>
+          <li id="tranli" class="list-group-item list-group-item-warning">The message will be automatically destroyed according to your settings.</li>
+        </ul>
+        <button type="button" class="btn btn-outline-secondary" id="copybutton" onclick="copylink()">
+          <i class="fas fa-copy me-2"></i>Copy Link
+        </button>
+      </div>
     </div>
     
-    <div class="mb-3">
-      <label for="decryptResult" class="form-label">Decrypted Result (from Encrypted Result)</label>
-      <textarea class="form-control" id="decryptResult" rows="3" placeholder="Decrypted result will appear here" readonly></textarea>
-      <button class="btn btn-outline-secondary" type="button" onclick="copyDecryptResult()"><i class="fas fa-copy me-2"></i>Copy</button>
-    </div>
-    
-    <div class="alert alert-info mt-3" id="encryptInfoHelp" style="font-size:0.95em">
-      <strong>Info:</strong> <span id="encryptInfoText">Zero-width encryption hides the hidden content in the cover text. Binary encryption converts the hidden content to 0/1. You can set a custom password for additional security.</span>
-    </div>
+    <!-- Container for Hidden Text after encryption -->
+    <div id="hiddenTextAfterEncrypt"></div>
 </div>
 </main>
 
@@ -162,58 +320,131 @@
 </div>
 </footer>
 
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">How to decode messages</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img id="decrysrc" src="read/pic/enDecode1.png" class="img-fluid" alt="changecode" data-bs-toggle="modal" data-bs-target="#myModal">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="translate.js"></script>
 <script>
-// 默认语言
+// Default language
 var currentLanguage = 'en';
 
 function switchLanguage(lang) {
   currentLanguage = lang;
-  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'English');
+  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'EN');
   document.getElementById('trans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
+  document.getElementById('mobileTrans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
   
   // Navigation links
   document.getElementById('navLinkText').textContent = (lang === 'zh' ? '生成链接' : 'Generate Link');
   document.getElementById('navEncryptText').textContent = (lang === 'zh' ? '字符加密' : 'Character Encryption');
   document.getElementById('navDecryptText').textContent = (lang === 'zh' ? '解密工具' : 'Decrypt');
   
-  // 加密页面元素
-  document.getElementById('trans2').textContent = (lang === 'zh' ? '字符加密工具' : 'Character Encryption Tool');
-  document.getElementById('encryptIntro').textContent = (lang === 'zh' ? '隐信云是一款多功能的加密工具。您可以：' : 'Privnote is a versatile encryption tool for secure notes. You can:');
-  document.getElementById('zeroWidthDesc').textContent = (lang === 'zh' ? '使用零宽字符在普通文本中隐藏信息，肉眼无法察觉。' : 'Hide your note in plain text using zero-width characters, making it invisible to the naked eye.');
-  document.getElementById('binaryDesc').textContent = (lang === 'zh' ? '将信息转换为二进制（0和1）以提供额外的安全性。' : 'Convert your note into binary (0s and 1s) for extra security.');
-  document.getElementById('coverTextTitle').textContent = (lang === 'zh' ? '掩饰文本' : 'Cover Text');
-  document.getElementById('hiddenTextTitle').textContent = (lang === 'zh' ? '隐藏内容' : 'Hidden Content');
-  document.getElementById('passwordLabel').textContent = (lang === 'zh' ? '密码（可选）' : 'Password (optional)');
-  document.getElementById('zeroWidthBtnText').textContent = (lang === 'zh' ? '零宽字符加密' : 'Zero-Width Encrypt');
-  document.getElementById('binaryBtnText').textContent = (lang === 'zh' ? '二进制加密' : 'Binary Encrypt');
-  document.getElementById('resultLabel').textContent = (lang === 'zh' ? '加密结果' : 'Encrypted Result');
-  document.getElementById('copyBtnText').textContent = (lang === 'zh' ? '复制结果' : 'Copy Result');
-  document.getElementById('encryptInfoText').textContent = (lang === 'zh' ? '零宽加密将隐藏内容隐藏在掩饰文本中。二进制加密将隐藏内容转换为0/1。您可以设置自定义密码以提高安全性。' : 'Zero-width encryption hides the hidden content in the cover text. Binary encryption converts the hidden content to 0/1. You can set a custom password for additional security.');
-  document.getElementById('successMessage').textContent = (lang === 'zh' ? '便签已成功加密，生成了两种加密方式：上框内容为零宽字符加密，信息存储在文字中；下框内容为加密后的0和1数字。两个框中的内容都可以复制并用于解密' : 'The note has been successfully encrypted with two methods: the upper box contains zero-width character encryption, storing the information within the text, while the lower box shows the encryption as binary (0s and 1s). Both can be copied and used for decryption.');
+  // Update main interface text
+  document.getElementById('encryptTabTitle').textContent = (lang === 'zh' ? '字符加密工具' : 'Character Encryption Tool');
+  document.getElementById('tranmake').innerHTML = '<i class="fas fa-lock me-2"></i>' + (lang === 'zh' ? '加密便签' : 'Encrypt Note');
+  document.getElementById('tranli').textContent = (lang === 'zh' ? '消息将根据您的设置自动销毁。' : 'The message will be automatically destroyed according to your settings.');
   
-  // 更新placeholder
-  document.getElementById('coverText').placeholder = (lang === 'zh' ? '输入掩饰文本（用于隐藏您的信息的可见文本）' : 'Enter cover text (visible text to hide your message in)');
-  document.getElementById('hiddenText').placeholder = (lang === 'zh' ? '输入要加密的隐藏内容' : 'Enter hidden content to encrypt');
-  document.getElementById('encryptKey').placeholder = (lang === 'zh' ? '输入密码（如果有）' : 'Enter password (if any)');
-  document.getElementById('encryptResult').placeholder = (lang === 'zh' ? '加密结果将在此显示' : 'Encrypted result will appear here');
+  // Update placeholders
+  document.getElementById('myTextarea').placeholder = (lang === 'zh' ? '在此输入便签内容...' : 'Write Your Note Here...');
+  document.getElementById('HiddenTextarea').placeholder = (lang === 'zh' ? '在此输入隐藏内容...' : 'Write Hidden Messages Here...');
+  document.getElementById('pass1').placeholder = (lang === 'zh' ? '输入密码' : 'Enter Password');
+  document.getElementById('pass2').placeholder = (lang === 'zh' ? '确认密码' : 'Confirm Password');
+  document.getElementById('coverCopy').placeholder = (lang === 'zh' ? '加密内容将在此显示' : 'Encrypted content will appear here');
 }
 
-// 从原始文件完全重写的加密功能核心函数
+// 删除 convertTime2 和 convertTime 函数及所有相关调用
+
+//console.log(convertTime2(343434));
+const url = window.location.href;
+const regex = /prive\/(\d+)\/note/;
+const match = url.match(regex);
+
+//console.log(match); // logs "2146489127"
+
+
+
+
+let myCookieValue = document.cookie
+  .split('; ')
+  .find(cookie => cookie.startsWith('cookiefilenumber='))
+  ?.split('=')[1];
+if (myCookieValue) {
+  ///console.log(myCookieValue);
+
+   const numberoffile = myCookieValue;
+   const buttcontent = document.getElementById('containerbox');
+   buttcontent.innerHTML = '<h3><div class="spinner-grow text-muted"></div><div class="spinner-grow text-primary"></div><div class="spinner-grow text-success"></div><div class="spinner-grow text-info"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-danger"></div><div class="spinner-grow text-secondary"></div><div class="spinner-grow text-dark"></div><div class="spinner-grow text-light"></div></h3>';
+
+  document.cookie = "cookiefilenumber=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+
+} else {
+  //console.log("Cookie not found.");
+  // document.getElementById('grabify').style.display='block';
+}
+
+
+
+
+if(match !== null){
+  const numberoffile = match[1];
+  
+
+}
+
+var textareaValue='';
+var expiretime = 0;
+var confirmask = 1;
+var pass1=''; var pass2='';
+var containerbox = document.getElementById('demo');
+var buttontwo = document.getElementById('buttontwo');
+var myArray = '';
+var lastElement = '';
+var globename='';
+var combineallvalue='';
+function copylink(){
+     const exampleLi = document.getElementById('innerlink'); // select the <li> element with id "example"
+     const exampleText = exampleLi.textContent; // get the text content of the <li> element
+     navigator.clipboard.writeText(exampleText) // copy the text to the clipboard
+  .then(() => {
+
+var button = document.getElementById("copybutton");
+button.classList.add('rotate');
+button.textContent = "Link Copied";
+
+  })
+  .catch((err) => {
+    console.error('Error copying text: ', err);
+  });
+
+}
+
 
 // 加密过程：使用XOR对文本进行加密，并转换为0和1的二进制
 function textToBinaryEncryption(text, key) {
-    // 转换密钥为字符的charCode数组
-    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
+    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 转换密钥为字符的charCode数组
 
-    // 对每个字符进行XOR加密，并转换为16位二进制
+    // 第一步：对每个字符进行XOR加密，并转换为二进制
     const encryptedText = Array.from(text).map((char, index) => {
         // 使用密钥字符的charCode与当前字符的charCode进行异或运算
         let charCode = char.charCodeAt(0) ^ keyCodes[index % keyCodes.length];
         
         // 转换为二进制，返回的是0和1的字符串（每个字符的16位二进制表示）
-        return charCode.toString(2).padStart(16, '0');
+        return charCode.toString(2).padStart(16, '0'); // 每个字符的二进制表示为16位
     }).join('');
 
     return encryptedText;
@@ -221,8 +452,7 @@ function textToBinaryEncryption(text, key) {
 
 // 解密过程：从0和1的二进制恢复原始文本
 function binaryToTextDecryption(binaryText, key) {
-    // 转换密钥为字符的charCode数组
-    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
+    const keyCodes = Array.from(key).map(char => char.charCodeAt(0));  // 转换密钥为字符的charCode数组
 
     // 分割二进制字符串为每16位一组（每个字符的16位二进制表示）
     const text = binaryText.match(/.{16}/g).map((bin, index) => {
@@ -234,27 +464,28 @@ function binaryToTextDecryption(binaryText, key) {
     return text;
 }
 
-// 使用零宽字符加密（使用XOR加密并转换为零宽字符）
+// 使用统一的 16 位二进制进行 XOR 加密，并转换为零宽字符
 function textToZeroWidthWithDoubleEncryption(text, key) {
-    // 将密钥字符串转为字符的charCode数组
+    // 将密钥字符串转为字符的 charCode 数组
     const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
 
-    // 第一步：XOR加密
+    // 第一步：XOR 加密
     const xorEncryptedText = Array.from(text).map((char, index) => {
-        // 使用keyCodes中的字符与原始字符的charCode进行异或运算
+        // 使用 keyCodes 中的字符与原始字符的 charCode 进行异或运算
         let charCode = char.charCodeAt(0) ^ keyCodes[index % keyCodes.length];
         
-        // 将字符编码强制为16位二进制字符串，确保统一长度
+        // 将字符编码强制为 16 位二进制字符串，确保统一长度
         return charCode.toString(2).padStart(16, '0');
     }).join('');
 
-    // 第二步：将XOR加密后的二进制转换为零宽字符
+    // 第二步：将 XOR 加密后的二进制转换为零宽字符
     return xorEncryptedText.split('').map(bit => bit === '0' ? '\u200B' : '\u200C').join('');
 }
 
-// 零宽字符解密
+
+// 解密流程：先解码零宽字符，再使用 XOR 解密
 function zeroWidthToTextWithDoubleDecryption(zeroWidthText, key) {
-    // 将密钥字符串转为字符的charCode数组
+    // 将密钥字符串转为字符的 charCode 数组
     const keyCodes = Array.from(key).map(char => char.charCodeAt(0));
 
     // 将零宽字符转换为二进制字符串
@@ -276,180 +507,218 @@ function zeroWidthToTextWithDoubleDecryption(zeroWidthText, key) {
     return text;
 }
 
-// UI交互函数
+function decoding(){
+  const textarea = document.getElementById('myTextarea'); // Get the textarea element by its ID
+  textareaValue = textarea.value; 
+  
+  
+  pass1 = document.getElementById('pass1').value;
+  pass2 = document.getElementById('pass2').value;
+  if (pass1 === "" && pass2 === "") {
+    pass1 = 'mythenigma';
+  }
+  const isBinary = /^[01]+$/.test(textareaValue);
+  let decodedSecretMessage;
 
-// 添加零宽字符加密功能
-function encryptZeroWidth() {
-    const coverText = document.getElementById('coverText');
-    const hiddenText = document.getElementById('hiddenText');
-    let password = document.getElementById('encryptKey').value;
-    if (hiddenText.value === "") {
-        alert(currentLanguage === 'zh' ? '请输入要隐藏的内容！' : 'Please enter hidden content to encrypt!');
-        return;
-    }
-    if (password === "") {
-        password = 'mythenigma';
-    }
-    const encrypted = textToZeroWidthWithDoubleEncryption(hiddenText.value, password);
-    // 生成 cover+zero-width 并直接写回第一个输入框
-    coverText.value = coverText.value + encrypted;
-    document.getElementById('encryptResult').value = coverText.value;
-    const encryptInfo = document.getElementById('encryptinfo');
-    fadeIn(encryptInfo);
-    decryptFromResult(); // 自动解密
+if (isBinary) {
+   decodedSecretMessage = binaryToTextDecryption(textareaValue,pass1);
+ console.log(decodedSecretMessage);
+} else {
+  const encodedSecretPart = textareaValue.slice(0, textareaValue.length);  // 提取加密部分
+  decodedSecretMessage = zeroWidthToTextWithDoubleDecryption(encodedSecretPart, pass1);  // 解密加密部分
 }
 
-// 添加二进制加密功能
-function encryptBinary() {
-    const hiddenText = document.getElementById('hiddenText').value;
-    let password = document.getElementById('encryptKey').value;
-    
-    if (hiddenText === "") {
-        alert(currentLanguage === 'zh' ? '请输入要隐藏的内容！' : 'Please enter hidden content to encrypt!');
-        return;
-    }
-    
-    if (password === "") {
-        password = 'mythenigma'; // 默认密码
-    }
-    
-    const encryptedText = textToBinaryEncryption(hiddenText, password);
-    document.getElementById('encryptResult').value = encryptedText;
-    
-    const encryptInfo = document.getElementById('encryptinfo');
-    fadeIn(encryptInfo);
+  //console.log(decodedSecretMessage);
+  simulateTyping("HiddenTextarea",decodedSecretMessage, 100);
 }
 
-// 复制加密结果
-function copyEncryptedResult() {
-    const encryptResult = document.getElementById('encryptResult');
-    const resultText = encryptResult.value;
-    
-    if (!resultText) {
-        alert(currentLanguage === 'zh' ? '没有可复制的内容！' : 'No content to copy!');
-        return;
-    }
-    
-    navigator.clipboard.writeText(resultText)
-        .then(() => {
-            const copyBtn = document.getElementById('btnCopyEncryptResult');
-            const originalText = copyBtn.innerHTML;
-            
-            copyBtn.classList.add('btn-success');
-            copyBtn.classList.remove('btn-outline-success');
-            copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>' + 
-                (currentLanguage === 'zh' ? '已复制！' : 'Copied!');
-            
-            setTimeout(() => {
-                copyBtn.classList.remove('btn-success');
-                copyBtn.classList.add('btn-outline-success');
-                copyBtn.innerHTML = originalText;
-            }, 2000);
-        })
-        .catch(err => {
-            console.error('无法复制文本: ', err);
-            alert(currentLanguage === 'zh' ? '复制失败，请手动复制。' : 'Copy failed, please copy manually.');
-        });
+function create() {
+   const textarea = document.getElementById('myTextarea');
+   textareaValue = textarea.value; 
+   const hiddentext = document.getElementById('HiddenTextarea');
+   hiddentextValue = hiddentext.value; hiddentextValue += ' \n ';
+
+
+  let totallength = textareaValue.length + hiddentextValue.length ;
+
+  if(totallength > 30000){
+    alert('Too long.....');
+    return ;
+  }
+
+
+if (textareaValue === ""){
+  alert('Write something on note');
+  return ;
 }
 
-// 复制覆盖文本
-function copyCoverText() {
-    const coverText = document.getElementById('coverText');
-    coverText.select();
+   pass1 = document.getElementById('pass1').value;
+   pass2 = document.getElementById('pass2').value;
+   //console.log(pass1);
+
+  if (pass1 === "" && pass2 === "") {
+    pass1 = 'mythenigma';
+  } else if (pass1 === pass2) {
+    pass1 = pass2;
+  } else {
+    alert('Password Not Matching or Clear the Password');
+    return;
+  }
+
+
+ const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1); 
+ const encodedSecretMessage01= textToBinaryEncryption(hiddentextValue, pass1); 
+ combineallvalue =  encodedSecretMessage + textareaValue;
+ textareaValue   =  combineallvalue;
+ textarea.value  =  combineallvalue;
+ hiddentext.value=   encodedSecretMessage01;
+ 
+ // Show the result
+ document.getElementById('encryptinfo').style.display = 'block';
+ document.getElementById('coverCopy').value = textarea.value;
+ 
+ // 将HiddenText框移动到最下面
+ const hiddenTextContainer = document.getElementById('hiddenTextContainer');
+ const hiddenTextAfterEncrypt = document.getElementById('hiddenTextAfterEncrypt');
+ const hiddenTextArea = document.getElementById('HiddenTextarea');
+ 
+ // 修改标签文本，更清晰地表示这是二进制加密结果
+ const label = hiddenTextContainer.querySelector('label');
+ label.innerHTML = '<i class="fas fa-code me-1"></i>Binary Encryption Result';
+ 
+ // 从父元素中移除原始 textarea
+ const hiddenTextParent = hiddenTextArea.parentNode;
+ hiddenTextParent.removeChild(hiddenTextArea);
+ 
+ // 给二进制结果框添加左边框样式 - 使用蓝色
+ hiddenTextArea.style.borderLeft = '4px solid #17a2b8';
+ hiddenTextArea.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9))';
+ hiddenTextArea.className = 'form-control mb-2'; // 添加 mb-2 以在文本框和按钮之间创建间距
+ 
+ // 将原始 textarea 添加回父容器
+ hiddenTextParent.appendChild(hiddenTextArea);
+ 
+ // 显示结果
+ document.getElementById('coverCopy').style.borderLeft = '4px solid #dc3545';
+ document.getElementById('coverCopy').style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9))';
+ 
+ // 创建复制按钮并添加到文本框下方
+ const copyButton = document.createElement('button');
+ copyButton.className = 'btn btn-info';  // 使用蓝色按钮(info)，区别于上面的红色按钮(danger)
+ copyButton.type = 'button';
+ copyButton.innerHTML = '<i class="fas fa-copy me-2"></i>Copy Binary Result';
+ copyButton.onclick = function() { copyTextarea('HiddenTextarea'); };
+ copyButton.style.width = 'auto'; // 设置按钮宽度为自动
+ copyButton.style.display = 'block'; // 设置为块级元素
+ 
+ // 创建一个按钮容器，用于居中显示按钮
+ const buttonContainer = document.createElement('div');
+ buttonContainer.className = 'd-flex justify-content-center';
+ buttonContainer.appendChild(copyButton);
+ 
+ // 将按钮容器添加到父容器
+ hiddenTextParent.appendChild(buttonContainer);
+ 
+ // 从原位置移除并附加到底部容器
+ hiddenTextAfterEncrypt.appendChild(hiddenTextContainer);
+ 
+ // 添加一些顶部间距，使其与上面的内容有更好的视觉分隔
+ hiddenTextContainer.classList.add('mt-4');
+}
+
+function copyTextarea(id) {
+    var textarea = document.getElementById(id);
+    textarea.select();
     document.execCommand('copy');
-}
-
-// 解密结果复制
-function copyDecryptResult() {
-    const decryptResult = document.getElementById('decryptResult');
-    decryptResult.select();
-    document.execCommand('copy');
-}
-
-// 解密结果显示
-function decryptFromResult() {
-    const encrypted = document.getElementById('encryptResult').value;
-    let password = document.getElementById('encryptKey').value;
-    if (password === "") {
-        password = 'mythenigma';
-    }
-    // 按照 decrypt.html 的方式，提取第一个连续的零宽字符片段
-    const zeroWidthChars = encrypted.match(/[\u200B\u200C]+/);
-    let decrypted = '';
-    if (zeroWidthChars) {
-        decrypted = zeroWidthToTextWithDoubleDecryption(zeroWidthChars[0], password);
+    
+    // Visual feedback for copy
+    let button;
+    if (id === 'coverCopy') {
+        // 直接找到按钮而不是使用 nextElementSibling
+        button = document.querySelector('.btn.btn-danger[onclick="copyTextarea(\'coverCopy\')"]');
     } else {
-        decrypted = 'No zero-width encoded content found.';
+        // 二进制结果的按钮，因为是动态创建的，使用部分匹配
+        button = document.querySelector('.btn.btn-info[onclick*="' + id + '"]');
     }
-    document.getElementById('decryptResult').value = decrypted;
+    
+    if (button) {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+        }, 2000);
+    }
 }
 
-// 辅助函数 - 淡入元素
-function fadeIn(element, duration = 1000) {
-    let opacity = 0;
-    element.style.opacity = opacity;
-    element.style.display = 'block';
-
-    const interval = 50;
-    const increment = interval / duration;
-
-    const fadeInInterval = setInterval(() => {
-        opacity += increment;
-        if (opacity >= 1) {
-            opacity = 1;
-            clearInterval(fadeInInterval);
-        }
-        element.style.opacity = opacity;
-    }, interval);
-}
-
-// 辅助函数 - 淡出元素
-function fadeOut(element) {
-    let opacity = 1;
-
-    function decreaseOpacity() {
-        opacity -= 0.05;
-        if (opacity <= 0) {
-            opacity = 0;
-            element.style.opacity = opacity;
-            clearInterval(fadeOutInterval);
-            element.style.display = 'none';
-        } else {
-            element.style.opacity = opacity;
+// 添加模拟打字效果的函数，以便decoding函数可以正常工作
+function simulateTyping(elementId, text, speed) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    element.value = '';
+    let i = 0;
+    
+    function type() {
+        if (i < text.length) {
+            element.value += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
         }
     }
-
-    const fadeOutInterval = setInterval(decreaseOpacity, 50);
+    
+    type();
 }
 
-// 地区检测和自动语言切换
-function maitime() {
-   let d = new Date();
-   d = d + 'maipdf';
-   console.log(d);
-    if(d.indexOf("0800") < 1) {  
-       return 0;
-    } else {
-      let filterstrings = ['台','香','新','sin','hong','sg','tw','hk','臺'];
-      let regex = new RegExp(filterstrings.join("|"), "i");  
-      if(regex.test(d)) {
-        return 0;
+// Add a function to check screen size and adjust UI elements
+function adjustForMobileView() {
+  if (window.innerWidth < 768) {
+    // Adjust textarea rows for better mobile viewing
+    document.querySelectorAll('textarea').forEach(textarea => {
+      textarea.rows = 4;
+    });
+    
+    // Ensure the alert message is concise on mobile
+    const alertSpan = document.querySelector('#encryptinfo span');
+    if (alertSpan) {
+      if (window.innerWidth < 576) {
+        alertSpan.textContent = 'Encryption successful! Upper box: zero-width characters. Lower box: binary format.';
+      } else if (window.innerWidth < 768) {
+        alertSpan.textContent = 'Encryption complete. The top box contains zero-width character encryption, while the bottom shows binary encryption.';
       }
     }
-    return 7;
+    
+    // Adjust button text for smaller screens
+    const copyZeroWidthBtn = document.querySelector('.btn.btn-danger[onclick="copyTextarea(\'coverCopy\')"]');
+    if (copyZeroWidthBtn && window.innerWidth < 400) {
+      copyZeroWidthBtn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
+    }
+  }
 }
 
-// 检查地区并自动切换语言
-window.addEventListener('DOMContentLoaded', function() {
-    var maigua = maitime();
-    console.log(maigua);
-    
-    if(maigua == 7) {
-        switchLanguage('zh');
-    } else {
-        switchLanguage('en');
+// Call the function on page load and resize
+window.addEventListener('load', adjustForMobileView);
+window.addEventListener('resize', adjustForMobileView);
+
+// Modify create() function to handle mobile displays better
+const originalCreate = create;
+create = function() {
+  originalCreate();
+  
+  // After encryption, if on mobile, modify the dynamically created button text to be shorter
+  if (window.innerWidth < 400) {
+    const binaryResultBtn = document.querySelector('.btn.btn-info[onclick*="HiddenTextarea"]');
+    if (binaryResultBtn) {
+      binaryResultBtn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
     }
-});
+  }
+  
+  // Scroll to the results on mobile
+  if (window.innerWidth < 768) {
+    document.getElementById('encryptinfo').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
 </script>
+
 </body>
 </html>
