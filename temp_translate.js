@@ -189,7 +189,6 @@ const languageEncryptionStrings = {
     btnBinaryEncrypt: 'Binary Encrypt',
     encryptResultLabel: 'Combined Result',
     encryptResultPlaceholder: 'Encrypted result will appear here',
-    textareaPlaceholder: 'Write Your Note Here...',
     tranmake: 'Encrypt Note',
     btnCopyEncryptResult: 'Copy Result',
     encryptInfo: '<strong>Info:</strong> Zero-width encryption hides the hidden content in the cover text. Binary encryption converts the hidden content to 0/1. You can set a custom password.',
@@ -199,7 +198,8 @@ const languageEncryptionStrings = {
     alertWriteSomething: 'Write something on note',
     mobileAlertShort: 'Encryption successful! Upper box: zero-width characters. Lower box: binary format.',
     mobileAlertMedium: 'Encryption complete. The top box contains zero-width character encryption, while the bottom shows binary encryption.'
-  },  zh: {
+  },
+  zh: {
     encryptTabTitle: '字符加密工具',
     coverTextLabel: '表面内容（可选）',
     coverTextPlaceholder: '输入表面内容，可留空',
@@ -213,7 +213,6 @@ const languageEncryptionStrings = {
     btnBinaryEncrypt: '二进制加密',
     encryptResultLabel: '合成结果',
     encryptResultPlaceholder: '加密内容将在此显示',
-    textareaPlaceholder: '在此输入便签内容...',
     tranmake: '加密便签',
     btnCopyEncryptResult: '复制结果',
     encryptInfo: '<strong>说明：</strong>零宽字符加密会将隐藏内容隐写进表面内容，二进制加密则将隐藏内容转为0/1字符串。可自定义密码。',
@@ -223,7 +222,8 @@ const languageEncryptionStrings = {
     alertWriteSomething: '请在便签上写些内容',
     mobileAlertShort: '加密成功！上框：零宽字符。下框：二进制格式。',
     mobileAlertMedium: '加密完成。顶部框包含零宽字符加密，底部显示二进制加密。'
-  },  es: {
+  },
+  es: {
     encryptTabTitle: 'Herramienta de Cifrado de Caracteres',
     coverTextLabel: 'Texto de Cobertura (opcional)',
     coverTextPlaceholder: 'Ingrese texto de cobertura, opcional',
@@ -237,13 +237,13 @@ const languageEncryptionStrings = {
     btnBinaryEncrypt: 'Cifrado Binario',
     encryptResultLabel: 'Resultado Combinado',
     encryptResultPlaceholder: 'El contenido cifrado aparecerá aquí',
-    textareaPlaceholder: 'Escriba su nota aquí...',
     tranmake: 'Cifrar Nota',
     btnCopyEncryptResult: 'Copiar Resultado',
     encryptInfo: '<strong>Info:</strong> El cifrado de ancho cero oculta el contenido en el texto de cobertura. El cifrado binario convierte el contenido oculto a 0/1. Puede establecer una contraseña personalizada.',
     hiddenTextareaPlaceholder: 'Escriba mensajes ocultos aquí...',
     alertPasswordMismatch: 'Contraseña no coincidente o borrar la contraseña',
-    alertContentTooLong: 'Demasiado largo.....',    alertWriteSomething: 'Escriba algo en la nota',
+    alertContentTooLong: 'Demasiado largo.....',
+    alertWriteSomething: 'Escriba algo en la nota',
     mobileAlertShort: '¡Cifrado exitoso! Cuadro superior: caracteres de ancho cero. Cuadro inferior: formato binario.',
     mobileAlertMedium: 'Cifrado completo. El cuadro superior contiene cifrado de caracteres de ancho cero, mientras que el inferior muestra cifrado binario.'
   },
@@ -261,7 +261,6 @@ const languageEncryptionStrings = {
     btnBinaryEncrypt: 'Chiffrer en Binaire',
     encryptResultLabel: 'Résultat Combiné',
     encryptResultPlaceholder: 'Le résultat chiffré apparaîtra ici',
-    textareaPlaceholder: 'Écrivez votre note ici...',
     tranmake: 'Chiffrer la Note',
     btnCopyEncryptResult: 'Copier le Résultat',
     encryptInfo: '<strong>Info:</strong> Le chiffrement à largeur zéro cache le contenu caché dans le texte de couverture. Le chiffrement binaire convertit le contenu caché en 0/1. Vous pouvez définir un mot de passe personnalisé.',

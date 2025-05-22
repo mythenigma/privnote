@@ -71,6 +71,11 @@ position: relative;
 overflow: hidden;
 }
 
+/* Ensure consistent heading spacing */
+.main-container h5:first-of-type {
+margin-top: 0.5rem;
+}
+
 .main-container::before {
 content: "";
 position: absolute;
@@ -458,6 +463,11 @@ font-size: 2rem;
 .btn {
 padding: 0.5rem 1rem;
 font-size: 0.8rem;
+}
+/* Adjust heading spacing on mobile */
+.main-container h5:first-of-type {
+margin-top: 0.5rem !important;
+padding-top: 0.5rem !important;
 }
 .main-container {
 padding: 1.5rem;
