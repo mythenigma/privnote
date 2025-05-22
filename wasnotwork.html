@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
 <meta property="og:url" content="https://privnote.chat/encryption.html">
 <link rel="canonical" href="https://privnote.chat/encryption.html">
 <meta property="og:type" content="website">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Bootstrap & Font Awesome -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -19,6 +20,21 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Organization",
+"name": "Privnote",
+"url": "https://privnote.chat",
+"logo": "https://privnote.chat/read/pic/noti.png",
+"contactPoint": {
+"@type": "ContactPoint",
+"email": "contact@privnote.chat",
+"contactType": "customer service"
+}
+}
+</script>
 
 <style>
 /* Enhanced Mobile Header Styles */
@@ -194,30 +210,25 @@ body {
 
 <body class="d-flex flex-column min-vh-100">
 <header class="site-header">
-  <div class="container-fluid">
-    <div class="d-flex align-items-center header-row">
-      <div class="logo-container">
-        <a class="text-decoration-none d-flex align-items-center" href="https://privnote.chat">
-          <div class="logo-icon"><i class="fas fa-lock"></i></div>
-          <h1 class="logo-text m-0">Priv<span class="text-warning">note</span></h1>
-        </a>
-      </div>
-      <div class="d-flex align-items-center header-controls">
-        <div class="dropdown language-dropdown">
-          <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-globe me-1"></i><span id="currentLanguage">EN</span>
-          </button>          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-            <li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
-            <li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
-            <li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">Español</a></li>
-            <li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">Français</a></li>
-          </ul>
-        </div>
-        <div id="trans1" class="tagline d-none d-md-block">Secure your words, vanish your trace</div>
-      </div>
-    </div>
-    <div class="mobile-tagline" id="mobileTrans1">Secure your words, vanish your trace</div>
-  </div>
+<div class="container-fluid d-flex justify-content-between align-items-center">
+<a class="text-decoration-none" href="https://privnote.chat">
+<h1 class="logo-text">Priv<i class="fas fa-unlock-alt"></i>ote.chat</h1>
+</a>
+<div class="d-flex align-items-center">
+<div class="dropdown me-3">
+<button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-globe me-1"></i><span id="currentLanguage">EN</span>
+</button>
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">Español</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">Français</a></li>
+</ul>
+</div>
+<div id="trans1" class="tagline">Secure your words, vanish your trace</div>
+</div>
+</div>
 </header>
 
 <!-- Navigation Links -->
@@ -243,7 +254,7 @@ body {
 
 <main class="flex-grow-1">
 <div class="container main-container">
-    <h5 class="mb-3 text-center" id="encryptTabTitle">Character Encryption Tool</h5>
+    <h5 class="mb-3 mt-4 pt-2 text-center" id="encryptTabTitle">Character Encryption Tool</h5>
 
     <!-- First textarea - Input area -->
     <div class="mb-3">
@@ -321,15 +332,15 @@ body {
 </div>
 </footer>
 
-<div class="modal" id="myModal">
+<div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">How to decode messages</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <img id="decrysrc" src="read/pic/enDecode1.png" class="img-fluid" alt="changecode" data-bs-toggle="modal" data-bs-target="#myModal">
+        <img id="decrysrc" src="read/pic/enDecode1.png" class="img-fluid" alt="changecode">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -339,49 +350,9 @@ body {
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="translate.js"></script>
 <script>
-// Default language
-var currentLanguage = localStorage.getItem('privnote_language') || 'en';
-
-function switchLanguage(lang) {
-  currentLanguage = lang;
-  // Save language preference to localStorage
-  localStorage.setItem('privnote_language', lang);
-  
-  // Set the current language display
-  let languageDisplay = 'English';
-  if (lang === 'zh') languageDisplay = '中文';
-  if (lang === 'es') languageDisplay = 'Español';
-  if (lang === 'fr') languageDisplay = 'Français';
-  document.getElementById('currentLanguage').textContent = languageDisplay;
-  
-  // Update tagline
-  let tagline = 'Secure your words, vanish your trace';
-  if (lang === 'zh') tagline = '安全传信，隐匿无踪';
-  if (lang === 'es') tagline = 'Asegura tus palabras, desvanece tu rastro';
-  if (lang === 'fr') tagline = 'Sécurisez vos mots, faites disparaître votre trace';
-  document.getElementById('trans1').textContent = tagline;
-  document.getElementById('mobileTrans1').textContent = tagline;
-  
-  // Navigation links
-  document.getElementById('navLinkText').textContent = (lang === 'zh' ? '生成链接' : 'Generate Link');
-  document.getElementById('navEncryptText').textContent = (lang === 'zh' ? '字符加密' : 'Character Encryption');
-  document.getElementById('navDecryptText').textContent = (lang === 'zh' ? '解密工具' : 'Decrypt');
-  
-  // Update main interface text
-  document.getElementById('encryptTabTitle').textContent = (lang === 'zh' ? '字符加密工具' : 'Character Encryption Tool');
-  document.getElementById('tranmake').innerHTML = '<i class="fas fa-lock me-2"></i>' + (lang === 'zh' ? '加密便签' : 'Encrypt Note');
-  document.getElementById('tranli').textContent = (lang === 'zh' ? '消息将根据您的设置自动销毁。' : 'The message will be automatically destroyed according to your settings.');
-  
-  // Update placeholders
-  document.getElementById('myTextarea').placeholder = (lang === 'zh' ? '在此输入便签内容...' : 'Write Your Note Here...');
-  document.getElementById('HiddenTextarea').placeholder = (lang === 'zh' ? '在此输入隐藏内容...' : 'Write Hidden Messages Here...');
-  document.getElementById('pass1').placeholder = (lang === 'zh' ? '输入密码' : 'Enter Password');
-  document.getElementById('pass2').placeholder = (lang === 'zh' ? '确认密码' : 'Confirm Password');
-  document.getElementById('coverCopy').placeholder = (lang === 'zh' ? '加密内容将在此显示' : 'Encrypted content will appear here');
-}
-
-// 删除 convertTime2 和 convertTime 函数及所有相关调用
+// Encryption functions
 
 //console.log(convertTime2(343434));
 const url = window.location.href;
@@ -552,36 +523,32 @@ function create() {
    textareaValue = textarea.value; 
    const hiddentext = document.getElementById('HiddenTextarea');
    hiddentextValue = hiddentext.value; hiddentextValue += ' \n ';
-
-
   let totallength = textareaValue.length + hiddentextValue.length ;
 
   if(totallength > 30000){
-    alert('Too long.....');
+    alert(getLocalizedString('alertContentTooLong', 'encryption'));
     return ;
   }
 
 
 if (textareaValue === ""){
-  alert('Write something on note');
+  alert(getLocalizedString('alertWriteSomething', 'encryption'));
   return ;
 }
 
    pass1 = document.getElementById('pass1').value;
    pass2 = document.getElementById('pass2').value;
    //console.log(pass1);
-
   if (pass1 === "" && pass2 === "") {
-    pass1 = 'mythenigma';
-  } else if (pass1 === pass2) {
+    pass1 = 'mythenigma';  } else if (pass1 === pass2) {
     pass1 = pass2;
   } else {
-    alert('Password Not Matching or Clear the Password');
+    alert(getLocalizedString('alertPasswordMismatch', 'encryption'));
     return;
   }
 
 
- const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1); 
+ const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1);
  const encodedSecretMessage01= textToBinaryEncryption(hiddentextValue, pass1); 
  combineallvalue =  encodedSecretMessage + textareaValue;
  textareaValue   =  combineallvalue;
@@ -691,15 +658,15 @@ function adjustForMobileView() {
     // Adjust textarea rows for better mobile viewing
     document.querySelectorAll('textarea').forEach(textarea => {
       textarea.rows = 4;
-    });
-    
-    // Ensure the alert message is concise on mobile
+    });    // Ensure the alert message is concise on mobile
     const alertSpan = document.querySelector('#encryptinfo span');
     if (alertSpan) {
       if (window.innerWidth < 576) {
-        alertSpan.textContent = 'Encryption successful! Upper box: zero-width characters. Lower box: binary format.';
+        alertSpan.textContent = getLocalizedString('mobileAlertShort', 'encryption') || 
+                               'Encryption successful! Upper box: zero-width characters. Lower box: binary format.';
       } else if (window.innerWidth < 768) {
-        alertSpan.textContent = 'Encryption complete. The top box contains zero-width character encryption, while the bottom shows binary encryption.';
+        alertSpan.textContent = getLocalizedString('mobileAlertMedium', 'encryption') || 
+                               'Encryption complete. The top box contains zero-width character encryption, while the bottom shows binary encryption.';
       }
     }
     
@@ -727,7 +694,8 @@ create = function() {
       binaryResultBtn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
     }
   }
-    // Scroll to the results on mobile
+  
+  // Scroll to the results on mobile
   if (window.innerWidth < 768) {
     document.getElementById('encryptinfo').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -735,7 +703,7 @@ create = function() {
 
 // Initialize language when DOM is loaded
 window.addEventListener('DOMContentLoaded', function() {
-  // Apply the language from localStorage or default
+  // This will use the language stored in localStorage or default to 'en'
   switchLanguage(currentLanguage);
 });
 </script>
