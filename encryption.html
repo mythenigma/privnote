@@ -482,16 +482,85 @@ function simulateTyping(elementId, text, speed) {
 document.addEventListener('DOMContentLoaded', function() {
   console.log("DOM fully loaded, initializing UI...");
   
-  // 短暂延迟以确保translate.js加载完成
+  // 确保currentLanguage变量已定义
+  if (typeof window.currentLanguage === 'undefined') {
+    console.warn("currentLanguage is undefined, defaulting to 'en'");
+    window.currentLanguage = 'en';
+  }
+  
+  // 使用超时确保translate.js完全加载和解析
   setTimeout(function() {
-    if (typeof window.switchLanguage === 'function') {
-      console.log("Applying translations from translate.js...");
-      window.switchLanguage(window.currentLanguage || 'en');
-    } else {
-      console.warn("External translation function not available");
+    try {
+      if (typeof window.switchLanguage === 'function') {
+        console.log("Applying translations from translate.js with language:", window.currentLanguage);
+        window.switchLanguage(window.currentLanguage || 'en');
+        
+        // 添加额外检查，确保关键元素已被翻译
+        setTimeout(function() {
+          checkAndFixTranslations();
+        }, 200);
+      } else {
+        console.error("switchLanguage function not available. Translation may fail.");
+      }
+    } catch (e) {
+      console.error("Error during language initialization:", e);
     }
-  }, 300);
+  }, 500); // 增加延迟，确保脚本完全加载
 });
+
+// 检查并修复可能未被翻译的元素
+function checkAndFixTranslations() {
+  const currentLang = window.currentLanguage || 'en';
+  const strings = window.languageEncryptionStrings[currentLang] || window.languageEncryptionStrings['en'];
+  
+  console.log("Running translation verification for language:", currentLang);
+  
+  // 检查重要按钮
+  const btnCopyZeroWidthResult = document.getElementById('btnCopyZeroWidthResult');
+  if (btnCopyZeroWidthResult && btnCopyZeroWidthResult.innerText.includes('undefined')) {
+    console.log("Fixing undefined in btnCopyZeroWidthResult");
+    btnCopyZeroWidthResult.innerHTML = '<i class="fas fa-copy me-2"></i>' + strings.btnCopyZeroWidthResult;
+  }
+  
+  // 检查标签
+  const labels = document.querySelectorAll('label');
+  labels.forEach(label => {
+    if (label.innerText.includes('undefined')) {
+      console.log("Found undefined in label:", label);
+      if (label.getAttribute('for') === 'myTextarea') {
+        label.innerHTML = '<i class="fas fa-edit me-1"></i>' + strings.coverTextLabel;
+      } else if (label.getAttribute('for') === 'HiddenTextarea') {
+        label.innerHTML = '<i class="fas fa-eye-slash me-1"></i>' + strings.hiddenTextLabel;
+      } else if (label.getAttribute('for') === 'pass1') {
+        label.textContent = strings.encryptKeyLabel;
+      } else if (label.getAttribute('for') === 'pass2') {
+        label.textContent = strings.encryptKeyLabelConfirm;
+      } else if (label.getAttribute('for') === 'coverCopy') {
+        label.innerHTML = '<i class="fas fa-key me-1"></i>' + strings.encryptResultLabel;
+      }
+    }
+  });
+  
+  // 在动态创建按钮时确保正确的翻译
+  const create = window.create;
+  if (typeof create === 'function') {
+    window.create = function() {
+      // 调用原始函数
+      const result = create.apply(this, arguments);
+      
+      // 创建后检查是否有未翻译的按钮
+      setTimeout(function() {
+        const btnCopyBinary = document.querySelector('.btn-info[onclick*="HiddenTextarea"]');
+        if (btnCopyBinary && btnCopyBinary.innerText.includes('undefined')) {
+          console.log("Fixing undefined in dynamic binary copy button");
+          btnCopyBinary.innerHTML = '<i class="fas fa-copy me-2"></i>' + strings.btnCopyBinaryResult;
+        }
+      }, 100);
+      
+      return result;
+    };
+  }
+}
 </script>
 
 </body>
