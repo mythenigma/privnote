@@ -571,6 +571,33 @@ function applyIndexLanguage(lang) {
 function switchLanguage(lang) {
   currentLanguage = lang;
   
+  // Save the selected language in localStorage
+  if (isLocalStorageAvailable()) {
+    localStorage.setItem('privnote_language', lang);
+    console.log("Language saved to localStorage:", lang);
+  }
+  
+  // Update language display in UI
+  const currentLanguageElement = document.getElementById('currentLanguage');
+  if (currentLanguageElement) {
+    // Display language code in UI (uppercase for better visibility)
+    if (lang === 'en') currentLanguageElement.textContent = 'English';
+    else if (lang === 'zh') currentLanguageElement.textContent = '中文';
+    else if (lang === 'es') currentLanguageElement.textContent = 'Español';
+    else if (lang === 'fr') currentLanguageElement.textContent = 'Français';
+  }
+  
+  // Add visual indication of selected language in dropdown
+  document.querySelectorAll('.dropdown-item').forEach(item => {
+    // Remove active class from all items
+    item.classList.remove('active');
+    
+    // Add active class to the selected language
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(`'${lang}'`)) {
+      item.classList.add('active');
+    }
+  });
+  
   // Apply common language elements (header, navigation)
   applyCommonLanguage(lang);
   
@@ -633,4 +660,55 @@ window.languageCommonStrings = languageCommonStrings;
 window.languageIndexStrings = languageIndexStrings;
 window.languageDecryptStrings = languageDecryptStrings;
 window.languageEncryptionStrings = languageEncryptionStrings;
-window.currentLanguage = 'en';
+
+// Helper function to check if localStorage is available
+function isLocalStorageAvailable() {
+  try {
+    const testKey = "__privnote_test__";
+    localStorage.setItem(testKey, testKey);
+    localStorage.removeItem(testKey);
+    return true;
+  } catch (e) {
+    console.warn("localStorage not available. Language preferences won't be saved.");
+    return false;
+  }
+}
+
+// Add CSS for active language in dropdown
+function addLanguageDropdownStyles() {
+  const styleEl = document.createElement('style');
+  styleEl.textContent = `
+    .dropdown-item.active {
+      background-color: #f8f9fa;
+      color: #007bff;
+      font-weight: bold;
+    }
+    .dropdown-item.active::before {
+      content: "✓ ";
+    }
+  `;
+  document.head.appendChild(styleEl);
+}
+
+// Call once when script loads
+addLanguageDropdownStyles();
+
+// Initialize the current language from localStorage or default to 'en'
+let savedLanguage = 'en';
+if (isLocalStorageAvailable()) {
+  savedLanguage = localStorage.getItem('privnote_language') || 'en';
+  console.log("Language loaded from localStorage:", savedLanguage);
+}
+window.currentLanguage = savedLanguage;
+
+// Execute as soon as the script loads to ensure proper language display before DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Force update of the language display in the dropdown
+  const currentLanguageElement = document.getElementById('currentLanguage');
+  if (currentLanguageElement) {
+    if (window.currentLanguage === 'en') currentLanguageElement.textContent = 'English';
+    else if (window.currentLanguage === 'zh') currentLanguageElement.textContent = '中文';
+    else if (window.currentLanguage === 'es') currentLanguageElement.textContent = 'Español';
+    else if (window.currentLanguage === 'fr') currentLanguageElement.textContent = 'Français';
+  }
+});

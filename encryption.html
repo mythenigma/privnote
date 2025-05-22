@@ -351,9 +351,6 @@ body {
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="translate.js"></script>
 <script>
-// Default language
-var currentLanguage = 'en';
-
 // Encryption functions
 
 //console.log(convertTime2(343434));
@@ -705,6 +702,7 @@ create = function() {
 
 // Initialize language when DOM is loaded
 window.addEventListener('DOMContentLoaded', function() {
+  // This will use the language stored in localStorage or default to 'en'
   switchLanguage(currentLanguage);
 });
 </script>

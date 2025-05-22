@@ -206,10 +206,11 @@ body {
         <div class="dropdown language-dropdown">
           <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-globe me-1"></i><span id="currentLanguage">EN</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+          </button>          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
             <li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
             <li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
+            <li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">Español</a></li>
+            <li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">Français</a></li>
           </ul>
         </div>
         <div id="trans1" class="tagline d-none d-md-block">Secure your words, vanish your trace</div>
@@ -340,13 +341,27 @@ body {
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
 // Default language
-var currentLanguage = 'en';
+var currentLanguage = localStorage.getItem('privnote_language') || 'en';
 
 function switchLanguage(lang) {
   currentLanguage = lang;
-  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'EN');
-  document.getElementById('trans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
-  document.getElementById('mobileTrans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
+  // Save language preference to localStorage
+  localStorage.setItem('privnote_language', lang);
+  
+  // Set the current language display
+  let languageDisplay = 'English';
+  if (lang === 'zh') languageDisplay = '中文';
+  if (lang === 'es') languageDisplay = 'Español';
+  if (lang === 'fr') languageDisplay = 'Français';
+  document.getElementById('currentLanguage').textContent = languageDisplay;
+  
+  // Update tagline
+  let tagline = 'Secure your words, vanish your trace';
+  if (lang === 'zh') tagline = '安全传信，隐匿无踪';
+  if (lang === 'es') tagline = 'Asegura tus palabras, desvanece tu rastro';
+  if (lang === 'fr') tagline = 'Sécurisez vos mots, faites disparaître votre trace';
+  document.getElementById('trans1').textContent = tagline;
+  document.getElementById('mobileTrans1').textContent = tagline;
   
   // Navigation links
   document.getElementById('navLinkText').textContent = (lang === 'zh' ? '生成链接' : 'Generate Link');
@@ -712,12 +727,17 @@ create = function() {
       binaryResultBtn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
     }
   }
-  
-  // Scroll to the results on mobile
+    // Scroll to the results on mobile
   if (window.innerWidth < 768) {
     document.getElementById('encryptinfo').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 }
+
+// Initialize language when DOM is loaded
+window.addEventListener('DOMContentLoaded', function() {
+  // Apply the language from localStorage or default
+  switchLanguage(currentLanguage);
+});
 </script>
 
 </body>
