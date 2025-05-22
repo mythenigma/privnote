@@ -53,6 +53,8 @@
 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
 <li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
 <li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">Español</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">Français</a></li>
 </ul>
 </div>
 <div id="trans1" class="tagline">Secure your words, vanish your trace</div>
@@ -126,7 +128,7 @@
       <label for="coverCopy" class="form-label"><i class="fas fa-key me-1"></i>Zero-Width Encrypted Result (Copy to Share)</label>
       <textarea class="form-control mb-2" id="coverCopy" rows="5" placeholder="Encrypted content will appear here" readonly style="border-left: 4px solid #dc3545; background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9)) !important;"></textarea>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-danger" type="button" onclick="copyTextarea('coverCopy')">
+        <button class="btn btn-danger" id="btnCopyZeroWidthResult" type="button" onclick="copyTextarea('coverCopy')">
           <i class="fas fa-copy me-2"></i>Copy Zero-Width Result
         </button>
       </div>
@@ -179,44 +181,22 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="translate.js"></script>
 <script>
-// Default language
-var currentLanguage = 'en';
-
-function switchLanguage(lang) {
-  currentLanguage = lang;
-  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'English');
-  document.getElementById('trans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
-  
-  // Navigation links
-  document.getElementById('navLinkText').textContent = (lang === 'zh' ? '生成链接' : 'Generate Link');
-  document.getElementById('navEncryptText').textContent = (lang === 'zh' ? '字符加密' : 'Character Encryption');
-  document.getElementById('navDecryptText').textContent = (lang === 'zh' ? '解密工具' : 'Decrypt');
-  
-  // Update main interface text
-  document.getElementById('encryptTabTitle').textContent = (lang === 'zh' ? '字符加密工具' : 'Character Encryption Tool');
-  document.getElementById('tranmake').innerHTML = '<i class="fas fa-lock me-2"></i>' + (lang === 'zh' ? '加密便签' : 'Encrypt Note');
-  document.getElementById('tranli').textContent = (lang === 'zh' ? '消息将根据您的设置自动销毁。' : 'The message will be automatically destroyed according to your settings.');
-  
-  // Update placeholders
-  document.getElementById('myTextarea').placeholder = (lang === 'zh' ? '在此输入便签内容...' : 'Write Your Note Here...');
-  document.getElementById('HiddenTextarea').placeholder = (lang === 'zh' ? '在此输入隐藏内容...' : 'Write Hidden Messages Here...');
-  document.getElementById('pass1').placeholder = (lang === 'zh' ? '输入密码' : 'Enter Password');
-  document.getElementById('pass2').placeholder = (lang === 'zh' ? '确认密码' : 'Confirm Password');
-  document.getElementById('coverCopy').placeholder = (lang === 'zh' ? '加密内容将在此显示' : 'Encrypted content will appear here');
-}
-
-// 删除 convertTime2 和 convertTime 函数及所有相关调用
+// Variables for encryption functions
+var textareaValue='';
+var expiretime = 0;
+var confirmask = 1;
+var pass1=''; var pass2='';
+var myArray = '';
+var lastElement = '';
+var globename='';
+var combineallvalue='';
 
 //console.log(convertTime2(343434));
 const url = window.location.href;
 const regex = /prive\/(\d+)\/note/;
 const match = url.match(regex);
-
-//console.log(match); // logs "2146489127"
-
-
-
 
 let myCookieValue = document.cookie
   .split('; ')
@@ -237,42 +217,23 @@ if (myCookieValue) {
   // document.getElementById('grabify').style.display='block';
 }
 
-
-
-
 if(match !== null){
   const numberoffile = match[1];
-  
-
 }
 
-var textareaValue='';
-var expiretime = 0;
-var confirmask = 1;
-var pass1=''; var pass2='';
-var containerbox = document.getElementById('demo');
-var buttontwo = document.getElementById('buttontwo');
-var myArray = '';
-var lastElement = '';
-var globename='';
-var combineallvalue='';
 function copylink(){
-     const exampleLi = document.getElementById('innerlink'); // select the <li> element with id "example"
-     const exampleText = exampleLi.textContent; // get the text content of the <li> element
-     navigator.clipboard.writeText(exampleText) // copy the text to the clipboard
+     const exampleLi = document.getElementById('innerlink');
+     const exampleText = exampleLi.textContent;
+     navigator.clipboard.writeText(exampleText)
   .then(() => {
-
-var button = document.getElementById("copybutton");
-button.classList.add('rotate');
-button.textContent = "Link Copied";
-
+    var button = document.getElementById("copybutton");
+    button.classList.add('rotate');
+    button.textContent = "Link Copied";
   })
   .catch((err) => {
     console.error('Error copying text: ', err);
   });
-
 }
-
 
 // 加密过程：使用XOR对文本进行加密，并转换为0和1的二进制
 function textToBinaryEncryption(text, key) {
@@ -322,7 +283,6 @@ function textToZeroWidthWithDoubleEncryption(text, key) {
     return xorEncryptedText.split('').map(bit => bit === '0' ? '\u200B' : '\u200C').join('');
 }
 
-
 // 解密流程：先解码零宽字符，再使用 XOR 解密
 function zeroWidthToTextWithDoubleDecryption(zeroWidthText, key) {
     // 将密钥字符串转为字符的 charCode 数组
@@ -348,9 +308,8 @@ function zeroWidthToTextWithDoubleDecryption(zeroWidthText, key) {
 }
 
 function decoding(){
-  const textarea = document.getElementById('myTextarea'); // Get the textarea element by its ID
+  const textarea = document.getElementById('myTextarea');
   textareaValue = textarea.value; 
-  
   
   pass1 = document.getElementById('pass1').value;
   pass2 = document.getElementById('pass2').value;
@@ -360,110 +319,119 @@ function decoding(){
   const isBinary = /^[01]+$/.test(textareaValue);
   let decodedSecretMessage;
 
-if (isBinary) {
-   decodedSecretMessage = binaryToTextDecryption(textareaValue,pass1);
- console.log(decodedSecretMessage);
-} else {
-  const encodedSecretPart = textareaValue.slice(0, textareaValue.length);  // 提取加密部分
-  decodedSecretMessage = zeroWidthToTextWithDoubleDecryption(encodedSecretPart, pass1);  // 解密加密部分
-}
+  if (isBinary) {
+    decodedSecretMessage = binaryToTextDecryption(textareaValue,pass1);
+    console.log(decodedSecretMessage);
+  } else {
+    const encodedSecretPart = textareaValue.slice(0, textareaValue.length);  // 提取加密部分
+    decodedSecretMessage = zeroWidthToTextWithDoubleDecryption(encodedSecretPart, pass1);  // 解密加密部分
+  }
 
-  //console.log(decodedSecretMessage);
   simulateTyping("HiddenTextarea",decodedSecretMessage, 100);
 }
 
 function create() {
-   const textarea = document.getElementById('myTextarea');
-   textareaValue = textarea.value; 
-   const hiddentext = document.getElementById('HiddenTextarea');
-   hiddentextValue = hiddentext.value; hiddentextValue += ' \n ';
+  const textarea = document.getElementById('myTextarea');
+  textareaValue = textarea.value; 
+  const hiddentext = document.getElementById('HiddenTextarea');
+  hiddentextValue = hiddentext.value; hiddentextValue += ' \n ';
 
-
-  let totallength = textareaValue.length + hiddentextValue.length ;
+  let totallength = textareaValue.length + hiddentextValue.length;
 
   if(totallength > 30000){
-    alert('Too long.....');
-    return ;
-  }
-
-
-if (textareaValue === ""){
-  alert('Write something on note');
-  return ;
-}
-
-   pass1 = document.getElementById('pass1').value;
-   pass2 = document.getElementById('pass2').value;
-   //console.log(pass1);
-
-  if (pass1 === "" && pass2 === "") {
-    pass1 = 'mythenigma';
-  } else if (pass1 === pass2) {
-    pass1 = pass2;
-  } else {
-    alert('Password Not Matching or Clear the Password');
+    alert(getLocalizedString('alertContentTooLong', 'encryption'));
     return;
   }
 
+  if (textareaValue === ""){
+    alert(getLocalizedString('alertWriteSomething', 'encryption'));
+    return;
+  }
 
- const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1); 
- const encodedSecretMessage01= textToBinaryEncryption(hiddentextValue, pass1); 
- combineallvalue =  encodedSecretMessage + textareaValue;
- textareaValue   =  combineallvalue;
- textarea.value  =  combineallvalue;
- hiddentext.value=   encodedSecretMessage01;
+  pass1 = document.getElementById('pass1').value;
+  pass2 = document.getElementById('pass2').value;
+
+  if (pass1 === "" && pass2 === "") {
+    pass1 = 'mythenigma';  
+  } else if (pass1 === pass2) {
+    pass1 = pass2;
+  } else {
+    alert(getLocalizedString('alertPasswordMismatch', 'encryption'));
+    return;
+  }
+
+  const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1);
+  const encodedSecretMessage01= textToBinaryEncryption(hiddentextValue, pass1); 
+  combineallvalue =  encodedSecretMessage + textareaValue;
+  textareaValue   =  combineallvalue;
+  textarea.value  =  combineallvalue;
+  hiddentext.value=   encodedSecretMessage01;
  
- // Show the result
- document.getElementById('encryptinfo').style.display = 'block';
- document.getElementById('coverCopy').value = textarea.value;
+  // Show the result
+  document.getElementById('encryptinfo').style.display = 'block';
+  document.getElementById('coverCopy').value = textarea.value;
  
- // 将HiddenText框移动到最下面
- const hiddenTextContainer = document.getElementById('hiddenTextContainer');
- const hiddenTextAfterEncrypt = document.getElementById('hiddenTextAfterEncrypt');
- const hiddenTextArea = document.getElementById('HiddenTextarea');
+  // 将HiddenText框移动到最下面
+  const hiddenTextContainer = document.getElementById('hiddenTextContainer');
+  const hiddenTextAfterEncrypt = document.getElementById('hiddenTextAfterEncrypt');
+  const hiddenTextArea = document.getElementById('HiddenTextarea');
  
- // 修改标签文本，更清晰地表示这是二进制加密结果
- const label = hiddenTextContainer.querySelector('label');
- label.innerHTML = '<i class="fas fa-code me-1"></i>Binary Encryption Result';
+  // 修改标签文本，更清晰地表示这是二进制加密结果
+  const label = hiddenTextContainer.querySelector('label');
+  label.innerHTML = '<i class="fas fa-code me-1"></i>' + getLocalizedString('binaryResultLabel', 'encryption');
  
- // 从父元素中移除原始 textarea
- const hiddenTextParent = hiddenTextArea.parentNode;
- hiddenTextParent.removeChild(hiddenTextArea);
+  // 从父元素中移除原始 textarea
+  const hiddenTextParent = hiddenTextArea.parentNode;
+  hiddenTextParent.removeChild(hiddenTextArea);
  
- // 给二进制结果框添加左边框样式 - 使用蓝色
- hiddenTextArea.style.borderLeft = '4px solid #17a2b8';
- hiddenTextArea.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9))';
- hiddenTextArea.className = 'form-control mb-2'; // 添加 mb-2 以在文本框和按钮之间创建间距
+  // 给二进制结果框添加左边框样式 - 使用蓝色
+  hiddenTextArea.style.borderLeft = '4px solid #17a2b8';
+  hiddenTextArea.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9))';
+  hiddenTextArea.className = 'form-control mb-2'; // 添加 mb-2 以在文本框和按钮之间创建间距
  
- // 将原始 textarea 添加回父容器
- hiddenTextParent.appendChild(hiddenTextArea);
+  // 将原始 textarea 添加回父容器
+  hiddenTextParent.appendChild(hiddenTextArea);
  
- // 显示结果
- document.getElementById('coverCopy').style.borderLeft = '4px solid #dc3545';
- document.getElementById('coverCopy').style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9))';
+  // 显示结果
+  document.getElementById('coverCopy').style.borderLeft = '4px solid #dc3545';
+  document.getElementById('coverCopy').style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9))';
  
- // 创建复制按钮并添加到文本框下方
- const copyButton = document.createElement('button');
- copyButton.className = 'btn btn-info';  // 使用蓝色按钮(info)，区别于上面的红色按钮(danger)
- copyButton.type = 'button';
- copyButton.innerHTML = '<i class="fas fa-copy me-2"></i>Copy Binary Result';
- copyButton.onclick = function() { copyTextarea('HiddenTextarea'); };
- copyButton.style.width = 'auto'; // 设置按钮宽度为自动
- copyButton.style.display = 'block'; // 设置为块级元素
+  // 创建复制按钮并添加到文本框下方
+  const copyButton = document.createElement('button');
+  copyButton.className = 'btn btn-info';  // 使用蓝色按钮(info)，区别于上面的红色按钮(danger)
+  copyButton.type = 'button';
+  copyButton.innerHTML = '<i class="fas fa-copy me-2"></i>' + getLocalizedString('btnCopyBinaryResult', 'encryption');
+  copyButton.onclick = function() { copyTextarea('HiddenTextarea'); };
+  copyButton.style.width = 'auto'; // 设置按钮宽度为自动
+  copyButton.style.display = 'block'; // 设置为块级元素
  
- // 创建一个按钮容器，用于居中显示按钮
- const buttonContainer = document.createElement('div');
- buttonContainer.className = 'd-flex justify-content-center';
- buttonContainer.appendChild(copyButton);
+  // 创建一个按钮容器，用于居中显示按钮
+  const buttonContainer = document.createElement('div');
+  buttonContainer.className = 'd-flex justify-content-center';
+  buttonContainer.appendChild(copyButton);
  
- // 将按钮容器添加到父容器
- hiddenTextParent.appendChild(buttonContainer);
+  // 将按钮容器添加到父容器
+  hiddenTextParent.appendChild(buttonContainer);
  
- // 从原位置移除并附加到底部容器
- hiddenTextAfterEncrypt.appendChild(hiddenTextContainer);
+  // 从原位置移除并附加到底部容器
+  hiddenTextAfterEncrypt.appendChild(hiddenTextContainer);
  
- // 添加一些顶部间距，使其与上面的内容有更好的视觉分隔
- hiddenTextContainer.classList.add('mt-4');
+  // 添加一些顶部间距，使其与上面的内容有更好的视觉分隔
+  hiddenTextContainer.classList.add('mt-4');
+ 
+  // 更新成功消息文本根据屏幕尺寸
+  updateSuccessMessage();
+}
+
+function updateSuccessMessage() {
+  const alertSpan = document.querySelector('#encryptinfo span');
+  if (alertSpan) {
+    if (window.innerWidth < 576) {
+      alertSpan.textContent = getLocalizedString('mobileAlertShort', 'encryption');
+    } else if (window.innerWidth < 768) {
+      alertSpan.textContent = getLocalizedString('mobileAlertMedium', 'encryption');
+    }
+  }
 }
 
 function copyTextarea(id) {
@@ -475,15 +443,15 @@ function copyTextarea(id) {
     let button;
     if (id === 'coverCopy') {
         // 直接找到按钮而不是使用 nextElementSibling
-        button = document.querySelector('.btn.btn-danger[onclick="copyTextarea(\'coverCopy\')"]');
+        button = document.querySelector('.btn-danger[onclick="copyTextarea(\'coverCopy\')"]');
     } else {
         // 二进制结果的按钮，因为是动态创建的，使用部分匹配
-        button = document.querySelector('.btn.btn-info[onclick*="' + id + '"]');
+        button = document.querySelector('.btn-info[onclick*="' + id + '"]');
     }
     
     if (button) {
         const originalText = button.innerHTML;
-        button.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
+        button.innerHTML = '<i class="fas fa-check me-2"></i>' + getLocalizedString('copySuccess', 'decrypt');
         
         setTimeout(() => {
             button.innerHTML = originalText;
@@ -514,14 +482,13 @@ function simulateTyping(elementId, text, speed) {
 document.addEventListener('DOMContentLoaded', function() {
   console.log("DOM fully loaded, initializing UI...");
   
-  // 短暂延迟以确保所有资源加载完成
+  // 短暂延迟以确保translate.js加载完成
   setTimeout(function() {
-    // 如果translate.js已加载，则应用翻译
-    if (typeof switchLanguage === 'function') {
-      console.log("Applying translations...");
-      switchLanguage(window.currentLanguage || 'en');
+    if (typeof window.switchLanguage === 'function') {
+      console.log("Applying translations from translate.js...");
+      window.switchLanguage(window.currentLanguage || 'en');
     } else {
-      console.warn("Translation function not available yet");
+      console.warn("External translation function not available");
     }
   }, 300);
 });

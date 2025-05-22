@@ -192,6 +192,8 @@ const languageEncryptionStrings = {
     textareaPlaceholder: 'Write Your Note Here...',
     tranmake: 'Encrypt Note',
     btnCopyEncryptResult: 'Copy Result',
+    btnCopyZeroWidthResult: 'Copy Zero-Width Result',
+    btnCopyBinaryResult: 'Copy Binary Result',
     encryptInfo: '<strong>Info:</strong> Zero-width encryption hides the hidden content in the cover text. Binary encryption converts the hidden content to 0/1. You can set a custom password.',
     hiddenTextareaPlaceholder: 'Write Hidden Messages Here...',
     alertPasswordMismatch: 'Password does not match or clear password',
@@ -216,6 +218,8 @@ const languageEncryptionStrings = {
     textareaPlaceholder: '在此输入便签内容...',
     tranmake: '加密便签',
     btnCopyEncryptResult: '复制结果',
+    btnCopyZeroWidthResult: '复制零宽字符结果',
+    btnCopyBinaryResult: '复制二进制结果',
     encryptInfo: '<strong>说明：</strong>零宽字符加密会将隐藏内容隐写进表面内容，二进制加密则将隐藏内容转为0/1字符串。可自定义密码。',
     hiddenTextareaPlaceholder: '在此输入隐藏内容...',
     alertPasswordMismatch: '密码不匹配或清除密码',
@@ -240,6 +244,8 @@ const languageEncryptionStrings = {
     textareaPlaceholder: 'Escriba su nota aquí...',
     tranmake: 'Cifrar Nota',
     btnCopyEncryptResult: 'Copiar Resultado',
+    btnCopyZeroWidthResult: 'Copiar Resultado de Ancho Cero',
+    btnCopyBinaryResult: 'Copiar Resultado Binario',
     encryptInfo: '<strong>Info:</strong> El cifrado de ancho cero oculta el contenido en el texto de cobertura. El cifrado binario convierte el contenido oculto a 0/1. Puede establecer una contraseña personalizada.',
     hiddenTextareaPlaceholder: 'Escriba mensajes ocultos aquí...',
     alertPasswordMismatch: 'Contraseña no coincidente o borrar la contraseña',
@@ -264,6 +270,8 @@ const languageEncryptionStrings = {
     textareaPlaceholder: 'Écrivez votre note ici...',
     tranmake: 'Chiffrer la Note',
     btnCopyEncryptResult: 'Copier le Résultat',
+    btnCopyZeroWidthResult: 'Copier le Résultat à Largeur Zéro',
+    btnCopyBinaryResult: 'Copier le Résultat Binaire',
     encryptInfo: '<strong>Info:</strong> Le chiffrement à largeur zéro cache le contenu caché dans le texte de couverture. Le chiffrement binaire convertit le contenu caché en 0/1. Vous pouvez définir un mot de passe personnalisé.',
     hiddenTextareaPlaceholder: 'Écrivez les messages cachés ici...',
     alertPasswordMismatch: 'Le mot de passe ne correspond pas ou effacez le mot de passe',
@@ -291,7 +299,6 @@ const languageTabStrings = {
     encryptResultLabel: 'Combined Result',
     encryptResultPlaceholder: 'Encrypted result will appear here',
     btnCopyEncryptResult: 'Copy Result',
-    encryptInfo: '<strong>Info:</strong> Zero-width encryption hides the hidden content in the cover text. Binary encryption converts the hidden content to 0/1. You can set a custom password.',
     decryptTabTitle: 'Decrypt Tool',
     decryptInputLabel: 'Encrypted Content (Zero-Width or Binary)',
     decryptInputPlaceholder: 'Paste content to decrypt',
@@ -320,7 +327,6 @@ const languageTabStrings = {
     encryptResultLabel: '合成结果',
     encryptResultPlaceholder: '加密结果将在此显示',
     btnCopyEncryptResult: '复制结果',
-    encryptInfo: '<strong>说明：</strong>零宽字符加密会将隐藏内容隐写进表面内容，二进制加密则将隐藏内容转为0/1字符串。可自定义密码。',
     decryptTabTitle: '解密工具',
     decryptInputLabel: '加密内容（零宽字符或二进制）',
     decryptInputPlaceholder: '粘贴需要解密的内容',
@@ -349,7 +355,6 @@ const languageTabStrings = {
     encryptResultLabel: 'Resultado Combinado',
     encryptResultPlaceholder: 'El resultado cifrado aparecerá aquí',
     btnCopyEncryptResult: 'Copiar Resultado',
-    encryptInfo: '<strong>Info:</strong> El cifrado de ancho cero oculta el contenido en el texto de cobertura. El cifrado binario convierte el contenido oculto a 0/1. Puede establecer una contraseña personalizada.',
     decryptTabTitle: 'Herramienta de Descifrado',
     decryptInputLabel: 'Contenido Cifrado (Ancho Cero o Binario)',
     decryptInputPlaceholder: 'Pegar contenido para descifrar',
@@ -378,7 +383,6 @@ const languageTabStrings = {
     encryptResultLabel: 'Résultat Combiné',
     encryptResultPlaceholder: 'Le résultat chiffré apparaîtra ici',
     btnCopyEncryptResult: 'Copier le Résultat',
-    encryptInfo: '<strong>Info:</strong> Le chiffrement à largeur zéro cache le contenu caché dans le texte de couverture. Le chiffrement binaire convertit le contenu caché en 0/1. Vous pouvez définir un mot de passe personnalisé.',
     decryptTabTitle: 'Outil de Déchiffrement',
     decryptInputLabel: 'Contenu Chiffré (Largeur Zéro ou Binaire)',
     decryptInputPlaceholder: 'Collez le contenu à déchiffrer',
@@ -453,6 +457,12 @@ function applyTabLanguage(lang) {
   const btnCopyEncryptResult = document.getElementById('btnCopyEncryptResult');
   if (btnCopyEncryptResult) btnCopyEncryptResult.innerHTML = '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyEncryptResult;
   
+  const btnCopyZeroWidthResult = document.getElementById('btnCopyZeroWidthResult');
+  if (btnCopyZeroWidthResult) btnCopyZeroWidthResult.innerHTML = '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyZeroWidthResult;
+  
+  const btnCopyBinaryResult = document.getElementById('btnCopyBinaryResult');
+  if (btnCopyBinaryResult) btnCopyBinaryResult.innerHTML = '<i class="fas fa-copy me-2"></i>' + tabStrings.btnCopyBinaryResult;
+  
   const encryptInfo = document.getElementById('encryptInfo');
   if (encryptInfo) encryptInfo.innerHTML = tabStrings.encryptInfo;
   
@@ -525,10 +535,46 @@ function applyEncryptionLanguage(lang) {
   const encryptionStrings = languageEncryptionStrings[lang] || languageEncryptionStrings['en'];
   
   // Update encryption page elements
-  document.getElementById('encryptTabTitle').textContent = encryptionStrings.encryptTabTitle;
+  const encryptTabTitle = document.getElementById('encryptTabTitle');
+  if (encryptTabTitle) {
+    encryptTabTitle.textContent = encryptionStrings.encryptTabTitle;
+  }
+  
+  // Update label for Public Message
+  const publicMessageLabel = document.querySelector('label[for="myTextarea"]');
+  if (publicMessageLabel) {
+    publicMessageLabel.innerHTML = '<i class="fas fa-edit me-1"></i>' + encryptionStrings.coverTextLabel;
+  }
+  
+  // Update label for Secret Message
+  const secretMessageLabel = document.querySelector('label[for="HiddenTextarea"]');
+  if (secretMessageLabel) {
+    secretMessageLabel.innerHTML = '<i class="fas fa-eye-slash me-1"></i>' + encryptionStrings.hiddenTextLabel;
+  }
+  
+  // Update label for Password
+  const passwordLabel = document.querySelector('label[for="pass1"]');
+  if (passwordLabel) {
+    passwordLabel.textContent = encryptionStrings.encryptKeyLabel;
+  }
+  
+  // Update label for Confirm Password
+  const confirmPasswordLabel = document.querySelector('label[for="pass2"]');
+  if (confirmPasswordLabel) {
+    confirmPasswordLabel.textContent = encryptionStrings.encryptKeyLabelConfirm;
+  }
+  
+  // Update label for Encrypted Result
+  const encryptedResultLabel = document.querySelector('label[for="coverCopy"]');
+  if (encryptedResultLabel) {
+    encryptedResultLabel.innerHTML = '<i class="fas fa-key me-1"></i>' + encryptionStrings.encryptResultLabel;
+  }
   
   // Update placeholders
-  document.getElementById('myTextarea').placeholder = encryptionStrings.textareaPlaceholder;
+  const myTextarea = document.getElementById('myTextarea');
+  if (myTextarea) {
+    myTextarea.placeholder = encryptionStrings.textareaPlaceholder;
+  }
   
   const hiddenTextarea = document.getElementById('HiddenTextarea');
   if (hiddenTextarea) {
@@ -549,16 +595,39 @@ function applyEncryptionLanguage(lang) {
   if (coverCopy) {
     coverCopy.placeholder = encryptionStrings.encryptResultPlaceholder;
   }
-    // Update button text
+  
+  // Update button text
   const tranmake = document.getElementById('tranmake');
   if (tranmake) {
     tranmake.innerHTML = '<i class="fas fa-lock me-2"></i>' + encryptionStrings.tranmake;
+  }
+  
+  // Update Copy Zero-Width Result button
+  const btnCopyZeroWidthResult = document.getElementById('btnCopyZeroWidthResult');
+  if (btnCopyZeroWidthResult) {
+    btnCopyZeroWidthResult.innerHTML = '<i class="fas fa-copy me-2"></i>' + encryptionStrings.btnCopyZeroWidthResult;
   }
   
   // Update other text elements if they exist
   const tranli = document.getElementById('tranli');
   if (tranli) {
     tranli.textContent = encryptionStrings.tranli;
+  }
+  
+  // Update success message
+  const encryptinfo = document.getElementById('encryptinfo');
+  if (encryptinfo) {
+    // Update only the span inside encryptinfo
+    const infoSpan = encryptinfo.querySelector('span');
+    if (infoSpan) {
+      if (window.innerWidth < 576) {
+        infoSpan.textContent = encryptionStrings.mobileAlertShort;
+      } else if (window.innerWidth < 768) {
+        infoSpan.textContent = encryptionStrings.mobileAlertMedium;
+      } else {
+        infoSpan.textContent = encryptionStrings.encryptInfo;
+      }
+    }
   }
 }
 
