@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -349,7 +350,7 @@ body {
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<!-- 移动 translate.js 到最后加载 -->
+<script src="translate.js"></script>
 <script>
 // Encryption functions
 
@@ -700,26 +701,10 @@ create = function() {
   }
 }
 
-// 确保DOM加载完成后再执行初始化
-document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOM fully loaded, initializing UI...");
-  // 此时可以安全地操作DOM元素
-});
-</script>
-
-<!-- 将translate.js移到这里，确保DOM已经完全加载 -->
-<script src="translate.js"></script>
-<script>
-// 在translate.js加载完成后，初始化语言设置
+// Initialize language when DOM is loaded
 window.addEventListener('DOMContentLoaded', function() {
-  // 确保translate.js已加载完成
-  setTimeout(function() {
-    console.log("Initializing language settings...");
-    // 使用当前语言初始化界面
-    if (typeof switchLanguage === 'function') {
-      switchLanguage(currentLanguage || 'en');
-    }
-  }, 100); // 短暂延迟以确保translate.js完全加载
+  // This will use the language stored in localStorage or default to 'en'
+  switchLanguage(currentLanguage);
 });
 </script>
 
