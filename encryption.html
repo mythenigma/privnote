@@ -29,181 +29,13 @@
 "logo": "https://privnote.chat/read/pic/noti.png",
 "contactPoint": {
 "@type": "ContactPoint",
-"email": "contact@privnote.chat",
-"contactType": "customer service"
+"email": "joe@pdfhost.online",
+"contactType": "Customer Service",
+"areaServed": "US",
+"availableLanguage": "English"
 }
 }
 </script>
-
-<style>
-/* Enhanced Mobile Header Styles */
-@media (max-width: 767px) {
-  .site-header {
-    padding: 10px 5px;
-    background-color: #343a40;
-  }
-  .logo-text {
-    font-size: 1.3rem;
-    margin-bottom: 0;
-    white-space: nowrap;
-  }
-  .logo-container {
-    display: flex;
-    align-items: center;
-  }
-  .logo-icon {
-    color: #FFC107;
-    font-size: 1.3rem;
-    margin-right: 3px;
-  }
-  .language-dropdown {
-    margin-right: 5px;
-  }
-  .language-dropdown .btn {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-  }
-  .tagline {
-    display: none;
-  }
-  .mobile-tagline {
-    display: block;
-    text-align: center;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 5px;
-    font-style: italic;
-  }
-  .header-row {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .header-controls {
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Improved mobile navigation */
-  #mainNav {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-bottom: 2px;
-    max-width: 100%;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-  }
-  #mainNav::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
-  #mainNav .nav-link {
-    padding: 0.4rem 0.6rem;
-    white-space: nowrap;
-    font-size: 0.9rem;
-  }
-  
-  /* Improved form controls for mobile */
-  .main-container {
-    padding: 0 8px;
-  }
-  .form-label {
-    font-size: 0.85rem;
-    margin-bottom: 0.2rem;
-  }
-  textarea.form-control {
-    font-size: 0.9rem;
-    padding: 0.4rem;
-  }
-  .btn {
-    padding: 0.35rem 0.65rem;
-    font-size: 0.9rem;
-  }
-  
-  /* Improved alert and card styling */
-  .alert {
-    padding: 0.6rem;
-    font-size: 0.85rem;
-  }
-  .card-body {
-    padding: 0.75rem;
-  }
-  
-  /* Fix dropdown on mobile */
-  .dropdown-menu {
-    position: absolute;
-    min-width: 7rem;
-  }
-}
-
-/* Extra small devices (phones, 576px and down) */
-@media (max-width: 576px) {
-  .site-header {
-    padding: 8px 4px;
-  }
-  .logo-text {
-    font-size: 1.2rem;
-  }
-  .logo-icon {
-    font-size: 1.2rem;
-  }
-  #mainNav .nav-link {
-    padding: 0.35rem 0.5rem;
-    font-size: 0.85rem;
-  }
-  h5.mb-3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem !important;
-  }
-  .form-label {
-    font-size: 0.8rem;
-  }
-  .row.mb-3 {
-    margin-bottom: 0.5rem !important;
-  }
-  textarea.form-control, input.form-control {
-    font-size: 0.85rem;
-    padding: 0.35rem;
-  }
-  .btn {
-    font-size: 0.85rem;
-    padding: 0.3rem 0.6rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .mobile-tagline {
-    display: none;
-  }
-}
-
-/* Add button hover/active states for better mobile feedback */
-.btn:active {
-  transform: translateY(1px);
-}
-
-/* Ensure scrolling works properly on mobile */
-body {
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Fix modal display on mobile */
-.modal-dialog {
-  margin: 0.5rem;
-}
-@media (max-width: 576px) {
-  .modal-dialog {
-    max-width: 95%;
-    margin: 0.25rem auto;
-  }
-  .modal-body {
-    padding: 0.5rem;
-  }
-  .modal-footer, .modal-header {
-    padding: 0.5rem;
-  }
-}
-</style>
 
 </head>
 
@@ -216,13 +48,11 @@ body {
 <div class="d-flex align-items-center">
 <div class="dropdown me-3">
 <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-<i class="fas fa-globe me-1"></i><span id="currentLanguage">EN</span>
+<i class="fas fa-globe me-1"></i><span id="currentLanguage">English</span>
 </button>
 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
 <li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
 <li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">Español</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">Français</a></li>
 </ul>
 </div>
 <div id="trans1" class="tagline">Secure your words, vanish your trace</div>
@@ -253,7 +83,7 @@ body {
 
 <main class="flex-grow-1">
 <div class="container main-container">
-    <h5 class="mb-3 mt-4 pt-2 text-center" id="encryptTabTitle">Character Encryption Tool</h5>
+    <h5 class="mb-3 text-center" id="encryptTabTitle">Character Encryption Tool</h5>
 
     <!-- First textarea - Input area -->
     <div class="mb-3">
@@ -331,15 +161,15 @@ body {
 </div>
 </footer>
 
-<div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+<div class="modal" id="myModal">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">How to decode messages</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <img id="decrysrc" src="read/pic/enDecode1.png" class="img-fluid" alt="changecode">
+        <img id="decrysrc" src="read/pic/enDecode1.png" class="img-fluid" alt="changecode" data-bs-toggle="modal" data-bs-target="#myModal">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -349,9 +179,34 @@ body {
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<!-- 移动 translate.js 到最后加载 -->
 <script>
-// Encryption functions
+// Default language
+var currentLanguage = 'en';
+
+function switchLanguage(lang) {
+  currentLanguage = lang;
+  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'English');
+  document.getElementById('trans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
+  
+  // Navigation links
+  document.getElementById('navLinkText').textContent = (lang === 'zh' ? '生成链接' : 'Generate Link');
+  document.getElementById('navEncryptText').textContent = (lang === 'zh' ? '字符加密' : 'Character Encryption');
+  document.getElementById('navDecryptText').textContent = (lang === 'zh' ? '解密工具' : 'Decrypt');
+  
+  // Update main interface text
+  document.getElementById('encryptTabTitle').textContent = (lang === 'zh' ? '字符加密工具' : 'Character Encryption Tool');
+  document.getElementById('tranmake').innerHTML = '<i class="fas fa-lock me-2"></i>' + (lang === 'zh' ? '加密便签' : 'Encrypt Note');
+  document.getElementById('tranli').textContent = (lang === 'zh' ? '消息将根据您的设置自动销毁。' : 'The message will be automatically destroyed according to your settings.');
+  
+  // Update placeholders
+  document.getElementById('myTextarea').placeholder = (lang === 'zh' ? '在此输入便签内容...' : 'Write Your Note Here...');
+  document.getElementById('HiddenTextarea').placeholder = (lang === 'zh' ? '在此输入隐藏内容...' : 'Write Hidden Messages Here...');
+  document.getElementById('pass1').placeholder = (lang === 'zh' ? '输入密码' : 'Enter Password');
+  document.getElementById('pass2').placeholder = (lang === 'zh' ? '确认密码' : 'Confirm Password');
+  document.getElementById('coverCopy').placeholder = (lang === 'zh' ? '加密内容将在此显示' : 'Encrypted content will appear here');
+}
+
+// 删除 convertTime2 和 convertTime 函数及所有相关调用
 
 //console.log(convertTime2(343434));
 const url = window.location.href;
@@ -522,32 +377,36 @@ function create() {
    textareaValue = textarea.value; 
    const hiddentext = document.getElementById('HiddenTextarea');
    hiddentextValue = hiddentext.value; hiddentextValue += ' \n ';
+
+
   let totallength = textareaValue.length + hiddentextValue.length ;
 
   if(totallength > 30000){
-    alert(getLocalizedString('alertContentTooLong', 'encryption'));
+    alert('Too long.....');
     return ;
   }
 
 
 if (textareaValue === ""){
-  alert(getLocalizedString('alertWriteSomething', 'encryption'));
+  alert('Write something on note');
   return ;
 }
 
    pass1 = document.getElementById('pass1').value;
    pass2 = document.getElementById('pass2').value;
    //console.log(pass1);
+
   if (pass1 === "" && pass2 === "") {
-    pass1 = 'mythenigma';  } else if (pass1 === pass2) {
+    pass1 = 'mythenigma';
+  } else if (pass1 === pass2) {
     pass1 = pass2;
   } else {
-    alert(getLocalizedString('alertPasswordMismatch', 'encryption'));
+    alert('Password Not Matching or Clear the Password');
     return;
   }
 
 
- const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1);
+ const encodedSecretMessage = textToZeroWidthWithDoubleEncryption(hiddentextValue, pass1); 
  const encodedSecretMessage01= textToBinaryEncryption(hiddentextValue, pass1); 
  combineallvalue =  encodedSecretMessage + textareaValue;
  textareaValue   =  combineallvalue;
@@ -651,75 +510,20 @@ function simulateTyping(elementId, text, speed) {
     type();
 }
 
-// Add a function to check screen size and adjust UI elements
-function adjustForMobileView() {
-  if (window.innerWidth < 768) {
-    // Adjust textarea rows for better mobile viewing
-    document.querySelectorAll('textarea').forEach(textarea => {
-      textarea.rows = 4;
-    });    // Ensure the alert message is concise on mobile
-    const alertSpan = document.querySelector('#encryptinfo span');
-    if (alertSpan) {
-      if (window.innerWidth < 576) {
-        alertSpan.textContent = getLocalizedString('mobileAlertShort', 'encryption') || 
-                               'Encryption successful! Upper box: zero-width characters. Lower box: binary format.';
-      } else if (window.innerWidth < 768) {
-        alertSpan.textContent = getLocalizedString('mobileAlertMedium', 'encryption') || 
-                               'Encryption complete. The top box contains zero-width character encryption, while the bottom shows binary encryption.';
-      }
-    }
-    
-    // Adjust button text for smaller screens
-    const copyZeroWidthBtn = document.querySelector('.btn.btn-danger[onclick="copyTextarea(\'coverCopy\')"]');
-    if (copyZeroWidthBtn && window.innerWidth < 400) {
-      copyZeroWidthBtn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
-    }
-  }
-}
-
-// Call the function on page load and resize
-window.addEventListener('load', adjustForMobileView);
-window.addEventListener('resize', adjustForMobileView);
-
-// Modify create() function to handle mobile displays better
-const originalCreate = create;
-create = function() {
-  originalCreate();
-  
-  // After encryption, if on mobile, modify the dynamically created button text to be shorter
-  if (window.innerWidth < 400) {
-    const binaryResultBtn = document.querySelector('.btn.btn-info[onclick*="HiddenTextarea"]');
-    if (binaryResultBtn) {
-      binaryResultBtn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
-    }
-  }
-  
-  // Scroll to the results on mobile
-  if (window.innerWidth < 768) {
-    document.getElementById('encryptinfo').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
 // 确保DOM加载完成后再执行初始化
 document.addEventListener('DOMContentLoaded', function() {
   console.log("DOM fully loaded, initializing UI...");
-  // 此时可以安全地操作DOM元素
-});
-</script>
-
-<!-- 将translate.js移到这里，确保DOM已经完全加载 -->
-<script src="translate.js"></script>
-<script>
-// 在translate.js加载完成后，初始化语言设置
-window.addEventListener('DOMContentLoaded', function() {
-  // 确保translate.js已加载完成
+  
+  // 短暂延迟以确保所有资源加载完成
   setTimeout(function() {
-    console.log("Initializing language settings...");
-    // 使用当前语言初始化界面
+    // 如果translate.js已加载，则应用翻译
     if (typeof switchLanguage === 'function') {
-      switchLanguage(currentLanguage || 'en');
+      console.log("Applying translations...");
+      switchLanguage(window.currentLanguage || 'en');
+    } else {
+      console.warn("Translation function not available yet");
     }
-  }, 100); // 短暂延迟以确保translate.js完全加载
+  }, 300);
 });
 </script>
 
