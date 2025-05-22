@@ -705,21 +705,167 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log("DOM fully loaded, initializing UI...");
   // 此时可以安全地操作DOM元素
 });
+
+// 在translate.js加载完成后，初始化语言设置
+document.addEventListener('DOMContentLoaded', function() {
+  // 确保translate.js已加载完成并且DOM已经准备好
+  setTimeout(function() {
+    console.log("Initializing language settings...");
+    // 使用当前语言初始化界面
+    if (typeof switchLanguage === 'function') {
+      try {
+        // 安全地调用switchLanguage，避免错误中断页面功能
+        var navElements = {
+          'tabLinkText': document.getElementById('navLinkText'),
+          'tabEncryptText': document.getElementById('navEncryptText'),
+          'tabDecryptText': document.getElementById('navDecryptText')
+        };
+        
+        // 在调用switchLanguage前，临时添加缺失的元素
+        if (!document.getElementById('tabLinkText') && navElements['tabLinkText']) {
+          var tempEl = document.createElement('span');
+          tempEl.id = 'tabLinkText';
+          tempEl.style.display = 'none';
+          document.body.appendChild(tempEl);
+        }
+        
+        if (!document.getElementById('tabEncryptText') && navElements['tabEncryptText']) {
+          var tempEl = document.createElement('span');
+          tempEl.id = 'tabEncryptText';
+          tempEl.style.display = 'none';
+          document.body.appendChild(tempEl);
+        }
+        
+        if (!document.getElementById('tabDecryptText') && navElements['tabDecryptText']) {
+          var tempEl = document.createElement('span');
+          tempEl.id = 'tabDecryptText';
+          tempEl.style.display = 'none';
+          document.body.appendChild(tempEl);
+        }
+        
+        // 添加其他可能缺失的元素
+        var requiredIds = ['coverTextLabel', 'coverText', 'hiddenTextLabel', 'hiddenText', 
+                          'encryptKeyLabel', 'encryptKey', 'btnZeroWidthEncrypt', 
+                          'btnBinaryEncrypt', 'encryptResultLabel', 'encryptResult', 
+                          'btnCopyEncryptResult', 'encryptInfo', 'decryptTabTitle',
+                          'decryptInputLabel', 'decryptInput', 'decryptKeyLabel', 
+                          'decryptKey', 'btnZeroWidthDecrypt', 'btnBinaryDecrypt',
+                          'decryptResultLabel', 'decryptResult', 'btnCopyDecryptResult', 
+                          'decryptInfo'];
+        
+        requiredIds.forEach(function(id) {
+          if (!document.getElementById(id)) {
+            var tempEl = document.createElement('span');
+            tempEl.id = id;
+            tempEl.style.display = 'none';
+            document.body.appendChild(tempEl);
+          }
+        });
+        
+        // 现在安全地调用switchLanguage
+        switchLanguage(currentLanguage || 'en');
+        
+        // 更新实际可见的导航元素
+        if (navElements['tabLinkText'] && document.getElementById('tabLinkText')) {
+          navElements['tabLinkText'].textContent = document.getElementById('tabLinkText').textContent;
+        }
+        
+        if (navElements['tabEncryptText'] && document.getElementById('tabEncryptText')) {
+          navElements['tabEncryptText'].textContent = document.getElementById('tabEncryptText').textContent;
+        }
+        
+        if (navElements['tabDecryptText'] && document.getElementById('tabDecryptText')) {
+          navElements['tabDecryptText'].textContent = document.getElementById('tabDecryptText').textContent;
+        }
+        
+      } catch (e) {
+        console.error("Error during language initialization:", e);
+      }
+    }
+  }, 200); // 使用稍长一点的延迟确保translate.js完全加载
+});
 </script>
 
 <!-- 将translate.js移到这里，确保DOM已经完全加载 -->
 <script src="translate.js"></script>
 <script>
 // 在translate.js加载完成后，初始化语言设置
-window.addEventListener('DOMContentLoaded', function() {
-  // 确保translate.js已加载完成
+document.addEventListener('DOMContentLoaded', function() {
+  // 确保translate.js已加载完成并且DOM已经准备好
   setTimeout(function() {
     console.log("Initializing language settings...");
     // 使用当前语言初始化界面
     if (typeof switchLanguage === 'function') {
-      switchLanguage(currentLanguage || 'en');
+      try {
+        // 安全地调用switchLanguage，避免错误中断页面功能
+        var navElements = {
+          'tabLinkText': document.getElementById('navLinkText'),
+          'tabEncryptText': document.getElementById('navEncryptText'),
+          'tabDecryptText': document.getElementById('navDecryptText')
+        };
+        
+        // 在调用switchLanguage前，临时添加缺失的元素
+        if (!document.getElementById('tabLinkText') && navElements['tabLinkText']) {
+          var tempEl = document.createElement('span');
+          tempEl.id = 'tabLinkText';
+          tempEl.style.display = 'none';
+          document.body.appendChild(tempEl);
+        }
+        
+        if (!document.getElementById('tabEncryptText') && navElements['tabEncryptText']) {
+          var tempEl = document.createElement('span');
+          tempEl.id = 'tabEncryptText';
+          tempEl.style.display = 'none';
+          document.body.appendChild(tempEl);
+        }
+        
+        if (!document.getElementById('tabDecryptText') && navElements['tabDecryptText']) {
+          var tempEl = document.createElement('span');
+          tempEl.id = 'tabDecryptText';
+          tempEl.style.display = 'none';
+          document.body.appendChild(tempEl);
+        }
+        
+        // 添加其他可能缺失的元素
+        var requiredIds = ['coverTextLabel', 'coverText', 'hiddenTextLabel', 'hiddenText', 
+                          'encryptKeyLabel', 'encryptKey', 'btnZeroWidthEncrypt', 
+                          'btnBinaryEncrypt', 'encryptResultLabel', 'encryptResult', 
+                          'btnCopyEncryptResult', 'encryptInfo', 'decryptTabTitle',
+                          'decryptInputLabel', 'decryptInput', 'decryptKeyLabel', 
+                          'decryptKey', 'btnZeroWidthDecrypt', 'btnBinaryDecrypt',
+                          'decryptResultLabel', 'decryptResult', 'btnCopyDecryptResult', 
+                          'decryptInfo'];
+        
+        requiredIds.forEach(function(id) {
+          if (!document.getElementById(id)) {
+            var tempEl = document.createElement('span');
+            tempEl.id = id;
+            tempEl.style.display = 'none';
+            document.body.appendChild(tempEl);
+          }
+        });
+        
+        // 现在安全地调用switchLanguage
+        switchLanguage(currentLanguage || 'en');
+        
+        // 更新实际可见的导航元素
+        if (navElements['tabLinkText'] && document.getElementById('tabLinkText')) {
+          navElements['tabLinkText'].textContent = document.getElementById('tabLinkText').textContent;
+        }
+        
+        if (navElements['tabEncryptText'] && document.getElementById('tabEncryptText')) {
+          navElements['tabEncryptText'].textContent = document.getElementById('tabEncryptText').textContent;
+        }
+        
+        if (navElements['tabDecryptText'] && document.getElementById('tabDecryptText')) {
+          navElements['tabDecryptText'].textContent = document.getElementById('tabDecryptText').textContent;
+        }
+        
+      } catch (e) {
+        console.error("Error during language initialization:", e);
+      }
     }
-  }, 100); // 短暂延迟以确保translate.js完全加载
+  }, 200); // 使用稍长一点的延迟确保translate.js完全加载
 });
 </script>
 
