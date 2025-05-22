@@ -10,7 +10,7 @@
 <meta property="og:url" content="https://privnote.chat/encryption.html">
 <link rel="canonical" href="https://privnote.chat/encryption.html">
 <meta property="og:type" content="website">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!-- Bootstrap & Font Awesome -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -20,44 +20,203 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<script type="application/ld+json">
-{
-"@context": "https://schema.org",
-"@type": "Organization",
-"name": "Privnote",
-"url": "https://privnote.chat",
-"logo": "https://privnote.chat/read/pic/noti.png",
-"contactPoint": {
-"@type": "ContactPoint",
-"email": "joe@pdfhost.online",
-"contactType": "Customer Service",
-"areaServed": "US",
-"availableLanguage": "English"
+<style>
+/* Enhanced Mobile Header Styles */
+@media (max-width: 767px) {
+  .site-header {
+    padding: 10px 5px;
+    background-color: #343a40;
+  }
+  .logo-text {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  .logo-icon {
+    color: #FFC107;
+    font-size: 1.3rem;
+    margin-right: 3px;
+  }
+  .language-dropdown {
+    margin-right: 5px;
+  }
+  .language-dropdown .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .tagline {
+    display: none;
+  }
+  .mobile-tagline {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+    font-style: italic;
+  }
+  .header-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Improved mobile navigation */
+  #mainNav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+    max-width: 100%;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  #mainNav::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  #mainNav .nav-link {
+    padding: 0.4rem 0.6rem;
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+  
+  /* Improved form controls for mobile */
+  .main-container {
+    padding: 0 8px;
+  }
+  .form-label {
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+  textarea.form-control {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+  .btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Improved alert and card styling */
+  .alert {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  /* Fix dropdown on mobile */
+  .dropdown-menu {
+    position: absolute;
+    min-width: 7rem;
+  }
 }
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+  .site-header {
+    padding: 8px 4px;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  .logo-icon {
+    font-size: 1.2rem;
+  }
+  #mainNav .nav-link {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  h5.mb-3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem !important;
+  }
+  .form-label {
+    font-size: 0.8rem;
+  }
+  .row.mb-3 {
+    margin-bottom: 0.5rem !important;
+  }
+  textarea.form-control, input.form-control {
+    font-size: 0.85rem;
+    padding: 0.35rem;
+  }
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+  }
 }
-</script>
+
+@media (min-width: 768px) {
+  .mobile-tagline {
+    display: none;
+  }
+}
+
+/* Add button hover/active states for better mobile feedback */
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Ensure scrolling works properly on mobile */
+body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix modal display on mobile */
+.modal-dialog {
+  margin: 0.5rem;
+}
+@media (max-width: 576px) {
+  .modal-dialog {
+    max-width: 95%;
+    margin: 0.25rem auto;
+  }
+  .modal-body {
+    padding: 0.5rem;
+  }
+  .modal-footer, .modal-header {
+    padding: 0.5rem;
+  }
+}
+</style>
 
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 <header class="site-header">
-<div class="container-fluid d-flex justify-content-between align-items-center">
-<a class="text-decoration-none" href="https://privnote.chat">
-<h1 class="logo-text">Priv<i class="fas fa-unlock-alt"></i>ote.chat</h1>
-</a>
-<div class="d-flex align-items-center">
-<div class="dropdown me-3">
-<button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-<i class="fas fa-globe me-1"></i><span id="currentLanguage">English</span>
-</button>
-<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
-</ul>
-</div>
-<div id="trans1" class="tagline">Secure your words, vanish your trace</div>
-</div>
-</div>
+  <div class="container-fluid">
+    <div class="d-flex align-items-center header-row">
+      <div class="logo-container">
+        <a class="text-decoration-none d-flex align-items-center" href="https://privnote.chat">
+          <div class="logo-icon"><i class="fas fa-lock"></i></div>
+          <h1 class="logo-text m-0">Priv<span class="text-warning">note</span></h1>
+        </a>
+      </div>
+      <div class="d-flex align-items-center header-controls">
+        <div class="dropdown language-dropdown">
+          <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-globe me-1"></i><span id="currentLanguage">EN</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+            <li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
+            <li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
+          </ul>
+        </div>
+        <div id="trans1" class="tagline d-none d-md-block">Secure your words, vanish your trace</div>
+      </div>
+    </div>
+    <div class="mobile-tagline" id="mobileTrans1">Secure your words, vanish your trace</div>
+  </div>
 </header>
 
 <!-- Navigation Links -->
@@ -185,8 +344,9 @@ var currentLanguage = 'en';
 
 function switchLanguage(lang) {
   currentLanguage = lang;
-  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'English');
+  document.getElementById('currentLanguage').textContent = (lang === 'zh' ? '中文' : 'EN');
   document.getElementById('trans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
+  document.getElementById('mobileTrans1').textContent = (lang === 'zh' ? '安全传信，隐匿无踪' : 'Secure your words, vanish your trace');
   
   // Navigation links
   document.getElementById('navLinkText').textContent = (lang === 'zh' ? '生成链接' : 'Generate Link');
@@ -508,6 +668,55 @@ function simulateTyping(elementId, text, speed) {
     }
     
     type();
+}
+
+// Add a function to check screen size and adjust UI elements
+function adjustForMobileView() {
+  if (window.innerWidth < 768) {
+    // Adjust textarea rows for better mobile viewing
+    document.querySelectorAll('textarea').forEach(textarea => {
+      textarea.rows = 4;
+    });
+    
+    // Ensure the alert message is concise on mobile
+    const alertSpan = document.querySelector('#encryptinfo span');
+    if (alertSpan) {
+      if (window.innerWidth < 576) {
+        alertSpan.textContent = 'Encryption successful! Upper box: zero-width characters. Lower box: binary format.';
+      } else if (window.innerWidth < 768) {
+        alertSpan.textContent = 'Encryption complete. The top box contains zero-width character encryption, while the bottom shows binary encryption.';
+      }
+    }
+    
+    // Adjust button text for smaller screens
+    const copyZeroWidthBtn = document.querySelector('.btn.btn-danger[onclick="copyTextarea(\'coverCopy\')"]');
+    if (copyZeroWidthBtn && window.innerWidth < 400) {
+      copyZeroWidthBtn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
+    }
+  }
+}
+
+// Call the function on page load and resize
+window.addEventListener('load', adjustForMobileView);
+window.addEventListener('resize', adjustForMobileView);
+
+// Modify create() function to handle mobile displays better
+const originalCreate = create;
+create = function() {
+  originalCreate();
+  
+  // After encryption, if on mobile, modify the dynamically created button text to be shorter
+  if (window.innerWidth < 400) {
+    const binaryResultBtn = document.querySelector('.btn.btn-info[onclick*="HiddenTextarea"]');
+    if (binaryResultBtn) {
+      binaryResultBtn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
+    }
+  }
+  
+  // Scroll to the results on mobile
+  if (window.innerWidth < 768) {
+    document.getElementById('encryptinfo').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 </script>
 

@@ -218,6 +218,186 @@ You can track the results of when the note link was opened, on which device it w
 </div>
 </div>
 
+<!-- Add mobile-specific styles to the head section -->
+<style>
+/* Mobile Responsive Enhancements */
+@media (max-width: 767px) {
+  .site-header {
+    padding: 10px 5px;
+  }
+  .logo-text {
+    font-size: 1.3rem;
+    white-space: nowrap;
+  }
+  .tagline {
+    display: none;
+  }
+  .dropdown {
+    margin-right: 5px;
+  }
+  .dropdown .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Add a mobile tagline below header */
+  .header-mobile-tagline {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+    font-style: italic;
+    background-color: #343a40;
+    padding-bottom: 8px;
+  }
+  
+  /* Improved mobile navigation */
+  #mainNav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+    max-width: 100%;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  #mainNav::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  #mainNav .nav-link {
+    padding: 0.4rem 0.6rem;
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+  
+  /* Improved form controls for mobile */
+  .main-container {
+    padding: 0 8px;
+  }
+  
+  h5.mb-3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .form-label {
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  textarea.form-control {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+    rows: 5;
+  }
+  
+  .btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Improved alert and card styling */
+  .alert {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  /* Adjust button containers */
+  #buttontwo .btn {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Improve spacing in demo collapse */
+  #demo h6, #demo h5 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  #demo .row {
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Fix dropdown on mobile */
+  .dropdown-menu {
+    position: absolute;
+    min-width: 7rem;
+  }
+}
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+  .site-header {
+    padding: 8px 4px;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  #mainNav .nav-link {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  .header-mobile-tagline {
+    font-size: 0.7rem;
+  }
+  textarea.form-control {
+    rows: 4;
+    font-size: 0.85rem;
+    padding: 0.35rem;
+  }
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+  }
+  #demo .form-check-label {
+    font-size: 0.8rem;
+  }
+  .section-title {
+    font-size: 1rem;
+  }
+  .form-select, .form-control {
+    font-size: 0.85rem;
+    padding: 0.35rem;
+  }
+  .after-section h3 {
+    font-size: 1.3rem;
+  }
+  .after-section p.lead {
+    font-size: 0.9rem;
+  }
+}
+
+/* Add button hover/active states for better mobile feedback */
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Ensure scrolling works properly on mobile */
+body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix modal display on mobile */
+.modal-dialog {
+  margin: 0.5rem;
+}
+@media (max-width: 576px) {
+  .modal-dialog {
+    max-width: 95%;
+    margin: 0.25rem auto;
+  }
+  .modal-body {
+    padding: 0.5rem;
+  }
+  .modal-footer, .modal-header {
+    padding: 0.5rem;
+  }
+}
+</style>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="translate.js"></script>
 <script>
