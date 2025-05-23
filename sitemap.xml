@@ -147,6 +147,117 @@
   <lastmod>2025-01-27T05:48:53+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
+<!-- Blog Pages -->
+<url>
+  <loc>https://privnote.chat/blog/index.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/blog-page-2.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<!-- Blog Articles -->
+<url>
+  <loc>https://privnote.chat/blog/data-breach-prevention.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/healthcare-communication-privacy.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/secure-international-communications.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/see-once-notes-complete-guide.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/burn-notes-secure-communication.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/legal-compliance-secure-messaging.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/remote-work-security.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/secure-collaboration-tools.html</loc>
+  <lastmod>2025-06-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/password-sharing-guide.html</loc>
+  <lastmod>2025-05-22T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/self-destructing-notes-privacy.html</loc>
+  <lastmod>2025-05-22T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zero-width-encryption.html</loc>
+  <lastmod>2025-05-22T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/privnote-use-cases.html</loc>
+  <lastmod>2025-05-22T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/secure-messaging-for-business.html</loc>
+  <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/messaging-security-101.html</loc>
+  <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/temporary-messaging-comparison.html</loc>
+  <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/end-to-end-encryption-guide.html</loc>
+  <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/digital-privacy-best-practices.html</loc>
+  <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/self-destructing-pdfs-guide.html</loc>
+  <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/secure-messaging-apps-comparison.html</loc>
+  <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/corporate-data-leak-prevention.html</loc>
+  <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
 
 </urlset>
