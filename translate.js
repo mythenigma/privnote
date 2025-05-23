@@ -8,6 +8,7 @@ const languageCommonStrings = {
     navLinkText: 'Generate Link',
     navEncryptText: 'Character Encryption',
     navDecryptText: 'Decrypt',
+    navBlogText: 'Blog',
     currentLanguage: 'English'
   },
   zh: {
@@ -15,6 +16,7 @@ const languageCommonStrings = {
     navLinkText: '生成链接',
     navEncryptText: '字符加密',
     navDecryptText: '解密工具',
+    navBlogText: '博客',
     currentLanguage: '中文'
   },
   es: {
@@ -22,6 +24,7 @@ const languageCommonStrings = {
     navLinkText: 'Generar Enlace',
     navEncryptText: 'Cifrado de Caracteres',
     navDecryptText: 'Descifrar',
+    navBlogText: 'Blog',
     currentLanguage: 'Español'
   },
   fr: {
@@ -29,6 +32,7 @@ const languageCommonStrings = {
     navLinkText: 'Générer un Lien',
     navEncryptText: 'Chiffrement de Caractères',
     navDecryptText: 'Déchiffrer',
+    navBlogText: 'Blog',
     currentLanguage: 'Français'
   }
 };
@@ -444,16 +448,17 @@ function switchLanguage(lang) {
   if (hasTabElement) {
     applyTabLanguage(lang);
   }
-  
-  // Check if current page is decrypt.html
+    // Check if current page is decrypt.html
   const isDecryptPage = document.getElementById('decryptTabTitle') !== null && 
                         document.getElementById('decryptInput') !== null;
   if (isDecryptPage) {
     applyDecryptLanguage(lang);
   }
+  
+  // Blog pages don't need translation - intentionally removed
 }
 
-// Helper function to get text based on current language
+// Function to get localized string
 function getLocalizedString(stringKey, category = 'common') {
   let stringObject;
   
@@ -472,8 +477,7 @@ function getLocalizedString(stringKey, category = 'common') {
       stringObject = languageCommonStrings[currentLanguage] || languageCommonStrings['en'];
       break;
   }
-  
-  return stringObject[stringKey] || stringKey;
+    return stringObject[stringKey] || stringKey;
 }
 
 // Export functions and variables for global use
