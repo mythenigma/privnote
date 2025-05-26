@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MaiTube Tools Suite</title>
+    <meta name="description" content="MaiFile - Document Sharing & Security Tools - MaiPDF">
+    <meta property="og:image" content="https://doc.maitube.club/js/img/online/2nd%20home.png">
+    <meta property="og:type" content="website">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap and Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #4e54c8;
+            --secondary-color: #8f94fb;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --gradient: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+          .bg-gradient {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+        
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background: rgba(78, 84, 200, 0.95);
+                border-radius: 10px;
+                padding: 15px;
+                margin-top: 15px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-link {
+                margin: 5px 0;
+                text-align: center;
+            }
+        }
+          .navbar {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 2rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            border-radius: 30px;
+            padding: 8px 15px !important;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .divider {
+            height: 3px;
+            background: var(--gradient);
+            margin: 3rem 0;
+            width: 100%;
+            border-radius: 3px;
+        }
+        
+        .feature-section {
+            padding: 5rem 0;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 2rem 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .feature-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        .feature-description {
+            color: #6c757d;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .btn-custom {
+            background: var(--gradient);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+        
+        .btn-custom-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-custom-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            background: #f8f9fa;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Animation */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .animated-bg span {
+            position: absolute;
+            display: block;
+            background: rgba(78, 84, 200, 0.05);
+            border-radius: 50%;
+            animation: animate 25s linear infinite;
+        }
+        
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 8rem 0;
+            background: var(--gradient);
+            color: white;
+            margin-bottom: 3rem;
+            border-radius: 0 0 50% 50% / 20%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-title {
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle {
+            font-weight: 300;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-card {
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            margin-bottom: 2rem;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <span style="width: 80px; height: 80px; left: 20%; animation-delay: 0s;"></span>
+        <span style="width: 40px; height: 40px; left: 40%; animation-delay: 2s;"></span>
+        <span style="width: 60px; height: 60px; left: 60%; animation-delay: 4s;"></span>
+        <span style="width: 20px; height: 20px; left: 80%; animation-delay: 6s;"></span>
+        <span style="width: 50px; height: 50px; left: 10%; animation-delay: 8s;"></span>
+        <span style="width: 70px; height: 70px; left: 30%; animation-delay: 10s;"></span>
+    </div>    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-file-pdf me-2"></i> MaiTube
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-bold px-3" href="#"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold px-3" href="#pdf-tools"><i class="fas fa-file-pdf me-1"></i> PDF Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold px-3" href="#sharing-tools"><i class="fas fa-share-alt me-1"></i> Sharing Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold px-3" href="#utility-tools"><i class="fas fa-tools me-1"></i> Utilities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold px-3" href="#contact"><i class="fas fa-envelope me-1"></i> Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="hero-title">Secure Document Solutions</h1>
+            <p class="hero-subtitle">Protect, Share, and Track Your Important Files</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <p class="lead mb-4">A comprehensive suite of tools for secure document sharing, tracking, and management. Perfect for professionals who need to protect sensitive information.</p>
+                    <a href="#pdf-tools" class="btn btn-light btn-lg px-4 me-md-2">Explore Tools</a>
+                    <a href="https://privnote.maipdf.com" class="btn btn-outline-light btn-lg px-4">Try Privnote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Online MaiPDF Cloud Sharing -->
+        <section class="feature-section" id="pdf-tools">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <img src="https://images.unsplash.com/photo-1568311407987-a0a6c6e44f42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="PDF Cloud Sharing" class="img-fluid rounded-3 shadow">
+                </div>
+                <div class="col-lg-6 order-lg-1 px-4 py-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h2 class="feature-title">Online MaiPDF Cloud Sharing</h2>
+                    <p class="feature-description">
+                        Share your PDF documents securely with powerful tracking and protection features:
+                    </p>
+                    <ul class="feature-description mb-4">
+                        <li>Set read limits to track document views and prevent unauthorized copying</li>
+                        <li>Disable printing and copying to protect your content from plagiarism</li>
+                        <li>Share files up to 100MB with enhanced security measures</li>
+                        <li>Generate QR codes for convenient mobile access without downloads</li>
+                    </ul>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="https://maifile.cn/getresult.html" class="btn btn-custom">
+                            <i class="fas fa-chart-line me-2"></i> View Analytics
+                        </a>
+                        <a href="https://maifile.cn/maiupload.php" class="btn btn-custom-secondary">
+                            <i class="fas fa-share-alt me-2"></i> Generate Link
+                        </a>
+                        <a href="https://maifile.cn/pdf/hahachange.php" class="btn btn-custom-secondary">
+                            <i class="fas fa-cog me-2"></i> Modify Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Offline PDF-DRM -->
+        <section class="feature-section">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1633265486501-0cf524a07213?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Offline PDF-DRM" class="img-fluid rounded-3 shadow">
+                </div>
+                <div class="col-lg-6 px-4 py-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h2 class="feature-title">Offline PDF-DRM</h2>
+                    <p class="feature-description">
+                        Convert PDFs to DRM-protected HTML files that expire automatically:
+                    </p>
+                    <ul class="feature-description mb-4">
+                        <li>Create HTML files with embedded PDF content that requires validation</li>
+                        <li>Set automatic expiration dates for time-limited access</li>
+                        <li>Works across all operating systems with no ads</li>
+                        <li>Configure DRM security parameters to prevent unauthorized access</li>
+                        <li>Simple, free, and effective document protection</li>
+                    </ul>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="https://maitube.com/offlinechange.php" class="btn btn-custom">
+                            <i class="fas fa-edit me-2"></i> Modify/Check
+                        </a>
+                        <a href="https://maitube.com/pdf/offline.php" class="btn btn-custom-secondary">
+                            <i class="fas fa-play me-2"></i> Get Started
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Image Sharing and QR Tools -->
+        <section class="feature-section" id="sharing-tools">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <img src="https://images.unsplash.com/photo-1595079676061-f29341137556?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="QR Code Generator" class="img-fluid rounded-3 shadow">
+                </div>
+                <div class="col-lg-6 order-lg-1 px-4 py-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h2 class="feature-title">Image Sharing & QR Code Tools</h2>
+                    <p class="feature-description">
+                        Generate QR codes and sharing links for various content types:
+                    </p>
+                    <ul class="feature-description mb-4">
+                        <li>Create QR codes for images, WiFi credentials, phone numbers, SMS, and URLs</li>
+                        <li>Generate shareable links for images</li>
+                        <li>Free hotlinking platform for your content</li>
+                        <li>Simple interface for quick content sharing</li>
+                    </ul>
+                    <a href="https://qr.maitube.com" class="btn btn-custom">
+                        <i class="fas fa-qrcode me-2"></i> Start Using
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Other Tools -->
+        <section class="feature-section" id="utility-tools">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h2 class="feature-title">More Useful Tools</h2>
+                    <p class="feature-description">Explore our additional utility tools to enhance your productivity</p>
+                </div>
+                
+                <div class="row g-4">
+                    <!-- PDF Conversion -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <i class="fas fa-file-image text-primary fa-2x mb-3"></i>
+                            <h3 class="h5 mb-3">PDF Conversion</h3>
+                            <p class="mb-3">Convert PDFs to images, set print-only restrictions, or disable editing to protect your documents.</p>
+                            <a href="https://maifile.cn/est/maiconvert.html" class="btn btn-sm btn-custom">
+                                <i class="fas fa-arrow-right me-1"></i> Use Tool
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- IP Address Tracking -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <i class="fas fa-map-marker-alt text-primary fa-2x mb-3"></i>
+                            <h3 class="h5 mb-3">IP Address Tracking</h3>
+                            <p class="mb-3">Track IP addresses with Grabify and monitor email opens with our tracking tools.</p>
+                            <a href="https://whatstheirip.tech/cn.php" class="btn btn-sm btn-custom">
+                                <i class="fas fa-arrow-right me-1"></i> Use Tool
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Keyboard Key Code Reference -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <i class="fas fa-keyboard text-primary fa-2x mb-3"></i>
+                            <h3 class="h5 mb-3">Keyboard KeyCode Reference</h3>
+                            <p class="mb-3">Get the corresponding keycode by pressing any key on your keyboard. Useful for developers.</p>
+                            <a href="https://maifile.cn/description/js.html" class="btn btn-sm btn-custom">
+                                <i class="fas fa-arrow-right me-1"></i> Use Tool
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Utility Tools -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <i class="fas fa-calculator text-primary fa-2x mb-3"></i>
+                            <h3 class="h5 mb-3">Number Converters</h3>
+                            <p class="mb-3">Convert Arabic numerals to uppercase text formats for formal documents and financial records.</p>
+                            <a href="https://maitube.com/read/nicetool.html" class="btn btn-sm btn-custom">
+                                <i class="fas fa-arrow-right me-1"></i> Use Tool
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- SRT Generator -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <i class="fas fa-closed-captioning text-primary fa-2x mb-3"></i>
+                            <h3 class="h5 mb-3">SRT Subtitle Generator</h3>
+                            <p class="mb-3">Create SRT subtitle files for your videos with our easy-to-use generator tool.</p>
+                            <a href="https://maitube.com/read/caption.html" class="btn btn-sm btn-custom">
+                                <i class="fas fa-arrow-right me-1"></i> Use Tool
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Information -->
+                    <div class="col-md-6 col-lg-4" id="contact">
+                        <div class="feature-card">
+                            <i class="fas fa-envelope text-primary fa-2x mb-3"></i>
+                            <h3 class="h5 mb-3">Website Contact</h3>
+                            <p class="mb-3">Learn about MaiPDF usage, WeChat contact information, and ad-free consultation.</p>
+                            <a href="https://maipdf.com/js/maifile.html" class="btn btn-sm btn-custom">
+                                <i class="fas fa-arrow-right me-1"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Privnote Feature -->
+        <section class="feature-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <img src="https://iplogger.icu/mainote.png" class="img-fluid rounded-3 shadow" alt="Privnote">
+                    </div>
+                    <div class="col-lg-6 px-4 py-5">
+                        <div class="feature-icon">
+                            <i class="fas fa-comment-slash"></i>
+                        </div>
+                        <h2 class="feature-title">MaiPDF's Privnote</h2>
+                        <p class="feature-description">
+                            Send self-destructing private notes securely:
+                        </p>
+                        <ul class="feature-description mb-4">
+                            <li>Create notes that automatically destroy after being read</li>
+                            <li>No registration required - just write and share</li>
+                            <li>Get instant notifications when your note is read</li>
+                            <li>One-time use links ensure security</li>
+                            <li>Full HTTPS encryption for maximum privacy</li>
+                        </ul>
+                        <a href="https://privnote.maipdf.com" class="btn btn-custom">
+                            <i class="fas fa-lock me-2"></i> Start Using Privnote
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">About MaiTube</h5>
+                    <p class="text-white-50">
+                        MaiTube provides secure document sharing, tracking, and conversion tools for professionals who need to protect sensitive information.
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Popular Tools</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="https://privnote.maipdf.com"><i class="fas fa-angle-right me-2"></i>Privnote</a></li>
+                        <li><a href="https://maifile.cn/maiupload.php"><i class="fas fa-angle-right me-2"></i>PDF Cloud Sharing</a></li>
+                        <li><a href="https://maitube.com/pdf/offline.php"><i class="fas fa-angle-right me-2"></i>PDF-DRM</a></li>
+                        <li><a href="https://qr.maitube.com"><i class="fas fa-angle-right me-2"></i>QR Code Generator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="https://iplogger.icu"><i class="fas fa-angle-right me-2"></i>IP Locator</a></li>
+                        <li><a href="https://grabify.icu"><i class="fas fa-angle-right me-2"></i>IP Tracker</a></li>
+                        <li><a href="https://pdfhost.online"><i class="fas fa-angle-right me-2"></i>PDF Host</a></li>
+                        <li><a href="https://maipdf.com/qr.php"><i class="fas fa-angle-right me-2"></i>QR Maker</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white-50">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="footer-copyright">&copy; 2025 MaiPDF. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="footer-copyright">
+                        <a href="http://beian.miit.gov.cn/" class="text-white-50">沪ICP备15021410号</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap and custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animation for background elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedBg = document.querySelector('.animated-bg');
+            for(let i = 0; i < 15; i++) {
+                const span = document.createElement('span');
+                const size = Math.random() * 80 + 20;
+                span.style.width = size + 'px';
+                span.style.height = size + 'px';
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.animationDelay = Math.random() * 25 + 's';
+                span.style.animationDuration = Math.random() * 15 + 15 + 's';
+                animatedBg.appendChild(span);
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

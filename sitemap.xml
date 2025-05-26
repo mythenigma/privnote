@@ -158,6 +158,12 @@
   <lastmod>2025-06-28T05:00:00+00:00</lastmod>
   <priority>0.80</priority>
 </url>
+<!-- Chinese Blog Index -->
+<url>
+  <loc>https://privnote.chat/blog/zh/index.html</loc>
+  <lastmod>2025-05-30T05:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
 <!-- Blog Articles -->
 <url>
   <loc>https://privnote.chat/blog/data-breach-prevention.html</loc>
@@ -257,6 +263,119 @@
 <url>
   <loc>https://privnote.chat/blog/corporate-data-leak-prevention.html</loc>
   <lastmod>2025-05-23T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<!-- Chinese Blog Articles -->
+<url>
+  <loc>https://privnote.chat/blog/zh/zidong-xiaohui-xiaoxi-zhidao.html</loc>
+  <lastmod>2025-05-25T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/ling-kuan-zifu-jiami.html</loc>
+  <lastmod>2025-05-25T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/anquan-mima-gongxiang.html</loc>
+  <lastmod>2025-05-25T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/duandao-duanjia-mi-tongxin.html</loc>
+  <lastmod>2025-05-25T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/qiye-shuju-xielou-fanghu.html</loc>
+  <lastmod>2025-05-26T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/richang-mima-anquan.html</loc>
+  <lastmod>2025-05-27T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/anquan-xiaoxi-yingyong-duibi.html</loc>
+  <lastmod>2025-05-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/shejiao-meiti-yinsi-baohu.html</loc>
+  <lastmod>2025-05-29T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/luxing-shuju-anquan.html</loc>
+  <lastmod>2025-05-30T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<!-- New Chinese Blog Articles -->
+<url>
+  <loc>https://privnote.chat/blog/zh/yiliao-shuju-yinsi.html</loc>
+  <lastmod>2025-05-26T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/zaixian-jiaoyu-anquan.html</loc>
+  <lastmod>2025-05-26T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/jinrong-shuju-yinsi.html</loc>
+  <lastmod>2025-05-27T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/wulianwang-shebei-yinsi.html</loc>
+  <lastmod>2025-05-26T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/jiami-tongxin-zhinan.html</loc>
+  <lastmod>2025-05-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/yuancheng-gongzuo-anquan.html</loc>
+  <lastmod>2025-05-30T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/meiti-neirong-yinsi.html</loc>
+  <lastmod>2025-05-29T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/ertong-zaixian-yinsi.html</loc>
+  <lastmod>2025-05-28T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/wangluo-qifu-fanghu.html</loc>
+  <lastmod>2025-05-29T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/zh/mima-anquan-gongxiang.html</loc>
+  <lastmod>2025-05-30T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<!-- New English Blog Articles -->
+<url>
+  <loc>https://privnote.chat/blog/email-security-best-practices.html</loc>
+  <lastmod>2025-05-25T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/ephemeral-messaging-finance.html</loc>
+  <lastmod>2025-05-25T05:00:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/military-grade-encryption.html</loc>
+  <lastmod>2025-05-26T05:00:00+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
