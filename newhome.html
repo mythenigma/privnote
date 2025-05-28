@@ -3,47 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaiPDF English Homepage</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>MaiPDF English Homepage</title>    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar">
-    <div class="container nav-container">
-        <div class="logo">MaiPDF</div>
-        <button class="mobile-menu-toggle" id="mobile-menu-toggle">
-            <i class="fas fa-bars"></i>
-        </button>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#features"><i class="fas fa-rocket"></i> Features</a></li>
-            <li><a href="https://maipdf.com/"><i class="fas fa-file-pdf"></i> MaiPDF</a></li>
-            <li><a href="https://privnote.chat"><i class="fas fa-fire"></i> PrivNote</a></li>
-        </ul>
-    </div>
-</nav>
 
 <header class="hero-section">
     <div class="hero-background">
         <div class="hero-pattern"></div>
+        <div class="animated-bg"></div>
     </div>
     <div class="container">
-        <div class="logo logo-main">MaiPDF</div>
-        <h1>MaiPDF: Smart Secure Sharing</h1>
-        <p>Professional and reliable sharing solutions for your documents.</p>
-        <a href="#" class="btn btn-start">Start Now</a>
-        <div class="scroll-indicator">
+        <div class="logo logo-main animate__animated animate__fadeInDown">MaiPDF</div>
+        <h1 class="animate__animated animate__fadeInUp">MaiPDF: Smart Secure Sharing</h1>
+        <p class="animate__animated animate__fadeInUp animate__delay-1s">Professional and reliable sharing solutions for your documents.</p>
+        <div class="cta-buttons animate__animated animate__fadeInUp animate__delay-1s">
+            <a href="#features" class="btn btn-start">Start Now</a>
+            <a href="#features" class="btn btn-learn">Learn More</a>
+        </div>
+        <div class="scroll-indicator animate__animated animate__fadeIn animate__delay-2s">
             <span class="arrow-down"></span>
             <span class="arrow-down"></span>
         </div>
     </div>
-</header><main>
-        <section class="features-section" id="features">
-            <div class="container">
+    <div class="floating-elements">
+        <div class="float-element" style="--i:1"></div>
+        <div class="float-element" style="--i:2"></div>
+        <div class="float-element" style="--i:3"></div>
+        <div class="float-element" style="--i:4"></div>
+        <div class="float-element" style="--i:5"></div>    </div>
+</header>
+<main>
+    <section class="features-section" id="features"><div class="container">
                 <h2>Smart Sharing, Secure Transfer</h2>
-                <div class="features-grid">
-                    <div class="feature-box">
-                        <i class="fas fa-cloud-arrow-up fa-icon"></i>                        <h3>Online MaiPDF Cloud Sharing</h3>
+                <div class="features-grid"><div class="feature-box">
+                        <i class="fas fa-cloud-arrow-up fa-icon"></i>
+                        <h3>Online MaiPDF Cloud Sharing</h3>
                         <p>Convenient online secure PDF document sharing experience with multiple security options to protect your documents...</p>
                         <a href="/pdf/maipdf.php" class="btn btn-feature-start">START</a>
                     </div>
@@ -52,10 +50,8 @@
                         <h3>Text PDF to Image PDF</h3>
                         <p>Convert text-based PDF files to image-based PDF files to prevent content copying...</p>
                         <a href="https://maipdf.com/est/maiconvert.html" class="btn btn-feature-start">START</a>
-                    </div>
-                    <div class="feature-box">
+                    </div>                    <div class="feature-box">
                          <i class="fas fa-file-zipper fa-icon"></i>
-						
                         <h3>PDF-DRM Protection</h3>
                         <p>Protect your PDF files with Digital Rights Management technology to control file distribution and usage permissions...</p>
                         <a href="https://maipdf.com/pdf/drm.php" class="btn btn-feature-start">START</a>
@@ -71,13 +67,69 @@
                         <h3>IP Address Lookup</h3>
                         <p>IP address lookup tool to help you quickly obtain and understand relevant IP address information...</p>
                         <a href="https://iplogger.icu" class="btn btn-feature-start">START</a>
-                    </div>
-                    <div class="feature-box">
+                    </div>                    <div class="feature-box">
                          <i class="fas fa-fire-alt fa-icon"></i>
                         <h3>PRIVNOTE Burn After Reading</h3>
                         <p>Send self-destructing private note messages that automatically delete after reading to protect your privacy...</p>
                         <a href="https://privnote.chat" class="btn btn-feature-start">START</a>
                     </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="why-choose-us-section" id="why-choose-us">
+            <div class="container">
+                <h2 data-aos="fade-up">Why Choose MaiPDF</h2>
+                <div class="why-choose-us-content">
+                    <div class="why-choose-us-image" data-aos="fade-right">
+                        <img src="https://article.maipdf.com/offlinepages/mutil_task_setting.png" alt="MaiPDF Security">
+                    </div>
+                    <div class="why-choose-us-reasons" data-aos="fade-left">
+                        <div class="reason-item">
+                            <div class="reason-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="reason-text">
+                                <h3>Uncompromising Security</h3>
+                                <p>End-to-end encryption and advanced security protocols keep your documents safe at all times.</p>
+                            </div>
+                        </div>
+                        <div class="reason-item">
+                            <div class="reason-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="reason-text">
+                                <h3>Lightning Fast Performance</h3>
+                                <p>Optimized file processing and delivery systems ensure your documents are shared instantly.</p>
+                            </div>
+                        </div>                        <div class="reason-item">
+                            <div class="reason-icon">
+                                <i class="fas fa-user-lock"></i>
+                            </div>
+                            <div class="reason-text">
+                                <h3>Privacy-First Approach</h3>
+                                <p>We prioritize your privacy with secure temporary storage - all content is protected during transmission and viewing.</p>
+                            </div>
+                        </div>
+                        <div class="reason-item">
+                            <div class="reason-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="reason-text">
+                                <h3>Continuous Innovation</h3>
+                                <p>We constantly improve our tools to provide cutting-edge document protection features.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        </section>
+        
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-box" data-aos="zoom-in">
+                    <h2>Ready to Experience Secure Document Sharing?</h2>
+                    <p>Join thousands of satisfied users who trust MaiPDF for their secure document sharing needs.</p>
+                    <a href="/pdf/maipdf.php" class="btn btn-cta">Get Started Now</a>
                 </div>
             </div>
         </section>
@@ -92,8 +144,13 @@
                     <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
                 </div>
+                <div class="language-switcher">
+                    <span class="current-lang active">English</span>
+                    <a href="newcnhome.html" class="lang-option">中文</a>
+                </div>
             </div>
-            <div class="footer-right">                <div class="contact-info">
+            <div class="footer-right">                
+                <div class="contact-info">
                     <h4>Contact Us</h4>
                     <p><i class="fas fa-envelope"></i> joe@pdfhost.online</p>
                     <p class="contact-note">Feel free to reach out with any questions or feedback.</p>
@@ -102,95 +159,37 @@
             </div>
         </div>
     </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 <style>
-/* Navbar Styling */
-.navbar {
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li {
-    margin-left: 25px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    position: relative;
-    transition: color 0.3s ease;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-}
-
-.nav-links a i {
-    margin-right: 5px;
-    color: #8e44ad;
-}
-
-.nav-links a:hover {
-    color: #8e44ad;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #8e44ad;
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.95);
-        flex-direction: column;
-        padding: 20px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    .nav-links li {
-        margin: 10px 0;
-    }
-    
-    .mobile-menu-toggle {
-        display: block;
-    }
-}
-
 /* Basic Reset & Defaults */
+:root {
+    --primary: #8e44ad;
+    --primary-light: #9b59b6;
+    --primary-dark: #7d3c98;
+    --secondary: #3498db;
+    --accent: #2ecc71;
+    --text-dark: #2c3e50;
+    --text-light: #ecf0f1;
+    --bg-light: #f9f9f9;
+    --bg-dark: #2c3e50;
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --shadow-inset: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+    --gradient-primary: linear-gradient(135deg, #2c3e50, #4b7bec);
+    --gradient-button: linear-gradient(to right, #114FEE, #C835F8);
+    --transition-fast: all 0.3s ease;
+    --transition-medium: all 0.5s ease;
+    --transition-slow: all 0.8s ease;
+    --border-radius-sm: 5px;
+    --border-radius-md: 10px;
+    --border-radius-lg: 20px;
+    --border-radius-full: 50%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -198,9 +197,12 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-dark);
+    overflow-x: hidden;
+    background-color: var(--bg-light);
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -239,13 +241,56 @@ body {
 .btn-start {
     background-color: #fff;
     color: #555;
-    margin-top: 20px;
+    margin: 20px 10px 0;
     border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-start::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
 }
 
 .btn-start:hover {
     background-color: #f4f4f4;
     transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-start:hover::before {
+    left: 100%;
+}
+
+.btn-learn {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    margin: 20px 10px 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-learn:hover {
+    background-color: #fff;
+    color: #4b7bec;
+    transform: scale(1.05);
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-feature-start {
@@ -269,10 +314,13 @@ body {
     background: linear-gradient(135deg, #2c3e50, #4b7bec);
     color: #fff;
     text-align: center;
-    padding: 100px 0 80px 0;
-    margin-top: -10px; /* Adjust to hide any gap between navbar and hero */
+    padding: 120px 0 100px 0;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-background {
@@ -297,6 +345,109 @@ body {
     opacity: 0.6;
 }
 
+.animated-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        -45deg,
+        rgba(44, 62, 80, 0.8),
+        rgba(52, 73, 94, 0.8),
+        rgba(75, 123, 236, 0.8),
+        rgba(142, 68, 173, 0.8)
+    );
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    z-index: -1;
+}
+
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.float-element {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.float-element:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation: float-animation 25s infinite ease-in-out;
+}
+
+.float-element:nth-child(2) {
+    bottom: 30%;
+    right: 15%;
+    width: 8px;
+    height: 8px;
+    animation: float-animation 20s infinite ease-in-out reverse;
+}
+
+.float-element:nth-child(3) {
+    top: 50%;
+    left: 70%;
+    width: 10px;
+    height: 10px;
+    animation: float-animation 30s infinite ease-in-out;
+}
+
+.float-element:nth-child(4) {
+    top: 70%;
+    left: 30%;
+    width: 4px;
+    height: 4px;
+    animation: float-animation 15s infinite ease-in-out reverse;
+}
+
+.float-element:nth-child(5) {
+    top: 25%;
+    left: 80%;
+    animation: float-animation 18s infinite ease-in-out;
+}
+
+@keyframes float-animation {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(100px, 50px) rotate(90deg);
+    }
+    50% {
+        transform: translate(50px, 100px) rotate(180deg);
+    }
+    75% {
+        transform: translate(-50px, 50px) rotate(270deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 .hero-section .container {
     position: relative;
     z-index: 1;
@@ -317,55 +468,143 @@ body {
 /* Features Section */
 .features-section {
     background-color: #f9f9f9;
-    padding: 60px 0;
+    padding: 80px 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.features-section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: #f9f9f9;
+    clip-path: ellipse(50% 60% at 50% 100%);
+    z-index: 1;
+}
+
+.features-section::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: var(--gradient-button);
+    clip-path: ellipse(50% 60% at 50% 0%);
+    z-index: 1;
 }
 
 .features-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 40px;
-    color: #444;
+    font-size: 2rem;
+    margin-bottom: 60px;
+    color: var(--text-dark);
     font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.features-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--gradient-button);
+    border-radius: 3px;
 }
 
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    position: relative;
+    z-index: 2;
 }
 
 .feature-box {
     background-color: #fff;
-    padding: 30px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 35px 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: var(--transition-medium);
+    position: relative;
+    overflow: hidden;    border-bottom: 4px solid #8e44ad;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.feature-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-button);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
 }
 
 .feature-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-box:hover::before {
+    transform: scaleX(1);
 }
 
 /* Styling for Font Awesome icons */
 .fa-icon { /* General class for Font Awesome icons in feature boxes */
     font-size: 2.8rem; /* Increased size for more impact */
-    color: #8e44ad; /* Purple icons, consistent with theme */
-    margin-bottom: 20px; /* More space below icon */
-    display: block; /* Ensure it takes block display for margin and centering */
-    line-height: 1; /* Prevent extra space if icon renders with different line-height */
+    position: relative;
+    display: inline-flex;
+    width: 70px;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    color: #fff;
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+    transition: all 0.4s ease;
 }
 
-/* Removed old .feature-icon class for <img> as it's replaced */
-/*
-.feature-icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 15px;
-    display: inline-block;
+.fa-icon::before {
+    z-index: 1;
 }
-*/
+
+.fa-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9b59b6, #3498db);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.feature-box:hover .fa-icon {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(142, 68, 173, 0.5);
+}
+
+.feature-box:hover .fa-icon::after {
+    opacity: 1;
+}
 
 .feature-box h3 {
     font-size: 1.1rem;
@@ -391,6 +630,110 @@ body {
     font-size: 0.9rem;
     color: #666;
     min-height: 60px;
+}
+
+/* Why Choose Us Section */
+.why-choose-us-section {
+    background-color: #f4f7fc;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.why-choose-us-section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: #fff;
+    clip-path: ellipse(50% 60% at 50% 100%);
+    z-index: 1;
+}
+
+.why-choose-us-section h2 {
+    font-size: 2rem;
+    margin-bottom: 60px;
+    color: var(--text-dark);
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.why-choose-us-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--gradient-button);
+    border-radius: 3px;
+}
+
+.why-choose-us-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.why-choose-us-image {
+    flex: 1;
+    text-align: center;
+}
+
+.why-choose-us-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+}
+
+.why-choose-us-reasons {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.reason-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: transform 0.3s ease;
+}
+
+.reason-item:hover {
+    transform: translateX(10px);
+}
+
+.reason-icon {
+    background: var(--gradient-button);
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: var(--border-radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.3rem;
+    box-shadow: var(--shadow-md);
+}
+
+.reason-text h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.reason-text p {
+    font-size: 0.9rem;
+    color: #666;
 }
 
 /* Footer Section */
@@ -497,10 +840,24 @@ body {
     .features-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    .why-choose-us-content {
+        flex-direction: column;
+    }
+    .why-choose-us-image, .why-choose-us-reasons {
+        flex: none;
+        width: 100%;
+    }
+    .why-choose-us-image {
+        margin-bottom: 40px;
+    }
+    .why-choose-us-image img {
+        max-width: 80%;
+    }
     .footer-content {
         flex-direction: column;
         text-align: center;
-    }    .footer-left, .footer-right {
+    }    
+    .footer-left, .footer-right {
         flex-basis: 100%;
         margin-bottom: 20px;
         text-align: center;
@@ -515,30 +872,9 @@ body {
         margin: 0 auto 20px;
     }
     
-    .footer-social {
+    .footer-social, .language-switcher {
         justify-content: center;
-    }
-      /* Add a mobile menu toggle button for smaller screens */
-      .mobile-menu-toggle {
-        display: block;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: #333;
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .nav-links {
-        display: none;
-    }
-    
-    .nav-links.active {
-        display: flex;
-    }
+    }    /* End of footer responsive styles */
 }
 
 @media (max-width: 768px) {
@@ -556,9 +892,62 @@ body {
     }
     .footer-left p {
         font-size: 0.85rem;
-    }
-    .fa-icon { /* Slightly smaller icons on mobile */
+    }    .fa-icon { /* Slightly smaller icons on mobile */
         font-size: 2.5rem;
+        width: 60px;
+        height: 60px;
+    }
+    .why-choose-us-section {
+        padding: 70px 0;
+    }
+    .reason-item {
+        gap: 15px;
+    }
+    .reason-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        font-size: 1rem;
+    }
+    .reason-text h3 {
+        font-size: 1rem;
+    }
+    .reason-text p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 100px 0 80px;
+    }
+    .hero-section h1 {
+        font-size: 1.6rem;
+    }
+    .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn-start, .btn-learn {
+        margin: 0;
+        width: 100%;
+    }
+    .features-section h2, .why-choose-us-section h2, .cta-box h2 {
+        font-size: 1.7rem;
+    }
+    .cta-box {
+        padding: 30px 20px;
+    }
+    .cta-box p {
+        font-size: 0.95rem;
+    }
+    .btn-cta {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
     }
 }
 
@@ -597,64 +986,187 @@ body {
 .arrow-down + .arrow-down {
     margin-top: 5px;
 }
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://article.maipdf.com/offlinepages/drag_files_to_upload.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 100px 0;
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
+
+.cta-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta-box h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.cta-box p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.btn-cta {
+    background: var(--gradient-button);
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border: none;
+    transform-origin: center;
+    animation: pulse 2s infinite;
+}
+
+.btn-cta:hover {
+    transform: scale(1.05);
+    animation: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(142, 68, 173, 0.7);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(142, 68, 173, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(142, 68, 173, 0);
+    }
+}
+
+/* Language Switcher */
+.language-switcher {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.current-lang, .lang-option {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.lang-option {
+    text-decoration: none;
+}
+
+.current-lang.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.lang-option:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-button);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
 </style>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Mobile menu toggle functionality
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const navLinks = document.getElementById('nav-links');
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize AOS animation library with minimal settings
+        AOS.init({
+            disable: true,  // Temporarily disable AOS to ensure content visibility
+            duration: 400,
+            easing: 'ease',
+            once: true
+        });
         
-        if (mobileMenuToggle && navLinks) {
-            mobileMenuToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                // Change icon between bars and times
-                const icon = mobileMenuToggle.querySelector('i');
-                if (icon.classList.contains('fa-bars')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return; // Skip for # links
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Scroll to element
+                    window.scrollTo({
+                        top: targetElement.offsetTop, // No offset needed as navbar is removed
+                        behavior: 'smooth'
+                    });
                 }
             });
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!navLinks.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-                    navLinks.classList.remove('active');
-                    const icon = mobileMenuToggle.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
+        });
+        
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return; // Skip for # links
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Close mobile menu if open
-                        navLinks.classList.remove('active');
-                        const icon = mobileMenuToggle.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                        
-                        // Scroll to element
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 70, // Offset for navbar
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        }
+        });
+          // Make sure feature boxes are visible
+        document.querySelectorAll('.feature-box').forEach((box, index) => {
+            box.style.opacity = '1';
+            box.style.visibility = 'visible';
+        });
     });
 </script>
 </body>
