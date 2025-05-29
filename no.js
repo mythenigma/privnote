@@ -98,15 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('grabify')) {
     document.getElementById('grabify').style.display = 'block';
   }
-  // Debug: 输出当前URL和jsnopri08.js已加载
-  if (!window._jsnopri08_debug) {
-    window._jsnopri08_debug = true;
-    const debugDiv = document.createElement('div');
-    debugDiv.style = 'position:fixed;bottom:0;left:0;z-index:9999;background:#fff3cd;color:#856404;padding:8px 16px;border:1px solid #ffeeba;font-size:14px;';
-    debugDiv.innerHTML = 'jsnopri08.js loaded. URL: ' + url;
-    document.body.appendChild(debugDiv);
-    setTimeout(()=>debugDiv.remove(), 6000);
-  }
 });
 
 var textareaValue='';
