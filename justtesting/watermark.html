@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Query the PDF file browsing information by watermark number, including access device, IP, phone number, and more.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Watermark Information Query - MaiPDF</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #8e44ad;
+      --primary-light: #9b59b6;
+      --primary-dark: #7d3c98;
+      --secondary: #3498db;
+      --accent: #2ecc71;
+      --text-dark: #2c3e50;
+      --text-light: #ecf0f1;
+      --bg-light: #f9f9f9;
+      --bg-dark: #2c3e50;
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+      --shadow-inset: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+      --gradient-primary: linear-gradient(135deg, #2c3e50, #4b7bec);
+      --gradient-button: linear-gradient(to right, #114FEE, #C835F8);
+      --danger: #e74c3c;
+      --transition-fast: all 0.3s ease;
+      --transition-medium: all 0.5s ease;
+      --transition-slow: all 0.8s ease;
+      --border-radius-sm: 5px;
+      --border-radius-md: 10px;
+      --border-radius-lg: 20px;
+      --border-radius-full: 50%;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+      scroll-behavior: smooth;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #2c3e50, #4b7bec);
+      color: #fff;
+      text-align: center;
+      padding: 80px 0 60px 0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 8%), 
+                        radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 8%),
+                        radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 8%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 8%);
+      opacity: 0.6;
+    }
+
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+          -45deg,
+          rgba(44, 62, 80, 0.8),
+          rgba(52, 73, 94, 0.8),
+          rgba(75, 123, 236, 0.8),
+          rgba(142, 68, 173, 0.8)
+      );
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+    }
+
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .float-element {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+    }
+
+    .float-element:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      animation: float-animation 25s infinite ease-in-out;
+    }
+
+    .float-element:nth-child(2) {
+      bottom: 30%;
+      right: 15%;
+      width: 8px;
+      height: 8px;
+      animation: float-animation 20s infinite ease-in-out reverse;
+    }
+
+    .float-element:nth-child(3) {
+      top: 50%;
+      left: 70%;
+      width: 10px;
+      height: 10px;
+      animation: float-animation 30s infinite ease-in-out;
+    }
+
+    .float-element:nth-child(4) {
+      top: 70%;
+      left: 30%;
+      width: 4px;
+      height: 4px;
+      animation: float-animation 15s infinite ease-in-out reverse;
+    }
+
+    .float-element:nth-child(5) {
+      top: 25%;
+      left: 80%;
+      animation: float-animation 18s infinite ease-in-out;
+    }
+
+    @keyframes float-animation {
+      0% {
+          transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+          transform: translate(100px, 50px) rotate(90deg);
+      }
+      50% {
+          transform: translate(50px, 100px) rotate(180deg);
+      }
+      75% {
+          transform: translate(-50px, 50px) rotate(270deg);
+      }
+      100% {
+          transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    .hero-section .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-section h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .hero-section p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .logo-main {
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #3498db, #9b59b6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    /* Main content */
+    .main-content {
+      padding: 60px 0;
+      background-color: #f4f7fc;
+    }
+
+    .query-box {
+      background-color: #fff;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-md);
+      padding: 30px;
+      max-width: 700px;
+      margin: 0 auto;
+      transition: var(--transition-medium);
+    }
+
+    .query-box:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .query-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      color: var(--text-dark);
+      font-weight: 600;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .query-box h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--gradient-button);
+      border-radius: 3px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius-md);
+      transition: var(--transition-fast);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.2);
+      outline: none;
+    }
+
+    .search-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--gradient-button);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius-md);
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(114, 53, 248, 0.3);
+    }
+
+    .search-btn:hover:not(.disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(114, 53, 248, 0.4);
+    }
+
+    .search-btn.disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: var(--border-radius-md);
+      border-left: 4px solid var(--primary);
+    }
+
+    .result-item {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .result-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .label {
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: inline-block;
+      min-width: 150px;
+      margin-right: 10px;
+    }
+
+    /* Footer Section */
+    .footer-section {
+      background: linear-gradient(to right, #114FEE, #C835F8);
+      color: #ccc;
+      padding: 50px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      flex-basis: 60%;
+    }
+
+    .footer-left .logo {
+      color: #eee;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+
+    .footer-left p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .footer-social {
+      margin-top: 15px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .footer-right {
+      flex-basis: 30%;
+    }
+
+    .contact-info {
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .contact-info h4 {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .contact-info p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .contact-info i {
+      margin-right: 10px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .contact-note {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7) !important;
+      margin-top: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-left, .footer-right {
+        flex-basis: 100%;
+        margin-bottom: 30px;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+
+      .hero-section {
+        padding: 60px 0 40px 0;
+      }
+
+      .hero-section h1 {
+        font-size: 1.8rem;
+      }
+
+      .query-box {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-section h1 {
+        font-size: 1.6rem;
+      }
+
+      .main-content {
+        padding: 40px 0;
+      }
+
+      .query-box h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Animation for search result */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fadeIn {
+      animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-background">
+      <div class="hero-pattern"></div>
+      <div class="animated-bg"></div>
+    </div>
+    <div class="container">
+      <div class="logo logo-main animate__animated animate__fadeInDown">MaiPDF</div>
+      <h1 class="animate__animated animate__fadeInUp" id="page-title">Watermark Information Query</h1>
+      <p class="animate__animated animate__fadeInUp animate__delay-1s" id="hero-subtitle">Track who accessed your documents with secure watermark technology</p>
+    </div>
+    <div class="floating-elements">
+      <div class="float-element" style="--i:1"></div>
+      <div class="float-element" style="--i:2"></div>
+      <div class="float-element" style="--i:3"></div>
+      <div class="float-element" style="--i:4"></div>
+      <div class="float-element" style="--i:5"></div>
+    </div>
+
+    <div style="position:absolute;top:18px;right:24px;z-index:10;">
+      <div class="btn-group" id="lang-switcher" role="group" aria-label="Language Switcher">
+        <button type="button" class="btn btn-outline-light btn-sm" data-lang="en">EN</button>
+        <button type="button" class="btn btn-outline-light btn-sm" data-lang="zh">中文</button>
+        <button type="button" class="btn btn-outline-light btn-sm" data-lang="ja">日本語</button>
+        <button type="button" class="btn btn-outline-light btn-sm" data-lang="fr">FR</button>
+        <button type="button" class="btn btn-outline-light btn-sm" data-lang="de">DE</button>
+        <button type="button" class="btn btn-outline-light btn-sm" data-lang="es">ES</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section class="main-content">
+    <div class="container">
+      <div class="query-box">
+        <!-- Alert for multi-language messages -->
+        <div id="alert-message" class="alert alert-info alert-dismissible fade show" role="alert" style="display: none;">
+          <span id="alert-text"></span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <h2 id="query-box-title">Enter Watermark Details</h2>
+        
+        <div class="input-group">
+          <input type="text" id="watermark_number" placeholder="Enter watermark number">
+        </div>
+        
+        <button onclick="fetchLog()" id="search-button" class="search-btn">
+          <span class="spinner-border spinner-border-sm d-none" id="loading-spinner" role="status" aria-hidden="true"></span>
+          <span id="search-button-text">Search</span> <span id="countdown"></span>
+        </button>
+
+        <div id="result" class="result fadeIn" style="display:none;">
+          <div class="result-item"><span class="label" id="access_code-label">Reading Code:</span><span id="access_code">XXX</span></div>
+          <div class="result-item"><span class="label" id="recognition-info-label">Recognition Info:</span><span id="phone">XXX</span></div>
+          <div class="result-item"><span class="label" id="user_agent-label">Browser Info:</span><span id="user_agent">XXX</span></div>
+          <div class="result-item"><span class="label" id="ip_address-label">IP Address:</span><span id="ip_address">XXX</span></div>
+          <div class="result-item"><span class="label" id="open_time-label">Open Time:</span><span id="open_time">XXX</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <div class="logo" id="footer-logo">MaiPDF</div>
+        <p id="footer-desc">Advanced document sharing solutions. <br> Secure, reliable, and easy to use. <br> &copy; 2025 MaiPDF. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="footer-right">                
+        <div class="contact-info">
+          <h4 id="footer-contact-title">Contact Us</h4>
+          <p><i class="fas fa-envelope"></i> <span id="footer-contact-email">joe@pdfhost.online</span></p>
+          <p class="contact-note" id="footer-contact-note">Feel free to reach out with any questions or feedback.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+
+  <script>
+    // Language settings based on browser language
+    const lang = navigator.language || navigator.userLanguage;
+
+    const translations = {
+  en: {
+    pageTitle: "Watermark Information Query",
+    heroSubtitle: "Track who accessed your documents with secure watermark technology",
+    queryBoxTitle: "Enter Watermark Details",
+    searchButton: "Search",
+    accessCodeLabel: "Reading Code:",
+    recognitionInfoLabel: "Recognition Info:",
+    userAgentLabel: "Browser Info:",
+    ipAddressLabel: "IP Address:",
+    openTimeLabel: "Open Time:",
+    placeholder: "Enter watermark number",
+    alertMessage: "If you encounter any issues, please contact joe@pdfhost.online.",
+    footerLogo: "MaiPDF",
+    footerDesc: "Advanced document sharing solutions. <br> Secure, reliable, and easy to use. <br> &copy; 2025 MaiPDF. All rights reserved.",
+    footerContactTitle: "Contact Us",
+    footerContactEmail: "joe@pdfhost.online",
+    footerContactNote: "Feel free to reach out with any questions or feedback."
+  },
+  zh: {
+    pageTitle: "水印信息查询",
+    heroSubtitle: "通过水印技术追踪谁访问了您的文档",
+    queryBoxTitle: "输入水印信息",
+    searchButton: "查询",
+    accessCodeLabel: "阅读码：",
+    recognitionInfoLabel: "识别信息：",
+    userAgentLabel: "浏览器信息：",
+    ipAddressLabel: "IP 地址：",
+    openTimeLabel: "打开时间：",
+    placeholder: "请输入水印编号",
+    alertMessage: "如果遇到任何问题，请联系 joe@pdfhost.online。",
+    footerLogo: "MaiPDF",
+    footerDesc: "高级文档分享解决方案。<br>安全，可靠，易于使用。<br>&copy; 2025 MaiPDF 版权所有。",
+    footerContactTitle: "联系我们",
+    footerContactEmail: "joe@pdfhost.online",
+    footerContactNote: "欢迎随时联系我们,提出任何反馈。"
+  },
+  ja: {
+    pageTitle: "ウォーターマーク情報の検索",
+    heroSubtitle: "ウォーターマーク技術で誰が文書にアクセスしたかを追跡",
+    queryBoxTitle: "ウォーターマーク情報を入力してください",
+    searchButton: "検索",
+    accessCodeLabel: "アクセスコード：",
+    recognitionInfoLabel: "認識情報：",
+    userAgentLabel: "ブラウザ情報：",
+    ipAddressLabel: "IPアドレス：",
+    openTimeLabel: "開封時間：",
+    placeholder: "ウォーターマーク番号を入力してください",
+    alertMessage: "何か問題があれば、joe@pdfhost.onlineまでお問い合わせください。",
+    footerLogo: "MaiPDF",
+    footerDesc: "高度なドキュメント共有ソリューション。<br>安全、信頼性、使いやすさ。<br>&copy; 2025 MaiPDF. All rights reserved.",
+    footerContactTitle: "お問い合わせ",
+    footerContactEmail: "joe@pdfhost.online",
+    footerContactNote: "ご質問やご意見があればお気軽にご連絡ください。"
+  },
+  fr: {
+    pageTitle: "Recherche d'informations sur le filigrane",
+    heroSubtitle: "Suivez qui a accédé à vos documents grâce à la technologie du filigrane",
+    queryBoxTitle: "Entrez les détails du filigrane",
+    searchButton: "Chercher",
+    accessCodeLabel: "Code d'accès :",
+    recognitionInfoLabel: "Informations de reconnaissance :",
+    userAgentLabel: "Informations sur le navigateur :",
+    ipAddressLabel: "Adresse IP :",
+    openTimeLabel: "Heure d'ouverture :",
+    placeholder: "Entrez le numéro du filigrane",
+    alertMessage: "Si vous rencontrez des problèmes, veuillez contacter joe@pdfhost.online.",
+    footerLogo: "MaiPDF",
+    footerDesc: "Solutions avancées de partage de documents.<br>Sécurisé, fiable et facile à utiliser.<br>&copy; 2025 MaiPDF. Tous droits réservés.",
+    footerContactTitle: "Contactez-nous",
+    footerContactEmail: "joe@pdfhost.online",
+    footerContactNote: "N'hésitez pas à nous contacter pour toute question ou suggestion."
+  },
+  de: {
+    pageTitle: "Abfragen von Wasserzeicheninformationen",
+    heroSubtitle: "Verfolgen Sie, wer Ihre Dokumente mit Wasserzeichentechnologie aufgerufen hat",
+    queryBoxTitle: "Wasserzeichendetails eingeben",
+    searchButton: "Suchen",
+    accessCodeLabel: "Zugangscode:",
+    recognitionInfoLabel: "Erkennungsinfo:",
+    userAgentLabel: "Browser-Informationen:",
+    ipAddressLabel: "IP-Adresse:",
+    openTimeLabel: "Öffnungszeit:",
+    placeholder: "Wasserzeichen-Nummer eingeben",
+    alertMessage: "Wenn Sie auf Probleme stoßen, kontaktieren Sie bitte joe@pdfhost.online.",
+    footerLogo: "MaiPDF",
+    footerDesc: "Erweiterte Dokumentenfreigabelösungen.<br>Sicher, zuverlässig und einfach zu bedienen.<br>&copy; 2025 MaiPDF. Alle Rechte vorbehalten.",
+    footerContactTitle: "Kontakt",
+    footerContactEmail: "joe@pdfhost.online",
+    footerContactNote: "Kontaktieren Sie uns gerne bei Fragen oder Feedback."
+  },
+  es: {
+    pageTitle: "Consulta de información de marcas de agua",
+    heroSubtitle: "Rastree quién accedió a sus documentos con tecnología de marca de agua",
+    queryBoxTitle: "Ingrese los detalles de la marca de agua",
+    searchButton: "Buscar",
+    accessCodeLabel: "Código de acceso:",
+    recognitionInfoLabel: "Información de reconocimiento:",
+    userAgentLabel: "Información del navegador:",
+    ipAddressLabel: "Dirección IP:",
+    openTimeLabel: "Hora de apertura:",
+    placeholder: "Introduzca el número de marca de agua",
+    alertMessage: "Si encuentra algún problema, comuníquese con joe@pdfhost.online.",
+    footerLogo: "MaiPDF",
+    footerDesc: "Soluciones avanzadas para compartir documentos.<br>Seguro, confiable y fácil de usar.<br>&copy; 2025 MaiPDF. Todos los derechos reservados.",
+    footerContactTitle: "Contáctenos",
+    footerContactEmail: "joe@pdfhost.online",
+    footerContactNote: "No dude en contactarnos si tiene preguntas o comentarios."
+  },
+};
+
+
+    let userSelectedLang = null;
+
+    const setLanguage = (langCode) => {
+      if (!translations[langCode]) langCode = 'en';
+      document.getElementById('page-title').textContent = translations[langCode].pageTitle;
+      document.getElementById('hero-subtitle').textContent = translations[langCode].heroSubtitle;
+      document.getElementById('query-box-title').textContent = translations[langCode].queryBoxTitle;
+      document.getElementById('search-button-text').textContent = translations[langCode].searchButton;
+      document.getElementById('access_code-label').textContent = translations[langCode].accessCodeLabel;
+      document.getElementById('recognition-info-label').textContent = translations[langCode].recognitionInfoLabel;
+      document.getElementById('user_agent-label').textContent = translations[langCode].userAgentLabel;
+      document.getElementById('ip_address-label').textContent = translations[langCode].ipAddressLabel;
+      document.getElementById('open_time-label').textContent = translations[langCode].openTimeLabel;
+      document.getElementById('watermark_number').placeholder = translations[langCode].placeholder;
+      document.getElementById('alert-text').textContent = translations[langCode].alertMessage;
+      document.getElementById('alert-message').style.display = 'block';
+      document.getElementById('footer-logo').textContent = translations[langCode].footerLogo;
+      document.getElementById('footer-desc').innerHTML = translations[langCode].footerDesc;
+      document.getElementById('footer-contact-title').textContent = translations[langCode].footerContactTitle;
+      document.getElementById('footer-contact-email').textContent = translations[langCode].footerContactEmail;
+      document.getElementById('footer-contact-note').textContent = translations[langCode].footerContactNote;
+      // 按钮高亮
+      document.querySelectorAll('#lang-switcher button').forEach(btn => {
+        if (btn.getAttribute('data-lang') === langCode) {
+          btn.classList.add('active');
+          btn.classList.remove('btn-outline-light');
+          btn.classList.add('btn-light','text-primary');
+        } else {
+          btn.classList.remove('active','btn-light','text-primary');
+          btn.classList.add('btn-outline-light');
+        }
+      });
+      userSelectedLang = langCode;
+      localStorage.setItem('watermark_lang', langCode);
+    };
+
+    // 语言切换按钮事件
+    window.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('#lang-switcher button').forEach(btn => {
+        btn.addEventListener('click', function() {
+          setLanguage(this.getAttribute('data-lang'));
+        });
+      });
+      // 优先本地存储
+      let savedLang = localStorage.getItem('watermark_lang');
+      if (savedLang && translations[savedLang]) {
+        setLanguage(savedLang);
+        return;
+      }
+      // 自动检测
+      const lang = navigator.language || navigator.userLanguage;
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const userAgent = navigator.userAgent;
+      if (lang.includes('zh')) {
+        setLanguage('zh');
+      } else if (lang.includes('ja')) {
+        setLanguage('ja');
+      } else if (lang.includes('fr')) {
+        setLanguage('fr');
+      } else if (lang.includes('de')) {
+        setLanguage('de');
+      } else if (lang.includes('es')) {
+        setLanguage('es');
+      } else if (timeZone.includes('America') || userAgent.includes('en')) {
+        setLanguage('en');
+      } else {
+        setLanguage('en');
+      }
+    });
+
+    let isSearching = false;
+    let countdownTimer;
+
+    function fetchLog() {
+      if (isSearching) return; // If already searching, do not click again
+
+      const number = document.getElementById('watermark_number').value;
+      if (!number) {
+        alert("Please enter a watermark number.");
+        return;
+      }
+
+      // Disable the button, show the loading spinner
+      isSearching = true;
+      document.getElementById('search-button').classList.add('disabled');
+      document.getElementById('search-button').disabled = true;
+      document.getElementById('loading-spinner').classList.remove('d-none');
+      document.getElementById('search-button-text').textContent = "Searching...";
+      document.getElementById('countdown').textContent = ' 60s';
+
+      // Start the 60 seconds countdown
+      let countdown = 60;
+      countdownTimer = setInterval(function() {
+        countdown--;
+        document.getElementById('countdown').textContent = ` ${countdown}s`;
+        if (countdown <= 0) {
+          clearInterval(countdownTimer);
+          isSearching = false;
+          document.getElementById('search-button').classList.remove('disabled');
+          document.getElementById('search-button').disabled = false;
+          document.getElementById('loading-spinner').classList.add('d-none');
+          document.getElementById('search-button-text').textContent = "Search";
+          document.getElementById('countdown').textContent = '';
+        }
+      }, 1000);
+
+      fetch('query_log.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'number=' + encodeURIComponent(number)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.success) {
+          document.getElementById('access_code').textContent = data.access_code || '—';
+          document.getElementById('phone').textContent = data.phone || '—';
+          document.getElementById('user_agent').textContent = data.user_agent || '—';
+          document.getElementById('ip_address').textContent = data.ip_address || '—';
+          document.getElementById('open_time').textContent = data.open_time || '—';
+          document.getElementById('result').style.display = 'block';
+        } else {
+          document.getElementById('result').innerHTML = 'No records found';
+          document.getElementById('result').style.display = 'block';
+        }
+      })
+      .catch(error => {
+        document.getElementById('result').innerHTML = 'Query failed, please try again later';
+        document.getElementById('result').style.display = 'block';
+      });
+    }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
+</body>
+</html>
