@@ -226,13 +226,16 @@ body {
 <div class="d-flex align-items-center">
 <div class="dropdown me-3">
 <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-<i class="fas fa-globe me-1"></i><span id="currentLanguage">English</span>
+<span id="currentLanguage">English</span>
 </button>
 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">Español</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">Français</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">🇺🇸 English</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">🇨🇳 中文</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('tw')">🇹🇼 中文</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">🇪🇸 Español</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">🇫🇷 Français</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('ja')">🇯🇵 日本語</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('de')">🇩🇪 Deutsch</a></li>
 </ul>
 </div>
 <div id="trans1" class="tagline">Secure your words, vanish your trace</div>
@@ -385,6 +388,13 @@ const languageCommonStrings = {
     navDecryptText: '解密工具',
     currentLanguage: '中文'
   },
+  tw: {
+    tagline: '安全傳信，隱匿無蹤',
+    navLinkText: '生成連結',
+    navEncryptText: '字元加密',
+    navDecryptText: '解密工具',
+    currentLanguage: '中文'
+  },
   es: {
     tagline: 'Asegura tus palabras, desvanece tu rastro',
     navLinkText: 'Generar Enlace',
@@ -398,6 +408,20 @@ const languageCommonStrings = {
     navEncryptText: 'Chiffrement de Caractères',
     navDecryptText: 'Déchiffrer',
     currentLanguage: 'Français'
+  },
+  ja: {
+    tagline: 'あなたの言葉を守り、痕跡を消す',
+    navLinkText: 'リンクを生成',
+    navEncryptText: '文字の暗号化',
+    navDecryptText: '復号',
+    currentLanguage: '日本語'
+  },
+  de: {
+    tagline: 'Sichern Sie Ihre Worte, verschwinden Sie Ihre Spur',
+    navLinkText: 'Link generieren',
+    navEncryptText: 'Zeichenverschlüsselung',
+    navDecryptText: 'Entschlüsseln',
+    currentLanguage: 'Deutsch'
   }
 };
 
@@ -463,6 +487,36 @@ const languageEncryptionStrings = {
     mobileAlertMedium: '加密完成。顶部框包含零宽字符加密，底部显示二进制加密。',
     tranli: '消息将根据您的设置自动销毁。'
   },
+  tw: {
+    encryptTabTitle: '字元加密工具',
+    coverTextLabel: '表面內容（輸入）',
+    coverTextPlaceholder: '在此輸入便條內容...',
+    hiddenTextLabel: '隱藏內容（輸入）',
+    hiddenTextPlaceholder: '在此輸入隱藏內容...',
+    encryptKeyLabel: '密碼',
+    encryptKeyLabelConfirm: '確認密碼',
+    encryptKeyPlaceholder: '輸入密碼',
+    encryptKeyPlaceholderConfirm: '確認密碼',
+    pass1Placeholder: '輸入密碼',
+    pass2Placeholder: '確認密碼',
+    btnZeroWidthEncrypt: '零寬字元加密',
+    btnBinaryEncrypt: '二進位加密',
+    encryptResultLabel: '零寬字元加密結果（複製分享）',
+    encryptResultPlaceholder: '加密內容將顯示在此',
+    binaryResultLabel: '二進位加密結果',
+    textareaPlaceholder: '在此輸入便條內容...',
+    tranmake: '加密便條',
+    btnCopyEncryptResult: '複製零寬字元結果',
+    btnCopyBinaryResult: '複製二進位結果',
+    encryptInfo: '<strong>說明：</strong>零寬字元加密會將隱藏內容隱寫進表面內容，二進位加密則將隱藏內容轉為0/1字串。可自訂密碼。',
+    hiddenTextareaPlaceholder: '在此輸入隱藏內容...',
+    alertPasswordMismatch: '密碼不匹配或清除密碼',
+    alertContentTooLong: '內容過長.....',
+    alertWriteSomething: '請在便條上寫些內容',
+    mobileAlertShort: '加密成功！上框：零寬字元。下框：二進位格式。',
+    mobileAlertMedium: '加密完成。上框包含零寬字元加密，下框顯示二進位加密。',
+    tranli: '訊息將依據您的設定自動銷毀。'
+  },
   es: {
     encryptTabTitle: 'Herramienta de Cifrado de Caracteres',
     coverTextLabel: 'Mensaje Público (Entrada)',
@@ -522,6 +576,66 @@ const languageEncryptionStrings = {
     mobileAlertShort: 'Chiffrement réussi ! Boîte supérieure : caractères à largeur zéro. Boîte inférieure : format binaire.',
     mobileAlertMedium: 'Chiffrement terminé. La boîte supérieure contient le chiffrement à caractères de largeur zéro, tandis que celle du bas affiche le chiffrement binaire.',
     tranli: 'Le message sera automatiquement détruit selon vos paramètres.'
+  },
+  ja: {
+    encryptTabTitle: '文字暗号化ツール',
+    coverTextLabel: '公開メッセージ（入力）',
+    coverTextPlaceholder: 'ここにメモを書いてください...',
+    hiddenTextLabel: '秘密メッセージ（入力）',
+    hiddenTextPlaceholder: 'ここに隠しメッセージを書いてください...',
+    encryptKeyLabel: 'パスワード',
+    encryptKeyLabelConfirm: 'パスワード確認',
+    encryptKeyPlaceholder: 'パスワードを入力',
+    encryptKeyPlaceholderConfirm: 'パスワードを確認',
+    pass1Placeholder: 'パスワードを入力',
+    pass2Placeholder: 'パスワードを確認',
+    btnZeroWidthEncrypt: 'ゼロ幅暗号化',
+    btnBinaryEncrypt: 'バイナリ暗号化',
+    encryptResultLabel: 'ゼロ幅暗号化結果（共有用にコピー）',
+    encryptResultPlaceholder: '暗号化されたコンテンツがここに表示されます',
+    binaryResultLabel: 'バイナリ暗号化結果',
+    textareaPlaceholder: 'ここにメモを書いてください...',
+    tranmake: 'メモを暗号化',
+    btnCopyEncryptResult: 'ゼロ幅結果をコピー',
+    btnCopyBinaryResult: 'バイナリ結果をコピー',
+    encryptInfo: '<strong>情報：</strong>ゼロ幅暗号化は隠しコンテンツをカバーテキストに隠します。バイナリ暗号化は隠しコンテンツを0/1に変換します。カスタムパスワードを設定できます。',
+    hiddenTextareaPlaceholder: 'ここに隠しメッセージを書いてください...',
+    alertPasswordMismatch: 'パスワードが一致しないか、パスワードをクリアしてください',
+    alertContentTooLong: '長すぎます.....',
+    alertWriteSomething: 'メモに何か書いてください',
+    mobileAlertShort: '暗号化成功！上のボックス：ゼロ幅文字。下のボックス：バイナリ形式。',
+    mobileAlertMedium: '暗号化完了。上のボックスにはゼロ幅文字暗号化、下のボックスにはバイナリ暗号化が含まれています。',
+    tranli: 'メッセージは設定に従って自動的に破棄されます。'
+  },
+  de: {
+    encryptTabTitle: 'Zeichen-Verschlüsselungswerkzeug',
+    coverTextLabel: 'Öffentliche Nachricht (Eingabe)',
+    coverTextPlaceholder: 'Schreiben Sie Ihre Notiz hier...',
+    hiddenTextLabel: 'Geheime Nachricht (Eingabe)',
+    hiddenTextPlaceholder: 'Schreiben Sie hier versteckte Nachrichten...',
+    encryptKeyLabel: 'Passwort',
+    encryptKeyLabelConfirm: 'Passwort bestätigen',
+    encryptKeyPlaceholder: 'Passwort eingeben',
+    encryptKeyPlaceholderConfirm: 'Passwort bestätigen',
+    pass1Placeholder: 'Passwort eingeben',
+    pass2Placeholder: 'Passwort bestätigen',
+    btnZeroWidthEncrypt: 'Nullbreiten-Verschlüsselung',
+    btnBinaryEncrypt: 'Binär-Verschlüsselung',
+    encryptResultLabel: 'Nullbreiten-Verschlüsselungsergebnis (Zum Teilen kopieren)',
+    encryptResultPlaceholder: 'Verschlüsselter Inhalt wird hier angezeigt',
+    binaryResultLabel: 'Binär-Verschlüsselungsergebnis',
+    textareaPlaceholder: 'Schreiben Sie Ihre Notiz hier...',
+    tranmake: 'Notiz verschlüsseln',
+    btnCopyEncryptResult: 'Nullbreiten-Ergebnis kopieren',
+    btnCopyBinaryResult: 'Binär-Ergebnis kopieren',
+    encryptInfo: '<strong>Info:</strong> Nullbreiten-Verschlüsselung versteckt den versteckten Inhalt im Decktext. Binär-Verschlüsselung wandelt den versteckten Inhalt in 0/1 um. Sie können ein benutzerdefiniertes Passwort festlegen.',
+    hiddenTextareaPlaceholder: 'Schreiben Sie hier versteckte Nachrichten...',
+    alertPasswordMismatch: 'Passwort stimmt nicht überein oder Passwort löschen',
+    alertContentTooLong: 'Zu lang.....',
+    alertWriteSomething: 'Schreiben Sie etwas in die Notiz',
+    mobileAlertShort: 'Verschlüsselung erfolgreich! Oberes Feld: Nullbreitenzeichen. Unteres Feld: Binärformat.',
+    mobileAlertMedium: 'Verschlüsselung abgeschlossen. Das obere Feld enthält Nullbreitenzeichen-Verschlüsselung, während das untere Binär-Verschlüsselung zeigt.',
+    tranli: 'Die Nachricht wird gemäß Ihren Einstellungen automatisch gelöscht.'
   }
 };
 
@@ -571,8 +685,15 @@ function applyLanguage(lang) {
   const commonStrings = languageCommonStrings[lang] || languageCommonStrings['en'];
   const encryptionStrings = languageEncryptionStrings[lang] || languageEncryptionStrings['en'];
   
-  // Update common elements
-  document.getElementById('currentLanguage').textContent = commonStrings.currentLanguage;
+  // Update common elements with flag icons
+  if (lang === 'en') document.getElementById('currentLanguage').textContent = '🇺🇸 English';
+  else if (lang === 'zh') document.getElementById('currentLanguage').textContent = '🇨🇳 中文';
+  else if (lang === 'tw') document.getElementById('currentLanguage').textContent = '🇹🇼 中文';
+  else if (lang === 'es') document.getElementById('currentLanguage').textContent = '🇪🇸 Español';
+  else if (lang === 'fr') document.getElementById('currentLanguage').textContent = '🇫🇷 Français';
+  else if (lang === 'ja') document.getElementById('currentLanguage').textContent = '🇯🇵 日本語';
+  else if (lang === 'de') document.getElementById('currentLanguage').textContent = '🇩🇪 Deutsch';
+  
   document.getElementById('trans1').textContent = commonStrings.tagline;
   document.getElementById('navLinkText').textContent = commonStrings.navLinkText;
   document.getElementById('navEncryptText').textContent = commonStrings.navEncryptText;

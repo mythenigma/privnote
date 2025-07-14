@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕵️‍♂️ 如何在微信群公开发消息，却让特定同事悄悄收到加密信息？- 文字加密教程 - Privnote博客</title>
+    <meta name="description" content="公司机密会议如何在微信群公开通知？学会文字加密技术，让普通消息隐藏真正的秘密信息。Privnote文字加密完全指南，保护企业机密沟通。">
+    <meta name="keywords" content="文字加密,微信群加密,企业机密通信,文字隐藏技术,公司内部加密,密码保护消息,工作场合加密,团队秘密沟通,文字加密软件,安全通知系统">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://privnote.chat/blog/zh/weixinqun-jiami-tongzhi.html">
+    <meta property="og:title" content="🕵️‍♂️ 如何在微信群公开发消息，却让特定同事悄悄收到加密信息？">
+    <meta property="og:description" content="学会文字加密技术，在公开场合传递机密信息而不被发现">
+    <meta property="og:image" content="https://privnote.chat/privnote.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://privnote.chat/blog/zh/weixinqun-jiami-tongzhi.html">
+    <meta property="twitter:title" content="🕵️‍♂️ 微信群文字加密：公开发消息，秘密传信息">
+    <meta property="twitter:description" content="学会文字加密技术，在公开场合传递机密信息而不被发现">
+    <meta property="twitter:image" content="https://privnote.chat/privnote.png">
+
+    <link rel="canonical" href="https://privnote.chat/blog/zh/weixinqun-jiami-tongzhi.html">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --info-color: #17a2b8;
+            --business-color: #6c5ce7;
+            --text-color: #2c3e50;
+            --bg-color: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="business" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="8" fill="white" opacity="0.05"/><circle cx="10" cy="10" r="3" fill="white" opacity="0.03"/><circle cx="30" cy="30" r="3" fill="white" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23business)"/></svg>');
+            animation: businessFlow 25s linear infinite;
+        }
+
+        @keyframes businessFlow {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-10px, -15px) rotate(90deg); }
+            50% { transform: translate(-20px, 10px) rotate(180deg); }
+            75% { transform: translate(10px, -5px) rotate(270deg); }
+        }
+
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-section .lead {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .article-content {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin: 3rem 0 1.5rem 0;
+            font-size: 2rem;
+            border-left: 4px solid var(--business-color);
+            padding-left: 1rem;
+        }
+
+        .article-content h3 {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .business-scenario {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .business-scenario::before {
+            content: '🏢';
+            font-size: 4rem;
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            opacity: 0.2;
+        }
+
+        .business-scenario h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .problem-box {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .problem-box::before {
+            content: '⚠️';
+            font-size: 2.5rem;
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            opacity: 0.7;
+        }
+
+        .problem-box h4 {
+            color: #856404;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .solution-steps {
+            background: white;
+            border: 3px solid #e9ecef;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .solution-steps::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            height: 8px;
+            background: linear-gradient(90deg, var(--business-color), var(--secondary-color), var(--success-color));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .step-item {
+            background: #f8f9fa;
+            border-left: 4px solid var(--business-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 15px 15px 0;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .step-item::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--business-color);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .solution-steps {
+            counter-reset: step-counter;
+        }
+
+        .wechat-demo {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .wechat-demo::before {
+            content: '💬';
+            font-size: 2.5rem;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+
+        .wechat-demo h4 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .message-surface {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Roboto Mono', monospace;
+            position: relative;
+        }
+
+        .message-surface::before {
+            content: '👁️ 表面消息';
+            position: absolute;
+            top: -0.7rem;
+            left: 1rem;
+            background: white;
+            padding: 0 0.5rem;
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .message-hidden {
+            background: #f0f8ff;
+            border: 2px dashed #2196f3;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Roboto Mono', monospace;
+            position: relative;
+        }
+
+        .message-hidden::before {
+            content: '🔐 隐藏信息（加密后）';
+            position: absolute;
+            top: -0.7rem;
+            left: 1rem;
+            background: #f0f8ff;
+            padding: 0 0.5rem;
+            font-size: 0.8rem;
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        .reactions-box {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .reactions-box::before {
+            content: '👀';
+            font-size: 2.5rem;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+
+        .reactions-box h4 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .benefit-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .use-cases-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .use-cases-section::before {
+            content: '🌟';
+            font-size: 3rem;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            opacity: 0.3;
+        }
+
+        .use-case-item {
+            background: white;
+            border-left: 4px solid var(--info-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .how-to-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .how-to-section::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="guide" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="3" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23guide)"/></svg>');
+            animation: guideFlow 30s linear infinite;
+        }
+
+        @keyframes guideFlow {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-20px, -30px); }
+            50% { transform: translate(-40px, 20px); }
+            75% { transform: translate(20px, -10px); }
+        }
+
+        .how-to-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .how-to-section h3 {
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .summary-box {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .summary-box::before {
+            content: '✨';
+            font-size: 2.5rem;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+
+        .summary-box h4 {
+            color: #856404;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cta" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="3" height="3" x="8" y="8" fill="white" opacity="0.1"/><rect width="3" height="3" x="18" y="18" fill="white" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23cta)"/></svg>');
+            animation: ctaPattern 15s ease-in-out infinite;
+        }
+
+        @keyframes ctaPattern {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-custom {
+            background: white;
+            color: var(--secondary-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: var(--primary-color);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-section .lead {
+                font-size: 1.1rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1rem;
+            }
+            
+            .business-scenario, .solution-steps, .use-cases-section, .how-to-section {
+                margin: 2rem 0;
+                padding: 1.5rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .step-item::before {
+                left: -1.5rem;
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="fas fa-lock me-2"></i>Privnote
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>🕵️‍♂️ 如何在微信群公开发一句"今晚开会"，却让特定同事悄悄收到真正的信息？</h1>
+            <p class="lead">掌握文字加密技术，让你在公开场合传递机密信息而不被察觉</p>
+            <div class="text-white-50 mt-3">
+                <small>发布于 2025年7月14日 | 最后编辑：2025年7月14日</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <article class="article-content">
+            <div class="business-scenario">
+                <h3><i class="fas fa-briefcase me-2"></i>真实的企业场景</h3>
+                <p>最近公司做新项目，因为竞争激烈，会议讨论的具体细节不方便在微信群里公开说明。</p>
+                <p><strong>但问题来了：</strong></p>
+            </div>
+
+            <div class="problem-box">
+                <h4>企业沟通的两难困境</h4>
+                <ul>
+                    <li><strong>单独私聊问题</strong>：如果单独私聊某位同事，其他同事可能觉得"不公平"</li>
+                    <li><strong>公开透明风险</strong>：如果在公开群里直接说具体内容，又怕被截图或者泄密</li>
+                    <li><strong>信息安全要求</strong>：企业机密需要精准传递给特定人员</li>
+                    <li><strong>团队和谐考虑</strong>：既要保密又不能影响团队氛围</li>
+                </ul>
+            </div>
+
+            <p>于是我们几个核心同事提前约定，用一个安全又有趣的小工具：<strong>privnote.chat 的文字加密功能</strong>：</p>
+
+            <div class="solution-steps">
+                <h3><i class="fas fa-lightbulb me-2"></i>我们的文字加密解决方案</h3>
+                
+                <div class="step-item">
+                    <h5>🤝 事先约定</h5>
+                    <p>任何重要但不方便公开的消息，我们都提前说好用 privnote.chat 的文字加密功能</p>
+                </div>
+                
+                <div class="step-item">
+                    <h5>🔐 加密处理</h5>
+                    <p>加密后的消息可以公开发在微信群或邮件里，表面上看起来都是普通的通知</p>
+                </div>
+                
+                <div class="step-item">
+                    <h5>🎯 精准传递</h5>
+                    <p>真正的信息只有知情的同事，通过事先约好的密码去解密后才能看到</p>
+                </div>
+            </div>
+
+            <h2>📲 实际操作案例演示</h2>
+
+            <p>那天晚上，我需要在群里发消息通知大家开个会。我使用了 privnote.chat 的文字加密功能：</p>
+
+            <div class="wechat-demo">
+                <h4>文字加密操作过程</h4>
+                <p>我在 privnote.chat 里输入了：</p>
+
+                <div class="message-surface">
+                    "今晚开个简单会，8点线上。"
+                </div>
+                <p class="text-muted small">↑ 这是表面显示的普通消息</p>
+
+                <div class="message-hidden">
+                    "今晚会议实际是新项目启动会，提前5分钟进Zoom，链接是xxx，密码是12345。"
+                </div>
+                <p class="text-muted small">↑ 这是实际隐藏的机密信息（已用密码保护）</p>
+
+                <p class="mt-3"><strong>结果：</strong>我复制生成后的加密文字，直接发到了公司的微信群。</p>
+            </div>
+
+            <div class="reactions-box">
+                <h4>👀 同事们的不同反应</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>🤷‍♀️ 普通同事</h5>
+                        <p>大部分同事都只回复了一句："收到"。</p>
+                        <p class="text-muted">他们只看到了表面的普通会议通知</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>🧠 核心同事</h5>
+                        <p>几个核心同事看到后，立刻明白了，私下都默默去 privnote.chat 解密。</p>
+                        <p class="text-success fw-bold">他们看到真正的信息后，私信回复我："明白，今晚准时到！"</p>
+                    </div>
+                </div>
+                <div class="alert alert-success mt-3">
+                    <strong>完美效果：</strong>整个过程没有任何异常，公开场合的信息非常普通，真正的机密内容却得到了精准传递。
+                </div>
+            </div>
+
+            <h2>🚩 为什么选择文字加密这种方式？</h2>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-eye-slash text-primary"></i>
+                    <h5>隐蔽性强</h5>
+                    <p>公开场合发消息，不容易被察觉有问题</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-shield-alt text-success"></i>
+                    <h5>防泄露</h5>
+                    <p>即使被截屏、泄露，表面信息也是普通的内容</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-key text-warning"></i>
+                    <h5>双重保护</h5>
+                    <p>只有约定的人，拿着事先设定的密码才能解开真正的信息</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-users text-info"></i>
+                    <h5>团队和谐</h5>
+                    <p>保护了项目的机密性，也不会引起非核心成员的不满或怀疑</p>
+                </div>
+            </div>
+
+            <h2>🌟 文字加密适合什么场景？</h2>
+
+            <div class="use-cases-section">
+                <h3><i class="fas fa-list-check me-2"></i>实用应用场景</h3>
+                
+                <div class="use-case-item">
+                    <h5><i class="fas fa-building text-primary me-2"></i>企业商务场景</h5>
+                    <p><strong>公司内部保密的项目会议通知</strong> - 在普通的会议通知中隐藏真正的议题、地点和重要细节</p>
+                </div>
+                
+                <div class="use-case-item">
+                    <h5><i class="fas fa-flask text-success me-2"></i>学术研究环境</h5>
+                    <p><strong>研究组、实验室重要数据沟通</strong> - 在日常交流中隐藏实验数据、研究进展等敏感信息</p>
+                </div>
+                
+                <div class="use-case-item">
+                    <h5><i class="fas fa-graduation-cap text-warning me-2"></i>教育机构应用</h5>
+                    <p><strong>学校学生会、社团组织机密通知</strong> - 在公开通知中隐藏活动细节、预算信息等</p>
+                </div>
+                
+                <div class="use-case-item">
+                    <h5><i class="fas fa-heart text-danger me-2"></i>个人生活应用</h5>
+                    <p><strong>家人、朋友间有趣的游戏、惊喜策划活动</strong> - 在日常聊天中隐藏惊喜计划、聚会安排等</p>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4>文字加密的核心优势</h4>
+                <p><strong>表面信息看似正常，真正的信息被隐藏且加了密码保护，就算手机放在桌上被其他人看见，也不会暴露任何秘密。</strong></p>
+            </div>
+
+            <div class="how-to-section">
+                <div class="container">
+                    <h3>🔗 如何使用文字加密？</h3>
+                    <div class="row text-start">
+                        <div class="col-md-3">
+                            <h5><i class="fas fa-mouse-pointer me-2"></i>第一步</h5>
+                            <p>打开 👉 <a href="../../encryption.html" class="text-white fw-bold">privnote.chat</a></p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5><i class="fas fa-keyboard me-2"></i>第二步</h5>
+                            <p>输入"表面信息" 和真正的"秘密信息"，并设置好密码</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5><i class="fas fa-share me-2"></i>第三步</h5>
+                            <p>生成信息后直接复制，发到任何公开环境里</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5><i class="fas fa-unlock me-2"></i>第四步</h5>
+                            <p>对方收到后，自行到 privnote.chat 用密码解密即可</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4>✨ 文字加密的哲学</h4>
+                <p><strong>有时候真正的安全，并不是把信息藏起来，而是明目张胆地摆在别人眼前，却让只有懂的人看得懂。</strong></p>
+                <p>这就是文字加密技术的魅力所在 - 在最显眼的地方隐藏最深的秘密。</p>
+            </div>
+
+            <p>如果你也需要这种安全又有趣的文字加密沟通方式，不妨自己试一下。无论是企业机密沟通、学术研究交流，还是个人隐私保护，文字加密都能为你提供完美的解决方案。</p>
+        </article>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>立即体验文字加密技术</h2>
+            <p class="lead">让你的消息在众目睽睽之下安全传递</p>
+            <a href="../../encryption.html" class="btn-custom">
+                <i class="fas fa-magic me-2"></i>开始文字加密
+            </a>
+            <a href="../../decrypt.html" class="btn-custom">
+                <i class="fas fa-unlock me-2"></i>解密收到的消息
+            </a>
+            <a href="../../index.html" class="btn-custom">
+                <i class="fas fa-link me-2"></i>创建自毁链接
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Privnote.chat. 专业的文字加密解决方案。</p>
+            <p>
+                <a href="../../index.html" class="text-white me-3">首页</a>
+                <a href="../index.html" class="text-white me-3">博客</a>
+                <a href="../../encryption.html" class="text-white me-3">文字加密</a>
+                <a href="../../decrypt.html" class="text-white">解密工具</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

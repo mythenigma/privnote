@@ -49,13 +49,16 @@
 <div class="d-flex align-items-center">
 <div class="dropdown me-3">
 <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-<i class="fas fa-globe me-1"></i><span id="currentLanguage">English</span>
+<span id="currentLanguage">English</span>
 </button>
 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">English</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">中文</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">Español</a></li>
-<li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">Français</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('en')">🇺🇸 English</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('zh')">🇨🇳 中文</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('tw')">🇹🇼 中文</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('es')">🇪🇸 Español</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('fr')">🇫🇷 Français</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('ja')">🇯🇵 日本語</a></li>
+<li><a class="dropdown-item" href="#" onclick="switchLanguage('de')">🇩🇪 Deutsch</a></li>
 </ul>
 </div>
 <div id="trans1" class="tagline">Secure your words, vanish your trace</div>
@@ -163,7 +166,7 @@
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4" id="buttontwo">
     <button id="tranmake" type="button" class="btn btn-primary">
-      <i class="fas fa-lock me-2"></i>Encrypt Note
+      <i class="fas fa-link me-2"></i>Generate Link
     </button>
     <button id="tranoption" type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#demo">
       <i class="fas fa-cog me-2"></i>Optional Setting
@@ -412,7 +415,7 @@ window.addEventListener('DOMContentLoaded', function() {
   // This will use the language stored in localStorage or default to 'en'
   switchLanguage(currentLanguage);
   
-  // Bind Encrypt Note button event
+  // Bind Generate Link button event
   var encryptBtn = document.getElementById('tranmake');
   if (encryptBtn) {
     encryptBtn.addEventListener('click', function() {
