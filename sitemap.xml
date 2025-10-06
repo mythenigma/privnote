@@ -378,5 +378,16 @@
   <lastmod>2025-05-26T05:00:00+00:00</lastmod>
   <priority>0.64</priority>
 </url>
+<!-- Privnote Alternative Pages -->
+<url>
+  <loc>https://privnote.chat/privnote-alternative.html</loc>
+  <lastmod>2025-01-27T10:00:00+00:00</lastmod>
+  <priority>0.90</priority>
+</url>
+<url>
+  <loc>https://privnote.chat/blog/privnote-alternative-comprehensive-comparison-2025.html</loc>
+  <lastmod>2025-01-27T10:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
 
 </urlset>

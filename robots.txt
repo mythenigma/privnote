@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://privnote.chat/sitemap.xml
+
+# Disallow admin and private directories
+Disallow: /admin/
+Disallow: /private/
+Disallow: /backup/
+Disallow: /justtesting/
+
+# Allow important pages
+Allow: /blog/
+Allow: /read/
+Allow: /encryption.html
+Allow: /decrypt.html
+Allow: /privnote-alternative.html
+
+# Crawl delay (optional)
+Crawl-delay: 1
