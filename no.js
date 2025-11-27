@@ -605,7 +605,7 @@ async function tocontent(){
      textarea.value += char;
      typingIndex++;
      textarea.scrollTop = textarea.scrollHeight; // 自动滚动到底部
-     setTimeout(typeNextChar, 30); // 30毫秒延迟，可以调整速度
+     setTimeout(typeNextChar, 50); // 30毫秒延迟，可以调整速度
    }
  }
  typeNextChar();
