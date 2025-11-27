@@ -594,8 +594,21 @@ async function tocontent(){
    buttcontent.innerHTML = '<h3>Note Content</h3> <div class="alert alert-success">This note will be self-destructed after '+expiretime+' </div><textarea id="resultarea" class="form-control" rows="12" style="background-color:hsla(19,65%,75%,0.3);"></textarea>';
  }
  
+ // 使用打字机效果逐字显示内容
  const textarea = document.getElementById('resultarea');
- textarea.value = textareaValue;
+ textarea.value = ''; // 先清空 textarea
+ // 打字机效果：一个字一个字显示
+ let typingIndex = 0;
+ function typeNextChar() {
+   if (typingIndex < textareaValue.length) {
+     const char = textareaValue.charAt(typingIndex);
+     textarea.value += char;
+     typingIndex++;
+     textarea.scrollTop = textarea.scrollHeight; // 自动滚动到底部
+     setTimeout(typeNextChar, 30); // 30毫秒延迟，可以调整速度
+   }
+ }
+ typeNextChar();
  
  setTimeout(jilu(), 2000);
 }
