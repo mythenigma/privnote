@@ -1,0 +1,108 @@
+<svg width="600" height="900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .process-box { fill: #E8EAF6; stroke: #5C6BC0; stroke-width: 2; }
+      .decision-box { fill: #F3E5F5; stroke: #8E24AA; stroke-width: 2; }
+      .highlight-box { fill: #BBDEFB; stroke: #1976D2; stroke-width: 2; }
+      .start-end { fill: #FF7043; stroke: #D84315; stroke-width: 2; rx: 25; }
+      .text { font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+      .text-small { font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+      .arrow { stroke: #424242; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .label { font-size: 12px; fill: #424242; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#424242" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="300" y="30" class="text" font-size="18" font-weight="bold">Privnote Self-Destructing Message Flow</text>
+  
+  <!-- Start -->
+  <ellipse cx="300" cy="70" rx="100" ry="40" class="start-end"/>
+  <text x="300" y="78" class="text" fill="white" font-size="15">Create Note</text>
+  
+  <!-- Arrow -->
+  <line x1="300" y1="100" x2="300" y2="130" class="arrow"/>
+  
+  <!-- Process 1 -->
+  <rect x="200" y="130" width="200" height="60" class="process-box" rx="5"/>
+  <text x="300" y="155" class="text">Enter Sensitive Info</text>
+  <text x="300" y="175" class="text-small" fill="#666">Text/Password/Link</text>
+  
+  <!-- Arrow -->
+  <line x1="300" y1="190" x2="300" y2="220" class="arrow"/>
+  
+  <!-- Highlight Process -->
+  <rect x="200" y="220" width="200" height="60" class="highlight-box" rx="5"/>
+  <text x="300" y="245" class="text" font-weight="bold">Client-Side Encryption</text>
+  <text x="300" y="265" class="text-small" fill="#1565C0">AES-256 Encryption</text>
+  
+  <!-- Arrow -->
+  <line x1="300" y1="280" x2="300" y2="310" class="arrow"/>
+  
+  <!-- Process 2 -->
+  <rect x="200" y="310" width="200" height="60" class="process-box" rx="5"/>
+  <text x="300" y="335" class="text">Generate Unique Link</text>
+  <text x="300" y="355" class="text-small" fill="#666">Encryption key in URL</text>
+  
+  <!-- Arrow -->
+  <line x1="300" y1="370" x2="300" y2="400" class="arrow"/>
+  
+  <!-- Process 3 -->
+  <rect x="200" y="400" width="200" height="60" class="process-box" rx="5"/>
+  <text x="300" y="425" class="text">Store on Server</text>
+  <text x="300" y="445" class="text-small" fill="#666">Only encrypted data</text>
+  
+  <!-- Arrow -->
+  <line x1="300" y1="460" x2="300" y2="490" class="arrow"/>
+  
+  <!-- Process 4 -->
+  <rect x="200" y="490" width="200" height="60" class="process-box" rx="5"/>
+  <text x="300" y="515" class="text">Recipient Opens Link</text>
+  <text x="300" y="535" class="text-small" fill="#666">User accesses URL</text>
+  
+  <!-- Arrow -->
+  <line x1="300" y1="550" x2="300" y2="580" class="arrow"/>
+  
+  <!-- Decision -->
+  <path d="M 300 580 L 400 630 L 300 680 L 200 630 Z" class="decision-box"/>
+  <text x="300" y="630" class="text">Link Valid?</text>
+  <text x="300" y="650" class="text-small" fill="#666">Not read yet</text>
+  
+  <!-- No path -->
+  <line x1="200" y1="630" x2="100" y2="630" class="arrow"/>
+  <text x="150" y="625" class="label">Invalid</text>
+  <line x1="100" y1="630" x2="100" y2="850" class="arrow"/>
+  <rect x="50" y="820" width="100" height="50" class="process-box" rx="5"/>
+  <text x="100" y="850" class="text-small">Show Error</text>
+  
+  <!-- Yes path -->
+  <line x1="300" y1="680" x2="300" y2="710" class="arrow"/>
+  <text x="320" y="695" class="label">Valid</text>
+  
+  <!-- Highlight Process 2 -->
+  <rect x="200" y="710" width="200" height="60" class="highlight-box" rx="5"/>
+  <text x="300" y="735" class="text" font-weight="bold">Decrypt and Display</text>
+  <text x="300" y="755" class="text-small" fill="#1565C0">Client-side decryption</text>
+  
+  <!-- Arrow -->
+  <line x1="300" y1="770" x2="300" y2="800" class="arrow"/>
+  
+  <!-- End -->
+  <ellipse cx="300" cy="840" rx="100" ry="40" class="start-end"/>
+  <text x="300" y="848" class="text" fill="white" font-size="15">Auto-Destroy</text>
+  
+  <!-- Side notes -->
+  <rect x="430" y="220" width="150" height="80" fill="#FFF9C4" stroke="#F57F17" stroke-width="1" rx="5"/>
+  <text x="505" y="240" class="text-small" fill="#F57F17">🔒 Security Features</text>
+  <text x="505" y="260" class="text-small" font-size="11">• End-to-end encryption</text>
+  <text x="505" y="275" class="text-small" font-size="11">• One-time read</text>
+  <text x="505" y="290" class="text-small" font-size="11">• Auto-destruction</text>
+  
+  <rect x="430" y="400" width="150" height="80" fill="#E1F5FE" stroke="#0277BD" stroke-width="1" rx="5"/>
+  <text x="505" y="420" class="text-small" fill="#0277BD">ℹ️ Server Features</text>
+  <text x="505" y="440" class="text-small" font-size="11">• Cannot decrypt content</text>
+  <text x="505" y="455" class="text-small" font-size="11">• Stores only ciphertext</text>
+  <text x="505" y="470" class="text-small" font-size="11">• Burn after reading</text>
+</svg>

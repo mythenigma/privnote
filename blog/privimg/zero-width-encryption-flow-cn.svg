@@ -1,0 +1,72 @@
+<svg width="600" height="700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .process-box { fill: #E8F5E9; stroke: #43A047; stroke-width: 2; }
+      .decision-box { fill: #FFF3E0; stroke: #F57C00; stroke-width: 2; }
+      .highlight-box { fill: #E1BEE7; stroke: #8E24AA; stroke-width: 2; }
+      .start-end { fill: #FF5722; stroke: #D84315; stroke-width: 2; rx: 25; }
+      .text { font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+      .text-small { font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+      .arrow { stroke: #424242; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#424242" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="300" y="30" class="text" font-size="18" font-weight="bold">零宽字符加密流程</text>
+  
+  <!-- Start -->
+  <ellipse cx="300" cy="70" rx="100" ry="40" class="start-end"/>
+  <text x="300" y="78" class="text" fill="white" font-size="15">输入文本</text>
+  
+  <line x1="300" y1="110" x2="300" y2="140" class="arrow"/>
+  
+  <!-- Process 1 -->
+  <rect x="200" y="140" width="200" height="60" class="process-box" rx="5"/>
+  <text x="300" y="165" class="text">转换为二进制</text>
+  <text x="300" y="185" class="text-small" fill="#2E7D32">0和1编码</text>
+  
+  <line x1="300" y1="200" x2="300" y2="230" class="arrow"/>
+  
+  <!-- Highlight Process -->
+  <rect x="200" y="230" width="200" height="60" class="highlight-box" rx="5"/>
+  <text x="300" y="255" class="text" font-weight="bold">映射为零宽字符</text>
+  <text x="300" y="275" class="text-small" fill="#6A1B9A">ZWSP, ZWNJ编码</text>
+  
+  <line x1="300" y1="290" x2="300" y2="320" class="arrow"/>
+  
+  <!-- Process 2 -->
+  <rect x="200" y="320" width="200" height="60" class="process-box" rx="5"/>
+  <text x="300" y="345" class="text">插入载体文本</text>
+  <text x="300" y="365" class="text-small" fill="#2E7D32">隐藏字符</text>
+  
+  <line x1="300" y1="380" x2="300" y2="410" class="arrow"/>
+  
+  <!-- Process 3 -->
+  <rect x="200" y="410" width="200" height="60" class="process-box" rx="5"/>
+  <text x="300" y="435" class="text">生成链接</text>
+  <text x="300" y="455" class="text-small" fill="#2E7D32">分享隐写文本</text>
+  
+  <line x1="300" y1="470" x2="300" y2="500" class="arrow"/>
+  
+  <!-- Highlight Process 2 -->
+  <rect x="200" y="500" width="200" height="60" class="highlight-box" rx="5"/>
+  <text x="300" y="525" class="text" font-weight="bold">提取零宽字符</text>
+  <text x="300" y="545" class="text-small" fill="#6A1B9A">接收者提取</text>
+  
+  <line x1="300" y1="560" x2="300" y2="590" class="arrow"/>
+  
+  <!-- End -->
+  <ellipse cx="300" cy="640" rx="100" ry="40" class="start-end"/>
+  <text x="300" y="648" class="text" fill="white" font-size="15">解码消息</text>
+  
+  <!-- Side note -->
+  <rect x="430" y="230" width="150" height="100" fill="#F3E5F5" stroke="#8E24AA" stroke-width="1" rx="5"/>
+  <text x="505" y="250" class="text-small" fill="#6A1B9A">🔐 核心特性</text>
+  <text x="505" y="270" class="text-small" font-size="11">• 不可见加密</text>
+  <text x="505" y="285" class="text-small" font-size="11">• 隐写术方法</text>
+  <text x="505" y="300" class="text-small" font-size="11">• 隐藏在明文中</text>
+  <text x="505" y="315" class="text-small" font-size="11">• 额外隐私层</text>
+</svg>

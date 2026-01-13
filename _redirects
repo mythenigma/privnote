@@ -1,6 +1,5 @@
 # Cloudflare Pages 重定向规则
 # /note/:id 直接伪静态渲染 index.html，由首页 JS 处理
+/note/*   /index.html   200
 
-
-# SPA catch-all
-/*    /index.html   200
+# 其他静态页面保持原样，不重定向

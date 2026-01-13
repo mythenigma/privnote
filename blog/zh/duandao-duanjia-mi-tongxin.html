@@ -63,6 +63,17 @@
                         
                         <p>这种加密方式与传统的传输层加密（如HTTPS）有显著区别。在传统模式下，服务提供商可以在其服务器上访问解密后的消息内容，而端到端加密则确保信息在整个传输过程中始终保持加密状态，只有最终用户拥有解密密钥。</p>
 
+                        <h2 class="fw-bolder mb-4 mt-5">Privnote如何实现端到端加密流程</h2>
+                        
+                        <p>为了更好地理解端到端加密的实际应用，让我们看看Privnote的完整工作流程图：</p>
+                        
+                        <figure class="mb-5 text-center">
+                            <img class="img-fluid rounded" src="../privimg/privnote-flow-diagram-cn.svg" alt="Privnote自毁消息完整流程图" style="max-width: 600px;" />
+                            <figcaption class="text-center text-muted mt-3">Privnote的完整工作流程：从客户端加密到阅读后自动销毁</figcaption>
+                        </figure>
+                        
+                        <p>如流程图所示，Privnote结合了端到端加密和自动销毁技术。消息在发送者设备上使用AES-256加密，服务器只存储加密数据，无法解密内容。当接收者打开链接后，消息在客户端被解密并显示，然后立即从服务器上彻底删除。</p>
+                        
                         <h2 class="fw-bolder mb-4 mt-5">端到端加密的工作原理</h2>
                         <p>为了理解端到端加密的强大功能，了解其基本工作原理非常重要：</p>
 
