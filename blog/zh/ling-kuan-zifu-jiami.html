@@ -14,14 +14,14 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="../../index.html">Privnote</a>
+            <a class="navbar-brand" href="../../">Privnote</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../index.html">首页</a>
+                        <a class="nav-link" href="../../">首页</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../../encryption.html">加密</a>
@@ -30,7 +30,7 @@
                         <a class="nav-link" href="../../decrypt.html">解密</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="../index.html">博客</a>
+                        <a class="nav-link active" href="../">博客</a>
                     </li>
                 </ul>
             </div>
@@ -81,6 +81,16 @@
                             <li><strong>嵌入载体文本</strong> - 这些不可见的零宽字符被嵌入到一段普通文本（载体文本）中。</li>
                             <li><strong>生成加密结果</strong> - 最终生成一段看似普通但实际包含隐藏信息的文本。</li>
                         </ol>
+
+                        <!-- Diagrams: Zero-width & Binary encryption flows -->
+                        <figure class="mb-4 text-center">
+                            <img class="img-fluid rounded shadow-sm" src="../diagram/zh/zero-width-encryption-flow.svg" alt="零宽字符加密流程图（Privnote.chat）" loading="lazy" />
+                            <figcaption class="text-center text-muted mt-2">零宽字符隐写：将隐藏信息转为不可见字符并嵌入到普通文本中。</figcaption>
+                        </figure>
+                        <figure class="mb-4 text-center">
+                            <img class="img-fluid rounded shadow-sm" src="../diagram/zh/binary-encryption-flow.svg" alt="二进制（0/1）加密流程图（Privnote.chat）" loading="lazy" />
+                            <figcaption class="text-center text-muted mt-2">二进制加密：XOR → 固定宽度比特 → 以 0/1 密文形式分享。</figcaption>
+                        </figure>
 
                         <p>接收者在解密时，系统会提取这些不可见的零宽字符，并将其转换回原始消息。</p>
 

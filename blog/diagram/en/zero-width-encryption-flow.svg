@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Zero-width character encryption flow (hide secret text inside cover text)">
+  <defs>
+    <style>
+      .bg { fill: #07151a; }
+      .card { fill: #0b2430; stroke: #1e5a6e; stroke-width: 2; rx: 14; }
+      .title { fill: #e7fbff; font: 700 22px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .text { fill: #d5f5ff; font: 500 15px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .muted { fill: #9fd2e3; font: 500 13px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .pill { fill: #0d3141; stroke: #2a86a6; stroke-width: 2; rx: 999; }
+      .pillText { fill: #e7fbff; font: 700 13px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; letter-spacing: .2px; }
+      .arrow { stroke: #67e8f9; stroke-width: 3; fill: none; }
+      .accent { fill: #22c55e; }
+      .warn { fill: #fbbf24; }
+      .code { fill: #bff7ff; font: 600 13px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+      .chip { fill: #08303d; stroke: #2a86a6; stroke-width: 2; rx: 10; }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#67e8f9"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="540" rx="18"/>
+  <text class="title" x="36" y="56">Zero‑Width Character Encryption (Steganography)</text>
+  <text class="muted" x="36" y="82">Idea: convert secret text into invisible Unicode and embed it inside normal text.</text>
+
+  <!-- Inputs -->
+  <rect class="card" x="60" y="120" width="400" height="120" rx="14"/>
+  <rect class="pill" x="78" y="137" width="120" height="28" rx="999"/>
+  <text class="pillText" x="102" y="157">Inputs</text>
+  <text class="text" x="78" y="192">Cover text (visible)</text>
+  <text class="text" x="78" y="214">Secret text (hidden)</text>
+  <text class="muted" x="78" y="236">Optional: password (key)</text>
+
+  <!-- Transform -->
+  <rect class="card" x="520" y="120" width="380" height="120" rx="14"/>
+  <rect class="pill" x="538" y="137" width="150" height="28" rx="999"/>
+  <text class="pillText" x="562" y="157">Transform</text>
+  <text class="text" x="538" y="192">XOR encrypt → binary bits</text>
+  <text class="muted" x="538" y="214">Map bits to Unicode: 0 → U+200B, 1 → U+200C</text>
+  <text class="code" x="538" y="236">ZWSP / ZWNJ (invisible)</text>
+
+  <!-- Output -->
+  <rect class="card" x="60" y="295" width="840" height="170" rx="14"/>
+  <rect class="pill" x="78" y="312" width="170" height="28" rx="999"/>
+  <text class="pillText" x="102" y="332">Output (share)</text>
+  <text class="text" x="78" y="368">Final text looks normal to humans, but contains hidden characters.</text>
+
+  <rect class="chip" x="78" y="385" width="804" height="62" rx="10"/>
+  <text class="code" x="98" y="412">[invisible zero‑width payload]</text>
+  <text class="code" x="320" y="412">+ cover text →</text>
+  <text class="code" x="450" y="412">"Meet at 6pm. Bring the documents."</text>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M460,180 C490,180 500,180 520,180" marker-end="url(#arrowHead)"/>
+  <path class="arrow" d="M710,240 C710,265 550,295 480,295" marker-end="url(#arrowHead)"/>
+  <path class="arrow" d="M260,240 C260,268 260,280 260,295" marker-end="url(#arrowHead)"/>
+
+  <!-- Notes -->
+  <circle cx="77" cy="488" r="6" class="accent"/>
+  <text class="muted" x="92" y="492">Recipient decrypts by extracting zero‑width chars and reversing XOR with the same password.</text>
+  <circle cx="77" cy="510" r="6" class="warn"/>
+  <text class="muted" x="92" y="514">Works best when the cover text is long enough to avoid suspicion.</text>
+
+  <!-- Watermark -->
+  <g opacity="0.08">
+    <text x="480" y="300" text-anchor="middle" fill="#ffffff" font-size="48"
+          font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+          transform="rotate(-18 480 300)">https://privnote.chat</text>
+  </g>
+  <text x="940" y="524" text-anchor="end" fill="#ffffff" opacity="0.18" font-size="14"
+        font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">https://privnote.chat</text>
+</svg>
+

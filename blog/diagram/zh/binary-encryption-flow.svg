@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="二进制加密流程（XOR 加密并表示为 0/1 字符串）">
+  <defs>
+    <style>
+      .bg { fill: #120a22; }
+      .card { fill: #1a0f33; stroke: #4a2f7d; stroke-width: 2; rx: 14; }
+      .title { fill: #f1eaff; font: 700 22px system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .text { fill: #e2d6ff; font: 500 15px system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .muted { fill: #b8a6e6; font: 500 13px system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .pill { fill: #23114a; stroke: #7c5cff; stroke-width: 2; rx: 999; }
+      .pillText { fill: #f1eaff; font: 700 13px system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", Segoe UI, Roboto, Helvetica, Arial, sans-serif; letter-spacing: .2px; }
+      .arrow { stroke: #a78bfa; stroke-width: 3; fill: none; }
+      .code { fill: #efe7ff; font: 600 13px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+      .chip { fill: #160b2b; stroke: #7c5cff; stroke-width: 2; rx: 10; }
+      .accent { fill: #34d399; }
+      .warn { fill: #fbbf24; }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#a78bfa"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="540" rx="18"/>
+  <text class="title" x="36" y="56">二进制加密（0/1）：加密与解密流程</text>
+  <text class="muted" x="36" y="82">思路：使用密码做 XOR，加密后将每个字符编码为固定宽度比特（例如 16 位）。</text>
+
+  <!-- Encrypt side -->
+  <rect class="card" x="60" y="120" width="400" height="150" rx="14"/>
+  <rect class="pill" x="78" y="137" width="140" height="28" rx="999"/>
+  <text class="pillText" x="102" y="157">加密</text>
+  <text class="text" x="78" y="192">输入：明文 + 密码</text>
+  <text class="muted" x="78" y="214">逐字符 XOR（使用密钥循环）</text>
+  <text class="muted" x="78" y="236">每字符输出 16 位二进制</text>
+  <rect class="chip" x="78" y="248" width="364" height="18" rx="9"/>
+  <text class="code" x="90" y="262">0100100001101001…</text>
+
+  <!-- Decrypt side -->
+  <rect class="card" x="500" y="120" width="400" height="150" rx="14"/>
+  <rect class="pill" x="518" y="137" width="140" height="28" rx="999"/>
+  <text class="pillText" x="542" y="157">解密</text>
+  <text class="text" x="518" y="192">输入：二进制 + 密码</text>
+  <text class="muted" x="518" y="214">按 16 位切分为块</text>
+  <text class="muted" x="518" y="236">用同一密钥 XOR 还原</text>
+  <rect class="chip" x="518" y="248" width="364" height="18" rx="9"/>
+  <text class="code" x="530" y="262">还原出明文</text>
+
+  <!-- Middle arrows -->
+  <path class="arrow" d="M460,195 C475,195 485,195 500,195" marker-end="url(#arrowHead)"/>
+
+  <!-- Sharing / usage -->
+  <rect class="card" x="60" y="305" width="840" height="170" rx="14"/>
+  <rect class="pill" x="78" y="322" width="210" height="28" rx="999"/>
+  <text class="pillText" x="102" y="342">如何使用</text>
+  <text class="text" x="78" y="378">发送方分享二进制密文（0/1）与密码（尽量分渠道发送）。</text>
+  <text class="muted" x="78" y="402">接收方把二进制粘贴到解密工具，输入密码即可查看内容。</text>
+
+  <circle cx="77" cy="448" r="6" class="accent"/>
+  <text class="muted" x="92" y="452">固定宽度（16 位）让解析更稳定。</text>
+  <circle cx="77" cy="470" r="6" class="warn"/>
+  <text class="muted" x="92" y="474">密码泄露会导致密文可被解开，请按“密文”级别保护。</text>
+
+  <path class="arrow" d="M700,270 C700,292 520,305 480,305" marker-end="url(#arrowHead)"/>
+
+  <!-- Watermark -->
+  <g opacity="0.08">
+    <text x="480" y="300" text-anchor="middle" fill="#ffffff" font-size="48"
+          font-family="system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+          transform="rotate(-18 480 300)">https://privnote.chat</text>
+  </g>
+  <text x="940" y="524" text-anchor="end" fill="#ffffff" opacity="0.18" font-size="14"
+        font-family="system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', Segoe UI, Roboto, Helvetica, Arial, sans-serif">https://privnote.chat</text>
+</svg>
+

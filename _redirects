@@ -2,4 +2,26 @@
 # /note/:id 直接伪静态渲染 index.html，由首页 JS 处理
 /note/*   /index.html   200
 
-# 其他静态页面保持原样，不重定向
+# ------------------------------
+# Canonical URL normalization
+# ------------------------------
+# Prefer "pretty URLs" (no .html). This prevents Google from indexing redirecting .html variants.
+/index.html                 /                         301
+/blog/index.html            /blog/                    301
+/read/index.html            /read/                    301
+
+# Common top-level pages
+/encryption.html            /encryption               301
+/decrypt.html               /decrypt                  301
+/privnote-alternative.html  /privnote-alternative     301
+
+# Directory trailing slashes
+/blog                        /blog/                   301
+/read                        /read/                   301
+
+# Blog + Chinese blog: strip .html
+/blog/:slug.html            /blog/:slug               301
+/blog/zh/:slug.html         /blog/zh/:slug            301
+
+# Read pages: strip .html
+/read/:slug.html            /read/:slug               301

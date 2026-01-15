@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Binary encryption flow (XOR encrypt text and represent as 0/1 string)">
+  <defs>
+    <style>
+      .bg { fill: #120a22; }
+      .card { fill: #1a0f33; stroke: #4a2f7d; stroke-width: 2; rx: 14; }
+      .title { fill: #f1eaff; font: 700 22px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .text { fill: #e2d6ff; font: 500 15px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .muted { fill: #b8a6e6; font: 500 13px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .pill { fill: #23114a; stroke: #7c5cff; stroke-width: 2; rx: 999; }
+      .pillText { fill: #f1eaff; font: 700 13px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; letter-spacing: .2px; }
+      .arrow { stroke: #a78bfa; stroke-width: 3; fill: none; }
+      .code { fill: #efe7ff; font: 600 13px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+      .chip { fill: #160b2b; stroke: #7c5cff; stroke-width: 2; rx: 10; }
+      .accent { fill: #34d399; }
+      .warn { fill: #fbbf24; }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#a78bfa"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="540" rx="18"/>
+  <text class="title" x="36" y="56">Binary Encryption (0/1): Encrypt &amp; Decrypt Flow</text>
+  <text class="muted" x="36" y="82">Idea: XOR encrypt text with a password key, then encode each char as fixed‑width bits (e.g. 16‑bit).</text>
+
+  <!-- Encrypt side -->
+  <rect class="card" x="60" y="120" width="400" height="150" rx="14"/>
+  <rect class="pill" x="78" y="137" width="140" height="28" rx="999"/>
+  <text class="pillText" x="102" y="157">Encrypt</text>
+  <text class="text" x="78" y="192">Input: plaintext + password</text>
+  <text class="muted" x="78" y="214">XOR each character with key bytes</text>
+  <text class="muted" x="78" y="236">Convert to 16‑bit binary per char</text>
+  <rect class="chip" x="78" y="248" width="364" height="18" rx="9"/>
+  <text class="code" x="90" y="262">0100100001101001…</text>
+
+  <!-- Decrypt side -->
+  <rect class="card" x="500" y="120" width="400" height="150" rx="14"/>
+  <rect class="pill" x="518" y="137" width="140" height="28" rx="999"/>
+  <text class="pillText" x="542" y="157">Decrypt</text>
+  <text class="text" x="518" y="192">Input: binary string + password</text>
+  <text class="muted" x="518" y="214">Split into 16‑bit chunks</text>
+  <text class="muted" x="518" y="236">XOR back with the same key</text>
+  <rect class="chip" x="518" y="248" width="364" height="18" rx="9"/>
+  <text class="code" x="530" y="262">Plaintext recovered</text>
+
+  <!-- Middle arrows -->
+  <path class="arrow" d="M460,195 C475,195 485,195 500,195" marker-end="url(#arrowHead)"/>
+
+  <!-- Sharing / usage -->
+  <rect class="card" x="60" y="305" width="840" height="170" rx="14"/>
+  <rect class="pill" x="78" y="322" width="210" height="28" rx="999"/>
+  <text class="pillText" x="102" y="342">How it’s used</text>
+  <text class="text" x="78" y="378">Sender shares the binary output (0/1) + password (via a separate channel).</text>
+  <text class="muted" x="78" y="402">Recipient pastes binary into the decrypt tool and enters the password to reveal the message.</text>
+
+  <circle cx="77" cy="448" r="6" class="accent"/>
+  <text class="muted" x="92" y="452">Fixed‑width chunks (16‑bit) make parsing deterministic.</text>
+  <circle cx="77" cy="470" r="6" class="warn"/>
+  <text class="muted" x="92" y="474">If the password is leaked, the binary can be decrypted — treat it like ciphertext.</text>
+
+  <path class="arrow" d="M700,270 C700,292 520,305 480,305" marker-end="url(#arrowHead)"/>
+
+  <!-- Watermark -->
+  <g opacity="0.08">
+    <text x="480" y="300" text-anchor="middle" fill="#ffffff" font-size="48"
+          font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+          transform="rotate(-18 480 300)">https://privnote.chat</text>
+  </g>
+  <text x="940" y="524" text-anchor="end" fill="#ffffff" opacity="0.18" font-size="14"
+        font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">https://privnote.chat</text>
+</svg>
+

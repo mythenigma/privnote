@@ -36,14 +36,14 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="../index.html">Privnote</a>
+            <a class="navbar-brand" href="../">Privnote</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
+                        <a class="nav-link" href="../">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../encryption.html">Encryption</a>
@@ -52,7 +52,7 @@
                         <a class="nav-link" href="../decrypt.html">Decrypt</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Blog</a>
+                        <a class="nav-link active" href="./">Blog</a>
                     </li>
                 </ul>
             </div>
@@ -163,6 +163,16 @@
                                 </ol>
                             </div>
                         </div>
+
+                        <!-- Diagrams: Zero-width & Binary encryption flows -->
+                        <figure class="mb-4 text-center">
+                            <img class="img-fluid rounded shadow-sm" src="diagram/en/zero-width-encryption-flow.svg" alt="Zero-width character encryption flow diagram (Privnote.chat)" loading="lazy" />
+                            <figcaption class="text-center text-muted mt-2">Zero‑width encryption: hide secret bits inside normal text using invisible Unicode.</figcaption>
+                        </figure>
+                        <figure class="mb-4 text-center">
+                            <img class="img-fluid rounded shadow-sm" src="diagram/en/binary-encryption-flow.svg" alt="Binary (0/1) encryption flow diagram (Privnote.chat)" loading="lazy" />
+                            <figcaption class="text-center text-muted mt-2">Binary encryption: XOR → fixed‑width bits → share as 0/1 ciphertext.</figcaption>
+                        </figure>
                         
                         <div class="encryption-demo p-4 mb-4">
                             <h4>Simplified Example:</h4>

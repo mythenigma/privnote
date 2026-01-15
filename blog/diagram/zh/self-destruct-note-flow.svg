@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="自毁便签流程（创建、分享链接、阅读一次、销毁）">
+  <defs>
+    <style>
+      .bg { fill: #0b1220; }
+      .card { fill: #0f1b33; stroke: #2b3f66; stroke-width: 2; rx: 14; }
+      .title { fill: #e8f0ff; font: 700 22px system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .text { fill: #d2ddff; font: 500 15px system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .muted { fill: #9fb2e6; font: 500 13px system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      .pill { fill: #12244a; stroke: #355aa3; stroke-width: 2; rx: 999; }
+      .pillText { fill: #e8f0ff; font: 700 13px system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", Segoe UI, Roboto, Helvetica, Arial, sans-serif; letter-spacing: .2px; }
+      .arrow { stroke: #7aa7ff; stroke-width: 3; fill: none; }
+      .arrowSoft { stroke: #4f73c7; stroke-width: 2.5; fill: none; stroke-dasharray: 7 6; }
+      .accent { fill: #1fdb9b; }
+      .danger { fill: #ff6b6b; }
+      .warn { fill: #ffd166; }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#7aa7ff"/>
+    </marker>
+    <marker id="arrowHeadSoft" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#4f73c7"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="540" rx="18"/>
+  <text class="title" x="36" y="56">自毁便签：端到端流程</text>
+  <text class="muted" x="36" y="82">目标：敏感信息只看一次，随后从服务端永久删除。</text>
+
+  <!-- Step cards -->
+  <rect class="card" x="60" y="125" width="360" height="110" rx="14"/>
+  <rect class="pill" x="78" y="142" width="94" height="28" rx="999"/>
+  <text class="pillText" x="100" y="162">步骤 1</text>
+  <text class="text" x="78" y="196">写便签（可选：密码 / 过期时间）</text>
+  <text class="muted" x="78" y="218">发送方在浏览器中准备内容。</text>
+
+  <rect class="card" x="540" y="125" width="360" height="110" rx="14"/>
+  <rect class="pill" x="558" y="142" width="94" height="28" rx="999"/>
+  <text class="pillText" x="580" y="162">步骤 2</text>
+  <text class="text" x="558" y="196">生成唯一链接</text>
+  <text class="muted" x="558" y="218">链接指向服务端的加密便签。</text>
+
+  <rect class="card" x="60" y="285" width="360" height="110" rx="14"/>
+  <rect class="pill" x="78" y="302" width="94" height="28" rx="999"/>
+  <text class="pillText" x="100" y="322">步骤 3</text>
+  <text class="text" x="78" y="356">通过任意渠道分享链接</text>
+  <text class="muted" x="78" y="378">邮件 / 聊天 / 二维码等（只发链接）。</text>
+
+  <rect class="card" x="540" y="285" width="360" height="110" rx="14"/>
+  <rect class="pill" x="558" y="302" width="94" height="28" rx="999"/>
+  <text class="pillText" x="580" y="322">步骤 4</text>
+  <text class="text" x="558" y="356">接收方打开链接并阅读</text>
+  <text class="muted" x="558" y="378">若设置了密码，需要先输入密码。</text>
+
+  <rect class="card" x="300" y="425" width="360" height="86" rx="14"/>
+  <rect class="pill" x="318" y="442" width="118" height="28" rx="999"/>
+  <text class="pillText" x="340" y="462">自动删除</text>
+  <text class="text" x="318" y="494">首次阅读后，服务端销毁便签</text>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M420,180 C470,180 490,180 540,180" marker-end="url(#arrowHead)"/>
+  <path class="arrow" d="M240,235 C240,255 240,265 240,285" marker-end="url(#arrowHead)"/>
+  <path class="arrow" d="M420,340 C470,340 490,340 540,340" marker-end="url(#arrowHead)"/>
+  <path class="arrow" d="M720,395 C720,420 650,425 615,425" marker-end="url(#arrowHead)"/>
+
+  <!-- Security notes -->
+  <circle cx="77" cy="108" r="6" class="accent"/>
+  <text class="muted" x="92" y="112">便签被读取后不应再次复用（链接将失效）。</text>
+  <circle cx="470" cy="468" r="6" class="danger"/>
+  <text class="muted" x="485" y="472">删除后：链接不可再次打开。</text>
+  <circle cx="77" cy="502" r="6" class="warn"/>
+  <text class="muted" x="92" y="506">建议：高风险信息（账号/密钥）启用密码。</text>
+
+  <!-- Optional branches -->
+  <path class="arrowSoft" d="M720,235 C720,252 720,268 720,285" marker-end="url(#arrowHeadSoft)"/>
+  <text class="muted" x="742" y="266">可选：阅读确认</text>
+
+  <!-- Watermark -->
+  <g opacity="0.08">
+    <text x="480" y="300" text-anchor="middle" fill="#ffffff" font-size="48"
+          font-family="system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+          transform="rotate(-18 480 300)">https://privnote.chat</text>
+  </g>
+  <text x="940" y="524" text-anchor="end" fill="#ffffff" opacity="0.18" font-size="14"
+        font-family="system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', Segoe UI, Roboto, Helvetica, Arial, sans-serif">https://privnote.chat</text>
+</svg>
+

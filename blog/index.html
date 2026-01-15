@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privnote Blog | Privacy, Security, and Secure Communication</title>
+    <link rel="canonical" href="https://privnote.chat/blog/">
     <meta name="description" content="Explore articles on secure communication, privacy protection, and best practices for sensitive information sharing using Privnote's self-destructing notes technology.">
     <meta name="keywords" content="Privnote blog, secure messaging, self-destructing notes, privacy protection, password security, zero-width encryption, digital privacy">
     <link rel="stylesheet" href="../style.css">
@@ -14,13 +15,13 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="../index.html">Privnote</a>
+            <a class="navbar-brand" href="../">Privnote</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
+                        <a class="nav-link" href="../">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../encryption.html">Encryption</a>
@@ -29,7 +30,7 @@
                         <a class="nav-link" href="../decrypt.html">Decrypt</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Blog</a>
+                        <a class="nav-link active" href="./">Blog</a>
                     </li>
                 </ul>
             </div>
@@ -65,6 +66,31 @@
                 <!-- Nested row for non-featured blog posts-->
                 <div class="row">
                     <div class="col-lg-6">
+                        <!-- New simple guides (with Mermaid flowcharts) -->
+                        <div class="card mb-4">
+                            <a href="send-sensitive-info-in-60-seconds.html">
+                                <img class="card-img-top" src="privimg/self_destruct_link_generated_result.png" alt="Send sensitive info with a one-time link" />
+                            </a>
+                            <div class="card-body">
+                                <div class="small text-muted">January 15, 2026</div>
+                                <h2 class="card-title h4">Send Sensitive Info in 60 Seconds (Flowchart)</h2>
+                                <p class="card-text">A beginner checklist + Mermaid flowchart for sharing a message once, then destroying it automatically.</p>
+                                <a class="btn btn-primary" href="send-sensitive-info-in-60-seconds.html">Read more →</a>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <a href="share-wifi-password-safely.html">
+                                <img class="card-img-top" src="privimg/generatelink_with_optional_settings.png" alt="Share Wi-Fi password safely" />
+                            </a>
+                            <div class="card-body">
+                                <div class="small text-muted">January 15, 2026</div>
+                                <h2 class="card-title h4">How to Share a Wi‑Fi Password Safely (Flowchart)</h2>
+                                <p class="card-text">Avoid chat history. Use a one‑time link and separate channels. Simple and practical.</p>
+                                <a class="btn btn-primary" href="share-wifi-password-safely.html">Read more →</a>
+                            </div>
+                        </div>
+
                         <!-- Blog post-->
                         <div class="card mb-4">
                             <a href="self-destructing-notes-privacy.html">
@@ -102,6 +128,19 @@
                                 <a class="btn btn-primary" href="privnote-use-cases.html">Read more →</a>
                             </div>
                         </div>
+
+                        <div class="card mb-4">
+                            <a href="zero-width-vs-binary-which-to-use.html">
+                                <img class="card-img-top" src="privimg/message_encryption_binary_zerowidth.png" alt="Zero-width vs binary encryption decision guide" />
+                            </a>
+                            <div class="card-body">
+                                <div class="small text-muted">January 15, 2026</div>
+                                <h2 class="card-title h4">Zero‑Width vs Binary: Which Should You Use? (Flowchart)</h2>
+                                <p class="card-text">A simple decision guide with a Mermaid flowchart: choose stealth (zero‑width) vs robustness (binary).</p>
+                                <a class="btn btn-primary" href="zero-width-vs-binary-which-to-use.html">Read more →</a>
+                            </div>
+                        </div>
+
                         <!-- Blog post-->
                         <div class="card mb-4">
                             <a href="digital-privacy-best-practices.html">
@@ -121,8 +160,8 @@
                     <ul class="pagination justify-content-center my-4">
                         <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
                         <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="blog-page-2.html">2</a></li>
-                        <li class="page-item"><a class="page-link" href="blog-page-2.html">Older</a></li>
+                        <li class="page-item"><a class="page-link" href="blog-page-2">2</a></li>
+                        <li class="page-item"><a class="page-link" href="blog-page-2">Older</a></li>
                     </ul>
                 </nav>
             </div>
@@ -158,6 +197,28 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Recently Updated widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Recently Updated</div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <a href="send-sensitive-info-in-60-seconds">Send Sensitive Info in 60 Seconds (Flowchart)</a>
+                                <div class="small text-muted">Jan 15, 2026</div>
+                            </li>
+                            <li class="mb-2">
+                                <a href="share-wifi-password-safely">How to Share a Wi‑Fi Password Safely (Flowchart)</a>
+                                <div class="small text-muted">Jan 15, 2026</div>
+                            </li>
+                            <li>
+                                <a href="zero-width-vs-binary-which-to-use">Zero‑Width vs Binary: Which Should You Use? (Flowchart)</a>
+                                <div class="small text-muted">Jan 15, 2026</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
                   <!-- New Articles widget-->
                 <div class="card mb-4">
                     <div class="card-header">New Articles</div>                    <div class="card-body">
@@ -188,7 +249,7 @@
                     <div class="card-header">About Privnote</div>
                     <div class="card-body">
                         <p>Privnote is a free service that lets you send notes that will self-destruct after being read. No registration or software installation is required. Our mission is to provide the simplest and most secure way to share sensitive information online.</p>
-                        <a class="btn btn-primary btn-sm" href="../index.html">Create a Note Now</a>
+                        <a class="btn btn-primary btn-sm" href="../">Create a Note Now</a>
                     </div>
                 </div>
             </div>

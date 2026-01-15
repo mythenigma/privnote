@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阅后即焚新手教程：3步发送自毁消息 | Privnote</title>
+  <meta name="description" content="超简单的新手教程：3步用 Privnote 发送阅后即焚自毁消息，并用流程图解释整个过程。">
+  <meta name="keywords" content="阅后即焚, 自毁消息, 自毁便签, 一次性消息, 安全通信, Privnote, 新手教程, 流程图">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../mermaid/mermaid-theme.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="../../">Privnote</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../../">首页</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../encryption">加密</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../decrypt">解密</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./">博客</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <article>
+          <header class="mb-4">
+            <h1 class="fw-bolder mb-1">阅后即焚新手教程：3步发送自毁消息</h1>
+            <div class="text-muted fst-italic mb-2">发布于 2026年1月15日</div>
+            <div class="badge bg-secondary text-decoration-none link-light">新手教程</div>
+            <div class="badge bg-secondary text-decoration-none link-light">阅后即焚</div>
+            <div class="badge bg-secondary text-decoration-none link-light">安全通信</div>
+          </header>
+
+          <figure class="mb-4">
+            <img class="img-fluid rounded" src="../privimg/self_destruct_link_generated_result.png" alt="自毁消息链接生成示意" />
+          </figure>
+
+          <section class="mb-5">
+            <p>如果你只是想把一段敏感信息（密码、地址、门禁码、临时口令）发给对方看一次，那么最简单的做法是：用自毁消息（阅后即焚）。</p>
+
+            <h2 class="fw-bolder mb-4 mt-5">超简单 3 步</h2>
+            <ol>
+              <li><strong>写消息</strong>：打开首页，输入你要发送的内容。</li>
+              <li><strong>生成链接</strong>：点击创建按钮，得到一个一次性链接。</li>
+              <li><strong>发送链接</strong>：把链接发给对方，对方打开后阅读，消息会被销毁。</li>
+            </ol>
+
+            <div class="alert alert-info my-4">
+              <i class="fas fa-info-circle me-2"></i>
+              <strong>小建议：</strong>特别敏感的信息建议再加一层“便签密码”，并把“链接/密码”分渠道发送。
+            </div>
+
+            <h2 class="fw-bolder mb-4 mt-5">流程图（代码生成）</h2>
+            <p class="text-muted">下面这张图不是图片编辑器画的，是页面里写了一段 Mermaid 代码自动渲染出来的。</p>
+
+            <div class="mermaid">
+flowchart TD
+  A[写入消息] --> B[可选：设置便签密码/过期时间]
+  B --> C[生成一次性链接]
+  C --> D[发送链接给接收方]
+  D --> E[接收方打开链接阅读]
+  E --> F[服务端删除内容（链接失效）]
+            </div>
+
+            <h2 class="fw-bolder mb-4 mt-5">立即开始</h2>
+            <ul>
+              <li><a href="../../">生成自毁链接</a></li>
+              <li><a href="../../decrypt">解密/读取相关功能</a></li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Privnote 2026</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="../mermaid/mermaid-init.js" defer></script>
+</body>
+</html>
+
