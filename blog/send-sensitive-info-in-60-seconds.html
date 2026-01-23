@@ -64,8 +64,8 @@
             <div class="mermaid">
 flowchart TD
   A[Write message] --> B{Add note password?}
-  B -- No --> C[Generate one-time link]
-  B -- Yes --> D[Set password]
+  B -->|No| C[Generate one-time link]
+  B -->|Yes| D[Set password]
   D --> C
   C --> E[Send link to recipient]
   E --> F[Recipient opens + reads]
