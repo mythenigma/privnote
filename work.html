@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Privnote.chat - 项目改进计划 & 工作记录</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; }
+        .priority-high { border-left: 5px solid #e74c3c; }
+        .priority-mid  { border-left: 5px solid #f39c12; }
+        .priority-low  { border-left: 5px solid #27ae60; }
+        .badge-high { background: #e74c3c; }
+        .badge-mid  { background: #f39c12; }
+        .badge-low  { background: #27ae60; }
+        .task-card { background: #fff; border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .section-header { margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #ddd; }
+        .file-tag { font-size: 0.8rem; background: #e9ecef; border-radius: 4px; padding: 2px 8px; margin-right: 4px; font-family: monospace; }
+        .status-todo     { color: #e74c3c; font-weight: 600; }
+        .status-doing    { color: #f39c12; font-weight: 600; }
+        .status-done     { color: #27ae60; font-weight: 600; }
+        .checklist li    { list-style: none; padding: 4px 0; }
+        .checklist li::before { content: "☐ "; font-size: 1.1rem; }
+        .checklist li.done::before { content: "☑ "; color: #27ae60; }
+        h1 small { font-size: 0.5em; color: #888; }
+        .toc a { text-decoration: none; color: #495057; }
+        .toc a:hover { color: #e74c3c; }
+        .log-entry { background: #fffbe6; border-left: 4px solid #f39c12; padding: 0.8rem 1rem; margin-bottom: 0.8rem; border-radius: 6px; }
+        .log-date { font-weight: 700; color: #666; margin-right: 8px; }
+        .stat-box { border-radius: 10px; padding: 1rem; text-align: center; }
+        .keyword-tag { display: inline-block; background: #e3f2fd; color: #1565c0; border-radius: 4px; padding: 2px 10px; margin: 2px; font-size: 0.85rem; }
+        .keyword-tag.zh { background: #fce4ec; color: #c62828; }
+        table.seo-table { font-size: 0.9rem; }
+        table.seo-table td, table.seo-table th { vertical-align: middle; }
+    </style>
+</head>
+<body>
+
+<div class="container py-4" style="max-width: 960px;">
+
+    <!-- ========== 标题 ========== -->
+    <h1 class="text-center mb-2">
+        <i class="fas fa-clipboard-list text-danger"></i> Privnote.chat 项目改进计划
+        <small>v2.0 — 2026-03-11 更新</small>
+    </h1>
+    <p class="text-center text-muted mb-1">此文件仅供内部参考，已设置 <code>noindex</code>，不会被搜索引擎收录。</p>
+    <p class="text-center mb-4"><span class="badge bg-danger">当前第一优先级：SEO 流量增长</span></p>
+
+    <!-- ========== 目录 ========== -->
+    <div class="card mb-4">
+        <div class="card-body toc">
+            <h5><i class="fas fa-list-ol"></i> 目录</h5>
+            <ol>
+                <li><a href="#overview">项目现状总览</a></li>
+                <li><a href="#seo-plan">🔴 SEO 流量增长计划（最高优先级）</a></li>
+                <li><a href="#seo-fix">🔴 SEO 技术修复（紧急）</a></li>
+                <li><a href="#seo-content">🟡 内容策略 & 关键词规划</a></li>
+                <li><a href="#seo-offpage">🟡 站外 SEO & 推广</a></li>
+                <li><a href="#cleanup">🟡 文件清理（中优先级）</a></li>
+                <li><a href="#security">🟢 安全 & 代码问题（后期处理）</a></li>
+                <li><a href="#log">工作日志</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ========== 1. 项目现状总览 ========== -->
+    <h3 id="overview" class="section-header"><i class="fas fa-info-circle"></i> 1. 项目现状总览</h3>
+    <div class="task-card">
+        <p><strong>项目：</strong>Privnote.chat — 加密自毁便签工具</p>
+        <p><strong>技术栈：</strong>纯前端 HTML/CSS/JS + 外部 PHP 后端 (maipdf.com) + Cloudflare Pages 托管</p>
+        <p><strong>联系邮箱：</strong><code>joe@pdfhost.online</code>（统一用这个）</p>
+        <p><strong>核心问题：</strong><span class="text-danger fw-bold">网站没有流量，没人看。内容资产（128篇博客）没有被充分利用。</span></p>
+    </div>
+
+    <!-- 博客内容资产盘点 -->
+    <div class="task-card" style="background: linear-gradient(135deg, #667eea15, #764ba215);">
+        <h6><i class="fas fa-database"></i> 内容资产盘点（2026-03-11）</h6>
+        <div class="row mt-3">
+            <div class="col-3"><div class="stat-box" style="background:#e3f2fd;"><h3 class="mb-0 text-primary">90</h3><small>英文博客</small></div></div>
+            <div class="col-3"><div class="stat-box" style="background:#fce4ec;"><h3 class="mb-0 text-danger">38</h3><small>中文博客</small></div></div>
+            <div class="col-3"><div class="stat-box" style="background:#fff3e0;"><h3 class="mb-0 text-warning">76</h3><small>未入 Sitemap</small></div></div>
+            <div class="col-3"><div class="stat-box" style="background:#ffebee;"><h3 class="mb-0 text-danger">61</h3><small>缺 Canonical</small></div></div>
+        </div>
+        <p class="mt-3 mb-0 text-muted"><strong>结论：</strong>你已经有了大量内容，但 Google 根本不知道其中 76 篇的存在。修复这个就能立竿见影。</p>
+    </div>
+
+    <!-- ========== 2. SEO 流量增长计划 ========== -->
+    <h3 id="seo-plan" class="section-header text-danger"><i class="fas fa-rocket"></i> 2. 🔴 SEO 流量增长计划（最高优先级）</h3>
+
+    <div class="task-card priority-high">
+        <h5 class="text-danger mb-3">总体策略：3 阶段增长路线</h5>
+        <table class="table table-bordered seo-table">
+            <thead class="table-dark">
+                <tr><th>阶段</th><th>时间</th><th>目标</th><th>核心动作</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>第一阶段<br>🔧 技术修复</strong></td>
+                    <td>本周</td>
+                    <td>让 Google 发现全部 128 篇文章</td>
+                    <td>
+                        ✅ 76 篇加入 sitemap.xml<br>
+                        ✅ 61 篇补上 canonical URL<br>
+                        ✅ 修复 _headers 格式<br>
+                        ✅ 统一邮箱为 joe@pdfhost.online<br>
+                        ✅ 提交 sitemap 到 Google Search Console & Bing Webmaster
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>第二阶段<br>📝 内容优化</strong></td>
+                    <td>1-4 周</td>
+                    <td>提高现有文章排名</td>
+                    <td>
+                        🔄 优化 title/description 瞄准长尾关键词<br>
+                        🔄 博客内加强内链网络<br>
+                        🔄 每篇文章底部加 CTA → 引导到主站<br>
+                        🔄 补充 read/ 目录内容页的 SEO 标签<br>
+                        🔄 写 5-10 篇新的高价值文章
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>第三阶段<br>🚀 站外推广</strong></td>
+                    <td>持续</td>
+                    <td>获取外链 & 社交流量</td>
+                    <td>
+                        📣 提交到 Product Hunt / AlternativeTo<br>
+                        📣 在 Reddit (r/privacy) 分享工具<br>
+                        📣 发布 GitHub 开源宣传<br>
+                        📣 Hacker News / Dev.to 投稿
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========== 3. SEO 技术修复 ========== -->
+    <h3 id="seo-fix" class="section-header text-danger"><i class="fas fa-wrench"></i> 3. 🔴 SEO 技术修复（紧急 — 本周完成）</h3>
+
+    <div class="task-card priority-high">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">3.1 ⚡ 76 篇博客不在 sitemap.xml — 修复</h6>
+            <span class="badge badge-high text-white">紧急</span>
+        </div>
+        <p><strong>问题：</strong>你有 128 篇博客文章，但 sitemap.xml 只包含了 52 篇。Google 根本不知道另外 76 篇的存在！</p>
+        <p><strong>涉及文件：</strong><span class="file-tag">sitemap.xml</span></p>
+        <p><strong>缺失的英文博客（60篇）：</strong></p>
+        <div style="max-height:200px;overflow-y:auto;background:#f8f9fa;padding:8px;border-radius:6px;font-size:0.8rem;font-family:monospace;">
+            5-minute-guide-secure-message-sharing<br>
+            after-message-destruction-privacy-guide-2025<br>
+            best-self-destructing-note-services-privnote-comparison<br>
+            bidding-floor-price-encryption / bidding-floor-price-encryption-guide<br>
+            burn-after-reading-notes-guide-2025<br>
+            business-case-study-self-destructing-messages<br>
+            cybersecurity-best-practices-2025<br>
+            enterprise-data-protection-2025<br>
+            family-privacy-protection-guide<br>
+            free-privnote-service-privacy-protection-guide<br>
+            gong-zuo-chang-jing-an-quan-fen-xiang<br>
+            how-privnote-protects-your-privacy<br>
+            how-to-create-self-destructing-pdfs-maipdf-tutorial<br>
+            how-to-safely-share-bank-card-information<br>
+            how-to-safely-share-passwords-with-family<br>
+            how-to-safely-share-personal-photos<br>
+            how-to-safely-share-travel-plans<br>
+            how-to-safely-share-work-information<br>
+            jia-ting-yin-si-bao-hu-zhi-nan<br>
+            maipdf-business-document-security-guide<br>
+            maipdf-self-destructing-pdfs-open-count-limit-guide<br>
+            maipdf-vs-regular-pdf-sharing-comparison<br>
+            password-management-strategies-2025<br>
+            privacy-protection-technologies-2025<br>
+            privacy-stories-real-people-real-protection<br>
+            privnote-best-practices-legal-teams<br>
+            privnote-education-schools-secure-communication<br>
+            privnote-family-password-sharing-secure-guide<br>
+            privnote-financial-services-secure-communication<br>
+            privnote-healthcare-secure-communication<br>
+            privnote-journalists-whistleblowers-secure-communication<br>
+            privnote-online-dating-safety-secure-messaging<br>
+            privnote-password-sharing-guide<br>
+            privnote-personal-privacy-protection-guide<br>
+            privnote-real-estate-agents-secure-communication<br>
+            privnote-remote-work-security-guide<br>
+            privnote-security-tips<br>
+            privnote-vs-other-secure-messaging-apps-comparison<br>
+            professional-note-security-best-practices-2025<br>
+            professional-privnote-applications-2025<br>
+            psychology-of-digital-privacy<br>
+            secure-communication-tools-2025<br>
+            secure-digital-communication-2025<br>
+            secure-note-sharing-guide-2025<br>
+            secure-workplace-text-encryption<br>
+            see-once-notes-revolutionary-privacy-2025<br>
+            self-destructing-messages-complete-guide-2025<br>
+            self-destructing-messages-simple-guide<br>
+            self-destructing-notes-for-business-teams<br>
+            self-destructing-notes-privacy-comparison-2025<br>
+            self-destructing-notes-vs-regular-messages-privnote<br>
+            simple-self-destructing-messages<br>
+            technical-magic-behind-self-destructing-messages<br>
+            what-is-privnote-self-destructing-notes-guide<br>
+            why-use-privnote-secure-messaging<br>
+            workplace-secure-information-sharing<br>
+            yue-hou-ji-fen-xiao-xi-jian-dan-jiao-cheng<br>
+            zero-trust-communication-2025<br>
+            zero-width-character-encryption-guide-2025
+        </div>
+        <p class="mt-2"><strong>缺失的中文博客（16篇）：</strong></p>
+        <div style="max-height:120px;overflow-y:auto;background:#fff3e0;padding:8px;border-radius:6px;font-size:0.8rem;font-family:monospace;">
+            bie-yiwei-ta-zhishi-suikou-wen<br>
+            donglemain<br>
+            falv-xinxi-genzong<br>
+            gaonji-wendang-genzong<br>
+            geren-anquan-genzong<br>
+            jiaoyu-yinsi-anquan-genzong<br>
+            jingbiao-dipai-jiami<br>
+            mimi-xiaoxi-jiami<br>
+            qiye-shuju-anquan-baohu-2025<br>
+            qiye-tongxin-anquan-zhuizong<br>
+            qiye-xinxi-anquan-geming-2025<br>
+            shoushoubu-jiaoxue<br>
+            shuzi-yinsi-baohu-zhongji-zhinan-2025<br>
+            wanquan-yinsi-baohu-zhinan-2025<br>
+            weixinqun-jiami-tongzhi
+        </div>
+        <p class="mt-2"><small>（注意：<code>test-image</code> 是测试页面，不要加入 sitemap）</small></p>
+        <p><strong>动作：</strong>生成完整的新 sitemap.xml，包含全部页面。</p>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <div class="task-card priority-high">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">3.2 ⚡ 61 篇博客缺少 canonical URL — 修复</h6>
+            <span class="badge badge-high text-white">紧急</span>
+        </div>
+        <p><strong>问题：</strong>90 篇英文博客中有 61 篇缺少 <code>&lt;link rel="canonical"&gt;</code>。这会导致：</p>
+        <ul>
+            <li>Google 不确定哪个是"正版"URL，可能把权重分散</li>
+            <li>如果有 .html 和无 .html 两个 URL 都能访问，会被当成重复内容</li>
+        </ul>
+        <p><strong>动作：</strong>给所有博客文章添加 <code>&lt;link rel="canonical" href="https://privnote.chat/blog/文件名"&gt;</code></p>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <div class="task-card priority-high">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">3.3 ⚡ _headers 格式不兼容 Cloudflare Pages</h6>
+            <span class="badge badge-high text-white">紧急</span>
+        </div>
+        <p><strong>问题：</strong>当前 <code>_headers</code> 用 TOML（Netlify 风格），Cloudflare Pages 用纯文本格式。安全头可能没生效。</p>
+        <p><strong>正确格式：</strong></p>
+<pre><code>/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/read/pic/*
+  Cache-Control: public, max-age=31536000
+</code></pre>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <div class="task-card priority-high">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">3.4 ⚡ 邮箱不一致 — 统一为 joe@pdfhost.online</h6>
+            <span class="badge badge-high text-white">紧急</span>
+        </div>
+        <p><strong>问题：</strong><code>encryption.html</code> JSON-LD 中用了 <code>contact@privnote.chat</code>，需统一。</p>
+        <p><strong>涉及文件：</strong><span class="file-tag">encryption.html</span> <span class="file-tag">decrypt.html</span></p>
+        <p><strong>动作：</strong>所有 JSON-LD 中 email 改为 <code>joe@pdfhost.online</code></p>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <div class="task-card priority-high">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">3.5 ⚡ 提交 Sitemap 到搜索引擎</h6>
+            <span class="badge badge-high text-white">紧急</span>
+        </div>
+        <p><strong>动作清单：</strong></p>
+        <ul class="checklist">
+            <li>登录 <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a>，验证 privnote.chat 并提交 sitemap.xml</li>
+            <li>登录 <a href="https://www.bing.com/webmasters" target="_blank">Bing Webmaster Tools</a>，提交 sitemap.xml（read/ 下已有 BingSiteAuth.xml）</li>
+            <li>使用 Google Search Console 的 "URL Inspection" 手动请求索引高价值页面</li>
+            <li>sitemap 更新后 ping Google：<code>https://www.google.com/ping?sitemap=https://privnote.chat/sitemap.xml</code></li>
+        </ul>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <div class="task-card priority-high">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">3.6 ⚡ sitemap.xml 日期全部过旧</h6>
+            <span class="badge badge-high text-white">紧急</span>
+        </div>
+        <p><strong>问题：</strong>大部分页面 <code>lastmod</code> 还是 2025-01，Google 会认为内容很旧不值得重新爬取。</p>
+        <p><strong>动作：</strong>更新所有 <code>lastmod</code> 为 2026-03-11（或实际修改日期）。</p>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <!-- ========== 4. 内容策略 & 关键词 ========== -->
+    <h3 id="seo-content" class="section-header text-warning"><i class="fas fa-pen-fancy"></i> 4. 🟡 内容策略 & 关键词规划（1-4 周）</h3>
+
+    <div class="task-card priority-mid">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">4.1 目标关键词矩阵</h6>
+            <span class="badge badge-mid text-white">中</span>
+        </div>
+        <p><strong>英文高价值关键词（竞争中等，搜索量可观）：</strong></p>
+        <div class="mb-2">
+            <span class="keyword-tag">privnote alternative</span>
+            <span class="keyword-tag">self destructing notes</span>
+            <span class="keyword-tag">send self destructing message</span>
+            <span class="keyword-tag">burn after reading message</span>
+            <span class="keyword-tag">share password securely</span>
+            <span class="keyword-tag">zero width character encryption</span>
+            <span class="keyword-tag">temporary message</span>
+            <span class="keyword-tag">one time secret</span>
+            <span class="keyword-tag">encrypted note sharing</span>
+            <span class="keyword-tag">secure note online</span>
+        </div>
+        <p><strong>中文高价值关键词：</strong></p>
+        <div class="mb-2">
+            <span class="keyword-tag zh">阅后即焚</span>
+            <span class="keyword-tag zh">自毁消息</span>
+            <span class="keyword-tag zh">零宽字符加密</span>
+            <span class="keyword-tag zh">隐私便签</span>
+            <span class="keyword-tag zh">安全分享密码</span>
+            <span class="keyword-tag zh">privnote 替代品</span>
+            <span class="keyword-tag zh">加密笔记</span>
+            <span class="keyword-tag zh">临时消息 工具</span>
+            <span class="keyword-tag zh">隐信云</span>
+        </div>
+        <p><strong>已有的高潜力页面（优先优化这些）：</strong></p>
+        <table class="table table-sm table-bordered seo-table">
+            <thead><tr><th>页面</th><th>目标关键词</th><th>当前问题</th></tr></thead>
+            <tbody>
+                <tr><td><code>privnote-alternative.html</code></td><td>privnote alternative</td><td>✅ 有 canonical，已在 sitemap，<strong>最有价值</strong></td></tr>
+                <tr><td><code>blog/what-is-privnote-self-destructing-notes-guide</code></td><td>what is privnote, self destructing notes</td><td>❌ 不在 sitemap，无 canonical</td></tr>
+                <tr><td><code>blog/best-self-destructing-note-services-privnote-comparison</code></td><td>best self destructing note services</td><td>❌ 不在 sitemap</td></tr>
+                <tr><td><code>blog/burn-after-reading-notes-guide-2025</code></td><td>burn after reading notes</td><td>❌ 不在 sitemap</td></tr>
+                <tr><td><code>blog/how-to-safely-share-passwords-with-family</code></td><td>share passwords safely family</td><td>❌ 不在 sitemap，无 canonical</td></tr>
+                <tr><td><code>blog/password-sharing-guide</code></td><td>secure password sharing</td><td>在 sitemap，但无 canonical</td></tr>
+                <tr><td><code>blog/zero-width-encryption</code></td><td>zero width character encryption</td><td>在 sitemap，但无 canonical</td></tr>
+                <tr><td><code>blog/privnote-journalists-whistleblowers-secure-communication</code></td><td>privnote for journalists</td><td>❌ 不在 sitemap，无 canonical</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="task-card priority-mid">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">4.2 博客文章内链优化</h6>
+            <span class="badge badge-mid text-white">中</span>
+        </div>
+        <p><strong>问题：</strong>博客之间有少量内链，但不够系统。很多文章是"孤岛"。</p>
+        <p><strong>动作：</strong></p>
+        <ul>
+            <li>每篇文章底部加 "相关文章" 推荐区（3-5 篇相关内链）</li>
+            <li>每篇文章底部加 CTA 按钮：<em>"立即试用 Privnote →"</em> 指向首页</li>
+            <li>首页和 encryption.html 底部加博客入口卡片</li>
+            <li>英文博客 ↔ 中文博客之间加 hreflang 互链（同主题文章）</li>
+        </ul>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <div class="task-card priority-mid">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">4.3 read/ 目录的 SEO 价值挖掘</h6>
+            <span class="badge badge-mid text-white">中</span>
+        </div>
+        <p><strong>现状：</strong><code>read/</code> 下有 45+ 个内容页，都在 sitemap 中。但很多页面文件名是拼音或中文，SEO 不友好。</p>
+        <p><strong>建议：</strong></p>
+        <ul>
+            <li>评估这些页面的内容质量，低质量的去掉</li>
+            <li>高质量的中文页面保留，确保有 meta description 和 h1</li>
+            <li>中文URL（如 <code>privnote作用</code>）的权重可能不高，考虑是否值得保留</li>
+        </ul>
+        <p><strong>状态：</strong><span class="status-todo">待评估</span></p>
+    </div>
+
+    <div class="task-card priority-mid">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">4.4 建议写的新高价值文章（5-10 篇）</h6>
+            <span class="badge badge-mid text-white">中</span>
+        </div>
+        <p><strong>目前缺失的高搜索量主题：</strong></p>
+        <table class="table table-sm table-bordered seo-table">
+            <thead><tr><th>建议标题</th><th>目标关键词</th><th>语言</th></tr></thead>
+            <tbody>
+                <tr><td>Privnote vs Onetimesecret vs Pastebin: Complete Comparison 2026</td><td>privnote vs onetimesecret</td><td>EN</td></tr>
+                <tr><td>How to Send a One-Time Secret Link (Step-by-Step Guide)</td><td>one time secret link</td><td>EN</td></tr>
+                <tr><td>Top 10 Free Privacy Tools You Should Use in 2026</td><td>free privacy tools 2026</td><td>EN</td></tr>
+                <tr><td>Is Privnote Safe? Security Analysis & Trust Guide</td><td>is privnote safe</td><td>EN</td></tr>
+                <tr><td>How to Share Sensitive Documents Without Email</td><td>share sensitive documents securely</td><td>EN</td></tr>
+                <tr><td>阅后即焚：5款免费自毁消息工具对比测评 2026</td><td>阅后即焚 工具 对比</td><td>ZH</td></tr>
+                <tr><td>如何安全地把密码分享给别人？完整指南</td><td>安全分享密码</td><td>ZH</td></tr>
+                <tr><td>Privnote 安全吗？深度安全分析</td><td>privnote 安全吗</td><td>ZH</td></tr>
+            </tbody>
+        </table>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <!-- ========== 5. 站外 SEO ========== -->
+    <h3 id="seo-offpage" class="section-header text-warning"><i class="fas fa-globe"></i> 5. 🟡 站外 SEO & 推广</h3>
+
+    <div class="task-card priority-mid">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">5.1 免费推广渠道清单</h6>
+            <span class="badge badge-mid text-white">中</span>
+        </div>
+        <ul class="checklist">
+            <li><strong>Product Hunt</strong> — 发布产品，获取早期用户和外链</li>
+            <li><strong>AlternativeTo.net</strong> — 注册为 Privnote.com 的替代品（直接匹配搜索意图）</li>
+            <li><strong>Reddit</strong> — r/privacy, r/cybersecurity, r/selfhosted 分享使用场景</li>
+            <li><strong>Hacker News</strong> — Show HN: Privnote.chat – Self-destructing notes with zero-width encryption</li>
+            <li><strong>Dev.to / Medium</strong> — 发布技术文章（零宽字符加密原理），引流回博客</li>
+            <li><strong>GitHub</strong> — 如果项目开源，README 加上网站链接</li>
+            <li><strong>知乎</strong> — 回答"阅后即焚"、"零宽字符"相关问题，引流中文用户</li>
+            <li><strong>V2EX</strong> — 分享工具到创意/分享区</li>
+            <li><strong>Indie Hackers</strong> — 分享产品故事</li>
+            <li><strong>ToolFinder / SaaS Hub / G2</strong> — 提交工具列表</li>
+        </ul>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <div class="task-card priority-mid">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">5.2 结构化数据增强</h6>
+            <span class="badge badge-mid text-white">中</span>
+        </div>
+        <p><strong>现状：</strong>首页有 Organization 的 JSON-LD，但博客文章没有 Article schema。</p>
+        <p><strong>动作：</strong></p>
+        <ul>
+            <li>每篇博客添加 <code>Article</code> 或 <code>BlogPosting</code> 的 JSON-LD</li>
+            <li>首页添加 <code>WebApplication</code> schema（工具类网站）</li>
+            <li>FAQ 页面添加 <code>FAQPage</code> schema（可获得搜索富片段）</li>
+        </ul>
+        <p><strong>状态：</strong><span class="status-todo">待开始</span></p>
+    </div>
+
+    <!-- ========== 6. 文件清理 ========== -->
+    <h3 id="cleanup" class="section-header text-warning"><i class="fas fa-trash-alt"></i> 6. 🟡 文件清理（中优先级）</h3>
+
+    <div class="task-card priority-mid">
+        <p><strong>以下文件确认无用，可以删除：</strong></p>
+        <ul class="checklist">
+            <li><span class="file-tag">a copy.html</span> — 复制文件，无用</li>
+            <li><span class="file-tag">a.html</span> — 测试文件</li>
+            <li><span class="file-tag">original.html</span> — 旧版备份</li>
+            <li><span class="file-tag">wasnotwork.html</span> — 废弃文件</li>
+            <li><span class="file-tag">view.js</span> — 空文件</li>
+            <li><span class="file-tag">getresult.html</span> — 测试页面</li>
+            <li><span class="file-tag">blog/zh/test-image.html</span> — 测试页面</li>
+        </ul>
+        <p><strong>以下目录/文件需要你确认后再删：</strong></p>
+        <ul class="checklist">
+            <li><span class="file-tag">backup2/</span> — 备份目录，确认不需要后删</li>
+            <li><span class="file-tag">justtesting/</span> — 测试目录，确认不需要后删</li>
+            <li><span class="file-tag">hahachange.php</span> — PHP 测试？</li>
+            <li><span class="file-tag">maifile.php</span> — PHP 文件？</li>
+            <li><span class="file-tag">watermark.html</span> — 水印工具，是否还在用？</li>
+            <li><span class="file-tag">simple-cn.html</span> — 中文简化版，是否还在用？</li>
+            <li><span class="file-tag">newcnhome.html</span> — 新中文首页，是否已废弃？</li>
+            <li><span class="file-tag">home.html</span> — MaiTube Tools Suite 页面，是否还在用？</li>
+        </ul>
+        <p><strong>状态：</strong><span class="status-todo">待确认后清理</span></p>
+    </div>
+
+    <!-- ========== 7. 安全 & 代码问题 ========== -->
+    <h3 id="security" class="section-header text-success"><i class="fas fa-shield-alt"></i> 7. 🟢 安全 & 代码问题（后期处理）</h3>
+    <p class="text-muted">以下问题先记录，等流量起来后再优化。不影响 SEO。</p>
+
+    <div class="task-card priority-low">
+        <h6>7.1 安全问题清单</h6>
+        <ul>
+            <li><strong>默认密码硬编码：</strong><code>no.js</code> 中 <code>pass1 = 'mythenigma'</code></li>
+            <li><strong>XOR 加密太弱：</strong>需替换为 Web Crypto API 的 AES-GCM</li>
+            <li><strong>密码明文传输：</strong><code>sendData()</code> 中密码明文发到服务器</li>
+        </ul>
+        <h6 class="mt-3">7.2 代码组织问题</h6>
+        <ul>
+            <li><code>no.js</code> 命名不直观 → 改为 <code>app.js</code></li>
+            <li><code>maitime()</code> 函数重复定义</li>
+            <li>多个 <code>DOMContentLoaded</code> 监听重复</li>
+            <li>函数命名中英文混杂（shouData, yanzheng, jilu）</li>
+        </ul>
+        <h6 class="mt-3">7.3 CSS 问题</h6>
+        <ul>
+            <li>三个 HTML 文件中大量重复的内嵌 <code>&lt;style&gt;</code></li>
+            <li><code>* { transition: all 0.3s ease; }</code> 全局过渡影响性能</li>
+        </ul>
+        <h6 class="mt-3">7.4 前端 UX 问题</h6>
+        <ul>
+            <li>无构建工具（无 minify/bundle）</li>
+            <li>解密用 <code>alert()</code> 弹窗，体验差</li>
+            <li><code>maitime()</code> 地理检测逻辑不可靠</li>
+        </ul>
+        <p><strong>状态：</strong><span class="status-todo">等流量起来后处理</span></p>
+    </div>
+
+    <!-- ========== 8. 工作日志 ========== -->
+    <h3 id="log" class="section-header"><i class="fas fa-history"></i> 8. 工作日志</h3>
+    <p class="text-muted">每次改动后在这里记录，方便回溯。</p>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>项目审查 & SEO 流量计划制定（v2.0）</strong>
+        <p class="mb-0 mt-1">
+            完成全面审查。关键发现：128 篇博客中有 76 篇不在 sitemap、61 篇缺 canonical URL。<br>
+            确定战略：<strong>SEO 流量增长为第一优先级</strong>，安全和代码问题后期处理。<br>
+            制定三阶段增长路线：技术修复 → 内容优化 → 站外推广。<br>
+            统一联系邮箱为 joe@pdfhost.online。
+        </p>    </div>    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #12：secure-messaging-apps-comparison</strong>
+        <p class="mb-0 mt-1">
+            ✅ Bootstrap 5.1→5.3, FA 6.0→6.4, Poppins, Article JSON-LD（2025-05-20）<br>
+            ✅ 统一 header/footer, 5 篇相关文章（e2e-encryption, digital-privacy, journalists, best-self-destructing, self-destructing-privacy）<br>
+            ✅ CTA: "Beyond Messaging Apps: Try Self-Destructing Notes"
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #11：end-to-end-encryption-guide</strong>
+        <p class="mb-0 mt-1">
+            ✅ Bootstrap 5.1→5.3, FA 6.0→6.4, Poppins, Article JSON-LD（2026-01-13）<br>
+            ✅ 统一 header/footer, 5 篇相关文章（zero-width, secure-messaging, military-grade, self-destructing-privacy, digital-privacy）<br>
+            ✅ CTA: "Try End-to-End Encrypted Messaging"
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #10：see-once-notes-complete-guide</strong>
+        <p class="mb-0 mt-1">
+            ✅ Bootstrap 5.1→5.3, FA 6.0→6.4, Poppins, Article JSON-LD（2025-05-23）<br>
+            ✅ 删除假评论（Thomas Richards / Sarah Johnson + dummyimage）<br>
+            ✅ 统一 header/footer, 5 篇相关文章（self-destructing-privacy, burn-after-reading, what-is-privnote, after-message-destruction, use-cases）<br>
+            ✅ CTA: "Send a See-Once Note Now"
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #9：privnote-use-cases</strong>
+        <p class="mb-0 mt-1">
+            ✅ Bootstrap 5.1→5.3, FA 6.0→6.4, Poppins, Article JSON-LD（2025-05-22）<br>
+            ✅ 统一 header/footer, 5 篇相关文章（password-sharing, self-destructing-privacy, secure-messaging-business, share-passwords-family, burn-after-reading）<br>
+            ✅ CTA: "Ready to Try Privnote?"
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #8：self-destructing-notes-privacy</strong>
+        <p class="mb-0 mt-1">
+            ✅ Bootstrap 5.1→5.3, FA 6.0→6.4, Poppins, Article JSON-LD（2025-05-22）<br>
+            ✅ 旧相关文章（2个死链 #）→ 5 篇新相关文章（what-is-privnote, burn-after-reading, how-privnote-protects, see-once-notes, digital-privacy）<br>
+            ✅ 统一 header/footer, CTA: "Keep Your Messages Private — Automatically"
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #7：privnote-journalists-whistleblowers-secure-communication</strong>
+        <p class="mb-0 mt-1">
+            ✅ canonical URL 已有（无 .html）<br>
+            ✅ Bootstrap 5.1→5.3, Font Awesome 6.0→6.4, 加 Poppins 字体<br>
+            ✅ 添加 Article JSON-LD（datePublished: 2025-01-15）<br>
+            ✅ 替换旧导航 navbar-dark bg-dark → 统一站点梯度 header<br>
+            ✅ 添加 5 篇相关文章内链（secure-messaging-apps-comparison, end-to-end-encryption-guide, self-destructing-notes-privacy, digital-privacy-best-practices, privnote-use-cases）<br>
+            ✅ 添加记者/举报人专属 CTA（"Protect Your Sources with Self-Destructing Notes"）<br>
+            ✅ 替换简陋 footer → 统一三列 footer<br>
+            ✅ 无假评论需删除，文章内容质量好保留原样
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #6：zero-width-encryption</strong>
+        <p class="mb-0 mt-1">
+            ✅ canonical URL 已有（无 .html）<br>
+            ✅ Bootstrap 5.1→5.3, Font Awesome 升级, 加 Poppins 字体<br>
+            ✅ 添加 Article JSON-LD（datePublished: 2025-05-22）<br>
+            ✅ 替换旧导航 → 统一站点梯度 header（修复残留 nav 代码）<br>
+            ✅ 旧相关文章（3篇 .html）→ 新相关文章（5篇：zero-width-guide-2025, zero-width-vs-binary, e2e-encryption, self-destructing-privacy, what-is-privnote）<br>
+            ✅ 添加零宽加密专属 CTA → 指向 /encryption 页面<br>
+            ✅ 替换简陋 footer → 统一三列 footer<br>
+            ✅ 保留 Prism.js 语法高亮
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #5：how-to-safely-share-passwords-with-family</strong>
+        <p class="mb-0 mt-1">
+            ✅ canonical URL 已有（无 .html）<br>
+            ✅ Bootstrap 5.1→5.3, Font Awesome 升级, 加 Poppins 字体<br>
+            ✅ 添加 Article JSON-LD（datePublished: 2025-01-15）<br>
+            ✅ 替换旧导航 → 统一站点梯度 header<br>
+            ✅ 删除假评论区（Mom of Three / College Student）<br>
+            ✅ 添加 5 篇相关文章内链（password-sharing, share-wifi, family-privacy, bank-card, password-management）<br>
+            ✅ 添加家庭分享专属 CTA（"Share a Password with Family — Safely"）<br>
+            ✅ 替换简陋 footer → 统一三列 footer
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #4：best-self-destructing-note-services-privnote-comparison</strong>
+        <p class="mb-0 mt-1">
+            ✅ canonical URL 已有（无 .html）<br>
+            ✅ Bootstrap 5.1→5.3, Font Awesome 升级, 加 Poppins 字体<br>
+            ✅ 添加 Article JSON-LD（datePublished: 2025-01-15）<br>
+            ✅ 替换旧导航 → 统一站点梯度 header<br>
+            ✅ 删除假评论区（dummyimage 头像）<br>
+            ✅ 添加 5 篇相关文章内链（privnote-alternative, what-is-privnote, burn-after-reading, secure-messaging-apps, e2e-encryption）<br>
+            ✅ 添加 CTA（"Try the Best Self-Destructing Note Service"）<br>
+            ✅ 替换简陋 footer → 统一三列 footer
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #3：burn-after-reading-notes-guide-2025</strong>
+        <p class="mb-0 mt-1">
+            ✅ canonical URL 已有（无 .html）<br>
+            ✅ Bootstrap 5.1→5.3, Font Awesome 升级, 加 Poppins 字体<br>
+            ✅ 添加 Article JSON-LD（datePublished: 2025-01-09）<br>
+            ✅ 替换旧导航 → 统一站点梯度 header<br>
+            ✅ 添加 5 篇相关文章内链（what-is-privnote, self-destructing-notes-privacy, after-message-destruction, see-once-notes, password-sharing）<br>
+            ✅ 添加 CTA（"Create Your First Burn-After-Reading Note"）<br>
+            ✅ 替换简陋 footer → 统一三列 footer
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #2：password-sharing-guide</strong>
+        <p class="mb-0 mt-1">
+            ✅ canonical URL 已有（无 .html）<br>
+            ✅ Bootstrap 5.1→5.3, Font Awesome 升级, 加 Poppins 字体<br>
+            ✅ 添加 Article JSON-LD（datePublished: 2025-05-22）<br>
+            ✅ 替换旧导航 → 统一站点梯度 header<br>
+            ✅ 旧相关文章（3篇 .html 链接）→ 新相关文章（5篇，绝对URL，含描述）<br>
+            ✅ 添加密码分享专属 CTA（"Need to Share a Password Securely?"）<br>
+            ✅ 替换简陋 footer → 统一三列 footer
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-03-11</span>
+        <strong>精修 #1：what-is-privnote-self-destructing-notes-guide</strong>
+        <p class="mb-0 mt-1">
+            ✅ canonical URL 已有（无 .html）<br>
+            ✅ Bootstrap 5.1→5.3, Font Awesome 升级到 6.4<br>
+            ✅ 添加 Article JSON-LD 结构化数据<br>
+            ✅ 替换 navbar-dark bg-dark → 统一站点梯度 header<br>
+            ✅ 删除假评论区（dummyimage 头像）<br>
+            ✅ 添加 5 篇相关文章内链<br>
+            ✅ 添加 CTA 区块（渐变卡片 → 主站）<br>
+            ✅ 替换简陋 footer → 统一三列 footer（工具+资源+品牌）
+        </p>
+    </div>
+
+    <div class="log-entry" style="background: #f0f0f0; border-left-color: #ccc;">
+        <span class="log-date">YYYY-MM-DD</span>
+        <strong>（下次改动记录模板）</strong>
+        <p class="mb-0 mt-1">在这里描述做了什么改动...</p>
+    </div>
+
+    <!-- ========== 快速统计 ========== -->
+    <div class="card mt-4 mb-4">
+        <div class="card-body text-center">
+            <h5>📊 任务统计</h5>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="p-3" style="background: #fde8e8; border-radius: 10px;">
+                        <h2 class="text-danger mb-0">6</h2>
+                        <small>🔴 SEO 紧急修复</small>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="p-3" style="background: #fff3e0; border-radius: 10px;">
+                        <h2 class="text-warning mb-0">6</h2>
+                        <small>🟡 内容 & 推广 & 清理</small>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="p-3" style="background: #e8f5e9; border-radius: 10px;">
+                        <h2 class="text-success mb-0">4</h2>
+                        <small>🟢 后期处理</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="text-center text-muted mt-4 mb-5">
+        <small>Privnote.chat Internal Work Plan v2.0 — 不对外公开</small>
+    </p>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
