@@ -3,264 +3,899 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privnote Blog | Privacy, Security, and Secure Communication</title>
+    <title>Privnote Blog — Privacy, Security &amp; Encrypted Communication Guides</title>
+    <meta name="description" content="Explore 80+ articles on secure communication, self-destructing notes, end-to-end encryption, and digital privacy best practices from Privnote.chat.">
+    <meta name="keywords" content="Privnote blog, secure messaging, self-destructing notes, privacy protection, end-to-end encryption, digital privacy, password sharing, zero-width encryption">
     <link rel="canonical" href="https://privnote.chat/blog/">
-    <meta name="description" content="Explore articles on secure communication, privacy protection, and best practices for sensitive information sharing using Privnote's self-destructing notes technology.">
-    <meta name="keywords" content="Privnote blog, secure messaging, self-destructing notes, privacy protection, password security, zero-width encryption, digital privacy">
-    <link rel="stylesheet" href="../style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Privnote Blog — Privacy, Security & Encrypted Communication Guides">
+    <meta property="og:description" content="Explore 80+ articles on secure communication, self-destructing notes, end-to-end encryption, and digital privacy best practices.">
+    <meta property="og:url" content="https://privnote.chat/blog/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Privnote.chat">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privnote Blog — Privacy, Security & Encrypted Communication Guides">
+    <meta name="twitter:description" content="Explore 80+ articles on secure communication, self-destructing notes, end-to-end encryption, and digital privacy best practices.">
+    <meta name="twitter:url" content="https://privnote.chat/blog/">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Privnote Blog — Privacy, Security & Encrypted Communication Guides",
+        "description": "Explore 80+ articles on secure communication, self-destructing notes, end-to-end encryption, and digital privacy best practices from Privnote.chat.",
+        "url": "https://privnote.chat/blog/",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Privnote.chat",
+            "url": "https://privnote.chat"
+        }
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://privnote.chat/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-blog { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 4rem 0; }
+        .hero-blog h1 { font-weight: 700; font-size: 2.6rem; }
+        .hero-blog p.lead { color: rgba(255,255,255,.75); }
+        .category-title { font-weight: 700; font-size: 1.4rem; border-left: 4px solid #6c63ff; padding-left: .75rem; margin-bottom: 1.25rem; }
+        .article-card { transition: transform .2s, box-shadow .2s; border: none; border-radius: 12px; }
+        .article-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+        .article-card .card-title a { color: #1a1a2e; text-decoration: none; font-weight: 600; font-size: .95rem; }
+        .article-card .card-title a:hover { color: #6c63ff; }
+        .article-card .badge { font-size: .7rem; font-weight: 500; }
+        .toc-sidebar a { color: #495057; text-decoration: none; font-size: .88rem; display: block; padding: .35rem 0; border-bottom: 1px solid #f0f0f0; }
+        .toc-sidebar a:hover { color: #6c63ff; }
+        .lang-switch { background: rgba(255,255,255,.12); border-radius: 10px; padding: 1.25rem; }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="../">Privnote</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../encryption.html">Encryption</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../decrypt.html">Decrypt</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./">Blog</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Page header with logo-->    <header class="py-5 bg-light border-bottom mb-4">
-        <div class="container">
-            <div class="text-center my-5">
-                <h1 class="fw-bolder">Privnote Blog</h1>
-                <p class="lead mb-0">Insights on Privacy, Security, and Secure Communication</p>
-            </div>
+    <header class="site-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="site-logo" href="https://privnote.chat/">Privnote <span class="dot-chat">.chat</span></a>
+            <nav class="site-nav">
+                <a href="https://privnote.chat/">Home</a>
+                <a href="https://privnote.chat/blog/">Blog</a>
+                <a href="https://privnote.chat/encryption.html">Encryption</a>
+                <a href="https://privnote.chat/decrypt.html">Decrypt</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Page content-->
-    <div class="container">
-        <div class="row">
-            <!-- Blog entries-->
-            <div class="col-lg-8">
-                <!-- Featured blog post-->
-                <div class="card mb-4">
-                    <a href="password-sharing-guide.html">
-                        <img class="card-img-top" src="privimg/generatelink_with_optional_settings.png" alt="Secure password sharing interface" />
-                    </a>
-                    <div class="card-body">
-                        <div class="small text-muted">January 13, 2026</div>
-                        <h2 class="card-title">Secure Password Sharing: Best Practices and Tools in 2026</h2>
-                        <p class="card-text">Learn how to share passwords securely using ephemeral messaging and self-destructing notes. Discover best practices for password sharing that protect your accounts and sensitive information.</p>
-                        <a class="btn btn-primary" href="password-sharing-guide.html">Read more →</a>
-                    </div>
-                </div>
-                <!-- Nested row for non-featured blog posts-->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- New simple guides (with Mermaid flowcharts) -->
-                        <div class="card mb-4">
-                            <a href="send-sensitive-info-in-60-seconds.html">
-                                <img class="card-img-top" src="privimg/self_destruct_link_generated_result.png" alt="Send sensitive info with a one-time link" />
-                            </a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 15, 2026</div>
-                                <h2 class="card-title h4">Send Sensitive Info in 60 Seconds (Flowchart)</h2>
-                                <p class="card-text">A beginner checklist + Mermaid flowchart for sharing a message once, then destroying it automatically.</p>
-                                <a class="btn btn-primary" href="send-sensitive-info-in-60-seconds.html">Read more →</a>
-                            </div>
-                        </div>
-
-                        <div class="card mb-4">
-                            <a href="share-wifi-password-safely.html">
-                                <img class="card-img-top" src="privimg/generatelink_with_optional_settings.png" alt="Share Wi-Fi password safely" />
-                            </a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 15, 2026</div>
-                                <h2 class="card-title h4">How to Share a Wi‑Fi Password Safely (Flowchart)</h2>
-                                <p class="card-text">Avoid chat history. Use a one‑time link and separate channels. Simple and practical.</p>
-                                <a class="btn btn-primary" href="share-wifi-password-safely.html">Read more →</a>
-                            </div>
-                        </div>
-
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="self-destructing-notes-privacy.html">
-                                <img class="card-img-top" src="privimg/self_destruct_link_generated_result.png" alt="Self-destructing note with generated link" />
-                            </a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 13, 2026</div>
-                                <h2 class="card-title h4">Secure Communication: How Self-Destructing Notes Protect Your Privacy Online</h2>
-                                <p class="card-text">Discover how Privnote's self-destructing notes technology ensures your sensitive information remains private and secure in an increasingly vulnerable digital world.</p>
-                                <a class="btn btn-primary" href="self-destructing-notes-privacy.html">Read more →</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="zero-width-encryption.html">
-                                <img class="card-img-top" src="privimg/character_encryption_page.png" alt="Zero-width encryption interface" />
-                            </a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 13, 2026</div>
-                                <h2 class="card-title h4">Zero-Width Character Encryption: The Invisible Layer of Privacy for Your Messages</h2>
-                                <p class="card-text">Explore how zero-width character encryption provides an advanced level of privacy protection for your most sensitive communications.</p>
-                                <a class="btn btn-primary" href="zero-width-encryption.html">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Blog post-->                        <div class="card mb-4">
-                            <a href="privnote-use-cases.html">
-                                <img class="card-img-top" src="privimg/Generatelink.png" alt="Privnote link generation interface" />
-                            </a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 13, 2026</div>
-                                <h2 class="card-title h4">5 Essential Use Cases for Privnote in Your Daily Life</h2>
-                                <p class="card-text">Discover five practical use cases where Privnote's secure, self-destructing messages can protect your privacy and sensitive information in everyday situations.</p>
-                                <a class="btn btn-primary" href="privnote-use-cases.html">Read more →</a>
-                            </div>
-                        </div>
-
-                        <div class="card mb-4">
-                            <a href="zero-width-vs-binary-which-to-use.html">
-                                <img class="card-img-top" src="privimg/message_encryption_binary_zerowidth.png" alt="Zero-width vs binary encryption decision guide" />
-                            </a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 15, 2026</div>
-                                <h2 class="card-title h4">Zero‑Width vs Binary: Which Should You Use? (Flowchart)</h2>
-                                <p class="card-text">A simple decision guide with a Mermaid flowchart: choose stealth (zero‑width) vs robustness (binary).</p>
-                                <a class="btn btn-primary" href="zero-width-vs-binary-which-to-use.html">Read more →</a>
-                            </div>
-                        </div>
-
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="digital-privacy-best-practices.html">
-                                <img class="card-img-top" src="privimg/message_encryption_binary_zerowidth.png" alt="Digital privacy protection illustration" />
-                            </a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 13, 2026</div>
-                                <h2 class="card-title h4">Digital Privacy Best Practices: Protecting Your Personal Information</h2>
-                                <p class="card-text">Discover essential digital privacy best practices to safeguard your personal information online in an increasingly connected world.</p>
-                                <a class="btn btn-primary" href="digital-privacy-best-practices.html">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>                <!-- Pagination-->
-                <nav aria-label="Pagination">
-                    <hr class="my-0" />
-                    <ul class="pagination justify-content-center my-4">
-                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="blog-page-2">2</a></li>
-                        <li class="page-item"><a class="page-link" href="blog-page-2">Older</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <!-- Side widgets-->
-            <div class="col-lg-4">                <!-- Search widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Search</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
-                    </div>
-                </div>                <!-- Categories widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Categories</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Privacy</a></li>
-                                    <li><a href="#!">Security</a></li>
-                                    <li><a href="#!">Password Sharing</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Encryption</a></li>
-                                    <li><a href="#!">Digital Privacy</a></li>
-                                    <li><a href="#!">Secure Communication</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Recently Updated widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Recently Updated</div>
-                    <div class="card-body">
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-2">
-                                <a href="send-sensitive-info-in-60-seconds">Send Sensitive Info in 60 Seconds (Flowchart)</a>
-                                <div class="small text-muted">Jan 15, 2026</div>
-                            </li>
-                            <li class="mb-2">
-                                <a href="share-wifi-password-safely">How to Share a Wi‑Fi Password Safely (Flowchart)</a>
-                                <div class="small text-muted">Jan 15, 2026</div>
-                            </li>
-                            <li>
-                                <a href="zero-width-vs-binary-which-to-use">Zero‑Width vs Binary: Which Should You Use? (Flowchart)</a>
-                                <div class="small text-muted">Jan 15, 2026</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                  <!-- New Articles widget-->
-                <div class="card mb-4">
-                    <div class="card-header">New Articles</div>                    <div class="card-body">
-                        <div class="row">                            <div class="col-sm-12">                                <ul class="list-unstyled mb-0">
-                                    <li><a href="military-grade-encryption.html">Military-Grade Encryption: What It Means for Privacy</a></li>
-                                    <li><a href="email-security-best-practices.html">Email Security Best Practices: Protecting Communications</a></li>
-                                    <li><a href="ephemeral-messaging-finance.html">Ephemeral Messaging in Finance: Secure Communication</a></li>
-                                    <li><a href="burn-notes-secure-communication.html">Burn Notes: Guide to Self-Destructing Messages</a></li>
-                                    <li><a href="zh/qiye-shuju-xielou-fanghu.html">企业数据泄露防护 (Corporate Data Leak Prevention - Chinese)</a></li>
-                                    <li><a href="zh/duandao-duanjia-mi-tongxin.html">端到端加密通信指南 (E2E Encryption Guide - Chinese)</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Language Selection widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Language / 语言</div>
-                    <div class="card-body">
-                        <p>You are viewing the English blog content. We also offer articles in Chinese.</p>
-                        <a class="btn btn-primary" href="zh/index.html">查看中文博客 (View Chinese Blog)</a>
-                    </div>
-                </div>
-                
-                <!-- About widget-->
-                <div class="card mb-4">
-                    <div class="card-header">About Privnote</div>
-                    <div class="card-body">
-                        <p>Privnote is a free service that lets you send notes that will self-destruct after being read. No registration or software installation is required. Our mission is to provide the simplest and most secure way to share sensitive information online.</p>
-                        <a class="btn btn-primary btn-sm" href="../">Create a Note Now</a>
-                    </div>
-                </div>
+    <!-- Hero -->
+    <section class="hero-blog text-center">
+        <div class="container">
+            <h1><i class="fas fa-shield-halved me-2"></i>Privnote Blog</h1>
+            <p class="lead mb-3">80+ guides on privacy, encryption, self-destructing notes &amp; secure communication</p>
+            <a href="https://privnote.chat/" class="btn btn-light btn-lg px-4 fw-semibold" style="border-radius:50px;"><i class="fas fa-lock me-2"></i>Create a Secure Note</a>
+            <div class="mt-4 lang-switch d-inline-block">
+                <a href="https://privnote.chat/blog/zh/" class="text-white text-decoration-none"><i class="fas fa-globe me-1"></i> 查看中文博客 (Chinese Blog)</a>
             </div>
         </div>
-    </div>    <!-- Footer-->
+    </section>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Articles -->
+            <div class="col-lg-9">
+
+                <!-- ========== GETTING STARTED ========== -->
+                <h2 class="category-title" id="getting-started"><i class="fas fa-rocket me-2 text-primary"></i>Getting Started</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Beginner</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/what-is-privnote-self-destructing-notes-guide">What is Privnote? Complete Guide to Self-Destructing Notes</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Beginner</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/see-once-notes-complete-guide">See-Once Notes: Complete Guide to Single-View Messaging</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Beginner</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-use-cases">5 Essential Use Cases for Privnote in Your Daily Life</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Quick Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/send-sensitive-info-in-60-seconds">Send Sensitive Info in 60 Seconds (Flowchart)</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Quick Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/simple-self-destructing-messages">Self-Destructing Messages Made Simple: 3 Steps</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Quick Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/5-minute-guide-secure-message-sharing">5-Minute Guide to Secure Message Sharing</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Beginner</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/self-destructing-messages-simple-guide">Self-Destructing Messages: Share Info Safely in 3 Minutes</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Beginner</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/why-use-privnote-secure-messaging">Why Use Privnote? Top 10 Reasons in 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Tips</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-security-tips">15 Best Practices for Self-Destructing Notes</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== ENCRYPTION & TECHNOLOGY ========== -->
+                <h2 class="category-title" id="encryption"><i class="fas fa-key me-2 text-warning"></i>Encryption &amp; Technology</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Core</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/end-to-end-encryption-guide">End-to-End Encryption: A Complete Guide</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Advanced</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/zero-width-encryption">Zero-Width Character Encryption: Invisible Privacy</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Advanced</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/zero-width-character-encryption-guide-2025">Zero-Width Encryption Guide 2025: Steganography Techniques</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Flowchart</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/zero-width-vs-binary-which-to-use">Zero-Width vs Binary: Which Should You Use?</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Core</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/military-grade-encryption">Military-Grade Encryption: What It Really Means</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Deep Dive</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/technical-magic-behind-self-destructing-messages">The Technical Magic Behind Self-Destructing Messages</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Workplace</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/secure-workplace-text-encryption">Workplace Text Encryption: Send Secret Messages to Colleagues</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Business</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/bidding-floor-price-encryption">Secretly Share Bidding Floor Prices with Partners</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Business</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/bidding-floor-price-encryption-guide">Safely Share Bidding Floor Prices: Encryption Guide</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== SELF-DESTRUCTING NOTES ========== -->
+                <h2 class="category-title" id="self-destructing"><i class="fas fa-fire me-2 text-danger"></i>Self-Destructing Notes &amp; Messages</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/burn-after-reading-notes-guide-2025">Burn After Reading Notes: Complete Guide 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/self-destructing-messages-complete-guide-2025">Self-Destructing Messages: Complete Guide 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/self-destructing-notes-privacy">How Self-Destructing Notes Protect Your Privacy</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Comparison</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/self-destructing-notes-vs-regular-messages-privnote">Self-Destructing Notes vs Regular Messages</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Comparison</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/self-destructing-notes-privacy-comparison-2025">Self-Destructing Notes Privacy Comparison 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/burn-notes-secure-communication">Burn Notes: Guide to Self-Destructing Messages</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">2025</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/see-once-notes-revolutionary-privacy-2025">See-Once Notes: Revolutionary Privacy Technology 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/after-message-destruction-privacy-guide-2025">After Message Destruction: Privacy Guide 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">PDF</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/self-destructing-pdfs-guide">Self-Destructing Notes &amp; PDFs: Ultimate Guide</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PASSWORD & EVERYDAY SHARING ========== -->
+                <h2 class="category-title" id="sharing"><i class="fas fa-share-nodes me-2 text-success"></i>Password &amp; Everyday Sharing</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Passwords</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/password-sharing-guide">Secure Password Sharing: Best Practices &amp; Tools</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Passwords</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/how-to-safely-share-passwords-with-family">How to Safely Share Passwords with Family</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Passwords</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-password-sharing-guide">Privnote Password Sharing Guide 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Passwords</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-family-password-sharing-secure-guide">Family Password Sharing with Privnote</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Passwords</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/password-management-strategies-2025">Password Management Strategies 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Flowchart</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/share-wifi-password-safely">How to Share a Wi-Fi Password Safely</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Finance</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/how-to-safely-share-bank-card-information">How to Safely Share Bank Card Information</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Photos</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/how-to-safely-share-personal-photos">How to Safely Share Personal Photos</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Travel</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/how-to-safely-share-travel-plans">How to Safely Share Travel Plans</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Work</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/how-to-safely-share-work-information">How to Safely Share Work Information</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PRIVACY & DIGITAL SECURITY ========== -->
+                <h2 class="category-title" id="privacy"><i class="fas fa-user-shield me-2" style="color:#6c63ff;"></i>Privacy &amp; Digital Security</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/digital-privacy-best-practices">Digital Privacy Best Practices</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/how-privnote-protects-your-privacy">How Privnote Protects Your Privacy</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">2025</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/cybersecurity-best-practices-2025">Cybersecurity Best Practices 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/data-breach-prevention">Data Breach Prevention with Self-Destructing Notes</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/email-security-best-practices">Email Security Best Practices</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">2025</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privacy-protection-technologies-2025">Privacy Protection Technologies 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">2025</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/zero-trust-communication-2025">Zero-Trust Communication: Unbreakable Privacy 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Stories</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privacy-stories-real-people-real-protection">Privacy Stories: Real People, Real Protection</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Psychology</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/psychology-of-digital-privacy">Psychology of Digital Privacy: Why Self-Destructing Messages Work</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Family</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/family-privacy-protection-guide">Family Privacy Protection Guide</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Personal</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-personal-privacy-protection-guide">Privnote Personal Privacy Protection Guide</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Free</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/free-privnote-service-privacy-protection-guide">Free Privnote Service: Privacy Protection Guide</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge text-white mb-2" style="background:#6c63ff;">Dating</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-online-dating-safety-secure-messaging">Privnote for Online Dating Safety</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== SECURE MESSAGING & COMMUNICATION ========== -->
+                <h2 class="category-title" id="messaging"><i class="fas fa-comments me-2 text-info"></i>Secure Messaging &amp; Communication</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">101</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/messaging-security-101">Messaging Security 101: Beginner's Guide</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">Comparison</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/secure-messaging-apps-comparison">Top 10 Messaging Apps Ranked by Security</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">Comparison</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/temporary-messaging-comparison">Temporary Messaging Services Compared</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">Comparison</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-vs-other-secure-messaging-apps-comparison">Privnote vs Other Secure Messaging Apps</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">Alternative</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-alternative-comprehensive-comparison-2025">Privnote.com Alternative: Why Privnote.chat is Better</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">Comparison</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/best-self-destructing-note-services-privnote-comparison">Best Self-Destructing Note Services Comparison</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">2025</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/secure-communication-tools-2025">Secure Communication Tools 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">2025</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/secure-digital-communication-2025">Secure Digital Communication 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">2025</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/secure-note-sharing-guide-2025">Secure Note Sharing Guide 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">Global</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/secure-international-communications">Secure International Communications: Cross-Border Privacy</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== BUSINESS & ENTERPRISE ========== -->
+                <h2 class="category-title" id="business"><i class="fas fa-building me-2" style="color:#e67e22;"></i>Business &amp; Enterprise</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Business</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/secure-messaging-for-business">Secure Messaging for Business</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Enterprise</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/enterprise-data-protection-2025">Enterprise Data Protection 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Prevention</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/corporate-data-leak-prevention">Corporate Data Leak Prevention Strategies</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Remote</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/remote-work-security">Remote Work Security: Protecting Sensitive Data</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Remote</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-remote-work-security-guide">Privnote Remote Work Security Guide 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Teams</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/self-destructing-notes-for-business-teams">Self-Destructing Notes for Business Teams</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Tools</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/secure-collaboration-tools">Secure Collaboration Tools: Self-Destructing Notes</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Workplace</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/workplace-secure-information-sharing">Workplace: Securely Share Sensitive Information</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Case Study</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/business-case-study-self-destructing-messages">Case Study: Companies Using Self-Destructing Messages</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Pro</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/professional-privnote-applications-2025">Professional Privnote: 15+ Industry Applications</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge mb-2" style="background:#e67e22;">Pro</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/professional-note-security-best-practices-2025">Professional Note Security Best Practices 2025</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== INDUSTRY-SPECIFIC ========== -->
+                <h2 class="category-title" id="industry"><i class="fas fa-briefcase-medical me-2" style="color:#27ae60;"></i>Industry-Specific Guides</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Healthcare</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/healthcare-communication-privacy">Healthcare Communication Privacy (HIPAA)</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Healthcare</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-healthcare-secure-communication">Privnote for Healthcare Professionals</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Finance</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/ephemeral-messaging-finance">Ephemeral Messaging in Finance</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Finance</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-financial-services-secure-communication">Privnote for Financial Services</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Legal</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/legal-compliance-secure-messaging">Legal Compliance &amp; Secure Messaging</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Legal</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-best-practices-legal-teams">Privnote Best Practices for Legal Teams</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Education</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-education-schools-secure-communication">Privnote for Education: Schools &amp; Universities</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Real Estate</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-real-estate-agents-secure-communication">Privnote for Real Estate Agents</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Journalism</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/privnote-journalists-whistleblowers-secure-communication">Privnote for Journalists &amp; Whistleblowers</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== MaiPDF & PDFs ========== -->
+                <h2 class="category-title" id="pdf"><i class="fas fa-file-pdf me-2 text-danger"></i>Self-Destructing PDFs (MaiPDF)</h2>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Tutorial</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/how-to-create-self-destructing-pdfs-maipdf-tutorial">Create Self-Destructing PDFs with MaiPDF</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Business</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/maipdf-business-document-security-guide">MaiPDF for Business Document Security</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Guide</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/maipdf-self-destructing-pdfs-open-count-limit-guide">MaiPDF: PDFs with Open Count Limits</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card article-card h-100 shadow-sm">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Comparison</span>
+                                <h5 class="card-title"><a href="https://privnote.chat/blog/maipdf-vs-regular-pdf-sharing-comparison">MaiPDF vs Regular PDF Sharing Comparison</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="sticky-lg-top" style="top: 2rem;">
+
+                    <!-- Table of Contents -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body toc-sidebar">
+                            <h6 class="fw-bold text-uppercase text-muted mb-3"><i class="fas fa-list me-2"></i>Categories</h6>
+                            <a href="#getting-started"><i class="fas fa-rocket me-2 text-primary"></i>Getting Started (9)</a>
+                            <a href="#encryption"><i class="fas fa-key me-2 text-warning"></i>Encryption &amp; Technology (9)</a>
+                            <a href="#self-destructing"><i class="fas fa-fire me-2 text-danger"></i>Self-Destructing Notes (9)</a>
+                            <a href="#sharing"><i class="fas fa-share-nodes me-2 text-success"></i>Password &amp; Sharing (10)</a>
+                            <a href="#privacy"><i class="fas fa-user-shield me-2" style="color:#6c63ff;"></i>Privacy &amp; Security (13)</a>
+                            <a href="#messaging"><i class="fas fa-comments me-2 text-info"></i>Secure Messaging (10)</a>
+                            <a href="#business"><i class="fas fa-building me-2" style="color:#e67e22;"></i>Business &amp; Enterprise (11)</a>
+                            <a href="#industry"><i class="fas fa-briefcase-medical me-2" style="color:#27ae60;"></i>Industry Guides (9)</a>
+                            <a href="#pdf"><i class="fas fa-file-pdf me-2 text-danger"></i>MaiPDF &amp; PDFs (4)</a>
+                        </div>
+                    </div>
+
+                    <!-- Language -->
+                    <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+                        <div class="card-body text-center text-white">
+                            <h6 class="fw-bold mb-2"><i class="fas fa-globe me-2"></i>中文博客</h6>
+                            <p class="small text-white-50 mb-3">38 articles in Chinese</p>
+                            <a href="https://privnote.chat/blog/zh/" class="btn btn-outline-light btn-sm">查看中文博客</a>
+                        </div>
+                    </div>
+
+                    <!-- About -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h6 class="fw-bold text-uppercase text-muted mb-3"><i class="fas fa-info-circle me-2"></i>About Privnote</h6>
+                            <p class="small text-muted">Free, open-source self-destructing encrypted notes. No registration required. Send a message that vanishes after being read.</p>
+                            <a href="https://privnote.chat/" class="btn btn-primary btn-sm w-100"><i class="fas fa-lock me-2"></i>Create a Note Now</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="container mb-5">
+        <div class="card border-0" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 16px;">
+            <div class="card-body text-center p-5">
+                <h3 class="text-white fw-bold mb-3"><i class="fas fa-paper-plane me-2"></i>Ready to Send a Secure Note?</h3>
+                <p class="text-white-50 mb-4">Encrypt your message and share a self-destructing link. Free, no sign-up, no trace.</p>
+                <a href="https://privnote.chat/" class="btn btn-light btn-lg px-5 py-3 fw-semibold" style="border-radius: 50px;">
+                    <i class="fas fa-lock me-2"></i>Create a Self-Destructing Note
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Privnote 2025</p>
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Privnote.chat</h5>
+                    <p class="text-white-50 small">Send self-destructing encrypted notes for free. Your privacy is our priority.</p>
+                    <p class="text-white-50 small mb-0"><i class="fas fa-envelope me-2"></i>joe@pdfhost.online</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Tools</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://privnote.chat/" class="text-white-50 text-decoration-none">Self-Destructing Notes</a></li>
+                        <li class="mb-2"><a href="https://privnote.chat/encryption.html" class="text-white-50 text-decoration-none">Text Encryption</a></li>
+                        <li class="mb-2"><a href="https://privnote.chat/decrypt.html" class="text-white-50 text-decoration-none">Text Decryption</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://privnote.chat/blog/" class="text-white-50 text-decoration-none">Blog</a></li>
+                        <li class="mb-2"><a href="https://privnote.chat/blog/what-is-privnote-self-destructing-notes-guide" class="text-white-50 text-decoration-none">What is Privnote?</a></li>
+                        <li class="mb-2"><a href="https://privnote.chat/blog/end-to-end-encryption-guide" class="text-white-50 text-decoration-none">Encryption Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary mt-4">
+            <p class="m-0 text-center text-white-50 small">&copy; 2025 Privnote.chat — All rights reserved.</p>
         </div>
     </footer>
-    
-    <!-- Bootstrap core JS-->    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
