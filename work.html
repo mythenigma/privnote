@@ -49,12 +49,12 @@
 
     <!-- ========== 🔥 当前冲刺 & 下一步行动 ========== -->
     <div id="sprint" class="card mb-4" style="border:2px solid #e74c3c; background: linear-gradient(135deg, #fff5f5 0%, #fef3e2 100%);">
-        <div class="card-body">        <h4 class="text-danger mb-3"><i class="fas fa-fire"></i> 当前冲刺 — 下一步行动计划 <small class="text-muted">（2026-04-03 更新）</small></h4>
+        <div class="card-body">        <h4 class="text-danger mb-3"><i class="fas fa-fire"></i> 当前冲刺 — 下一步行动计划 <small class="text-muted">（2026-04-08 更新）</small></h4>
 
             <!-- 总体进度 -->
             <div class="row mb-3">
                 <div class="col-3"><div class="stat-box" style="background:#d4edda;"><h3 class="mb-0 text-success">38/38</h3><small>🇨🇳 中文精修</small></div></div>
-                <div class="col-3"><div class="stat-box" style="background:#d4edda;"><h3 class="mb-0 text-success">60/90</h3><small>🇬🇧 英文精修</small></div></div>
+                <div class="col-3"><div class="stat-box" style="background:#d4edda;"><h3 class="mb-0 text-success">71/90</h3><small>🇬🇧 英文精修</small></div></div>
                 <div class="col-3"><div class="stat-box" style="background:#d4edda;"><h3 class="mb-0 text-success">127</h3><small>✅ 全入 Sitemap</small></div></div>
                 <div class="col-3"><div class="stat-box" style="background:#d4edda;"><h3 class="mb-0 text-success">✅</h3><small>Canonical 已修</small></div></div>
             </div>
@@ -64,13 +64,13 @@
                 <h6 class="text-success mb-2"><i class="fas fa-check-circle"></i> 已完成的里程碑</h6>
                 <div class="row" style="font-size:0.85rem;">                <div class="col-6">
                         <div>✅ 全部 38 篇中文文章精修完成</div>
-                        <div>✅ 60 篇英文文章精修完成（EN #1-#60）</div>
+                        <div>✅ 71 篇英文文章精修完成（EN #1-#71）</div>
                         <div>✅ 127 篇文章全部添加 Canonical URL</div>
-                        <div>✅ 127 篇文章全部添加 Article JSON-LD</div>
+                        <div>✅ 精修文章同步添加 Article JSON-LD（随 EN 队列继续补齐）</div>
                     </div>
                     <div class="col-6">
                         <div>✅ 统一邮箱 → joe@pdfhost.online</div>
-                        <div>✅ 批量 dateModified → 2026-03-16</div>
+                        <div>✅ 最新精修 dateModified → 2026-04-08</div>
                         <div>✅ blog/index.html 9 分类目录页重建</div>
                         <div>✅ <strong>sitemap.xml 重建（127篇博客已全部收录）</strong></div>
                     </div>
@@ -102,12 +102,12 @@
                     </tr>
                     <tr>
                         <td><strong>③</strong></td>
-                        <td><strong>🟡 继续精修 EN #61-#84</strong>（剩余 24 篇英文文章）<br>
-                            <small class="text-muted">精修时融入 GEO 元素：开头加"AI 可引用"直接回答段、教程加 HowTo schema、对比文加表格。</small></td>
+                        <td><strong>🟡 继续精修 EN #72-#84</strong>（剩余 13 篇英文文章）<br>
+                            <small class="text-muted">EN #61-#71 已完成：首批 11 篇补 Article/HowTo JSON-LD、Quick Answer、相关文章内链、日期与页脚同步。继续精修时融入 GEO 元素：开头加"AI 可引用"直接回答段、教程加 HowTo schema、对比文加表格。</small></td>
                         <td><span class="badge bg-warning text-dark">★★★★☆</span></td>
                         <td><span class="badge" style="background:#7c3aed;">★★★☆☆</span></td>
                         <td>每篇 5-10 分</td>
-                        <td><span class="status-todo">待做</span></td>
+                        <td><span class="status-doing">进行中</span></td>
                     </tr>
                     <tr>
                         <td><strong>④</strong></td>
@@ -845,6 +845,44 @@
         </p>
     </div>
 
+    <div class="log-entry">
+        <span class="log-date">2026-04-08</span>
+        <strong>精修 EN #61-#65：首批 5 篇英文文章完成</strong>
+        <p class="mb-0 mt-1">
+            <span class="badge bg-success me-2">内容精修</span><br>
+            ✅ 完成 5-minute-guide-secure-message-sharing、after-message-destruction-privacy-guide-2025、bidding-floor-price-encryption、bidding-floor-price-encryption-guide、burn-notes-secure-communication<br>
+            ✅ 5 篇均添加/更新 Article JSON-LD，dateModified → 2026-04-08<br>
+            ✅ 添加 "Quick Answer" 直接回答段、相关文章内链；教程页补 HowTo schema<br>
+            ✅ burn-notes 删除假评论区，替换为真实相关文章区<br>
+            📊 <strong>英文精修进度：</strong>65/90 完成，EN #66-#84 剩余 19 篇
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-04-08</span>
+        <strong>清理错误素材：移除博客中的 Generatelink.png 引用</strong>
+        <p class="mb-0 mt-1">
+            <span class="badge bg-warning text-dark me-2">质量修复</span><br>
+            ✅ 清理博客 HTML 中所有 Generatelink.png 引用，避免错误截图素材继续出现在文章/OG/JSON-LD 图片里<br>
+            ✅ 按页面语义替换为 self_destruct_link_generated_result、privnote-flow-diagram、Link_read_confirmation 等现有正确素材<br>
+            ✅ 修正 blog/zh 中文页面相对路径为 ../privimg/...，避免从 zh/privimg 错误读取<br>
+            🔎 <strong>验证：</strong>rg 确认 blog/*.html 无 Generatelink.png 残留；本次替换用到的目标素材均存在
+        </p>
+    </div>
+
+    <div class="log-entry">
+        <span class="log-date">2026-04-08</span>
+        <strong>精修 EN #66-#71：第二组 6 篇英文文章完成</strong>
+        <p class="mb-0 mt-1">
+            <span class="badge bg-success me-2">内容精修</span><br>
+            ✅ 完成 business-case-study-self-destructing-messages、secure-workplace-text-encryption、see-once-notes-revolutionary-privacy-2025、self-destructing-messages-complete-guide-2025、self-destructing-messages-simple-guide、self-destructing-notes-for-business-teams<br>
+            ✅ 6 篇均添加 Article JSON-LD，dateModified → 2026-04-08；3 篇教程型页面补 HowTo schema<br>
+            ✅ 添加 "Quick Answer" 直接回答段、相关文章内链；业务团队页删除假评论区并替换为真实相关文章<br>
+            ✅ 同步可见更新时间与底部版权年份 → 2026<br>
+            📊 <strong>英文精修进度：</strong>71/90 完成，EN #72-#84 剩余 13 篇
+        </p>
+    </div>
+
     <div class="log-entry" style="background: #f0f0f0; border-left-color: #ccc;">
         <span class="log-date">YYYY-MM-DD</span>
         <strong>（下次改动记录模板）</strong>
@@ -861,8 +899,8 @@
                 </div>
                 <div class="col-3">
                     <div class="p-3" style="background: #e8f5e9; border-radius: 10px;">
-                        <h2 class="text-success mb-0">98/127</h2>
-                        <small>📝 文章精修<br>(38ZH + 60EN 完成)</small>
+                        <h2 class="text-success mb-0">109/127</h2>
+                        <small>📝 文章精修<br>(38ZH + 71EN 完成)</small>
                     </div>
                 </div>
                 <div class="col-3">
